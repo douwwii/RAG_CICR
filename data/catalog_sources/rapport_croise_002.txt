@@ -1,0 +1,8 @@
+DOCUMENT ENTIÈREMENT FICTIF — DOC-CROISE-002
+
+Un rapport fictif rassemble les noms de Nadia Karim et Hugo Martin dans une
+liste transmise par un tiers. L’auteur précise ne pas connaître les raisons
+de cette association et ne pas avoir vérifié les informations de la liste.
+
+Ce texte sert uniquement à tester un document mentionnant plusieurs personnes.
+La présence de deux noms dans ce rapport n’établit aucun déplacement commun.

@@ -1,0 +1,434 @@
+[
+  {
+    "id": 1,
+    "document_id": "DOC-P001-nom",
+    "person_id": "P001",
+    "field_name": "nom",
+    "field_label": "Nom complet",
+    "value": "Jean Dupont",
+    "source_kind": "formulaire_fictif"
+  },
+  {
+    "id": 2,
+    "document_id": "DOC-P001-lieu_de_deces",
+    "person_id": "P001",
+    "field_name": "lieu_de_deces",
+    "field_label": "Lieu de décès",
+    "value": "Hôpital central de Sarajevo",
+    "source_kind": "formulaire_fictif"
+  },
+  {
+    "id": 3,
+    "document_id": "DOC-P001-lieu_de_disparition",
+    "person_id": "P001",
+    "field_name": "lieu_de_disparition",
+    "field_label": "Lieu de disparition",
+    "value": "Sarajevo",
+    "source_kind": "formulaire_fictif"
+  },
+  {
+    "id": 4,
+    "document_id": "DOC-P001-date_de_disparition",
+    "person_id": "P001",
+    "field_name": "date_de_disparition",
+    "field_label": "Date de disparition",
+    "value": "21 juin 1994",
+    "source_kind": "formulaire_fictif"
+  },
+  {
+    "id": 5,
+    "document_id": "DOC-P001-temoignage",
+    "person_id": "P001",
+    "field_name": "temoignage",
+    "field_label": "Témoignage",
+    "value": "Un proche rapporte avoir vu Jean Dupont à proximité du centre-ville de Sarajevo, sans confirmation ultérieure.",
+    "source_kind": "formulaire_fictif"
+  },
+  {
+    "id": 6,
+    "document_id": "DOC-P001-observation_medicale",
+    "person_id": "P001",
+    "field_name": "observation_medicale",
+    "field_label": "Observation médicale",
+    "value": "Un rapport mentionne un transfert vers Hôpital central de Sarajevo, sans conclusion médicale définitive.",
+    "source_kind": "formulaire_fictif"
+  },
+  {
+    "id": 7,
+    "document_id": "DOC-P002-nom",
+    "person_id": "P002",
+    "field_name": "nom",
+    "field_label": "Nom complet",
+    "value": "Marie Laurent",
+    "source_kind": "formulaire_fictif"
+  },
+  {
+    "id": 8,
+    "document_id": "DOC-P002-lieu_de_deces",
+    "person_id": "P002",
+    "field_name": "lieu_de_deces",
+    "field_label": "Lieu de décès",
+    "value": "Hôpital municipal de Mostar",
+    "source_kind": "formulaire_fictif"
+  },
+  {
+    "id": 9,
+    "document_id": "DOC-P002-lieu_de_disparition",
+    "person_id": "P002",
+    "field_name": "lieu_de_disparition",
+    "field_label": "Lieu de disparition",
+    "value": "Mostar",
+    "source_kind": "formulaire_fictif"
+  },
+  {
+    "id": 10,
+    "document_id": "DOC-P002-date_de_disparition",
+    "person_id": "P002",
+    "field_name": "date_de_disparition",
+    "field_label": "Date de disparition",
+    "value": "4 avril 1995",
+    "source_kind": "formulaire_fictif"
+  },
+  {
+    "id": 11,
+    "document_id": "DOC-P002-temoignage",
+    "person_id": "P002",
+    "field_name": "temoignage",
+    "field_label": "Témoignage",
+    "value": "Un proche rapporte avoir vu Marie Laurent à proximité du centre-ville de Mostar, sans confirmation ultérieure.",
+    "source_kind": "formulaire_fictif"
+  },
+  {
+    "id": 12,
+    "document_id": "DOC-P002-observation_medicale",
+    "person_id": "P002",
+    "field_name": "observation_medicale",
+    "field_label": "Observation médicale",
+    "value": "Un rapport mentionne un transfert vers Hôpital municipal de Mostar, sans conclusion médicale définitive.",
+    "source_kind": "formulaire_fictif"
+  },
+  {
+    "id": 13,
+    "document_id": "DOC-P003-nom",
+    "person_id": "P003",
+    "field_name": "nom",
+    "field_label": "Nom complet",
+    "value": "Amir Hadžić",
+    "source_kind": "formulaire_fictif"
+  },
+  {
+    "id": 14,
+    "document_id": "DOC-P003-lieu_de_deces",
+    "person_id": "P003",
+    "field_name": "lieu_de_deces",
+    "field_label": "Lieu de décès",
+    "value": "Centre médical de Tuzla",
+    "source_kind": "formulaire_fictif"
+  },
+  {
+    "id": 15,
+    "document_id": "DOC-P003-lieu_de_disparition",
+    "person_id": "P003",
+    "field_name": "lieu_de_disparition",
+    "field_label": "Lieu de disparition",
+    "value": "Tuzla",
+    "source_kind": "formulaire_fictif"
+  },
+  {
+    "id": 16,
+    "document_id": "DOC-P003-date_de_disparition",
+    "person_id": "P003",
+    "field_name": "date_de_disparition",
+    "field_label": "Date de disparition",
+    "value": "7 août 1993",
+    "source_kind": "formulaire_fictif"
+  },
+  {
+    "id": 17,
+    "document_id": "DOC-P003-temoignage",
+    "person_id": "P003",
+    "field_name": "temoignage",
+    "field_label": "Témoignage",
+    "value": "Un proche rapporte avoir vu Amir Hadžić à proximité du centre-ville de Tuzla, sans confirmation ultérieure.",
+    "source_kind": "formulaire_fictif"
+  },
+  {
+    "id": 18,
+    "document_id": "DOC-P003-observation_medicale",
+    "person_id": "P003",
+    "field_name": "observation_medicale",
+    "field_label": "Observation médicale",
+    "value": "Un rapport mentionne un transfert vers Centre médical de Tuzla, sans conclusion médicale définitive.",
+    "source_kind": "formulaire_fictif"
+  },
+  {
+    "id": 19,
+    "document_id": "DOC-P004-nom",
+    "person_id": "P004",
+    "field_name": "nom",
+    "field_label": "Nom complet",
+    "value": "Lina Moreau",
+    "source_kind": "formulaire_fictif"
+  },
+  {
+    "id": 20,
+    "document_id": "DOC-P004-lieu_de_deces",
+    "person_id": "P004",
+    "field_name": "lieu_de_deces",
+    "field_label": "Lieu de décès",
+    "value": "Hôpital Saint-Louis",
+    "source_kind": "formulaire_fictif"
+  },
+  {
+    "id": 21,
+    "document_id": "DOC-P004-lieu_de_disparition",
+    "person_id": "P004",
+    "field_name": "lieu_de_disparition",
+    "field_label": "Lieu de disparition",
+    "value": "Paris",
+    "source_kind": "formulaire_fictif"
+  },
+  {
+    "id": 22,
+    "document_id": "DOC-P004-date_de_disparition",
+    "person_id": "P004",
+    "field_name": "date_de_disparition",
+    "field_label": "Date de disparition",
+    "value": "18 mai 1996",
+    "source_kind": "formulaire_fictif"
+  },
+  {
+    "id": 23,
+    "document_id": "DOC-P004-temoignage",
+    "person_id": "P004",
+    "field_name": "temoignage",
+    "field_label": "Témoignage",
+    "value": "Un proche rapporte avoir vu Lina Moreau à proximité du centre-ville de Paris, sans confirmation ultérieure.",
+    "source_kind": "formulaire_fictif"
+  },
+  {
+    "id": 24,
+    "document_id": "DOC-P004-observation_medicale",
+    "person_id": "P004",
+    "field_name": "observation_medicale",
+    "field_label": "Observation médicale",
+    "value": "Un rapport mentionne un transfert vers Hôpital Saint-Louis, sans conclusion médicale définitive.",
+    "source_kind": "formulaire_fictif"
+  },
+  {
+    "id": 25,
+    "document_id": "DOC-P005-nom",
+    "person_id": "P005",
+    "field_name": "nom",
+    "field_label": "Nom complet",
+    "value": "Nadia Karim",
+    "source_kind": "formulaire_fictif"
+  },
+  {
+    "id": 26,
+    "document_id": "DOC-P005-lieu_de_deces",
+    "person_id": "P005",
+    "field_name": "lieu_de_deces",
+    "field_label": "Lieu de décès",
+    "value": "Clinique de Banja Luka",
+    "source_kind": "formulaire_fictif"
+  },
+  {
+    "id": 27,
+    "document_id": "DOC-P005-lieu_de_disparition",
+    "person_id": "P005",
+    "field_name": "lieu_de_disparition",
+    "field_label": "Lieu de disparition",
+    "value": "Banja Luka",
+    "source_kind": "formulaire_fictif"
+  },
+  {
+    "id": 28,
+    "document_id": "DOC-P005-date_de_disparition",
+    "person_id": "P005",
+    "field_name": "date_de_disparition",
+    "field_label": "Date de disparition",
+    "value": "2 février 1994",
+    "source_kind": "formulaire_fictif"
+  },
+  {
+    "id": 29,
+    "document_id": "DOC-P005-temoignage",
+    "person_id": "P005",
+    "field_name": "temoignage",
+    "field_label": "Témoignage",
+    "value": "Un proche rapporte avoir vu Nadia Karim à proximité du centre-ville de Banja Luka, sans confirmation ultérieure.",
+    "source_kind": "formulaire_fictif"
+  },
+  {
+    "id": 30,
+    "document_id": "DOC-P005-observation_medicale",
+    "person_id": "P005",
+    "field_name": "observation_medicale",
+    "field_label": "Observation médicale",
+    "value": "Un rapport mentionne un transfert vers Clinique de Banja Luka, sans conclusion médicale définitive.",
+    "source_kind": "formulaire_fictif"
+  },
+  {
+    "id": 31,
+    "document_id": "DOC-P006-nom",
+    "person_id": "P006",
+    "field_name": "nom",
+    "field_label": "Nom complet",
+    "value": "Hugo Martin",
+    "source_kind": "formulaire_fictif"
+  },
+  {
+    "id": 32,
+    "document_id": "DOC-P006-lieu_de_deces",
+    "person_id": "P006",
+    "field_name": "lieu_de_deces",
+    "field_label": "Lieu de décès",
+    "value": "Hôpital Édouard-Herriot",
+    "source_kind": "formulaire_fictif"
+  },
+  {
+    "id": 33,
+    "document_id": "DOC-P006-lieu_de_disparition",
+    "person_id": "P006",
+    "field_name": "lieu_de_disparition",
+    "field_label": "Lieu de disparition",
+    "value": "Lyon",
+    "source_kind": "formulaire_fictif"
+  },
+  {
+    "id": 34,
+    "document_id": "DOC-P006-date_de_disparition",
+    "person_id": "P006",
+    "field_name": "date_de_disparition",
+    "field_label": "Date de disparition",
+    "value": "1 novembre 1995",
+    "source_kind": "formulaire_fictif"
+  },
+  {
+    "id": 35,
+    "document_id": "DOC-P006-temoignage",
+    "person_id": "P006",
+    "field_name": "temoignage",
+    "field_label": "Témoignage",
+    "value": "Un proche rapporte avoir vu Hugo Martin à proximité du centre-ville de Lyon, sans confirmation ultérieure.",
+    "source_kind": "formulaire_fictif"
+  },
+  {
+    "id": 36,
+    "document_id": "DOC-P006-observation_medicale",
+    "person_id": "P006",
+    "field_name": "observation_medicale",
+    "field_label": "Observation médicale",
+    "value": "Un rapport mentionne un transfert vers Hôpital Édouard-Herriot, sans conclusion médicale définitive.",
+    "source_kind": "formulaire_fictif"
+  },
+  {
+    "id": 37,
+    "document_id": "DOC-P007-nom",
+    "person_id": "P007",
+    "field_name": "nom",
+    "field_label": "Nom complet",
+    "value": "Alma Petrović",
+    "source_kind": "formulaire_fictif"
+  },
+  {
+    "id": 38,
+    "document_id": "DOC-P007-lieu_de_deces",
+    "person_id": "P007",
+    "field_name": "lieu_de_deces",
+    "field_label": "Lieu de décès",
+    "value": "Centre hospitalier de Zenica",
+    "source_kind": "formulaire_fictif"
+  },
+  {
+    "id": 39,
+    "document_id": "DOC-P007-lieu_de_disparition",
+    "person_id": "P007",
+    "field_name": "lieu_de_disparition",
+    "field_label": "Lieu de disparition",
+    "value": "Zenica",
+    "source_kind": "formulaire_fictif"
+  },
+  {
+    "id": 40,
+    "document_id": "DOC-P007-date_de_disparition",
+    "person_id": "P007",
+    "field_name": "date_de_disparition",
+    "field_label": "Date de disparition",
+    "value": "15 décembre 1993",
+    "source_kind": "formulaire_fictif"
+  },
+  {
+    "id": 41,
+    "document_id": "DOC-P007-temoignage",
+    "person_id": "P007",
+    "field_name": "temoignage",
+    "field_label": "Témoignage",
+    "value": "Un proche rapporte avoir vu Alma Petrović à proximité du centre-ville de Zenica, sans confirmation ultérieure.",
+    "source_kind": "formulaire_fictif"
+  },
+  {
+    "id": 42,
+    "document_id": "DOC-P007-observation_medicale",
+    "person_id": "P007",
+    "field_name": "observation_medicale",
+    "field_label": "Observation médicale",
+    "value": "Un rapport mentionne un transfert vers Centre hospitalier de Zenica, sans conclusion médicale définitive.",
+    "source_kind": "formulaire_fictif"
+  },
+  {
+    "id": 43,
+    "document_id": "DOC-P008-nom",
+    "person_id": "P008",
+    "field_name": "nom",
+    "field_label": "Nom complet",
+    "value": "Lucas Bernard",
+    "source_kind": "formulaire_fictif"
+  },
+  {
+    "id": 44,
+    "document_id": "DOC-P008-lieu_de_deces",
+    "person_id": "P008",
+    "field_name": "lieu_de_deces",
+    "field_label": "Lieu de décès",
+    "value": "Hôpital de Split",
+    "source_kind": "formulaire_fictif"
+  },
+  {
+    "id": 45,
+    "document_id": "DOC-P008-lieu_de_disparition",
+    "person_id": "P008",
+    "field_name": "lieu_de_disparition",
+    "field_label": "Lieu de disparition",
+    "value": "Split",
+    "source_kind": "formulaire_fictif"
+  },
+  {
+    "id": 46,
+    "document_id": "DOC-P008-date_de_disparition",
+    "person_id": "P008",
+    "field_name": "date_de_disparition",
+    "field_label": "Date de disparition",
+    "value": "30 juillet 1994",
+    "source_kind": "formulaire_fictif"
+  },
+  {
+    "id": 47,
+    "document_id": "DOC-P008-temoignage",
+    "person_id": "P008",
+    "field_name": "temoignage",
+    "field_label": "Témoignage",
+    "value": "Un proche rapporte avoir vu Lucas Bernard à proximité du centre-ville de Split, sans confirmation ultérieure.",
+    "source_kind": "formulaire_fictif"
+  },
+  {
+    "id": 48,
+    "document_id": "DOC-P008-observation_medicale",
+    "person_id": "P008",
+    "field_name": "observation_medicale",
+    "field_label": "Observation médicale",
+    "value": "Un rapport mentionne un transfert vers Hôpital de Split, sans conclusion médicale définitive.",
+    "source_kind": "formulaire_fictif"
+  }
+]

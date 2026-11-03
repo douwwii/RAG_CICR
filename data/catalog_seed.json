@@ -1,0 +1,562 @@
+{
+  "dossiers": [
+    {
+      "dossier_id": "DOS001",
+      "title": "Dossier fictif A — personnes P001 à P004",
+      "person_ids": [
+        "P001",
+        "P002",
+        "P003",
+        "P004"
+      ]
+    },
+    {
+      "dossier_id": "DOS002",
+      "title": "Dossier fictif B — personnes P005 à P008",
+      "person_ids": [
+        "P005",
+        "P006",
+        "P007",
+        "P008"
+      ]
+    }
+  ],
+  "persons": [
+    {
+      "person_id": "P001",
+      "display_name": "Jean Dupont"
+    },
+    {
+      "person_id": "P002",
+      "display_name": "Marie Laurent"
+    },
+    {
+      "person_id": "P003",
+      "display_name": "Amir Hadžić"
+    },
+    {
+      "person_id": "P004",
+      "display_name": "Lina Moreau"
+    },
+    {
+      "person_id": "P005",
+      "display_name": "Nadia Karim"
+    },
+    {
+      "person_id": "P006",
+      "display_name": "Hugo Martin"
+    },
+    {
+      "person_id": "P007",
+      "display_name": "Alma Petrović"
+    },
+    {
+      "person_id": "P008",
+      "display_name": "Lucas Bernard"
+    }
+  ],
+  "documents": [
+    {
+      "document_id": "DOC-P001-nom",
+      "dossier_id": "DOS001",
+      "source_kind": "formulaire_fictif",
+      "source_path": "documents.json",
+      "source_locator": "id=1",
+      "person_ids": [
+        "P001"
+      ]
+    },
+    {
+      "document_id": "DOC-P001-lieu_de_deces",
+      "dossier_id": "DOS001",
+      "source_kind": "formulaire_fictif",
+      "source_path": "documents.json",
+      "source_locator": "id=2",
+      "person_ids": [
+        "P001"
+      ]
+    },
+    {
+      "document_id": "DOC-P001-lieu_de_disparition",
+      "dossier_id": "DOS001",
+      "source_kind": "formulaire_fictif",
+      "source_path": "documents.json",
+      "source_locator": "id=3",
+      "person_ids": [
+        "P001"
+      ]
+    },
+    {
+      "document_id": "DOC-P001-date_de_disparition",
+      "dossier_id": "DOS001",
+      "source_kind": "formulaire_fictif",
+      "source_path": "documents.json",
+      "source_locator": "id=4",
+      "person_ids": [
+        "P001"
+      ]
+    },
+    {
+      "document_id": "DOC-P001-temoignage",
+      "dossier_id": "DOS001",
+      "source_kind": "formulaire_fictif",
+      "source_path": "documents.json",
+      "source_locator": "id=5",
+      "person_ids": [
+        "P001"
+      ]
+    },
+    {
+      "document_id": "DOC-P001-observation_medicale",
+      "dossier_id": "DOS001",
+      "source_kind": "formulaire_fictif",
+      "source_path": "documents.json",
+      "source_locator": "id=6",
+      "person_ids": [
+        "P001"
+      ]
+    },
+    {
+      "document_id": "DOC-P002-nom",
+      "dossier_id": "DOS001",
+      "source_kind": "formulaire_fictif",
+      "source_path": "documents.json",
+      "source_locator": "id=7",
+      "person_ids": [
+        "P002"
+      ]
+    },
+    {
+      "document_id": "DOC-P002-lieu_de_deces",
+      "dossier_id": "DOS001",
+      "source_kind": "formulaire_fictif",
+      "source_path": "documents.json",
+      "source_locator": "id=8",
+      "person_ids": [
+        "P002"
+      ]
+    },
+    {
+      "document_id": "DOC-P002-lieu_de_disparition",
+      "dossier_id": "DOS001",
+      "source_kind": "formulaire_fictif",
+      "source_path": "documents.json",
+      "source_locator": "id=9",
+      "person_ids": [
+        "P002"
+      ]
+    },
+    {
+      "document_id": "DOC-P002-date_de_disparition",
+      "dossier_id": "DOS001",
+      "source_kind": "formulaire_fictif",
+      "source_path": "documents.json",
+      "source_locator": "id=10",
+      "person_ids": [
+        "P002"
+      ]
+    },
+    {
+      "document_id": "DOC-P002-temoignage",
+      "dossier_id": "DOS001",
+      "source_kind": "formulaire_fictif",
+      "source_path": "documents.json",
+      "source_locator": "id=11",
+      "person_ids": [
+        "P002"
+      ]
+    },
+    {
+      "document_id": "DOC-P002-observation_medicale",
+      "dossier_id": "DOS001",
+      "source_kind": "formulaire_fictif",
+      "source_path": "documents.json",
+      "source_locator": "id=12",
+      "person_ids": [
+        "P002"
+      ]
+    },
+    {
+      "document_id": "DOC-P003-nom",
+      "dossier_id": "DOS001",
+      "source_kind": "formulaire_fictif",
+      "source_path": "documents.json",
+      "source_locator": "id=13",
+      "person_ids": [
+        "P003"
+      ]
+    },
+    {
+      "document_id": "DOC-P003-lieu_de_deces",
+      "dossier_id": "DOS001",
+      "source_kind": "formulaire_fictif",
+      "source_path": "documents.json",
+      "source_locator": "id=14",
+      "person_ids": [
+        "P003"
+      ]
+    },
+    {
+      "document_id": "DOC-P003-lieu_de_disparition",
+      "dossier_id": "DOS001",
+      "source_kind": "formulaire_fictif",
+      "source_path": "documents.json",
+      "source_locator": "id=15",
+      "person_ids": [
+        "P003"
+      ]
+    },
+    {
+      "document_id": "DOC-P003-date_de_disparition",
+      "dossier_id": "DOS001",
+      "source_kind": "formulaire_fictif",
+      "source_path": "documents.json",
+      "source_locator": "id=16",
+      "person_ids": [
+        "P003"
+      ]
+    },
+    {
+      "document_id": "DOC-P003-temoignage",
+      "dossier_id": "DOS001",
+      "source_kind": "formulaire_fictif",
+      "source_path": "documents.json",
+      "source_locator": "id=17",
+      "person_ids": [
+        "P003"
+      ]
+    },
+    {
+      "document_id": "DOC-P003-observation_medicale",
+      "dossier_id": "DOS001",
+      "source_kind": "formulaire_fictif",
+      "source_path": "documents.json",
+      "source_locator": "id=18",
+      "person_ids": [
+        "P003"
+      ]
+    },
+    {
+      "document_id": "DOC-P004-nom",
+      "dossier_id": "DOS001",
+      "source_kind": "formulaire_fictif",
+      "source_path": "documents.json",
+      "source_locator": "id=19",
+      "person_ids": [
+        "P004"
+      ]
+    },
+    {
+      "document_id": "DOC-P004-lieu_de_deces",
+      "dossier_id": "DOS001",
+      "source_kind": "formulaire_fictif",
+      "source_path": "documents.json",
+      "source_locator": "id=20",
+      "person_ids": [
+        "P004"
+      ]
+    },
+    {
+      "document_id": "DOC-P004-lieu_de_disparition",
+      "dossier_id": "DOS001",
+      "source_kind": "formulaire_fictif",
+      "source_path": "documents.json",
+      "source_locator": "id=21",
+      "person_ids": [
+        "P004"
+      ]
+    },
+    {
+      "document_id": "DOC-P004-date_de_disparition",
+      "dossier_id": "DOS001",
+      "source_kind": "formulaire_fictif",
+      "source_path": "documents.json",
+      "source_locator": "id=22",
+      "person_ids": [
+        "P004"
+      ]
+    },
+    {
+      "document_id": "DOC-P004-temoignage",
+      "dossier_id": "DOS001",
+      "source_kind": "formulaire_fictif",
+      "source_path": "documents.json",
+      "source_locator": "id=23",
+      "person_ids": [
+        "P004"
+      ]
+    },
+    {
+      "document_id": "DOC-P004-observation_medicale",
+      "dossier_id": "DOS001",
+      "source_kind": "formulaire_fictif",
+      "source_path": "documents.json",
+      "source_locator": "id=24",
+      "person_ids": [
+        "P004"
+      ]
+    },
+    {
+      "document_id": "DOC-P005-nom",
+      "dossier_id": "DOS002",
+      "source_kind": "formulaire_fictif",
+      "source_path": "documents.json",
+      "source_locator": "id=25",
+      "person_ids": [
+        "P005"
+      ]
+    },
+    {
+      "document_id": "DOC-P005-lieu_de_deces",
+      "dossier_id": "DOS002",
+      "source_kind": "formulaire_fictif",
+      "source_path": "documents.json",
+      "source_locator": "id=26",
+      "person_ids": [
+        "P005"
+      ]
+    },
+    {
+      "document_id": "DOC-P005-lieu_de_disparition",
+      "dossier_id": "DOS002",
+      "source_kind": "formulaire_fictif",
+      "source_path": "documents.json",
+      "source_locator": "id=27",
+      "person_ids": [
+        "P005"
+      ]
+    },
+    {
+      "document_id": "DOC-P005-date_de_disparition",
+      "dossier_id": "DOS002",
+      "source_kind": "formulaire_fictif",
+      "source_path": "documents.json",
+      "source_locator": "id=28",
+      "person_ids": [
+        "P005"
+      ]
+    },
+    {
+      "document_id": "DOC-P005-temoignage",
+      "dossier_id": "DOS002",
+      "source_kind": "formulaire_fictif",
+      "source_path": "documents.json",
+      "source_locator": "id=29",
+      "person_ids": [
+        "P005"
+      ]
+    },
+    {
+      "document_id": "DOC-P005-observation_medicale",
+      "dossier_id": "DOS002",
+      "source_kind": "formulaire_fictif",
+      "source_path": "documents.json",
+      "source_locator": "id=30",
+      "person_ids": [
+        "P005"
+      ]
+    },
+    {
+      "document_id": "DOC-P006-nom",
+      "dossier_id": "DOS002",
+      "source_kind": "formulaire_fictif",
+      "source_path": "documents.json",
+      "source_locator": "id=31",
+      "person_ids": [
+        "P006"
+      ]
+    },
+    {
+      "document_id": "DOC-P006-lieu_de_deces",
+      "dossier_id": "DOS002",
+      "source_kind": "formulaire_fictif",
+      "source_path": "documents.json",
+      "source_locator": "id=32",
+      "person_ids": [
+        "P006"
+      ]
+    },
+    {
+      "document_id": "DOC-P006-lieu_de_disparition",
+      "dossier_id": "DOS002",
+      "source_kind": "formulaire_fictif",
+      "source_path": "documents.json",
+      "source_locator": "id=33",
+      "person_ids": [
+        "P006"
+      ]
+    },
+    {
+      "document_id": "DOC-P006-date_de_disparition",
+      "dossier_id": "DOS002",
+      "source_kind": "formulaire_fictif",
+      "source_path": "documents.json",
+      "source_locator": "id=34",
+      "person_ids": [
+        "P006"
+      ]
+    },
+    {
+      "document_id": "DOC-P006-temoignage",
+      "dossier_id": "DOS002",
+      "source_kind": "formulaire_fictif",
+      "source_path": "documents.json",
+      "source_locator": "id=35",
+      "person_ids": [
+        "P006"
+      ]
+    },
+    {
+      "document_id": "DOC-P006-observation_medicale",
+      "dossier_id": "DOS002",
+      "source_kind": "formulaire_fictif",
+      "source_path": "documents.json",
+      "source_locator": "id=36",
+      "person_ids": [
+        "P006"
+      ]
+    },
+    {
+      "document_id": "DOC-P007-nom",
+      "dossier_id": "DOS002",
+      "source_kind": "formulaire_fictif",
+      "source_path": "documents.json",
+      "source_locator": "id=37",
+      "person_ids": [
+        "P007"
+      ]
+    },
+    {
+      "document_id": "DOC-P007-lieu_de_deces",
+      "dossier_id": "DOS002",
+      "source_kind": "formulaire_fictif",
+      "source_path": "documents.json",
+      "source_locator": "id=38",
+      "person_ids": [
+        "P007"
+      ]
+    },
+    {
+      "document_id": "DOC-P007-lieu_de_disparition",
+      "dossier_id": "DOS002",
+      "source_kind": "formulaire_fictif",
+      "source_path": "documents.json",
+      "source_locator": "id=39",
+      "person_ids": [
+        "P007"
+      ]
+    },
+    {
+      "document_id": "DOC-P007-date_de_disparition",
+      "dossier_id": "DOS002",
+      "source_kind": "formulaire_fictif",
+      "source_path": "documents.json",
+      "source_locator": "id=40",
+      "person_ids": [
+        "P007"
+      ]
+    },
+    {
+      "document_id": "DOC-P007-temoignage",
+      "dossier_id": "DOS002",
+      "source_kind": "formulaire_fictif",
+      "source_path": "documents.json",
+      "source_locator": "id=41",
+      "person_ids": [
+        "P007"
+      ]
+    },
+    {
+      "document_id": "DOC-P007-observation_medicale",
+      "dossier_id": "DOS002",
+      "source_kind": "formulaire_fictif",
+      "source_path": "documents.json",
+      "source_locator": "id=42",
+      "person_ids": [
+        "P007"
+      ]
+    },
+    {
+      "document_id": "DOC-P008-nom",
+      "dossier_id": "DOS002",
+      "source_kind": "formulaire_fictif",
+      "source_path": "documents.json",
+      "source_locator": "id=43",
+      "person_ids": [
+        "P008"
+      ]
+    },
+    {
+      "document_id": "DOC-P008-lieu_de_deces",
+      "dossier_id": "DOS002",
+      "source_kind": "formulaire_fictif",
+      "source_path": "documents.json",
+      "source_locator": "id=44",
+      "person_ids": [
+        "P008"
+      ]
+    },
+    {
+      "document_id": "DOC-P008-lieu_de_disparition",
+      "dossier_id": "DOS002",
+      "source_kind": "formulaire_fictif",
+      "source_path": "documents.json",
+      "source_locator": "id=45",
+      "person_ids": [
+        "P008"
+      ]
+    },
+    {
+      "document_id": "DOC-P008-date_de_disparition",
+      "dossier_id": "DOS002",
+      "source_kind": "formulaire_fictif",
+      "source_path": "documents.json",
+      "source_locator": "id=46",
+      "person_ids": [
+        "P008"
+      ]
+    },
+    {
+      "document_id": "DOC-P008-temoignage",
+      "dossier_id": "DOS002",
+      "source_kind": "formulaire_fictif",
+      "source_path": "documents.json",
+      "source_locator": "id=47",
+      "person_ids": [
+        "P008"
+      ]
+    },
+    {
+      "document_id": "DOC-P008-observation_medicale",
+      "dossier_id": "DOS002",
+      "source_kind": "formulaire_fictif",
+      "source_path": "documents.json",
+      "source_locator": "id=48",
+      "person_ids": [
+        "P008"
+      ]
+    },
+    {
+      "document_id": "DOC-CROISE-001",
+      "dossier_id": "DOS001",
+      "source_kind": "rapport_fictif",
+      "source_path": "catalog_sources/rapport_croise_001.txt",
+      "source_locator": null,
+      "person_ids": [
+        "P001",
+        "P002"
+      ]
+    },
+    {
+      "document_id": "DOC-CROISE-002",
+      "dossier_id": "DOS002",
+      "source_kind": "rapport_fictif",
+      "source_path": "catalog_sources/rapport_croise_002.txt",
+      "source_locator": null,
+      "person_ids": [
+        "P005",
+        "P006"
+      ]
+    }
+  ]
+}

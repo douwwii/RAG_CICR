@@ -1,0 +1,8 @@
+DOCUMENT ENTIÈREMENT FICTIF — DOC-CROISE-001
+
+Un témoin fictif déclare avoir entendu Jean Dupont et Marie Laurent évoquer
+un déplacement commun. Il indique ne pas avoir assisté à ce déplacement.
+Aucune date, destination ou confirmation indépendante n’est disponible.
+
+Ce texte sert uniquement à tester un document mentionnant plusieurs personnes.
+Il ne permet de conclure ni à leur présence commune, ni à leur localisation.

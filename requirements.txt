@@ -1,0 +1,4 @@
+sentence-transformers>=5.0,<7
+qdrant-client>=1.19.1,<2
+pydantic>=2,<3
+numpy>=1.24,<3
