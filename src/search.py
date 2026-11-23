@@ -19,6 +19,7 @@ def retrieve(
     store: VectorStore, embedder: EmbeddingService, question: str, *,
     catalog: Catalog, dossier_id: str, person_id: str | None = None,
     field_name: str | None = None, top_k: int = DEFAULT_TOP_K,
+    text_builder_version: str = TEXT_BUILDER_VERSION,
 ) -> list[VectorHit]:
     validate_top_k(top_k)
     try:
@@ -28,10 +29,10 @@ def retrieve(
     scope = resolve_scope(catalog, filters.dossier_id, filters.person_id)
     if not scope.documents:
         return []
-    store.check_compatibility(embedder.profile, TEXT_BUILDER_VERSION)
+    store.check_compatibility(embedder.profile, text_builder_version)
     vector = embedder.embed_query(question)
     hits = store.search(
-        vector, filters, top_k, profile=embedder.profile, text_builder_version=TEXT_BUILDER_VERSION,
+        vector, filters, top_k, profile=embedder.profile, text_builder_version=text_builder_version,
     )
     documents = {document.document_id: document for document in scope.documents}
     # Vérifier le lot complet avant de le remettre au futur constructeur de contexte.

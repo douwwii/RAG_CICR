@@ -125,6 +125,17 @@ class WebTests(unittest.TestCase):
         repository = JobRepository(self.service.jobs.path)
         self.assertEqual(repository.get('interrupted')['status'], 'error')
 
+    def test_document_absent_from_active_generation_can_be_reimported(self):
+        job = self.wait(self.upload().json()['job'])
+        artifact = self.service.artifact_path / (job['document_id'] + '.json')
+        artifact.rename(artifact.with_suffix('.backup'))
+        document = self.client.get('/api/dossiers/A/documents').json()[0]
+        self.assertEqual(document['status'], 'not_indexed')
+        self.assertEqual(self.client.post('/api/dossiers/A/search', json={'question': 'Lina'}).json()['results'], [])
+        retried = self.wait(self.upload().json()['job'])
+        self.assertEqual(retried['document_id'], job['document_id'])
+        self.assertEqual(retried['status'], 'done')
+
     def test_partial_index_never_becomes_searchable(self):
         add = self.service.passages.add
         def fail_after_write(passages, encoder):

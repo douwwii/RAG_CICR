@@ -12,6 +12,7 @@ from vector_store import VectorRecord
 
 def prepare_index_records(
     records: Sequence[FieldRecord], catalog: Catalog, source_path: Path,
+    *, include_person_context: bool = False,
 ) -> list[VectorRecord]:
     validate_corpus(records)
     source_path = Path(source_path).resolve()
@@ -22,9 +23,13 @@ def prepare_index_records(
             raise ScopeError(f'Document absent du catalogue : {record.document_id}.')
         locator = f'id={record.id}'
         validate_field_reference(record, document, source_path=source_path, source_locator=locator)
+        embedding_text = make_text(record.model_dump())
+        if include_person_context:
+            persons = {p.person_id: p.display_name for p in catalog.list_persons(document.dossier_id)}
+            embedding_text = f'Personne : {persons[record.person_id]}. {embedding_text}'
         indexed.append(VectorRecord(
             **record.model_dump(), dossier_id=document.dossier_id,
             source_path=str(source_path), source_locator=locator,
-            embedding_text=make_text(record.model_dump()),
+            embedding_text=embedding_text,
         ))
     return indexed

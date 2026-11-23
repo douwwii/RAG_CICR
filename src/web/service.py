@@ -12,8 +12,7 @@ from qdrant_client import QdrantClient
 
 from catalog import Catalog
 from common import CATALOG_FILE, DATA_FILE
-from config import ROOT, VECTOR_STORE_CONFIG, OllamaConfig
-from embeddings import SentenceTransformerEmbedder
+from config import ROOT, OllamaConfig
 from ingestion import ingest_pdf
 from ollama_client import OllamaClient
 from passage_index import PassageIndex
@@ -22,16 +21,20 @@ from schemas import DocumentMetadata
 from search import retrieve
 from query_rewriting import rewrite_question
 from web.jobs import JobRepository
+from web.index_config import WebIndexConfig, create_embedder
 
 log = logging.getLogger(__name__)
 
 
 class WebService:
     def __init__(self, *, catalog_path=CATALOG_FILE, data_path=None, vector_path=None,
-                 embedder=None, llm=None, qdrant=None):
+                 embedder=None, llm=None, qdrant=None, index_config=None):
         self.catalog_path = Path(catalog_path)
         self.data_path = Path(data_path or os.environ.get('SPOC_WEB_DATA', ROOT / 'web_data')).resolve()
         self.data_path.mkdir(parents=True, exist_ok=True)
+        self.index_config = index_config or (WebIndexConfig(artifact_path=self.data_path) if (qdrant is not None or vector_path is not None) else WebIndexConfig.load(self.data_path))
+        self.artifact_path = self.index_config.artifact_path
+        self.artifact_path.mkdir(parents=True, exist_ok=True)
         self.jobs = JobRepository(self.data_path / 'jobs.sqlite')
         self.lock = RLock()
         self.embedder = embedder
@@ -40,9 +43,9 @@ class WebService:
             model_name=os.environ.get('SPOC_OLLAMA_MODEL', 'qwen3.8:27b-mlx'),
             timeout_seconds=180.0, num_predict=16384,
         ))
-        self.client = qdrant or QdrantClient(path=str(vector_path or VECTOR_STORE_CONFIG.path))
-        self.legacy = QdrantVectorStore(client=self.client)
-        self.passages = PassageIndex(self.client)
+        self.client = qdrant or QdrantClient(path=str(vector_path or self.index_config.fields.path))
+        self.legacy = QdrantVectorStore(config=self.index_config.fields, client=self.client)
+        self.passages = PassageIndex(self.client, collection=self.index_config.passage_collection)
         self.executor = ThreadPoolExecutor(max_workers=1, thread_name_prefix='pdf-ingestion')
 
     def close(self):
@@ -51,7 +54,7 @@ class WebService:
 
     def encoder(self):
         if self.embedder is None:
-            self.embedder = SentenceTransformerEmbedder()
+            self.embedder = create_embedder(self.index_config.embedding)
         return self.embedder
 
     def dossiers(self):
@@ -63,11 +66,11 @@ class WebService:
             catalog.list_documents(dossier_id)
 
     def legacy_ids(self):
-        if not self.client.collection_exists(VECTOR_STORE_CONFIG.collection_name):
+        if not self.client.collection_exists(self.index_config.fields.collection_name):
             return set()
         ids, offset = set(), None
         while True:
-            points, offset = self.client.scroll(VECTOR_STORE_CONFIG.collection_name, limit=256,
+            points, offset = self.client.scroll(self.index_config.fields.collection_name, limit=256,
                                                offset=offset, with_payload=['document_id'], with_vectors=False)
             ids.update(p.payload['document_id'] for p in points)
             if offset is None:
@@ -77,6 +80,10 @@ class WebService:
         with self.lock, Catalog(self.catalog_path, read_only=True) as catalog:
             documents = catalog.list_documents(dossier_id)
             jobs = self.jobs.documents(dossier_id)
+            for document_id, job in jobs.items():
+                if job['status'] == 'done' and not (self.artifact_path / (document_id + '.json')).exists():
+                    job.update(status='not_indexed', stage='Non indexé dans cette version',
+                               warning='Réimportez ce document pour l’indexer dans cette version.')
             indexed = self.legacy_ids()
             from data_loader import load_field_records
             labels = {r.document_id: r for r in load_field_records(DATA_FILE)}
@@ -103,7 +110,8 @@ class WebService:
         with self.lock:
             previous = self.jobs.duplicate(dossier_id, digest)
             if previous:
-                if previous['status'] != 'error':
+                missing_artifact = previous['status'] == 'done' and not (self.artifact_path / (previous['document_id'] + '.json')).exists()
+                if previous['status'] != 'error' and not missing_artifact:
                     return dict(job=self.jobs.public(previous), duplicate=True)
                 self.jobs.update(previous['job_id'], status='queued', stage='En attente', error=None, warning=None)
                 job_id, document_id = previous['job_id'], previous['document_id']
@@ -137,7 +145,8 @@ class WebService:
                         self.passages.add(passages, encoder)
             pages, count, warning = ingest_pdf(
                 Path(source.source_path), source, self.llm, embedder, LockedIndex(),
-                self.data_path / (source.document_id + '.json'), progress, model_lock=self.lock,
+                self.artifact_path / (source.document_id + '.json'), progress, model_lock=self.lock,
+                coherent=self.index_config.coherent,
             )
             self.jobs.update(job_id, status='done', stage='Terminé', page_count=pages,
                              passage_count=count, warning=warning)
@@ -153,7 +162,7 @@ class WebService:
         job = self.jobs.documents(dossier_id).get(document_id)
         if not job or job['status'] != 'done':
             raise ValueError('Document pas encore indexé.')
-        return json.loads((self.data_path / (document_id + '.json')).read_text(encoding='utf-8'))
+        return json.loads((self.artifact_path / (document_id + '.json')).read_text(encoding='utf-8'))
 
     def search(self, dossier_id, question, top_k):
         self.require_dossier(dossier_id)
@@ -172,15 +181,17 @@ class WebService:
             embedder = self.encoder()
             results = []
             persons = {p.person_id: p.display_name for p in catalog.list_persons(dossier_id)}
-            if self.client.collection_exists(VECTOR_STORE_CONFIG.collection_name):
+            if self.client.collection_exists(self.index_config.fields.collection_name):
                 for hit in retrieve(self.legacy, embedder, question, catalog=catalog,
-                                    dossier_id=dossier_id, top_k=top_k):
+                                    dossier_id=dossier_id, top_k=top_k,
+                                    text_builder_version=self.index_config.text_builder_version):
                     p = hit.payload
                     results.append(dict(passage_id=str(hit.id), document_id=p.document_id,
                                         dossier_id=dossier_id, title=p.field_label, text=p.value,
                                         score=hit.score, page_start=None, page_end=None,
                                         name=f'{p.field_label} · {persons.get(p.person_id, p.person_id)}', kind=p.source_kind))
             ready = {k: j for k, j in self.jobs.documents(dossier_id).items() if j['status'] == 'done'}
+            ready = {k: j for k, j in ready.items() if (self.artifact_path / (k + '.json')).exists()}
             vector = embedder.embed_query(question)
             for p, score in self.passages.search(vector, embedder, dossier_id, list(ready), top_k):
                 if p.document_id not in documents:

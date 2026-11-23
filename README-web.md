@@ -15,7 +15,7 @@ cd ..
 
 Si `pnpm` n'est pas installé, installer pnpm depuis son registre habituel (`npm install -g pnpm@11`). Le fichier `pnpm-lock.yaml` fixe les dépendances réellement testées. Aucun chargement de polices, lecteur PDF ou script depuis un CDN.
 
-Le catalogue `catalogue.sqlite`, le modèle MiniLM en cache et l'index historique sont réutilisés. Pour initialiser un checkout dépourvu de catalogue/index, suivre d'abord la procédure du README principal (`src/import_catalog.py`, puis `src/index.py`). Ne pas réindexer un corpus existant pour simplement démarrer l'interface.
+Le catalogue `catalogue.sqlite` est conservé. Le profil web actif est enregistré dans `web_data/active_index.json` ; après migration, il utilise BGE-M3 avec la préparation contexte + cohérent. Sans manifeste, le socle historique MiniLM reste disponible. Pour initialiser un checkout dépourvu de catalogue/index, suivre d'abord la procédure du README principal (`src/import_catalog.py`, puis `src/index.py`). Ne pas réindexer un corpus existant pour simplement démarrer l'interface.
 
 ## Démarrage
 
@@ -101,3 +101,37 @@ Pour régénérer les PDF de démonstration : `.venv/bin/python scripts/create_d
 Chaque recherche envoie d’abord la question à Qwen pour obtenir une phrase de recherche concise, sans réponse ni ajout de faits. MiniLM encode ensuite cette formulation et Qdrant classe les passages par similarité cosinus dans le dossier sélectionné. Cinq résultats maximum sont retournés. Une panne Qwen ou une formulation invalide/trop longue fait utiliser la question originale. Cette reformulation ne constitue pas un reranking et ne garantit pas une amélioration de pertinence.
 
 La reformulation utilise désormais le prompt versionné `prompts/query_rewriting/v4.txt`, avec contrôles conservateurs des noms, nombres, mois et négations. L’évaluation comparative et ses limites sont décrites dans `experiments/query_rewriting/README.md`. Elle ne remplace pas un classement plus fin des passages ni une amélioration du découpage documentaire.
+
+
+## Version BGE-M3 — contexte + cohérent
+
+La version migrée utilise `BAAI/bge-m3` à la révision `5617a9f61b028005a4858fdac845db406aefb181`, CPU, batch de quatre et quatre threads. Elle encode la question préparée et les documents avec le même modèle. La recherche reste limitée au dossier et à cinq passages maximum.
+
+- Champs historiques : le nom de la personne explicitement associée est inclus dans l’embedding. Les valeurs et identifiants source sont conservés.
+- PDF : prompt `prompts/segmentation/v3-coherent.txt`, ancrage des frontières dans le texte original, regroupement des intertitres courts, conservation des réserves et des phrases complètes lorsque Qwen les propose correctement. Toute la source est conservée, y compris les zones omises dans la proposition du modèle. Un échec d’ancrage entraîne la nouvelle tentative/repli explicite habituels.
+- Nouveaux imports : utilisent le profil actif et enregistrent leurs textes extraits dans le répertoire d’artefacts de cette génération.
+- Les collections MiniLM historiques et les anciens artefacts restent disponibles. Les scripts CLI historiques continuent à utiliser MiniLM ; ils ne reconstruisent pas l’index BGE web.
+
+Pour construire une nouvelle génération et l’activer, arrêter les deux serveurs puis lancer :
+
+```bash
+PYTHONPATH=src .venv/bin/python -m web.migrate_index
+./scripts/start-web.sh
+```
+
+Les poids BGE doivent être présents dans le cache Hugging Face ; le téléchargement local épinglé est disponible avec `experiments/embedding_benchmark/download_models.py`. Un tunnel Qwen fonctionnel est nécessaire pour redécouper les PDF. Ne pas lancer de nouveaux imports pendant cette opération.
+
+La migration écrit dans `web_data/indexes/` un stockage distinct et des artefacts distincts. Elle vérifie les empreintes des PDF, les références du catalogue, les profils, les décomptes et la recherche des champs après réouverture. Un PDF en repli interrompt la migration avant activation. Le fichier `active_index.json` n’est remplacé qu’après ces contrôles. `previous_index.json` permet un retour à la génération précédente, serveurs arrêtés :
+
+```bash
+.venv/bin/python - <<'PYTHON'
+from pathlib import Path
+from shutil import copyfile
+root = Path('web_data')
+copyfile(root / 'previous_index.json', root / 'active_index.tmp')
+(root / 'active_index.tmp').replace(root / 'active_index.json')
+PYTHON
+./scripts/start-web.sh
+```
+
+Le retour arrière change uniquement l’index consulté : les PDF importés depuis la migration restent visibles au catalogue et sont indiqués non indexés si leur artefact est absent de cette génération ; un réimport permet de les y indexer. Les compteurs de passages reflètent la dernière migration effectuée. Le profil actif est consultable via `GET /api/health`, sans exposer de chemins système.

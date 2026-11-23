@@ -79,8 +79,11 @@ def create_app(factory=WebService):
         return JSONResponse(status_code=500, content={'detail': 'Le serveur a rencontré une erreur. Consultez son journal.'})
 
     @app.get('/api/health')
-    def health():
-        return {'status': 'ok', 'prototype': True}
+    def health(request: Request):
+        config = request.app.state.service.index_config
+        return {'status': 'ok', 'prototype': True,
+                'retrieval': {'model': config.embedding.model_name,
+                              'preparation': 'contexte_coherent' if config.coherent else 'historique'}}
 
     @app.get('/api/dossiers')
     def dossiers(request: Request):

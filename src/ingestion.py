@@ -9,15 +9,16 @@ from passage_index import IndexedPassage, passage_id
 from segmentation import segment_document
 
 
-def ingest_pdf(path, source, client, embedder, index, artifact_path: Path, progress, *, model_lock=None):
+def ingest_pdf(path, source, client, embedder, index, artifact_path: Path, progress, *, model_lock=None, coherent=False):
     progress('Extraction du texte')
     extracted = extract_pdf(path)
     progress('Découpage thématique par Qwen')
     root = Path(__file__).resolve().parents[1]
-    prompt = (root / 'prompts/segmentation/v2-exemples.txt').read_text(encoding='utf-8')
+    prompt_version = 'v3-coherent' if coherent else 'v2-exemples'
+    prompt = (root / f'prompts/segmentation/{prompt_version}.txt').read_text(encoding='utf-8')
     run = segment_document(
-        extracted.text, source, client, prompt=prompt, prompt_version='v2-exemples',
-        restore_separators=True,
+        extracted.text, source, client, prompt=prompt, prompt_version=prompt_version,
+        restore_separators=True, coherent=coherent,
     )
     if any(a.error in {'connection', 'timeout', 'http', 'protocol', 'truncated'} for a in run.attempts):
         raise ValueError('Qwen est indisponible ou sa réponse est incomplète. Vérifiez le tunnel SSH puis réessayez.')
@@ -39,7 +40,8 @@ def ingest_pdf(path, source, client, embedder, index, artifact_path: Path, progr
     if not passages:
         raise ValueError('Aucun extrait indexable dans ce document.')
     # Source extraite et journal complet conservés avant publication dans l’index.
-    artifact = dict(text=extracted.text, pages=[asdict(p) for p in extracted.pages],
+    artifact = dict(pipeline='context_coherent_v1' if coherent else 'strict_v1',
+                    text=extracted.text, pages=[asdict(p) for p in extracted.pages],
                     segmentation=run.model_dump(), passages=[p.model_dump() for p in passages])
     temporary = artifact_path.with_suffix('.tmp')
     temporary.write_text(json.dumps(artifact, ensure_ascii=False, indent=2), encoding='utf-8')

@@ -29,16 +29,17 @@ def passage_id(document_id: str, start: int, end: int) -> str:
 
 
 class PassageIndex:
-    def __init__(self, client):
+    def __init__(self, client, *, collection=COLLECTION):
         self.client = client
+        self.collection = collection
 
     def ensure(self, embedder):
-        if not self.client.collection_exists(COLLECTION):
+        if not self.client.collection_exists(self.collection):
             self.client.create_collection(
-                COLLECTION, vectors_config=models.VectorParams(size=embedder.dimension, distance=models.Distance.COSINE),
+                self.collection, vectors_config=models.VectorParams(size=embedder.dimension, distance=models.Distance.COSINE),
                 metadata={'embedding_profile': embedder.profile.model_dump(), 'schema': 1},
             )
-        info = self.client.get_collection(COLLECTION)
+        info = self.client.get_collection(self.collection)
         metadata = info.config.metadata or {}
         if metadata.get('schema') != 1:
             raise ValueError('Schéma de passages incompatible.')
@@ -52,16 +53,16 @@ class PassageIndex:
         vectors = embedder.embed_documents([p.text for p in passages])
         points = [models.PointStruct(id=p.passage_id, vector=v.tolist(), payload=p.model_dump())
                   for p, v in zip(passages, vectors, strict=True)]
-        result = self.client.upsert(COLLECTION, points=points, wait=True)
+        result = self.client.upsert(self.collection, points=points, wait=True)
         if result.status != models.UpdateStatus.COMPLETED:
             raise ValueError('Indexation Qdrant inachevée.')
 
     def search(self, vector, embedder, dossier_id, document_ids, limit):
-        if not document_ids or not self.client.collection_exists(COLLECTION):
+        if not document_ids or not self.client.collection_exists(self.collection):
             return []
         self.ensure(embedder)
         hits = self.client.query_points(
-            COLLECTION, query=vector.tolist(), limit=limit, with_payload=True,
+            self.collection, query=vector.tolist(), limit=limit, with_payload=True,
             query_filter=models.Filter(must=[
                 models.FieldCondition(key='dossier_id', match=models.MatchValue(value=dossier_id)),
                 models.FieldCondition(key='document_id', match=models.MatchAny(any=document_ids)),
