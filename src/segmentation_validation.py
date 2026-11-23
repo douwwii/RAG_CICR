@@ -1,5 +1,6 @@
 """Validation exacte des extraits et positions dans le texte donné au modèle."""
 from collections import Counter
+import json
 
 from pydantic import ValidationError
 
@@ -67,3 +68,30 @@ def validate_segmentation(source: str, response: str) -> list[Passage]:
             'coverage', f'{len(source) - cursor} caractères non couverts en fin de texte.', cursor,
         )
     return passages
+
+
+def validate_source_alignment(source: str, response: str) -> list[Passage]:
+    """Restaurer seulement les séparateurs omis entre extraits exacts et ordonnés."""
+    try:
+        return validate_segmentation(source, response)
+    except SegmentationValidationError as original:
+        try:
+            proposal = SegmentationProposal.model_validate_json(response)
+        except ValidationError:
+            raise original
+        cursor = 0
+        starts = []
+        for passage in proposal.passages:
+            start = source.find(passage.text, cursor)
+            if not passage.text.strip() or start < 0 or source[cursor:start].strip():
+                raise original
+            starts.append(start)
+            cursor = start + len(passage.text)
+        if source[cursor:].strip():
+            raise original
+        bounds = [0, *starts[1:], len(source)]
+        restored = {'passages': [
+            {'title': p.title, 'text': source[a:b]}
+            for p, a, b in zip(proposal.passages, bounds[:-1], bounds[1:], strict=True)
+        ]}
+        return validate_segmentation(source, json.dumps(restored))

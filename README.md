@@ -1,6 +1,8 @@
 # SPOC CICR — Retrieval V1 (100 % fictif)
 
-**Objectif** : indexer des champs de formulaires fictifs, calculer leurs embeddings, les stocker dans Qdrant et récupérer les passages pertinents. **Pas d'OCR ni de LLM** à ce stade. Aucun document réel du CICR.
+**Objectif** : rechercher dans des dossiers et des documents entièrement fictifs. Le socle historique indexe des champs de formulaires ; l’interface web ajoute l’import de PDF numériques, la segmentation par Qwen et la consultation des sources. Aucun document réel du CICR. Pas d’OCR ni de génération de réponses RAG.
+
+**Interface web locale** : voir [la procédure de démarrage et de démonstration](README-web.md). Les commandes ci-dessous décrivent le socle historique ; il n’est pas nécessaire de reconstruire un index existant pour lancer l’interface.
 
 ## Pré-requis
 

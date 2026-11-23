@@ -7,3 +7,9 @@ catalogue.sqlite-journal
 catalogue.sqlite-wal
 catalogue.sqlite-shm
 experiments/segmentation/results/
+web_data/
+frontend/node_modules/
+frontend/dist/
+frontend/*.tsbuildinfo
+experiments/query_rewriting/results/
+experiments/embedding_benchmark/results/

@@ -192,12 +192,44 @@ class SentenceTransformerEmbedder:
             'convert_to_tensor': False, 'show_progress_bar': False,
         }
 
+    def document_spans(self, text: str) -> list[tuple[int, int]]:
+        """Découper sans troncature, avec le tokenizer réel et des positions source."""
+        spans = []
+        start = 0
+        while start < len(text):
+            low, high = start + 1, len(text)
+            end = start
+            while low <= high:
+                middle = (low + high) // 2
+                ids = self._model.tokenizer(
+                    self.profile.document_prompt + text[start:middle],
+                    add_special_tokens=True, truncation=False, verbose=False,
+                )['input_ids']
+                if len(ids) <= self.profile.max_seq_length:
+                    end, low = middle, middle + 1
+                else:
+                    high = middle - 1
+            if end == start:
+                raise EmbeddingError('Impossible de découper ce texte avec le tokenizer configuré.')
+            if end < len(text):
+                boundary = max(text.rfind('\n', start + 1, end), text.rfind(' ', start + 1, end))
+                if boundary > start:
+                    end = boundary + 1
+            if text[start:end].strip():
+                spans.append((start, end))
+            start = end
+        self._check_texts([text[a:b] for a, b in spans], self.profile.document_prompt)
+        return spans
+
     def embed_documents(self, texts: Sequence[str]) -> NDArray[np.float32]:
         texts = self._check_texts(texts, self.profile.document_prompt)
         if not texts:
             return np.empty((0, self.dimension), dtype=np.float32)
         vectors = self._model.encode_document(texts, **self._encode_options(self.profile.document_prompt))
         return self._validate_vectors(vectors, (len(texts), self.dimension))
+
+    def validate_query(self, question: str) -> None:
+        self._check_texts([question], self.profile.query_prompt)
 
     def embed_query(self, question: str) -> NDArray[np.float32]:
         self._check_texts([question], self.profile.query_prompt)

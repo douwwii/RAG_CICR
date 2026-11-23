@@ -1,0 +1,2221 @@
+{
+  "documents": [
+    {
+      "id": "DOC-P001-nom",
+      "dossier": "DOS001",
+      "text": "Jean Dupont",
+      "kind": "field",
+      "field_id": "1",
+      "embedding": "Type de champ : Nom complet. Information : Jean Dupont",
+      "context": "Personne : Jean Dupont. Type de champ : Nom complet. Information : Jean Dupont"
+    },
+    {
+      "id": "DOC-P001-lieu_de_deces",
+      "dossier": "DOS001",
+      "text": "Hôpital central de Sarajevo",
+      "kind": "field",
+      "field_id": "2",
+      "embedding": "Type de champ : Lieu de décès. Information : Hôpital central de Sarajevo",
+      "context": "Personne : Jean Dupont. Type de champ : Lieu de décès. Information : Hôpital central de Sarajevo"
+    },
+    {
+      "id": "DOC-P001-lieu_de_disparition",
+      "dossier": "DOS001",
+      "text": "Sarajevo",
+      "kind": "field",
+      "field_id": "3",
+      "embedding": "Type de champ : Lieu de disparition. Information : Sarajevo",
+      "context": "Personne : Jean Dupont. Type de champ : Lieu de disparition. Information : Sarajevo"
+    },
+    {
+      "id": "DOC-P001-date_de_disparition",
+      "dossier": "DOS001",
+      "text": "21 juin 1994",
+      "kind": "field",
+      "field_id": "4",
+      "embedding": "Type de champ : Date de disparition. Information : 21 juin 1994",
+      "context": "Personne : Jean Dupont. Type de champ : Date de disparition. Information : 21 juin 1994"
+    },
+    {
+      "id": "DOC-P001-temoignage",
+      "dossier": "DOS001",
+      "text": "Un proche rapporte avoir vu Jean Dupont à proximité du centre-ville de Sarajevo, sans confirmation ultérieure.",
+      "kind": "field",
+      "field_id": "5",
+      "embedding": "Type de champ : Témoignage. Information : Un proche rapporte avoir vu Jean Dupont à proximité du centre-ville de Sarajevo, sans confirmation ultérieure.",
+      "context": "Personne : Jean Dupont. Type de champ : Témoignage. Information : Un proche rapporte avoir vu Jean Dupont à proximité du centre-ville de Sarajevo, sans confirmation ultérieure."
+    },
+    {
+      "id": "DOC-P001-observation_medicale",
+      "dossier": "DOS001",
+      "text": "Un rapport mentionne un transfert vers Hôpital central de Sarajevo, sans conclusion médicale définitive.",
+      "kind": "field",
+      "field_id": "6",
+      "embedding": "Type de champ : Observation médicale. Information : Un rapport mentionne un transfert vers Hôpital central de Sarajevo, sans conclusion médicale définitive.",
+      "context": "Personne : Jean Dupont. Type de champ : Observation médicale. Information : Un rapport mentionne un transfert vers Hôpital central de Sarajevo, sans conclusion médicale définitive."
+    },
+    {
+      "id": "DOC-P002-nom",
+      "dossier": "DOS001",
+      "text": "Marie Laurent",
+      "kind": "field",
+      "field_id": "7",
+      "embedding": "Type de champ : Nom complet. Information : Marie Laurent",
+      "context": "Personne : Marie Laurent. Type de champ : Nom complet. Information : Marie Laurent"
+    },
+    {
+      "id": "DOC-P002-lieu_de_deces",
+      "dossier": "DOS001",
+      "text": "Hôpital municipal de Mostar",
+      "kind": "field",
+      "field_id": "8",
+      "embedding": "Type de champ : Lieu de décès. Information : Hôpital municipal de Mostar",
+      "context": "Personne : Marie Laurent. Type de champ : Lieu de décès. Information : Hôpital municipal de Mostar"
+    },
+    {
+      "id": "DOC-P002-lieu_de_disparition",
+      "dossier": "DOS001",
+      "text": "Mostar",
+      "kind": "field",
+      "field_id": "9",
+      "embedding": "Type de champ : Lieu de disparition. Information : Mostar",
+      "context": "Personne : Marie Laurent. Type de champ : Lieu de disparition. Information : Mostar"
+    },
+    {
+      "id": "DOC-P002-date_de_disparition",
+      "dossier": "DOS001",
+      "text": "4 avril 1995",
+      "kind": "field",
+      "field_id": "10",
+      "embedding": "Type de champ : Date de disparition. Information : 4 avril 1995",
+      "context": "Personne : Marie Laurent. Type de champ : Date de disparition. Information : 4 avril 1995"
+    },
+    {
+      "id": "DOC-P002-temoignage",
+      "dossier": "DOS001",
+      "text": "Un proche rapporte avoir vu Marie Laurent à proximité du centre-ville de Mostar, sans confirmation ultérieure.",
+      "kind": "field",
+      "field_id": "11",
+      "embedding": "Type de champ : Témoignage. Information : Un proche rapporte avoir vu Marie Laurent à proximité du centre-ville de Mostar, sans confirmation ultérieure.",
+      "context": "Personne : Marie Laurent. Type de champ : Témoignage. Information : Un proche rapporte avoir vu Marie Laurent à proximité du centre-ville de Mostar, sans confirmation ultérieure."
+    },
+    {
+      "id": "DOC-P002-observation_medicale",
+      "dossier": "DOS001",
+      "text": "Un rapport mentionne un transfert vers Hôpital municipal de Mostar, sans conclusion médicale définitive.",
+      "kind": "field",
+      "field_id": "12",
+      "embedding": "Type de champ : Observation médicale. Information : Un rapport mentionne un transfert vers Hôpital municipal de Mostar, sans conclusion médicale définitive.",
+      "context": "Personne : Marie Laurent. Type de champ : Observation médicale. Information : Un rapport mentionne un transfert vers Hôpital municipal de Mostar, sans conclusion médicale définitive."
+    },
+    {
+      "id": "DOC-P003-nom",
+      "dossier": "DOS001",
+      "text": "Amir Hadžić",
+      "kind": "field",
+      "field_id": "13",
+      "embedding": "Type de champ : Nom complet. Information : Amir Hadžić",
+      "context": "Personne : Amir Hadžić. Type de champ : Nom complet. Information : Amir Hadžić"
+    },
+    {
+      "id": "DOC-P003-lieu_de_deces",
+      "dossier": "DOS001",
+      "text": "Centre médical de Tuzla",
+      "kind": "field",
+      "field_id": "14",
+      "embedding": "Type de champ : Lieu de décès. Information : Centre médical de Tuzla",
+      "context": "Personne : Amir Hadžić. Type de champ : Lieu de décès. Information : Centre médical de Tuzla"
+    },
+    {
+      "id": "DOC-P003-lieu_de_disparition",
+      "dossier": "DOS001",
+      "text": "Tuzla",
+      "kind": "field",
+      "field_id": "15",
+      "embedding": "Type de champ : Lieu de disparition. Information : Tuzla",
+      "context": "Personne : Amir Hadžić. Type de champ : Lieu de disparition. Information : Tuzla"
+    },
+    {
+      "id": "DOC-P003-date_de_disparition",
+      "dossier": "DOS001",
+      "text": "7 août 1993",
+      "kind": "field",
+      "field_id": "16",
+      "embedding": "Type de champ : Date de disparition. Information : 7 août 1993",
+      "context": "Personne : Amir Hadžić. Type de champ : Date de disparition. Information : 7 août 1993"
+    },
+    {
+      "id": "DOC-P003-temoignage",
+      "dossier": "DOS001",
+      "text": "Un proche rapporte avoir vu Amir Hadžić à proximité du centre-ville de Tuzla, sans confirmation ultérieure.",
+      "kind": "field",
+      "field_id": "17",
+      "embedding": "Type de champ : Témoignage. Information : Un proche rapporte avoir vu Amir Hadžić à proximité du centre-ville de Tuzla, sans confirmation ultérieure.",
+      "context": "Personne : Amir Hadžić. Type de champ : Témoignage. Information : Un proche rapporte avoir vu Amir Hadžić à proximité du centre-ville de Tuzla, sans confirmation ultérieure."
+    },
+    {
+      "id": "DOC-P003-observation_medicale",
+      "dossier": "DOS001",
+      "text": "Un rapport mentionne un transfert vers Centre médical de Tuzla, sans conclusion médicale définitive.",
+      "kind": "field",
+      "field_id": "18",
+      "embedding": "Type de champ : Observation médicale. Information : Un rapport mentionne un transfert vers Centre médical de Tuzla, sans conclusion médicale définitive.",
+      "context": "Personne : Amir Hadžić. Type de champ : Observation médicale. Information : Un rapport mentionne un transfert vers Centre médical de Tuzla, sans conclusion médicale définitive."
+    },
+    {
+      "id": "DOC-P004-nom",
+      "dossier": "DOS001",
+      "text": "Lina Moreau",
+      "kind": "field",
+      "field_id": "19",
+      "embedding": "Type de champ : Nom complet. Information : Lina Moreau",
+      "context": "Personne : Lina Moreau. Type de champ : Nom complet. Information : Lina Moreau"
+    },
+    {
+      "id": "DOC-P004-lieu_de_deces",
+      "dossier": "DOS001",
+      "text": "Hôpital Saint-Louis",
+      "kind": "field",
+      "field_id": "20",
+      "embedding": "Type de champ : Lieu de décès. Information : Hôpital Saint-Louis",
+      "context": "Personne : Lina Moreau. Type de champ : Lieu de décès. Information : Hôpital Saint-Louis"
+    },
+    {
+      "id": "DOC-P004-lieu_de_disparition",
+      "dossier": "DOS001",
+      "text": "Paris",
+      "kind": "field",
+      "field_id": "21",
+      "embedding": "Type de champ : Lieu de disparition. Information : Paris",
+      "context": "Personne : Lina Moreau. Type de champ : Lieu de disparition. Information : Paris"
+    },
+    {
+      "id": "DOC-P004-date_de_disparition",
+      "dossier": "DOS001",
+      "text": "18 mai 1996",
+      "kind": "field",
+      "field_id": "22",
+      "embedding": "Type de champ : Date de disparition. Information : 18 mai 1996",
+      "context": "Personne : Lina Moreau. Type de champ : Date de disparition. Information : 18 mai 1996"
+    },
+    {
+      "id": "DOC-P004-temoignage",
+      "dossier": "DOS001",
+      "text": "Un proche rapporte avoir vu Lina Moreau à proximité du centre-ville de Paris, sans confirmation ultérieure.",
+      "kind": "field",
+      "field_id": "23",
+      "embedding": "Type de champ : Témoignage. Information : Un proche rapporte avoir vu Lina Moreau à proximité du centre-ville de Paris, sans confirmation ultérieure.",
+      "context": "Personne : Lina Moreau. Type de champ : Témoignage. Information : Un proche rapporte avoir vu Lina Moreau à proximité du centre-ville de Paris, sans confirmation ultérieure."
+    },
+    {
+      "id": "DOC-P004-observation_medicale",
+      "dossier": "DOS001",
+      "text": "Un rapport mentionne un transfert vers Hôpital Saint-Louis, sans conclusion médicale définitive.",
+      "kind": "field",
+      "field_id": "24",
+      "embedding": "Type de champ : Observation médicale. Information : Un rapport mentionne un transfert vers Hôpital Saint-Louis, sans conclusion médicale définitive.",
+      "context": "Personne : Lina Moreau. Type de champ : Observation médicale. Information : Un rapport mentionne un transfert vers Hôpital Saint-Louis, sans conclusion médicale définitive."
+    },
+    {
+      "id": "DOC-P005-nom",
+      "dossier": "DOS002",
+      "text": "Nadia Karim",
+      "kind": "field",
+      "field_id": "25",
+      "embedding": "Type de champ : Nom complet. Information : Nadia Karim",
+      "context": "Personne : Nadia Karim. Type de champ : Nom complet. Information : Nadia Karim"
+    },
+    {
+      "id": "DOC-P005-lieu_de_deces",
+      "dossier": "DOS002",
+      "text": "Clinique de Banja Luka",
+      "kind": "field",
+      "field_id": "26",
+      "embedding": "Type de champ : Lieu de décès. Information : Clinique de Banja Luka",
+      "context": "Personne : Nadia Karim. Type de champ : Lieu de décès. Information : Clinique de Banja Luka"
+    },
+    {
+      "id": "DOC-P005-lieu_de_disparition",
+      "dossier": "DOS002",
+      "text": "Banja Luka",
+      "kind": "field",
+      "field_id": "27",
+      "embedding": "Type de champ : Lieu de disparition. Information : Banja Luka",
+      "context": "Personne : Nadia Karim. Type de champ : Lieu de disparition. Information : Banja Luka"
+    },
+    {
+      "id": "DOC-P005-date_de_disparition",
+      "dossier": "DOS002",
+      "text": "2 février 1994",
+      "kind": "field",
+      "field_id": "28",
+      "embedding": "Type de champ : Date de disparition. Information : 2 février 1994",
+      "context": "Personne : Nadia Karim. Type de champ : Date de disparition. Information : 2 février 1994"
+    },
+    {
+      "id": "DOC-P005-temoignage",
+      "dossier": "DOS002",
+      "text": "Un proche rapporte avoir vu Nadia Karim à proximité du centre-ville de Banja Luka, sans confirmation ultérieure.",
+      "kind": "field",
+      "field_id": "29",
+      "embedding": "Type de champ : Témoignage. Information : Un proche rapporte avoir vu Nadia Karim à proximité du centre-ville de Banja Luka, sans confirmation ultérieure.",
+      "context": "Personne : Nadia Karim. Type de champ : Témoignage. Information : Un proche rapporte avoir vu Nadia Karim à proximité du centre-ville de Banja Luka, sans confirmation ultérieure."
+    },
+    {
+      "id": "DOC-P005-observation_medicale",
+      "dossier": "DOS002",
+      "text": "Un rapport mentionne un transfert vers Clinique de Banja Luka, sans conclusion médicale définitive.",
+      "kind": "field",
+      "field_id": "30",
+      "embedding": "Type de champ : Observation médicale. Information : Un rapport mentionne un transfert vers Clinique de Banja Luka, sans conclusion médicale définitive.",
+      "context": "Personne : Nadia Karim. Type de champ : Observation médicale. Information : Un rapport mentionne un transfert vers Clinique de Banja Luka, sans conclusion médicale définitive."
+    },
+    {
+      "id": "DOC-P006-nom",
+      "dossier": "DOS002",
+      "text": "Hugo Martin",
+      "kind": "field",
+      "field_id": "31",
+      "embedding": "Type de champ : Nom complet. Information : Hugo Martin",
+      "context": "Personne : Hugo Martin. Type de champ : Nom complet. Information : Hugo Martin"
+    },
+    {
+      "id": "DOC-P006-lieu_de_deces",
+      "dossier": "DOS002",
+      "text": "Hôpital Édouard-Herriot",
+      "kind": "field",
+      "field_id": "32",
+      "embedding": "Type de champ : Lieu de décès. Information : Hôpital Édouard-Herriot",
+      "context": "Personne : Hugo Martin. Type de champ : Lieu de décès. Information : Hôpital Édouard-Herriot"
+    },
+    {
+      "id": "DOC-P006-lieu_de_disparition",
+      "dossier": "DOS002",
+      "text": "Lyon",
+      "kind": "field",
+      "field_id": "33",
+      "embedding": "Type de champ : Lieu de disparition. Information : Lyon",
+      "context": "Personne : Hugo Martin. Type de champ : Lieu de disparition. Information : Lyon"
+    },
+    {
+      "id": "DOC-P006-date_de_disparition",
+      "dossier": "DOS002",
+      "text": "1 novembre 1995",
+      "kind": "field",
+      "field_id": "34",
+      "embedding": "Type de champ : Date de disparition. Information : 1 novembre 1995",
+      "context": "Personne : Hugo Martin. Type de champ : Date de disparition. Information : 1 novembre 1995"
+    },
+    {
+      "id": "DOC-P006-temoignage",
+      "dossier": "DOS002",
+      "text": "Un proche rapporte avoir vu Hugo Martin à proximité du centre-ville de Lyon, sans confirmation ultérieure.",
+      "kind": "field",
+      "field_id": "35",
+      "embedding": "Type de champ : Témoignage. Information : Un proche rapporte avoir vu Hugo Martin à proximité du centre-ville de Lyon, sans confirmation ultérieure.",
+      "context": "Personne : Hugo Martin. Type de champ : Témoignage. Information : Un proche rapporte avoir vu Hugo Martin à proximité du centre-ville de Lyon, sans confirmation ultérieure."
+    },
+    {
+      "id": "DOC-P006-observation_medicale",
+      "dossier": "DOS002",
+      "text": "Un rapport mentionne un transfert vers Hôpital Édouard-Herriot, sans conclusion médicale définitive.",
+      "kind": "field",
+      "field_id": "36",
+      "embedding": "Type de champ : Observation médicale. Information : Un rapport mentionne un transfert vers Hôpital Édouard-Herriot, sans conclusion médicale définitive.",
+      "context": "Personne : Hugo Martin. Type de champ : Observation médicale. Information : Un rapport mentionne un transfert vers Hôpital Édouard-Herriot, sans conclusion médicale définitive."
+    },
+    {
+      "id": "DOC-P007-nom",
+      "dossier": "DOS002",
+      "text": "Alma Petrović",
+      "kind": "field",
+      "field_id": "37",
+      "embedding": "Type de champ : Nom complet. Information : Alma Petrović",
+      "context": "Personne : Alma Petrović. Type de champ : Nom complet. Information : Alma Petrović"
+    },
+    {
+      "id": "DOC-P007-lieu_de_deces",
+      "dossier": "DOS002",
+      "text": "Centre hospitalier de Zenica",
+      "kind": "field",
+      "field_id": "38",
+      "embedding": "Type de champ : Lieu de décès. Information : Centre hospitalier de Zenica",
+      "context": "Personne : Alma Petrović. Type de champ : Lieu de décès. Information : Centre hospitalier de Zenica"
+    },
+    {
+      "id": "DOC-P007-lieu_de_disparition",
+      "dossier": "DOS002",
+      "text": "Zenica",
+      "kind": "field",
+      "field_id": "39",
+      "embedding": "Type de champ : Lieu de disparition. Information : Zenica",
+      "context": "Personne : Alma Petrović. Type de champ : Lieu de disparition. Information : Zenica"
+    },
+    {
+      "id": "DOC-P007-date_de_disparition",
+      "dossier": "DOS002",
+      "text": "15 décembre 1993",
+      "kind": "field",
+      "field_id": "40",
+      "embedding": "Type de champ : Date de disparition. Information : 15 décembre 1993",
+      "context": "Personne : Alma Petrović. Type de champ : Date de disparition. Information : 15 décembre 1993"
+    },
+    {
+      "id": "DOC-P007-temoignage",
+      "dossier": "DOS002",
+      "text": "Un proche rapporte avoir vu Alma Petrović à proximité du centre-ville de Zenica, sans confirmation ultérieure.",
+      "kind": "field",
+      "field_id": "41",
+      "embedding": "Type de champ : Témoignage. Information : Un proche rapporte avoir vu Alma Petrović à proximité du centre-ville de Zenica, sans confirmation ultérieure.",
+      "context": "Personne : Alma Petrović. Type de champ : Témoignage. Information : Un proche rapporte avoir vu Alma Petrović à proximité du centre-ville de Zenica, sans confirmation ultérieure."
+    },
+    {
+      "id": "DOC-P007-observation_medicale",
+      "dossier": "DOS002",
+      "text": "Un rapport mentionne un transfert vers Centre hospitalier de Zenica, sans conclusion médicale définitive.",
+      "kind": "field",
+      "field_id": "42",
+      "embedding": "Type de champ : Observation médicale. Information : Un rapport mentionne un transfert vers Centre hospitalier de Zenica, sans conclusion médicale définitive.",
+      "context": "Personne : Alma Petrović. Type de champ : Observation médicale. Information : Un rapport mentionne un transfert vers Centre hospitalier de Zenica, sans conclusion médicale définitive."
+    },
+    {
+      "id": "DOC-P008-nom",
+      "dossier": "DOS002",
+      "text": "Lucas Bernard",
+      "kind": "field",
+      "field_id": "43",
+      "embedding": "Type de champ : Nom complet. Information : Lucas Bernard",
+      "context": "Personne : Lucas Bernard. Type de champ : Nom complet. Information : Lucas Bernard"
+    },
+    {
+      "id": "DOC-P008-lieu_de_deces",
+      "dossier": "DOS002",
+      "text": "Hôpital de Split",
+      "kind": "field",
+      "field_id": "44",
+      "embedding": "Type de champ : Lieu de décès. Information : Hôpital de Split",
+      "context": "Personne : Lucas Bernard. Type de champ : Lieu de décès. Information : Hôpital de Split"
+    },
+    {
+      "id": "DOC-P008-lieu_de_disparition",
+      "dossier": "DOS002",
+      "text": "Split",
+      "kind": "field",
+      "field_id": "45",
+      "embedding": "Type de champ : Lieu de disparition. Information : Split",
+      "context": "Personne : Lucas Bernard. Type de champ : Lieu de disparition. Information : Split"
+    },
+    {
+      "id": "DOC-P008-date_de_disparition",
+      "dossier": "DOS002",
+      "text": "30 juillet 1994",
+      "kind": "field",
+      "field_id": "46",
+      "embedding": "Type de champ : Date de disparition. Information : 30 juillet 1994",
+      "context": "Personne : Lucas Bernard. Type de champ : Date de disparition. Information : 30 juillet 1994"
+    },
+    {
+      "id": "DOC-P008-temoignage",
+      "dossier": "DOS002",
+      "text": "Un proche rapporte avoir vu Lucas Bernard à proximité du centre-ville de Split, sans confirmation ultérieure.",
+      "kind": "field",
+      "field_id": "47",
+      "embedding": "Type de champ : Témoignage. Information : Un proche rapporte avoir vu Lucas Bernard à proximité du centre-ville de Split, sans confirmation ultérieure.",
+      "context": "Personne : Lucas Bernard. Type de champ : Témoignage. Information : Un proche rapporte avoir vu Lucas Bernard à proximité du centre-ville de Split, sans confirmation ultérieure."
+    },
+    {
+      "id": "DOC-P008-observation_medicale",
+      "dossier": "DOS002",
+      "text": "Un rapport mentionne un transfert vers Hôpital de Split, sans conclusion médicale définitive.",
+      "kind": "field",
+      "field_id": "48",
+      "embedding": "Type de champ : Observation médicale. Information : Un rapport mentionne un transfert vers Hôpital de Split, sans conclusion médicale définitive.",
+      "context": "Personne : Lucas Bernard. Type de champ : Observation médicale. Information : Un rapport mentionne un transfert vers Hôpital de Split, sans conclusion médicale définitive."
+    },
+    {
+      "id": "DOC-c5f1283c-80ad-42a3-80d9-882dfa36f233",
+      "dossier": "DOS001",
+      "text": "SPOC - DOCUMENT ENTIÈREMENT FICTIF\nCompte rendu de recherche\nTémoignage concernant Lina Morvan\nUn voisin pense avoir aperçu Lina Morvan près du hangar le 5 juin. Il était loin et n’a pas pu\nconfirmer son identité.\nContrôle du registre\nLa liste du centre ne mentionne pas Lina. Le dernier feuillet manque. Cette absence ne permet pas\nde conclure sur son passage au centre.\nEntretien de suivi\nL’entretien de suivi est prévu jeudi à 14 h.\nDonnées inventées pour les essais du prototype - Page 1\n\n\nSPOC - DOCUMENT ENTIÈREMENT FICTIF\nRectification et pièces associées\nDate concernant Sami Ferrand\nLa fiche initiale indique le 8 mai comme date de disparition. La famille précise que le 8 mai\ncorrespond au dernier appel. La date de disparition n’est pas établie.\nAffaires personnelles\nLe sac de Sami a été remis à sa sœur Nora.\nAttestation relative à un homonyme\nUne attestation mentionne Port-Lys comme lieu de décès. Le numéro du dossier indique qu’elle\nconcerne un homonyme de Lina Morvan. Le décès de Lina n’est pas établi. La mairie de Belle-Rive\nconserve une copie de l’attestation.\nDonnées inventées pour les essais du prototype - Page 2\n",
+      "kind": "pdf",
+      "current": [
+        {
+          "title": "Témoignage concernant Lina Morvan",
+          "text": "SPOC - DOCUMENT ENTIÈREMENT FICTIF\n",
+          "start": 0,
+          "end": 35
+        },
+        {
+          "title": "Témoignage concernant Lina Morvan",
+          "text": "Compte rendu de recherche\n",
+          "start": 35,
+          "end": 61
+        },
+        {
+          "title": "Témoignage concernant Lina Morvan",
+          "text": "Témoignage concernant Lina Morvan\n",
+          "start": 61,
+          "end": 95
+        },
+        {
+          "title": "Témoignage concernant Lina Morvan",
+          "text": "Un voisin pense avoir aperçu Lina Morvan près du hangar le 5 juin. Il était loin et n’a pas pu\n",
+          "start": 95,
+          "end": 190
+        },
+        {
+          "title": "Témoignage concernant Lina Morvan",
+          "text": "confirmer son identité.\n",
+          "start": 190,
+          "end": 214
+        },
+        {
+          "title": "Contrôle du registre",
+          "text": "Contrôle du registre\n",
+          "start": 214,
+          "end": 235
+        },
+        {
+          "title": "Contrôle du registre",
+          "text": "La liste du centre ne mentionne pas Lina. Le dernier feuillet manque. Cette absence ne permet pas\n",
+          "start": 235,
+          "end": 333
+        },
+        {
+          "title": "Contrôle du registre",
+          "text": "de conclure sur son passage au centre.\n",
+          "start": 333,
+          "end": 372
+        },
+        {
+          "title": "Entretien de suivi",
+          "text": "Entretien de suivi\n",
+          "start": 372,
+          "end": 391
+        },
+        {
+          "title": "Entretien de suivi",
+          "text": "L’entretien de suivi est prévu jeudi à 14 h.\n",
+          "start": 391,
+          "end": 436
+        },
+        {
+          "title": "Données inventées pour les essais du prototype - Page 1",
+          "text": "Données inventées pour les essais du prototype - Page 1\n\n\n",
+          "start": 436,
+          "end": 494
+        },
+        {
+          "title": "Données inventées pour les essais du prototype - Page 1",
+          "text": "SPOC - DOCUMENT ENTIÈREMENT FICTIF\n",
+          "start": 494,
+          "end": 529
+        },
+        {
+          "title": "Rectification et pièces associées",
+          "text": "Rectification et pièces associées\n",
+          "start": 529,
+          "end": 563
+        },
+        {
+          "title": "Date concernant Sami Ferrand",
+          "text": "Date concernant Sami Ferrand\n",
+          "start": 563,
+          "end": 592
+        },
+        {
+          "title": "Date concernant Sami Ferrand",
+          "text": "La fiche initiale indique le 8 mai comme date de disparition. La famille précise que le 8 mai\n",
+          "start": 592,
+          "end": 686
+        },
+        {
+          "title": "Date concernant Sami Ferrand",
+          "text": "correspond au dernier appel. La date de disparition n’est pas établie.\n",
+          "start": 686,
+          "end": 757
+        },
+        {
+          "title": "Affaires personnelles",
+          "text": "Affaires personnelles\n",
+          "start": 757,
+          "end": 779
+        },
+        {
+          "title": "Affaires personnelles",
+          "text": "Le sac de Sami a été remis à sa sœur Nora.\n",
+          "start": 779,
+          "end": 822
+        },
+        {
+          "title": "Attestation relative à un homonyme",
+          "text": "Attestation relative à un homonyme\n",
+          "start": 822,
+          "end": 857
+        },
+        {
+          "title": "Attestation relative à un homonyme",
+          "text": "Une attestation mentionne Port-Lys comme lieu de décès. Le numéro du dossier indique qu’elle\n",
+          "start": 857,
+          "end": 950
+        },
+        {
+          "title": "Attestation relative à un homonyme",
+          "text": "concerne un homonyme de Lina Morvan. Le décès de Lina n’est pas établi. La mairie de Belle-Rive\n",
+          "start": 950,
+          "end": 1046
+        },
+        {
+          "title": "Attestation relative à un homonyme",
+          "text": "conserve une copie de l’attestation.\n",
+          "start": 1046,
+          "end": 1083
+        },
+        {
+          "title": "Données inventées pour les essais du prototype - Page 2",
+          "text": "Données inventées pour les essais du prototype - Page 2\n",
+          "start": 1083,
+          "end": 1139
+        }
+      ],
+      "coherent": [
+        {
+          "title": "Témoignage concernant Lina Morvan",
+          "text": "SPOC - DOCUMENT ENTIÈREMENT FICTIF\nCompte rendu de recherche\nTémoignage concernant Lina Morvan\nUn voisin pense avoir aperçu Lina Morvan près du hangar le 5 juin. Il était loin et n’a pas pu\nconfirmer son identité.\n",
+          "start": 0,
+          "end": 214
+        },
+        {
+          "title": "Contrôle du registre",
+          "text": "Contrôle du registre\nLa liste du centre ne mentionne pas Lina. Le dernier feuillet manque. Cette absence ne permet pas\nde conclure sur son passage au centre.\n",
+          "start": 214,
+          "end": 372
+        },
+        {
+          "title": "Entretien de suivi",
+          "text": "Entretien de suivi\nL’entretien de suivi est prévu jeudi à 14 h.\n",
+          "start": 372,
+          "end": 436
+        },
+        {
+          "title": "Rectification et pièces associées",
+          "text": "Données inventées pour les essais du prototype - Page 1\n\n\nSPOC - DOCUMENT ENTIÈREMENT FICTIF\nRectification et pièces associées\n",
+          "start": 436,
+          "end": 563
+        },
+        {
+          "title": "Date concernant Sami Ferrand",
+          "text": "Date concernant Sami Ferrand\nLa fiche initiale indique le 8 mai comme date de disparition. La famille précise que le 8 mai\ncorrespond au dernier appel. La date de disparition n’est pas établie.\n",
+          "start": 563,
+          "end": 757
+        },
+        {
+          "title": "Affaires personnelles",
+          "text": "Affaires personnelles\nLe sac de Sami a été remis à sa sœur Nora.\n",
+          "start": 757,
+          "end": 822
+        },
+        {
+          "title": "Attestation relative à un homonyme",
+          "text": "Attestation relative à un homonyme\nUne attestation mentionne Port-Lys comme lieu de décès. Le numéro du dossier indique qu’elle\nconcerne un homonyme de Lina Morvan. Le décès de Lina n’est pas établi. La mairie de Belle-Rive\nconserve une copie de l’attestation.\nDonnées inventées pour les essais du prototype - Page 2\n",
+          "start": 822,
+          "end": 1139
+        }
+      ],
+      "coherent_status": "source_anchored",
+      "restored_gap_characters": 82
+    },
+    {
+      "id": "N01",
+      "dossier": "DOS001",
+      "text": "Déplacement et vérification\nUn chauffeur pense avoir aperçu Marwa Sahel près du pont des Aulnes le 3 mars. Il faisait nuit et il ne reconnaît pas son visage avec certitude. Une passagère conteste cette identification.\n\nRegistre\nLe registre du foyer ne mentionne pas Marwa. Deux pages du registre sont manquantes.",
+      "kind": "text",
+      "current": [
+        {
+          "title": "Déplacement et vérification",
+          "text": "Déplacement et vérification\n",
+          "start": 0,
+          "end": 28
+        },
+        {
+          "title": "Identification incertaine de Marwa Sahel près du pont des Aulnes",
+          "text": "Un chauffeur pense avoir aperçu Marwa Sahel près du pont des Aulnes le 3 mars. Il faisait nuit et il ne reconnaît pas son visage avec certitude. Une passagère conteste cette identification.\n\n",
+          "start": 28,
+          "end": 219
+        },
+        {
+          "title": "Registre",
+          "text": "Registre\n",
+          "start": 219,
+          "end": 228
+        },
+        {
+          "title": "Absence de Marwa dans le registre et pages manquantes",
+          "text": "Le registre du foyer ne mentionne pas Marwa. Deux pages du registre sont manquantes.",
+          "start": 228,
+          "end": 312
+        }
+      ],
+      "current_status": "validated",
+      "coherent": [
+        {
+          "title": "Déplacement et vérification",
+          "text": "Déplacement et vérification\nUn chauffeur pense avoir aperçu Marwa Sahel près du pont des Aulnes le 3 mars. Il faisait nuit et il ne reconnaît pas son visage avec certitude. Une passagère conteste cette identification.\n\n",
+          "start": 0,
+          "end": 219
+        },
+        {
+          "title": "Registre",
+          "text": "Registre\nLe registre du foyer ne mentionne pas Marwa. Deux pages du registre sont manquantes.",
+          "start": 219,
+          "end": 312
+        }
+      ],
+      "coherent_status": "source_anchored",
+      "restored_gap_characters": 0
+    },
+    {
+      "id": "N02",
+      "dossier": "DOS002",
+      "text": "Identité vérifiée\nMarwa Sahel a été reçue au dispensaire de Valbois le 11 avril. Son identité a été vérifiée avec une pièce officielle. Ce dossier est distinct de celui du pont des Aulnes.\n\nRendez-vous\nUne consultation de suivi est prévue lundi à 10 h.",
+      "kind": "text",
+      "current": [
+        {
+          "title": "Identité vérifiée",
+          "text": "Identité vérifiée\n",
+          "start": 0,
+          "end": 18
+        },
+        {
+          "title": "Marwa Sahel reçue au dispensaire de Valbois",
+          "text": "Marwa Sahel a été reçue au dispensaire de Valbois le 11 avril. Son identité a été vérifiée avec une pièce officielle. Ce dossier est distinct de celui du pont des Aulnes.\n\n",
+          "start": 18,
+          "end": 190
+        },
+        {
+          "title": "Rendez-vous",
+          "text": "Rendez-vous\n",
+          "start": 190,
+          "end": 202
+        },
+        {
+          "title": "Consultation de suivi prévue",
+          "text": "Une consultation de suivi est prévue lundi à 10 h.",
+          "start": 202,
+          "end": 252
+        }
+      ],
+      "current_status": "validated",
+      "coherent": [
+        {
+          "title": "Vérification de l'identité de Marwa Sahel",
+          "text": "Identité vérifiée\nMarwa Sahel a été reçue au dispensaire de Valbois le 11 avril. Son identité a été vérifiée avec une pièce officielle. Ce dossier est distinct de celui du pont des Aulnes.\n\n",
+          "start": 0,
+          "end": 190
+        },
+        {
+          "title": "Consultation de suivi",
+          "text": "Rendez-vous\nUne consultation de suivi est prévue lundi à 10 h.",
+          "start": 190,
+          "end": 252
+        }
+      ],
+      "coherent_status": "source_anchored",
+      "restored_gap_characters": 0
+    },
+    {
+      "id": "N03",
+      "dossier": "DOS001",
+      "text": "Rectification de date\nLa fiche de Théo Leroux mentionne une disparition le 16 août. Selon sa mère, le 16 août correspond uniquement à la réception d’une lettre. La date de disparition demeure inconnue.\n\nAffaires\nLe manteau de Théo a été confié à son cousin Idriss.",
+      "kind": "text",
+      "current": [
+        {
+          "title": "Rectification de date",
+          "text": "Rectification de date\n",
+          "start": 0,
+          "end": 22
+        },
+        {
+          "title": "Fiche de Théo Leroux et date de disparition",
+          "text": "La fiche de Théo Leroux mentionne une disparition le 16 août. Selon sa mère, le 16 août correspond uniquement à la réception d’une lettre. La date de disparition demeure inconnue.\n\n",
+          "start": 22,
+          "end": 203
+        },
+        {
+          "title": "Affaires",
+          "text": "Affaires\n",
+          "start": 203,
+          "end": 212
+        },
+        {
+          "title": "Manteau de Théo",
+          "text": "Le manteau de Théo a été confié à son cousin Idriss.",
+          "start": 212,
+          "end": 264
+        }
+      ],
+      "current_status": "validated",
+      "coherent": [
+        {
+          "title": "Rectification de la date de disparition de Théo Leroux",
+          "text": "Rectification de date\nLa fiche de Théo Leroux mentionne une disparition le 16 août. Selon sa mère, le 16 août correspond uniquement à la réception d’une lettre. La date de disparition demeure inconnue.\n\n",
+          "start": 0,
+          "end": 203
+        },
+        {
+          "title": "Confiance du manteau de Théo à son cousin",
+          "text": "Affaires\nLe manteau de Théo a été confié à son cousin Idriss.",
+          "start": 203,
+          "end": 264
+        }
+      ],
+      "coherent_status": "source_anchored",
+      "restored_gap_characters": 0
+    },
+    {
+      "id": "N04",
+      "dossier": "DOS002",
+      "text": "Pièce médicale\nUn certificat d’hospitalisation concerne une personne nommée Aïcha Benali à Montclair. L’âge inscrit diffère de celui de la personne recherchée. Le lien entre le certificat et la personne recherchée n’est pas établi.\n\nConservation\nL’original est conservé aux archives du dispensaire.",
+      "kind": "text",
+      "current": [
+        {
+          "title": "Document intégral",
+          "text": "Pièce médicale\nUn certificat d’hospitalisation concerne une personne nommée Aïcha Benali à Montclair. L’âge inscrit diffère de celui de la personne recherchée. Le lien entre le certificat et la personne recherchée n’est pas établi.\n\nConservation\nL’original est conservé aux archives du dispensaire.",
+          "start": 0,
+          "end": 298
+        }
+      ],
+      "current_status": "fallback",
+      "coherent": [
+        {
+          "title": "Certificat d'hospitalisation d'Aïcha Benali",
+          "text": "Pièce médicale\nUn certificat d’hospitalisation concerne une personne nommée Aïcha Benali à Montclair. L’âge inscrit diffère de celui de la personne recherchée. Le lien entre le certificat et la personne recherchée n’est pas établi.\n\n",
+          "start": 0,
+          "end": 233
+        },
+        {
+          "title": "Conservation de l'original",
+          "text": "Conservation\nL’original est conservé aux archives du dispensaire.",
+          "start": 233,
+          "end": 298
+        }
+      ],
+      "coherent_status": "source_anchored",
+      "restored_gap_characters": 0
+    },
+    {
+      "id": "N05",
+      "dossier": "DOS001",
+      "text": "Informations contradictoires\nUn ancien gardien affirme que Paul Morel était au centre de Rosières. La direction du centre déclare ne pas disposer de son nom dans ses listes. Aucun document indépendant ne permet de trancher entre ces déclarations.\n\nEntretien\nLa sœur de Paul sera entendue vendredi à 9 h.",
+      "kind": "text",
+      "current": [
+        {
+          "title": "Informations contradictoires",
+          "text": "Informations contradictoires\n",
+          "start": 0,
+          "end": 29
+        },
+        {
+          "title": "Affirmation d'un ancien gardien et déni de la direction du centre de Rosières",
+          "text": "Un ancien gardien affirme que Paul Morel était au centre de Rosières. La direction du centre déclare ne pas disposer de son nom dans ses listes. Aucun document indépendant ne permet de trancher entre ces déclarations.\n\n",
+          "start": 29,
+          "end": 248
+        },
+        {
+          "title": "Entretien",
+          "text": "Entretien\n",
+          "start": 248,
+          "end": 258
+        },
+        {
+          "title": "Audition de la sœur de Paul",
+          "text": "La sœur de Paul sera entendue vendredi à 9 h.",
+          "start": 258,
+          "end": 303
+        }
+      ],
+      "current_status": "validated",
+      "coherent": [
+        {
+          "title": "Contradictions sur la présence de Paul Morel",
+          "text": "Informations contradictoires\nUn ancien gardien affirme que Paul Morel était au centre de Rosières. La direction du centre déclare ne pas disposer de son nom dans ses listes. Aucun document indépendant ne permet de trancher entre ces déclarations.\n\n",
+          "start": 0,
+          "end": 248
+        },
+        {
+          "title": "Audition de la sœur de Paul",
+          "text": "Entretien\nLa sœur de Paul sera entendue vendredi à 9 h.",
+          "start": 248,
+          "end": 303
+        }
+      ],
+      "coherent_status": "source_anchored",
+      "restored_gap_characters": 0
+    },
+    {
+      "id": "N06",
+      "dossier": "DOS002",
+      "text": "Contacts familiaux\nNora Diallo est la tante de la personne recherchée. Elle est joignable par courrier au bureau de Belrive. Elle n’est pas elle-même signalée disparue.\n\nDépôt\nNora a remis trois photographies sans date au bureau.",
+      "kind": "text",
+      "current": [
+        {
+          "title": "Contacts familiaux",
+          "text": "Contacts familiaux\n",
+          "start": 0,
+          "end": 19
+        },
+        {
+          "title": "Nora Diallo, tante de la personne recherchée",
+          "text": "Nora Diallo est la tante de la personne recherchée. Elle est joignable par courrier au bureau de Belrive. Elle n’est pas elle-même signalée disparue.\n\n",
+          "start": 19,
+          "end": 170
+        },
+        {
+          "title": "Dépôt",
+          "text": "Dépôt\n",
+          "start": 170,
+          "end": 176
+        },
+        {
+          "title": "Remise de trois photographies sans date par Nora",
+          "text": "Nora a remis trois photographies sans date au bureau.",
+          "start": 176,
+          "end": 229
+        }
+      ],
+      "current_status": "validated",
+      "coherent": [
+        {
+          "title": "Coordonnées de la tante de la personne recherchée",
+          "text": "Contacts familiaux\nNora Diallo est la tante de la personne recherchée. Elle est joignable par courrier au bureau de Belrive. Elle n’est pas elle-même signalée disparue.\n\n",
+          "start": 0,
+          "end": 170
+        },
+        {
+          "title": "Remise de photographies au bureau",
+          "text": "Dépôt\nNora a remis trois photographies sans date au bureau.",
+          "start": 170,
+          "end": 229
+        }
+      ],
+      "coherent_status": "source_anchored",
+      "restored_gap_characters": 0
+    },
+    {
+      "id": "N07",
+      "dossier": "DOS001",
+      "text": "Chronologie\nLe rapport sur Lucien Roux a été rédigé le 20 janvier. Le témoin situe sa dernière rencontre avec Lucien durant la semaine précédente, sans jour précis. La date de rédaction ne correspond donc pas à une date de disparition établie.\n\nSource\nLe témoignage a été recueilli par téléphone.",
+      "kind": "text",
+      "current": [
+        {
+          "title": "Chronologie",
+          "text": "Chronologie\n",
+          "start": 0,
+          "end": 12
+        },
+        {
+          "title": "Rapport sur Lucien Roux et dernière rencontre",
+          "text": "Le rapport sur Lucien Roux a été rédigé le 20 janvier. Le témoin situe sa dernière rencontre avec Lucien durant la semaine précédente, sans jour précis. La date de rédaction ne correspond donc pas à une date de disparition établie.\n\n",
+          "start": 12,
+          "end": 245
+        },
+        {
+          "title": "Source",
+          "text": "Source\n",
+          "start": 245,
+          "end": 252
+        },
+        {
+          "title": "Mode de recueil du témoignage",
+          "text": "Le témoignage a été recueilli par téléphone.",
+          "start": 252,
+          "end": 296
+        }
+      ],
+      "current_status": "validated",
+      "coherent": [
+        {
+          "title": "Chronologie du rapport et de la dernière rencontre",
+          "text": "Chronologie\nLe rapport sur Lucien Roux a été rédigé le 20 janvier. Le témoin situe sa dernière rencontre avec Lucien durant la semaine précédente, sans jour précis. La date de rédaction ne correspond donc pas à une date de disparition établie.\n\n",
+          "start": 0,
+          "end": 245
+        },
+        {
+          "title": "Mode de recueil du témoignage",
+          "text": "Source\nLe témoignage a été recueilli par téléphone.",
+          "start": 245,
+          "end": 296
+        }
+      ],
+      "coherent_status": "source_anchored",
+      "restored_gap_characters": 0
+    },
+    {
+      "id": "N08",
+      "dossier": "DOS002",
+      "text": "Attestation\nUne attestation de décès sans photographie porte le nom Mina Sorel. La famille précise que deux personnes du village portent ce nom. Aucune pièce ne permet actuellement de déterminer laquelle est concernée.\n\nCopie\nUne copie est disponible à la mairie de Fontenay.",
+      "kind": "text",
+      "current": [
+        {
+          "title": "Attestation de décès portant le nom Mina Sorel",
+          "text": "Attestation\n",
+          "start": 0,
+          "end": 12
+        },
+        {
+          "title": "Attestation de décès sans photographie portant le nom Mina Sorel, ambiguïté identitaire",
+          "text": "Une attestation de décès sans photographie porte le nom Mina Sorel. La famille précise que deux personnes du village portent ce nom. Aucune pièce ne permet actuellement de déterminer laquelle est concernée.\n\n",
+          "start": 12,
+          "end": 220
+        },
+        {
+          "title": "Copie disponible à la mairie de Fontenay",
+          "text": "Copie\n",
+          "start": 220,
+          "end": 226
+        },
+        {
+          "title": "Disponibilité d'une copie à la mairie de Fontenay",
+          "text": "Une copie est disponible à la mairie de Fontenay.",
+          "start": 226,
+          "end": 275
+        }
+      ],
+      "current_status": "validated",
+      "coherent": [
+        {
+          "title": "Attestation de décès et ambiguïté du nom",
+          "text": "Attestation\nUne attestation de décès sans photographie porte le nom Mina Sorel. La famille précise que deux personnes du village portent ce nom. Aucune pièce ne permet actuellement de déterminer laquelle est concernée.\n\n",
+          "start": 0,
+          "end": 220
+        },
+        {
+          "title": "Disponibilité de la copie",
+          "text": "Copie\nUne copie est disponible à la mairie de Fontenay.",
+          "start": 220,
+          "end": 275
+        }
+      ],
+      "coherent_status": "source_anchored",
+      "restored_gap_characters": 0
+    },
+    {
+      "id": "N09",
+      "dossier": "DOS001",
+      "text": "Vérification de la dernière présence\nSolène Armand travaillait dans un atelier de réparation à Villehaute. Son responsable a d’abord déclaré qu’elle avait quitté cet atelier le 12 novembre. Lors du premier entretien, il a expliqué se souvenir de cette date parce qu’une livraison de matériel avait eu lieu ce jour-là. Les enquêteurs ont ensuite demandé à consulter le carnet des livraisons et les feuilles de présence de la même période. Le carnet confirme la livraison, mais ne contient aucune indication sur les personnes présentes. Les feuilles de présence ont été conservées dans un autre bâtiment et plusieurs d’entre elles ont été abîmées par une fuite d’eau. Une collègue indique avoir croisé Solène près de la porte de l’atelier après cette livraison, sans pouvoir préciser si cela s’est produit le jour même ou durant la semaine suivante. Le responsable a finalement rectifié son premier récit : le 12 novembre est la date de la livraison, pas une date certaine de dernière présence de Solène. La dernière présence de Solène et sa date de disparition restent indéterminées.\n\nPièce disponible\nLe carnet des livraisons peut être consulté au dépôt municipal.",
+      "kind": "text",
+      "current": [
+        {
+          "title": "Vérification de la dernière présence",
+          "text": "Vérification de la dernière présence\n",
+          "start": 0,
+          "end": 37
+        },
+        {
+          "title": "Solène Armand travaillait dans un atelier de réparation à Villehaute",
+          "text": "Solène Armand travaillait dans un atelier de réparation à Villehaute. Son responsable a d’abord déclaré qu’elle avait quitté cet atelier le 12 novembre. Lors du premier entretien, il a expliqué se souvenir de cette date parce qu’une livraison de matériel avait eu lieu ce jour-là. Les enquêteurs ont ensuite demandé à consulter le carnet des livraisons et les feuilles de présence de la même période. Le carnet confirme la livraison, mais ne contient aucune indication sur les personnes présentes. Les feuilles de présence ont été conservées dans un autre bâtiment et plusieurs d’entre elles ont été abîmées par une fuite d’eau. Une collègue indique avoir croisé Solène près de la porte de l’atelier après cette livraison, sans pouvoir préciser si cela s’est produit le jour même ou durant la semaine suivante. Le responsable a finalement rectifié son premier récit : le 12 novembre est la date de la livraison, pas une date certaine de dernière présence de Solène. La dernière présence de Solène et sa date de disparition restent indéterminées.\n\n",
+          "start": 37,
+          "end": 1084
+        },
+        {
+          "title": "Pièce disponible",
+          "text": "Pièce disponible\n",
+          "start": 1084,
+          "end": 1101
+        },
+        {
+          "title": "Le carnet des livraisons peut être consulté au dépôt municipal",
+          "text": "Le carnet des livraisons peut être consulté au dépôt municipal.",
+          "start": 1101,
+          "end": 1164
+        }
+      ],
+      "current_status": "validated",
+      "coherent": [
+        {
+          "title": "Vérification de la dernière présence de Solène Armand",
+          "text": "Vérification de la dernière présence\nSolène Armand travaillait dans un atelier de réparation à Villehaute. Son responsable a d’abord déclaré qu’elle avait quitté cet atelier le 12 novembre. Lors du premier entretien, il a expliqué se souvenir de cette date parce qu’une livraison de matériel avait eu lieu ce jour-là. Les enquêteurs ont ensuite demandé à consulter le carnet des livraisons et les feuilles de présence de la même période. Le carnet confirme la livraison, mais ne contient aucune indication sur les personnes présentes. Les feuilles de présence ont été conservées dans un autre bâtiment et plusieurs d’entre elles ont été abîmées par une fuite d’eau. Une collègue indique avoir croisé Solène près de la porte de l’atelier après cette livraison, sans pouvoir préciser si cela s’est produit le jour même ou durant la semaine suivante. Le responsable a finalement rectifié son premier récit : le 12 novembre est la date de la livraison, pas une date certaine de dernière présence de Solène. La dernière présence de Solène et sa date de disparition restent indéterminées.\n\n",
+          "start": 0,
+          "end": 1084
+        },
+        {
+          "title": "Pièce disponible",
+          "text": "Pièce disponible\nLe carnet des livraisons peut être consulté au dépôt municipal.",
+          "start": 1084,
+          "end": 1164
+        }
+      ],
+      "coherent_status": "source_anchored",
+      "restored_gap_characters": 0
+    },
+    {
+      "id": "N10",
+      "dossier": "DOS002",
+      "text": "Witness statement\nA passenger believes he saw Adam Vasseur near the railway station in Oakford. The passenger did not speak to him and could not confirm his identity. The report does not establish that Adam was at the station.\n\nPersonal belongings\nAdam’s notebook was handed to his brother Marc.",
+      "kind": "text",
+      "current": [
+        {
+          "title": "Témoignage concernant Adam Vasseur à Oakford",
+          "text": "Witness statement\n",
+          "start": 0,
+          "end": 18
+        },
+        {
+          "title": "Observation d’Adam Vasseur près de la gare d’Oakford",
+          "text": "A passenger believes he saw Adam Vasseur near the railway station in Oakford. The passenger did not speak to him and could not confirm his identity. The report does not establish that Adam was at the station.\n\n",
+          "start": 18,
+          "end": 228
+        },
+        {
+          "title": "Objets personnels",
+          "text": "Personal belongings\n",
+          "start": 228,
+          "end": 248
+        },
+        {
+          "title": "Carnet d’Adam remis à Marc",
+          "text": "Adam’s notebook was handed to his brother Marc.",
+          "start": 248,
+          "end": 295
+        }
+      ],
+      "current_status": "validated",
+      "coherent": [
+        {
+          "title": "Témoignage d'un passager concernant Adam Vasseur",
+          "text": "Witness statement\nA passenger believes he saw Adam Vasseur near the railway station in Oakford. The passenger did not speak to him and could not confirm his identity. The report does not establish that Adam was at the station.\n\n",
+          "start": 0,
+          "end": 228
+        },
+        {
+          "title": "Objets personnels d'Adam",
+          "text": "Personal belongings\nAdam’s notebook was handed to his brother Marc.",
+          "start": 228,
+          "end": 295
+        }
+      ],
+      "coherent_status": "source_anchored",
+      "restored_gap_characters": 0
+    }
+  ],
+  "cases": [
+    {
+      "id": "E01",
+      "question": "Où Jean Dupont est-il ou elle décédé(e) ?",
+      "dossier": "DOS001",
+      "document": "DOC-P001-lieu_de_deces",
+      "fragments": [
+        "Hôpital central de Sarajevo"
+      ],
+      "group": "historical",
+      "rewrite": "Lieu de décès de Jean Dupont.",
+      "evidence": [
+        [
+          0,
+          27
+        ]
+      ]
+    },
+    {
+      "id": "E02",
+      "question": "Quel est le lieu de disparition de Jean Dupont ?",
+      "dossier": "DOS001",
+      "document": "DOC-P001-lieu_de_disparition",
+      "fragments": [
+        "Sarajevo"
+      ],
+      "group": "historical",
+      "rewrite": "Lieu de disparition de Jean Dupont.",
+      "evidence": [
+        [
+          0,
+          8
+        ]
+      ]
+    },
+    {
+      "id": "E03",
+      "question": "Quelle est la date de disparition de Jean Dupont ?",
+      "dossier": "DOS001",
+      "document": "DOC-P001-date_de_disparition",
+      "fragments": [
+        "21 juin 1994"
+      ],
+      "group": "historical",
+      "rewrite": "Quelle est la date de disparition de Jean Dupont ?",
+      "evidence": [
+        [
+          0,
+          12
+        ]
+      ]
+    },
+    {
+      "id": "E04",
+      "question": "Que rapporte le témoin à propos de Jean Dupont ?",
+      "dossier": "DOS001",
+      "document": "DOC-P001-temoignage",
+      "fragments": [
+        "Un proche rapporte avoir vu Jean Dupont à proximité du centre-ville de Sarajevo, sans confirmation ultérieure."
+      ],
+      "group": "historical",
+      "rewrite": "Déclarations du témoin concernant Jean Dupont.",
+      "evidence": [
+        [
+          0,
+          110
+        ]
+      ]
+    },
+    {
+      "id": "E05",
+      "question": "Où Marie Laurent est-il ou elle décédé(e) ?",
+      "dossier": "DOS001",
+      "document": "DOC-P002-lieu_de_deces",
+      "fragments": [
+        "Hôpital municipal de Mostar"
+      ],
+      "group": "historical",
+      "rewrite": "Lieu de décès de Marie Laurent.",
+      "evidence": [
+        [
+          0,
+          27
+        ]
+      ]
+    },
+    {
+      "id": "E06",
+      "question": "Quel est le lieu de disparition de Marie Laurent ?",
+      "dossier": "DOS001",
+      "document": "DOC-P002-lieu_de_disparition",
+      "fragments": [
+        "Mostar"
+      ],
+      "group": "historical",
+      "rewrite": "Lieu de disparition de Marie Laurent.",
+      "evidence": [
+        [
+          0,
+          6
+        ]
+      ]
+    },
+    {
+      "id": "E07",
+      "question": "Quelle est la date de disparition de Marie Laurent ?",
+      "dossier": "DOS001",
+      "document": "DOC-P002-date_de_disparition",
+      "fragments": [
+        "4 avril 1995"
+      ],
+      "group": "historical",
+      "rewrite": "Quelle est la date de disparition de Marie Laurent ?",
+      "evidence": [
+        [
+          0,
+          12
+        ]
+      ]
+    },
+    {
+      "id": "E08",
+      "question": "Que rapporte le témoin à propos de Marie Laurent ?",
+      "dossier": "DOS001",
+      "document": "DOC-P002-temoignage",
+      "fragments": [
+        "Un proche rapporte avoir vu Marie Laurent à proximité du centre-ville de Mostar, sans confirmation ultérieure."
+      ],
+      "group": "historical",
+      "rewrite": "Déclarations du témoin concernant Marie Laurent.",
+      "evidence": [
+        [
+          0,
+          110
+        ]
+      ]
+    },
+    {
+      "id": "E09",
+      "question": "Où Amir Hadžić est-il ou elle décédé(e) ?",
+      "dossier": "DOS001",
+      "document": "DOC-P003-lieu_de_deces",
+      "fragments": [
+        "Centre médical de Tuzla"
+      ],
+      "group": "historical",
+      "rewrite": "Lieu de décès d'Amir Hadžić.",
+      "evidence": [
+        [
+          0,
+          23
+        ]
+      ]
+    },
+    {
+      "id": "E10",
+      "question": "Quel est le lieu de disparition de Amir Hadžić ?",
+      "dossier": "DOS001",
+      "document": "DOC-P003-lieu_de_disparition",
+      "fragments": [
+        "Tuzla"
+      ],
+      "group": "historical",
+      "rewrite": "Lieu de disparition d'Amir Hadžić.",
+      "evidence": [
+        [
+          0,
+          5
+        ]
+      ]
+    },
+    {
+      "id": "E11",
+      "question": "Quelle est la date de disparition de Amir Hadžić ?",
+      "dossier": "DOS001",
+      "document": "DOC-P003-date_de_disparition",
+      "fragments": [
+        "7 août 1993"
+      ],
+      "group": "historical",
+      "rewrite": "Quelle est la date de disparition de Amir Hadžić ?",
+      "evidence": [
+        [
+          0,
+          11
+        ]
+      ]
+    },
+    {
+      "id": "E12",
+      "question": "Que rapporte le témoin à propos de Amir Hadžić ?",
+      "dossier": "DOS001",
+      "document": "DOC-P003-temoignage",
+      "fragments": [
+        "Un proche rapporte avoir vu Amir Hadžić à proximité du centre-ville de Tuzla, sans confirmation ultérieure."
+      ],
+      "group": "historical",
+      "rewrite": "Déclarations du témoin concernant Amir Hadžić.",
+      "evidence": [
+        [
+          0,
+          107
+        ]
+      ]
+    },
+    {
+      "id": "E13",
+      "question": "Où Lina Moreau est-il ou elle décédé(e) ?",
+      "dossier": "DOS001",
+      "document": "DOC-P004-lieu_de_deces",
+      "fragments": [
+        "Hôpital Saint-Louis"
+      ],
+      "group": "historical",
+      "rewrite": "Lieu du décès de Lina Moreau.",
+      "evidence": [
+        [
+          0,
+          19
+        ]
+      ]
+    },
+    {
+      "id": "E14",
+      "question": "Quel est le lieu de disparition de Lina Moreau ?",
+      "dossier": "DOS001",
+      "document": "DOC-P004-lieu_de_disparition",
+      "fragments": [
+        "Paris"
+      ],
+      "group": "historical",
+      "rewrite": "Lieu de disparition de Lina Moreau.",
+      "evidence": [
+        [
+          0,
+          5
+        ]
+      ]
+    },
+    {
+      "id": "E15",
+      "question": "Quelle est la date de disparition de Lina Moreau ?",
+      "dossier": "DOS001",
+      "document": "DOC-P004-date_de_disparition",
+      "fragments": [
+        "18 mai 1996"
+      ],
+      "group": "historical",
+      "rewrite": "Quelle est la date de disparition de Lina Moreau ?",
+      "evidence": [
+        [
+          0,
+          11
+        ]
+      ]
+    },
+    {
+      "id": "E16",
+      "question": "Que rapporte le témoin à propos de Lina Moreau ?",
+      "dossier": "DOS001",
+      "document": "DOC-P004-temoignage",
+      "fragments": [
+        "Un proche rapporte avoir vu Lina Moreau à proximité du centre-ville de Paris, sans confirmation ultérieure."
+      ],
+      "group": "historical",
+      "rewrite": "Déclarations du témoin concernant Lina Moreau.",
+      "evidence": [
+        [
+          0,
+          107
+        ]
+      ]
+    },
+    {
+      "id": "E17",
+      "question": "Où Nadia Karim est-il ou elle décédé(e) ?",
+      "dossier": "DOS002",
+      "document": "DOC-P005-lieu_de_deces",
+      "fragments": [
+        "Clinique de Banja Luka"
+      ],
+      "group": "historical",
+      "rewrite": "Lieu du décès de Nadia Karim.",
+      "evidence": [
+        [
+          0,
+          22
+        ]
+      ]
+    },
+    {
+      "id": "E18",
+      "question": "Quel est le lieu de disparition de Nadia Karim ?",
+      "dossier": "DOS002",
+      "document": "DOC-P005-lieu_de_disparition",
+      "fragments": [
+        "Banja Luka"
+      ],
+      "group": "historical",
+      "rewrite": "Lieu de disparition de Nadia Karim.",
+      "evidence": [
+        [
+          0,
+          10
+        ]
+      ]
+    },
+    {
+      "id": "E19",
+      "question": "Quelle est la date de disparition de Nadia Karim ?",
+      "dossier": "DOS002",
+      "document": "DOC-P005-date_de_disparition",
+      "fragments": [
+        "2 février 1994"
+      ],
+      "group": "historical",
+      "rewrite": "Quelle est la date de disparition de Nadia Karim ?",
+      "evidence": [
+        [
+          0,
+          14
+        ]
+      ]
+    },
+    {
+      "id": "E20",
+      "question": "Que rapporte le témoin à propos de Nadia Karim ?",
+      "dossier": "DOS002",
+      "document": "DOC-P005-temoignage",
+      "fragments": [
+        "Un proche rapporte avoir vu Nadia Karim à proximité du centre-ville de Banja Luka, sans confirmation ultérieure."
+      ],
+      "group": "historical",
+      "rewrite": "Déclarations du témoin concernant Nadia Karim.",
+      "evidence": [
+        [
+          0,
+          112
+        ]
+      ]
+    },
+    {
+      "id": "E21",
+      "question": "Où Hugo Martin est-il ou elle décédé(e) ?",
+      "dossier": "DOS002",
+      "document": "DOC-P006-lieu_de_deces",
+      "fragments": [
+        "Hôpital Édouard-Herriot"
+      ],
+      "group": "historical",
+      "rewrite": "Lieu de décès de Hugo Martin.",
+      "evidence": [
+        [
+          0,
+          23
+        ]
+      ]
+    },
+    {
+      "id": "E22",
+      "question": "Quel est le lieu de disparition de Hugo Martin ?",
+      "dossier": "DOS002",
+      "document": "DOC-P006-lieu_de_disparition",
+      "fragments": [
+        "Lyon"
+      ],
+      "group": "historical",
+      "rewrite": "Lieu de disparition de Hugo Martin.",
+      "evidence": [
+        [
+          0,
+          4
+        ]
+      ]
+    },
+    {
+      "id": "E23",
+      "question": "Quelle est la date de disparition de Hugo Martin ?",
+      "dossier": "DOS002",
+      "document": "DOC-P006-date_de_disparition",
+      "fragments": [
+        "1 novembre 1995"
+      ],
+      "group": "historical",
+      "rewrite": "Quelle est la date de disparition de Hugo Martin ?",
+      "evidence": [
+        [
+          0,
+          15
+        ]
+      ]
+    },
+    {
+      "id": "E24",
+      "question": "Que rapporte le témoin à propos de Hugo Martin ?",
+      "dossier": "DOS002",
+      "document": "DOC-P006-temoignage",
+      "fragments": [
+        "Un proche rapporte avoir vu Hugo Martin à proximité du centre-ville de Lyon, sans confirmation ultérieure."
+      ],
+      "group": "historical",
+      "rewrite": "Déclarations du témoin concernant Hugo Martin.",
+      "evidence": [
+        [
+          0,
+          106
+        ]
+      ]
+    },
+    {
+      "id": "E25",
+      "question": "Où Alma Petrović est-il ou elle décédé(e) ?",
+      "dossier": "DOS002",
+      "document": "DOC-P007-lieu_de_deces",
+      "fragments": [
+        "Centre hospitalier de Zenica"
+      ],
+      "group": "historical",
+      "rewrite": "Lieu du décès d'Alma Petrović.",
+      "evidence": [
+        [
+          0,
+          28
+        ]
+      ]
+    },
+    {
+      "id": "E26",
+      "question": "Quel est le lieu de disparition de Alma Petrović ?",
+      "dossier": "DOS002",
+      "document": "DOC-P007-lieu_de_disparition",
+      "fragments": [
+        "Zenica"
+      ],
+      "group": "historical",
+      "rewrite": "Lieu de disparition d'Alma Petrović.",
+      "evidence": [
+        [
+          0,
+          6
+        ]
+      ]
+    },
+    {
+      "id": "E27",
+      "question": "Quelle est la date de disparition de Alma Petrović ?",
+      "dossier": "DOS002",
+      "document": "DOC-P007-date_de_disparition",
+      "fragments": [
+        "15 décembre 1993"
+      ],
+      "group": "historical",
+      "rewrite": "Quelle est la date de disparition d'Alma Petrović ?",
+      "evidence": [
+        [
+          0,
+          16
+        ]
+      ]
+    },
+    {
+      "id": "E28",
+      "question": "Que rapporte le témoin à propos de Alma Petrović ?",
+      "dossier": "DOS002",
+      "document": "DOC-P007-temoignage",
+      "fragments": [
+        "Un proche rapporte avoir vu Alma Petrović à proximité du centre-ville de Zenica, sans confirmation ultérieure."
+      ],
+      "group": "historical",
+      "rewrite": "Déclarations du témoin concernant Alma Petrović.",
+      "evidence": [
+        [
+          0,
+          110
+        ]
+      ]
+    },
+    {
+      "id": "E29",
+      "question": "Où Lucas Bernard est-il ou elle décédé(e) ?",
+      "dossier": "DOS002",
+      "document": "DOC-P008-lieu_de_deces",
+      "fragments": [
+        "Hôpital de Split"
+      ],
+      "group": "historical",
+      "rewrite": "Lieu de décès de Lucas Bernard.",
+      "evidence": [
+        [
+          0,
+          16
+        ]
+      ]
+    },
+    {
+      "id": "E30",
+      "question": "Quel est le lieu de disparition de Lucas Bernard ?",
+      "dossier": "DOS002",
+      "document": "DOC-P008-lieu_de_disparition",
+      "fragments": [
+        "Split"
+      ],
+      "group": "historical",
+      "rewrite": "Lieu de disparition de Lucas Bernard.",
+      "evidence": [
+        [
+          0,
+          5
+        ]
+      ]
+    },
+    {
+      "id": "E31",
+      "question": "Quelle est la date de disparition de Lucas Bernard ?",
+      "dossier": "DOS002",
+      "document": "DOC-P008-date_de_disparition",
+      "fragments": [
+        "30 juillet 1994"
+      ],
+      "group": "historical",
+      "rewrite": "Quelle est la date de disparition de Lucas Bernard ?",
+      "evidence": [
+        [
+          0,
+          15
+        ]
+      ]
+    },
+    {
+      "id": "E32",
+      "question": "Que rapporte le témoin à propos de Lucas Bernard ?",
+      "dossier": "DOS002",
+      "document": "DOC-P008-temoignage",
+      "fragments": [
+        "Un proche rapporte avoir vu Lucas Bernard à proximité du centre-ville de Split, sans confirmation ultérieure."
+      ],
+      "group": "historical",
+      "rewrite": "Déclarations du témoin concernant Lucas Bernard.",
+      "evidence": [
+        [
+          0,
+          109
+        ]
+      ]
+    },
+    {
+      "id": "E33",
+      "question": "Qui a récupéré le sac de Sami ?",
+      "dossier": "DOS001",
+      "document": "DOC-c5f1283c-80ad-42a3-80d9-882dfa36f233",
+      "fragments": [
+        "sœur Nora"
+      ],
+      "group": "pdf",
+      "rewrite": "Qui a récupéré le sac de Sami ?",
+      "evidence": [
+        [
+          811,
+          820
+        ]
+      ]
+    },
+    {
+      "id": "E34",
+      "question": "Pourquoi le registre ne suffit-il pas à exclure un passage de Lina ?",
+      "dossier": "DOS001",
+      "document": "DOC-c5f1283c-80ad-42a3-80d9-882dfa36f233",
+      "fragments": [
+        "dernier feuillet manque",
+        "ne permet pas de conclure"
+      ],
+      "group": "pdf",
+      "rewrite": "Pourquoi le registre ne suffit-il pas à exclure un passage de Lina ?",
+      "evidence": [
+        [
+          280,
+          303
+        ],
+        [
+          319,
+          344
+        ]
+      ]
+    },
+    {
+      "id": "E35",
+      "question": "Le décès de Lina à Port-Lys est-il confirmé ?",
+      "dossier": "DOS001",
+      "document": "DOC-c5f1283c-80ad-42a3-80d9-882dfa36f233",
+      "fragments": [
+        "Port-Lys",
+        "homonyme",
+        "n’est pas établi"
+      ],
+      "group": "pdf",
+      "rewrite": "Le décès de Lina à Port-Lys est-il confirmé ?",
+      "evidence": [
+        [
+          883,
+          891
+        ],
+        [
+          848,
+          856
+        ],
+        [
+          1004,
+          1020
+        ]
+      ]
+    },
+    {
+      "id": "E36",
+      "question": "Quand a lieu le prochain entretien ?",
+      "dossier": "DOS001",
+      "document": "DOC-c5f1283c-80ad-42a3-80d9-882dfa36f233",
+      "fragments": [
+        "jeudi à 14 h"
+      ],
+      "group": "pdf",
+      "rewrite": "Quand a lieu le prochain entretien ?",
+      "evidence": [
+        [
+          422,
+          434
+        ]
+      ]
+    },
+    {
+      "id": "E37",
+      "question": "Sami a-t-il disparu le 8 mai ?",
+      "dossier": "DOS001",
+      "document": "DOC-c5f1283c-80ad-42a3-80d9-882dfa36f233",
+      "fragments": [
+        "8 mai",
+        "dernier appel",
+        "n’est pas établie"
+      ],
+      "group": "pdf",
+      "rewrite": "Quels éléments permettent de vérifier si Sami a disparu le 8 mai ?",
+      "evidence": [
+        [
+          621,
+          626
+        ],
+        [
+          700,
+          713
+        ],
+        [
+          738,
+          755
+        ]
+      ]
+    },
+    {
+      "id": "E38",
+      "question": "Où un voisin pense-t-il avoir aperçu Lina, et son identité a-t-elle été confirmée ?",
+      "dossier": "DOS001",
+      "document": "DOC-c5f1283c-80ad-42a3-80d9-882dfa36f233",
+      "fragments": [
+        "hangar",
+        "n’a pas pu confirmer"
+      ],
+      "group": "pdf",
+      "rewrite": "Où un voisin pense-t-il avoir aperçu Lina, et son identité a-t-elle été confirmée ?",
+      "evidence": [
+        [
+          144,
+          150
+        ],
+        [
+          179,
+          199
+        ]
+      ]
+    },
+    {
+      "id": "E39",
+      "question": "Où trouver une copie de l’attestation ?",
+      "dossier": "DOS001",
+      "document": "DOC-c5f1283c-80ad-42a3-80d9-882dfa36f233",
+      "fragments": [
+        "mairie de Belle-Rive"
+      ],
+      "group": "pdf",
+      "rewrite": "Où trouver une copie de l’attestation ?",
+      "evidence": [
+        [
+          1025,
+          1045
+        ]
+      ]
+    },
+    {
+      "id": "E40",
+      "question": "Je cherche qui a eu les affaires de Sami, notamment son sac.",
+      "dossier": "DOS001",
+      "document": "DOC-c5f1283c-80ad-42a3-80d9-882dfa36f233",
+      "fragments": [
+        "sœur Nora"
+      ],
+      "group": "pdf",
+      "rewrite": "Qui a récupéré les affaires de Sami, notamment son sac ?",
+      "evidence": [
+        [
+          811,
+          820
+        ]
+      ]
+    },
+    {
+      "id": "N01-0",
+      "question": "Où le chauffeur situe-t-il Marwa et avec quelle certitude ?",
+      "dossier": "DOS001",
+      "document": "N01",
+      "fragments": [
+        "pont des Aulnes",
+        "ne reconnaît pas son visage avec certitude"
+      ],
+      "group": "novel",
+      "evidence": [
+        [
+          80,
+          95
+        ],
+        [
+          129,
+          171
+        ]
+      ],
+      "rewrite": "Où le chauffeur situe-t-il Marwa et avec quelle certitude ?"
+    },
+    {
+      "id": "N01-1",
+      "question": "Pourquoi l’absence de Marwa dans le registre ne suffit-elle pas à conclure ?",
+      "dossier": "DOS001",
+      "document": "N01",
+      "fragments": [
+        "ne mentionne pas Marwa",
+        "Deux pages du registre sont manquantes"
+      ],
+      "group": "novel",
+      "evidence": [
+        [
+          249,
+          271
+        ],
+        [
+          273,
+          311
+        ]
+      ],
+      "rewrite": "Pourquoi l'absence de Marwa dans le registre ne suffit-elle pas à conclure ?"
+    },
+    {
+      "id": "N02-0",
+      "question": "Où Marwa a-t-elle été reçue et comment son identité a-t-elle été contrôlée ?",
+      "dossier": "DOS002",
+      "document": "N02",
+      "fragments": [
+        "dispensaire de Valbois",
+        "pièce officielle"
+      ],
+      "group": "novel",
+      "evidence": [
+        [
+          45,
+          67
+        ],
+        [
+          118,
+          134
+        ]
+      ],
+      "rewrite": "Où Marwa a-t-elle été reçue et comment son identité a-t-elle été contrôlée ?"
+    },
+    {
+      "id": "N02-1",
+      "question": "Quand est prévu le suivi médical de Marwa ?",
+      "dossier": "DOS002",
+      "document": "N02",
+      "fragments": [
+        "lundi à 10 h"
+      ],
+      "group": "novel",
+      "evidence": [
+        [
+          239,
+          251
+        ]
+      ],
+      "rewrite": "Quand est prévu le suivi médical de Marwa ?"
+    },
+    {
+      "id": "N03-0",
+      "question": "Le 16 août est-il la date de disparition confirmée de Théo ?",
+      "dossier": "DOS001",
+      "document": "N03",
+      "fragments": [
+        "réception d’une lettre",
+        "date de disparition demeure inconnue"
+      ],
+      "group": "novel",
+      "evidence": [
+        [
+          137,
+          159
+        ],
+        [
+          164,
+          200
+        ]
+      ],
+      "rewrite": "Le 16 août est-il la date de disparition confirmée de Théo ?"
+    },
+    {
+      "id": "N03-1",
+      "question": "À qui le manteau de Théo a-t-il été remis ?",
+      "dossier": "DOS001",
+      "document": "N03",
+      "fragments": [
+        "son cousin Idriss"
+      ],
+      "group": "novel",
+      "evidence": [
+        [
+          246,
+          263
+        ]
+      ],
+      "rewrite": "À qui le manteau de Théo a-t-il été remis ?"
+    },
+    {
+      "id": "N04-0",
+      "question": "Le certificat permet-il de confirmer l’hospitalisation d’Aïcha recherchée ?",
+      "dossier": "DOS002",
+      "document": "N04",
+      "fragments": [
+        "L’âge inscrit diffère",
+        "n’est pas établi"
+      ],
+      "group": "novel",
+      "evidence": [
+        [
+          102,
+          123
+        ],
+        [
+          214,
+          230
+        ]
+      ],
+      "rewrite": "Le certificat permet-il de confirmer l’hospitalisation d’Aïcha recherchée ?"
+    },
+    {
+      "id": "N04-1",
+      "question": "Où se trouve l’original du certificat ?",
+      "dossier": "DOS002",
+      "document": "N04",
+      "fragments": [
+        "archives du dispensaire"
+      ],
+      "group": "novel",
+      "evidence": [
+        [
+          274,
+          297
+        ]
+      ],
+      "rewrite": "Où se trouve l’original du certificat ?"
+    },
+    {
+      "id": "N05-0",
+      "question": "La présence de Paul au centre de Rosières est-elle établie ?",
+      "dossier": "DOS001",
+      "document": "N05",
+      "fragments": [
+        "gardien affirme",
+        "ne pas disposer de son nom",
+        "ne permet de trancher"
+      ],
+      "group": "novel",
+      "evidence": [
+        [
+          39,
+          54
+        ],
+        [
+          130,
+          156
+        ],
+        [
+          201,
+          222
+        ]
+      ],
+      "rewrite": "La présence de Paul au centre de Rosières est-elle établie ?"
+    },
+    {
+      "id": "N05-1",
+      "question": "Quand aura lieu l’audition de la sœur de Paul ?",
+      "dossier": "DOS001",
+      "document": "N05",
+      "fragments": [
+        "vendredi à 9 h"
+      ],
+      "group": "novel",
+      "evidence": [
+        [
+          288,
+          302
+        ]
+      ],
+      "rewrite": "Quand aura lieu l’audition de la sœur de Paul ?"
+    },
+    {
+      "id": "N06-0",
+      "question": "Nora est-elle la personne disparue ou un contact familial ?",
+      "dossier": "DOS002",
+      "document": "N06",
+      "fragments": [
+        "la tante",
+        "n’est pas elle-même signalée disparue"
+      ],
+      "group": "novel",
+      "evidence": [
+        [
+          35,
+          43
+        ],
+        [
+          130,
+          167
+        ]
+      ],
+      "rewrite": "Nora est-elle la personne disparue ou un contact familial ?"
+    },
+    {
+      "id": "N06-1",
+      "question": "Quels documents Nora a-t-elle déposés ?",
+      "dossier": "DOS002",
+      "document": "N06",
+      "fragments": [
+        "trois photographies sans date"
+      ],
+      "group": "novel",
+      "evidence": [
+        [
+          189,
+          218
+        ]
+      ],
+      "rewrite": "Quels documents Nora a-t-elle déposés ?"
+    },
+    {
+      "id": "N07-0",
+      "question": "Le 20 janvier permet-il de dater la disparition de Lucien ?",
+      "dossier": "DOS001",
+      "document": "N07",
+      "fragments": [
+        "date de rédaction",
+        "pas à une date de disparition établie"
+      ],
+      "group": "novel",
+      "evidence": [
+        [
+          168,
+          185
+        ],
+        [
+          205,
+          242
+        ]
+      ],
+      "rewrite": "Le 20 janvier permet-il de dater la disparition de Lucien ?"
+    },
+    {
+      "id": "N07-1",
+      "question": "Comment le témoignage sur Lucien a-t-il été recueilli ?",
+      "dossier": "DOS001",
+      "document": "N07",
+      "fragments": [
+        "par téléphone"
+      ],
+      "group": "novel",
+      "evidence": [
+        [
+          282,
+          295
+        ]
+      ],
+      "rewrite": "Comment le témoignage sur Lucien a-t-il été recueilli ?"
+    },
+    {
+      "id": "N08-0",
+      "question": "L’attestation de Mina permet-elle d’identifier la personne décédée ?",
+      "dossier": "DOS002",
+      "document": "N08",
+      "fragments": [
+        "deux personnes du village",
+        "déterminer laquelle est concernée"
+      ],
+      "group": "novel",
+      "evidence": [
+        [
+          103,
+          128
+        ],
+        [
+          184,
+          217
+        ]
+      ],
+      "rewrite": "L’attestation de Mina permet-elle d’identifier la personne décédée ?"
+    },
+    {
+      "id": "N08-1",
+      "question": "Où consulter une copie de cette attestation ?",
+      "dossier": "DOS002",
+      "document": "N08",
+      "fragments": [
+        "mairie de Fontenay"
+      ],
+      "group": "novel",
+      "evidence": [
+        [
+          256,
+          274
+        ]
+      ],
+      "rewrite": "Où consulter une copie de cette attestation ?"
+    },
+    {
+      "id": "N09-0",
+      "question": "Pourquoi le 12 novembre ne permet-il pas de dater la disparition de Solène ?",
+      "dossier": "DOS001",
+      "document": "N09",
+      "fragments": [
+        "date de la livraison",
+        "pas une date certaine",
+        "restent indéterminées"
+      ],
+      "group": "novel",
+      "evidence": [
+        [
+          927,
+          947
+        ],
+        [
+          949,
+          970
+        ],
+        [
+          1060,
+          1081
+        ]
+      ],
+      "rewrite": "Pourquoi la date du 12 novembre ne permet-elle pas de dater la disparition de Solène ?"
+    },
+    {
+      "id": "N09-1",
+      "question": "Où consulter le carnet des livraisons ?",
+      "dossier": "DOS001",
+      "document": "N09",
+      "fragments": [
+        "dépôt municipal"
+      ],
+      "group": "novel",
+      "evidence": [
+        [
+          1148,
+          1163
+        ]
+      ],
+      "rewrite": "Où consulter le carnet des livraisons ?"
+    },
+    {
+      "id": "N10-0",
+      "question": "Où un passager pense-t-il avoir aperçu Adam et est-ce confirmé ?",
+      "dossier": "DOS002",
+      "document": "N10",
+      "fragments": [
+        "railway station in Oakford",
+        "could not confirm his identity"
+      ],
+      "group": "novel",
+      "evidence": [
+        [
+          68,
+          94
+        ],
+        [
+          135,
+          165
+        ]
+      ],
+      "rewrite": "Où un passager pense-t-il avoir aperçu Adam et est-ce confirmé ?"
+    },
+    {
+      "id": "N10-1",
+      "question": "Qui a reçu le carnet d’Adam ?",
+      "dossier": "DOS002",
+      "document": "N10",
+      "fragments": [
+        "his brother Marc"
+      ],
+      "group": "novel",
+      "evidence": [
+        [
+          278,
+          294
+        ]
+      ],
+      "rewrite": "Qui a reçu le carnet d’Adam ?"
+    }
+  ],
+  "coherent_prompt": "Découpe le texte brut en passages thématiques cohérents et retourne uniquement {\"passages\":[{\"title\":\"titre neutre\",\"text\":\"texte exact\"}]}.\nRecopie tout le texte dans l'ordre, sans omission ni reformulation, séparateurs compris.\nLes retours à la ligne peuvent venir de la mise en page PDF : ils ne délimitent PAS les sujets.\nNe coupe JAMAIS une phrase au milieu, même à un retour à la ligne. Conserve dans le même passage une information et ses réserves, son identité, ses négations, ses corrections ou son degré de certitude.\nRegroupe plusieurs phrases sur le même sujet. Un titre ou intertitre doit rester avec le contenu qu'il annonce, jamais isolé. Les éléments de pagination peuvent accompagner le passage adjacent.\nNe crée pas de faits ; les titres sont descriptifs. Ne mélange pas des sujets distincts pour réduire artificiellement le nombre de passages.\n",
+  "models": {
+    "qwen3.8:27b-mlx": "5642e97495e1a088883805981563dcdc4a040c2f53388b7a41d1f24d3622cf7e"
+  }
+}

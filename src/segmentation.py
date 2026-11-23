@@ -8,7 +8,7 @@ from segmentation_schemas import (
     Generation, GenerationError, Passage, SegmentationAttempt, SegmentationProposal, SegmentationRun,
     SegmentedDocument,
 )
-from segmentation_validation import SegmentationValidationError, validate_segmentation
+from segmentation_validation import SegmentationValidationError, validate_segmentation, validate_source_alignment
 
 
 class SegmentationClient(Protocol):
@@ -23,6 +23,7 @@ def segment_document(
     prompt: str,
     prompt_version: str,
     retry_invalid: bool = True,
+    restore_separators: bool = False,
 ) -> SegmentationRun:
     if not text or not prompt.strip() or not prompt_version.strip():
         raise ValueError('Le texte, le prompt et sa version sont requis.')
@@ -44,7 +45,8 @@ def segment_document(
             break
         elapsed = monotonic() - started
         try:
-            passages = validate_segmentation(text, generation.content)
+            validator = validate_source_alignment if restore_separators else validate_segmentation
+            passages = validator(text, generation.content)
         except SegmentationValidationError as exc:
             attempts.append(SegmentationAttempt(
                 elapsed_seconds=elapsed, generation=generation,
