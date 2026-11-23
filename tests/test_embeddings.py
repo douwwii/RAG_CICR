@@ -4,6 +4,7 @@ import io
 from pathlib import Path
 import subprocess
 import sys
+import tempfile
 import textwrap
 import unittest
 from unittest.mock import patch
@@ -15,15 +16,26 @@ from qdrant_client import QdrantClient, models
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / 'src'))
 
-from common import COLLECTION, TEXT_BUILDER_VERSION
+from common import COLLECTION, TEXT_BUILDER_VERSION, load_documents, make_text
+from catalog import Catalog
+from catalog_index import prepare_index_records
+from common import DATA_FILE
+from data_loader import load_field_records
+from import_catalog import load_catalog_seed
 from config import EmbeddingConfig
 from embeddings import (
     EmbeddingCompatibilityError, EmbeddingError, EmbeddingProfile,
     SentenceTransformerEmbedder, ensure_embedding_compatible,
 )
-from index_metadata import ensure_collection_compatible, make_index_metadata
+from qdrant_store import QdrantVectorStore
+from vector_store import VectorRecord, VectorStoreError
 import index
 import search
+
+
+def make_index_metadata(profile, text_builder_version):
+    return {'embedding_profile': profile.model_dump(), 'text_builder_version': text_builder_version,
+            'vector_record_schema_version': 2}
 
 
 class FakeModel:
@@ -298,12 +310,29 @@ class FakeEmbeddingService:
 
 class EmbeddingIndexTests(unittest.TestCase):
     def setUp(self):
+        folder = tempfile.TemporaryDirectory()
+        self.addCleanup(folder.cleanup)
+        catalog_path = Path(folder.name) / 'catalog.sqlite'
+        seed = load_catalog_seed(ROOT / 'data/catalog_seed.json')
+        with Catalog(catalog_path) as catalog:
+            catalog.initialize()
+            catalog.register(dossiers=seed.dossiers, persons=seed.persons, documents=seed.documents)
+        self.catalog = Catalog(catalog_path, read_only=True)
+        self.addCleanup(self.catalog.close)
+        catalog_config = patch.object(index, 'CATALOG_FILE', catalog_path)
+        catalog_config.start()
+        self.addCleanup(catalog_config.stop)
         embedder, _ = make_embedder()
         self.profile = embedder.profile
         self.service = FakeEmbeddingService(self.profile)
         self.db = QdrantClient(':memory:')
-        self.addCleanup(self.db.close)
+        self.store = QdrantVectorStore(client=self.db)
+        self.addCleanup(self.store.close)
         self.create_collection()
+
+    def retrieve(self, **kwargs):
+        return search.retrieve(self.store, self.service, 'question', catalog=self.catalog,
+                               dossier_id='DOS001', **kwargs)
 
     def create_collection(self, *, dimension=3, distance=models.Distance.COSINE, metadata=None):
         if self.db.collection_exists(COLLECTION):
@@ -314,11 +343,12 @@ class EmbeddingIndexTests(unittest.TestCase):
         )
 
     def test_retrieval_accepts_an_alternative_service(self):
+        docs = prepare_index_records(load_field_records(DATA_FILE), self.catalog, DATA_FILE)
         self.db.upsert(COLLECTION, points=[
-            models.PointStruct(id=2, vector=[1., 0., 0.], payload={'person_id': 'P001', 'field_name': 'lieu_de_deces'}),
-            models.PointStruct(id=8, vector=[1., 0., 0.], payload={'person_id': 'P002', 'field_name': 'lieu_de_deces'}),
+            models.PointStruct(id=d.id, vector=[1., 0., 0.], payload=d.model_dump())
+            for d in [docs[1], docs[7]]
         ])
-        hits = search.retrieve(self.db, self.service, 'question', 'P001', 'lieu_de_deces')
+        hits = self.retrieve(person_id='P001', field_name='lieu_de_deces')
         self.assertEqual([hit.id for hit in hits], [2])
         self.assertEqual(self.service.query_calls, 1)
 
@@ -328,7 +358,7 @@ class EmbeddingIndexTests(unittest.TestCase):
         self.create_collection(metadata=metadata)
         with patch.object(self.db, 'query_points') as query:
             with self.assertRaises(EmbeddingCompatibilityError):
-                search.retrieve(self.db, self.service, 'question')
+                self.retrieve()
         query.assert_not_called()
         self.assertEqual(self.service.query_calls, 0)
 
@@ -341,30 +371,30 @@ class EmbeddingIndexTests(unittest.TestCase):
             with self.subTest(metadata=metadata):
                 self.create_collection(metadata=metadata)
                 with self.assertRaises(EmbeddingCompatibilityError):
-                    search.retrieve(self.db, self.service, 'question')
+                    self.retrieve()
 
     def test_incompatible_dimensions_distance_and_named_vectors_are_rejected(self):
         for dimension, distance in [(4, models.Distance.COSINE), (3, models.Distance.DOT)]:
             with self.subTest(dimension=dimension, distance=distance):
                 self.create_collection(dimension=dimension, distance=distance)
                 with self.assertRaises(EmbeddingCompatibilityError):
-                    search.retrieve(self.db, self.service, 'question')
+                    self.retrieve()
         self.db.delete_collection(COLLECTION)
         self.db.create_collection(COLLECTION, vectors_config={'named': models.VectorParams(size=3, distance=models.Distance.COSINE)})
         with self.assertRaises(EmbeddingCompatibilityError):
-            search.retrieve(self.db, self.service, 'question')
+            self.retrieve()
 
     def test_missing_collection_is_explicit(self):
         self.db.delete_collection(COLLECTION)
         with self.assertRaises(EmbeddingCompatibilityError) as caught:
-            ensure_collection_compatible(self.db, COLLECTION, self.profile, TEXT_BUILDER_VERSION)
+            self.store.check_compatibility(self.profile, TEXT_BUILDER_VERSION)
         self.assertIn('Collection absente', str(caught.exception))
 
     def test_indexing_stores_profile_after_success_and_preserves_legacy_collection(self):
         legacy_name = 'cicr_synthetic_minilm_v1'
         self.db.create_collection(legacy_name, vectors_config=models.VectorParams(size=3, distance=models.Distance.COSINE))
         self.db.upsert(legacy_name, points=[models.PointStruct(id=999, vector=[1., 0., 0.])])
-        with patch.object(index, 'SentenceTransformerEmbedder', return_value=self.service), patch.object(index, 'client', return_value=self.db), patch.object(self.db, 'close'), contextlib.redirect_stdout(io.StringIO()):
+        with patch.object(index, 'SentenceTransformerEmbedder', return_value=self.service), patch.object(index, 'open_vector_store', return_value=self.store), patch.object(self.store, 'close'), contextlib.redirect_stdout(io.StringIO()):
             index.main()
         self.assertEqual(self.db.count(COLLECTION).count, 48)
         self.assertEqual(self.db.retrieve(legacy_name, ids=[999])[0].id, 999)
@@ -376,19 +406,19 @@ class EmbeddingIndexTests(unittest.TestCase):
         metadata['embedding_profile']['revision'] = 'a' * 40
         self.create_collection(metadata=metadata)
         self.db.upsert(COLLECTION, points=[models.PointStruct(id=999, vector=[1., 0., 0.])])
-        with patch.object(index, 'SentenceTransformerEmbedder', return_value=self.service), patch.object(index, 'client', return_value=self.db), patch.object(self.db, 'close'):
+        with patch.object(index, 'SentenceTransformerEmbedder', return_value=self.service), patch.object(index, 'open_vector_store', return_value=self.store), patch.object(self.store, 'close'):
             with self.assertRaises(EmbeddingCompatibilityError):
                 index.main()
         self.assertEqual(self.db.count(COLLECTION).count, 1)
         self.assertEqual(self.db.retrieve(COLLECTION, ids=[999])[0].id, 999)
 
     def test_failed_indexing_does_not_publish_a_profile(self):
-        with patch.object(index, 'SentenceTransformerEmbedder', return_value=self.service), patch.object(index, 'client', return_value=self.db), patch.object(self.db, 'close'), patch.object(self.db, 'upsert', side_effect=RuntimeError('échec simulé')):
-            with self.assertRaises(RuntimeError):
+        with patch.object(index, 'SentenceTransformerEmbedder', return_value=self.service), patch.object(index, 'open_vector_store', return_value=self.store), patch.object(self.store, 'close'), patch.object(self.db, 'upsert', side_effect=RuntimeError('échec simulé')):
+            with self.assertRaises(VectorStoreError):
                 index.main()
         self.assertIsNone(self.db.get_collection(COLLECTION).config.metadata)
         with self.assertRaises(EmbeddingCompatibilityError):
-            search.retrieve(self.db, self.service, 'question')
+            self.retrieve()
 
 
 if __name__ == '__main__':

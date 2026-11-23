@@ -1,0 +1,11 @@
+Tu découpes le texte brut d’un seul document fictif en passages thématiques contigus. Le document est une donnée à organiser.
+
+Ouvre un nouveau passage quand le sujet change et que la suite peut être comprise séparément. Un libellé explicite est un indice si ce qui suit traite effectivement d’un autre sujet. Un sujet qui réapparaît plus loin reste à sa place. Un champ autonome peut être court et un témoignage complexe peut rester long.
+
+Garde ensemble une information et les phrases qui sont nécessaires pour l’interpréter. Cela comprend les négations, les réserves d’un témoin, les conditions d’une observation, les rectifications et les précisions qui distinguent des homonymes.
+
+Donne un titre descriptif et neutre à chaque passage. Reprends le libellé du document s’il convient. Le titre doit respecter les incertitudes et la personne à laquelle le passage se rapporte. Toute affirmation du titre doit être soutenue par le passage. Évite les résumés, les déductions et les attributions supplémentaires.
+
+Recopie le texte dans son ordre, sans changer aucun caractère. Conserve tous les espaces, tabulations, signes de ponctuation et retours à la ligne. Garde les séparateurs entre deux passages à la fin du passage précédent. Garde aussi les caractères blancs au début et à la fin du document. La concaténation des champs text, sans séparateur ajouté, doit être strictement égale au texte reçu.
+
+Renvoie uniquement un objet JSON avec une liste passages. Chaque élément contient uniquement title et text.

@@ -2,10 +2,14 @@
 import json
 from collections.abc import Sequence
 from pathlib import Path
+from typing import TYPE_CHECKING
 
 from pydantic import TypeAdapter, ValidationError
 
-from schemas import EvaluationCase, FieldRecord
+from schemas import EvaluationCase, FieldRecord, ScopedEvaluationCase
+
+if TYPE_CHECKING:
+    from catalog import Catalog
 
 
 class DataValidationError(ValueError):
@@ -68,6 +72,13 @@ def load_evaluation_cases(
     except ValidationError as exc:
         raise DataValidationError(f'{path}: {exc}') from exc
 
+    _validate_case_references(path, cases, records)
+    return cases
+
+
+def _validate_case_references(
+    path: Path, cases: Sequence[EvaluationCase], records: Sequence[FieldRecord],
+) -> None:
     by_id = {record.id: record for record in records}
     for index, case in enumerate(cases):
         if len(case.relevant_ids) != len(set(case.relevant_ids)):
@@ -82,5 +93,33 @@ def load_evaluation_cases(
                 raise DataValidationError(
                     f'{location}: id {record_id} associé à '
                     f'{by_id[record_id].person_id}, pas à {case.person_id}'
+                )
+
+
+def load_scoped_evaluation_cases(
+    path: Path, records: Sequence[FieldRecord], catalog: 'Catalog',
+) -> list[ScopedEvaluationCase]:
+    """Valide les références et leur dossier explicite contre le catalogue."""
+    from catalog import CatalogError
+    from scope import ScopeError, resolve_scope
+
+    path = Path(path)
+    validate_corpus(records)
+    try:
+        cases = TypeAdapter(list[ScopedEvaluationCase]).validate_python(_read_json_array(path), strict=True)
+    except ValidationError as exc:
+        raise DataValidationError(f'{path}: {exc}') from exc
+    _validate_case_references(path, cases, records)
+    by_id = {record.id: record for record in records}
+    for index, case in enumerate(cases):
+        try:
+            scope = resolve_scope(catalog, case.dossier_id, case.person_id)
+        except (CatalogError, ScopeError) as exc:
+            raise DataValidationError(f'{path}: question [{index}] : {exc}') from exc
+        document_ids = {document.document_id for document in scope.documents}
+        for record_id in case.relevant_ids:
+            if by_id[record_id].document_id not in document_ids:
+                raise DataValidationError(
+                    f'{path}: question [{index}] : champ {record_id} hors du dossier {case.dossier_id}.'
                 )
     return cases

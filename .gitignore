@@ -6,3 +6,4 @@ catalogue.sqlite
 catalogue.sqlite-journal
 catalogue.sqlite-wal
 catalogue.sqlite-shm
+experiments/segmentation/results/

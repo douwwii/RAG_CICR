@@ -1,0 +1,258 @@
+[
+  {
+    "question": "Où Jean Dupont est-il ou elle décédé(e) ?",
+    "person_id": "P001",
+    "relevant_ids": [
+      2
+    ],
+    "dossier_id": "DOS001"
+  },
+  {
+    "question": "Quel est le lieu de disparition de Jean Dupont ?",
+    "person_id": "P001",
+    "relevant_ids": [
+      3
+    ],
+    "dossier_id": "DOS001"
+  },
+  {
+    "question": "Quelle est la date de disparition de Jean Dupont ?",
+    "person_id": "P001",
+    "relevant_ids": [
+      4
+    ],
+    "dossier_id": "DOS001"
+  },
+  {
+    "question": "Que rapporte le témoin à propos de Jean Dupont ?",
+    "person_id": "P001",
+    "relevant_ids": [
+      5
+    ],
+    "dossier_id": "DOS001"
+  },
+  {
+    "question": "Où Marie Laurent est-il ou elle décédé(e) ?",
+    "person_id": "P002",
+    "relevant_ids": [
+      8
+    ],
+    "dossier_id": "DOS001"
+  },
+  {
+    "question": "Quel est le lieu de disparition de Marie Laurent ?",
+    "person_id": "P002",
+    "relevant_ids": [
+      9
+    ],
+    "dossier_id": "DOS001"
+  },
+  {
+    "question": "Quelle est la date de disparition de Marie Laurent ?",
+    "person_id": "P002",
+    "relevant_ids": [
+      10
+    ],
+    "dossier_id": "DOS001"
+  },
+  {
+    "question": "Que rapporte le témoin à propos de Marie Laurent ?",
+    "person_id": "P002",
+    "relevant_ids": [
+      11
+    ],
+    "dossier_id": "DOS001"
+  },
+  {
+    "question": "Où Amir Hadžić est-il ou elle décédé(e) ?",
+    "person_id": "P003",
+    "relevant_ids": [
+      14
+    ],
+    "dossier_id": "DOS001"
+  },
+  {
+    "question": "Quel est le lieu de disparition de Amir Hadžić ?",
+    "person_id": "P003",
+    "relevant_ids": [
+      15
+    ],
+    "dossier_id": "DOS001"
+  },
+  {
+    "question": "Quelle est la date de disparition de Amir Hadžić ?",
+    "person_id": "P003",
+    "relevant_ids": [
+      16
+    ],
+    "dossier_id": "DOS001"
+  },
+  {
+    "question": "Que rapporte le témoin à propos de Amir Hadžić ?",
+    "person_id": "P003",
+    "relevant_ids": [
+      17
+    ],
+    "dossier_id": "DOS001"
+  },
+  {
+    "question": "Où Lina Moreau est-il ou elle décédé(e) ?",
+    "person_id": "P004",
+    "relevant_ids": [
+      20
+    ],
+    "dossier_id": "DOS001"
+  },
+  {
+    "question": "Quel est le lieu de disparition de Lina Moreau ?",
+    "person_id": "P004",
+    "relevant_ids": [
+      21
+    ],
+    "dossier_id": "DOS001"
+  },
+  {
+    "question": "Quelle est la date de disparition de Lina Moreau ?",
+    "person_id": "P004",
+    "relevant_ids": [
+      22
+    ],
+    "dossier_id": "DOS001"
+  },
+  {
+    "question": "Que rapporte le témoin à propos de Lina Moreau ?",
+    "person_id": "P004",
+    "relevant_ids": [
+      23
+    ],
+    "dossier_id": "DOS001"
+  },
+  {
+    "question": "Où Nadia Karim est-il ou elle décédé(e) ?",
+    "person_id": "P005",
+    "relevant_ids": [
+      26
+    ],
+    "dossier_id": "DOS002"
+  },
+  {
+    "question": "Quel est le lieu de disparition de Nadia Karim ?",
+    "person_id": "P005",
+    "relevant_ids": [
+      27
+    ],
+    "dossier_id": "DOS002"
+  },
+  {
+    "question": "Quelle est la date de disparition de Nadia Karim ?",
+    "person_id": "P005",
+    "relevant_ids": [
+      28
+    ],
+    "dossier_id": "DOS002"
+  },
+  {
+    "question": "Que rapporte le témoin à propos de Nadia Karim ?",
+    "person_id": "P005",
+    "relevant_ids": [
+      29
+    ],
+    "dossier_id": "DOS002"
+  },
+  {
+    "question": "Où Hugo Martin est-il ou elle décédé(e) ?",
+    "person_id": "P006",
+    "relevant_ids": [
+      32
+    ],
+    "dossier_id": "DOS002"
+  },
+  {
+    "question": "Quel est le lieu de disparition de Hugo Martin ?",
+    "person_id": "P006",
+    "relevant_ids": [
+      33
+    ],
+    "dossier_id": "DOS002"
+  },
+  {
+    "question": "Quelle est la date de disparition de Hugo Martin ?",
+    "person_id": "P006",
+    "relevant_ids": [
+      34
+    ],
+    "dossier_id": "DOS002"
+  },
+  {
+    "question": "Que rapporte le témoin à propos de Hugo Martin ?",
+    "person_id": "P006",
+    "relevant_ids": [
+      35
+    ],
+    "dossier_id": "DOS002"
+  },
+  {
+    "question": "Où Alma Petrović est-il ou elle décédé(e) ?",
+    "person_id": "P007",
+    "relevant_ids": [
+      38
+    ],
+    "dossier_id": "DOS002"
+  },
+  {
+    "question": "Quel est le lieu de disparition de Alma Petrović ?",
+    "person_id": "P007",
+    "relevant_ids": [
+      39
+    ],
+    "dossier_id": "DOS002"
+  },
+  {
+    "question": "Quelle est la date de disparition de Alma Petrović ?",
+    "person_id": "P007",
+    "relevant_ids": [
+      40
+    ],
+    "dossier_id": "DOS002"
+  },
+  {
+    "question": "Que rapporte le témoin à propos de Alma Petrović ?",
+    "person_id": "P007",
+    "relevant_ids": [
+      41
+    ],
+    "dossier_id": "DOS002"
+  },
+  {
+    "question": "Où Lucas Bernard est-il ou elle décédé(e) ?",
+    "person_id": "P008",
+    "relevant_ids": [
+      44
+    ],
+    "dossier_id": "DOS002"
+  },
+  {
+    "question": "Quel est le lieu de disparition de Lucas Bernard ?",
+    "person_id": "P008",
+    "relevant_ids": [
+      45
+    ],
+    "dossier_id": "DOS002"
+  },
+  {
+    "question": "Quelle est la date de disparition de Lucas Bernard ?",
+    "person_id": "P008",
+    "relevant_ids": [
+      46
+    ],
+    "dossier_id": "DOS002"
+  },
+  {
+    "question": "Que rapporte le témoin à propos de Lucas Bernard ?",
+    "person_id": "P008",
+    "relevant_ids": [
+      47
+    ],
+    "dossier_id": "DOS002"
+  }
+]

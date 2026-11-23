@@ -1,0 +1,197 @@
+[
+  {
+    "id": "fiche",
+    "split": "calibration",
+    "text": "Fiche fictive de Maëlle Ternier.\nObservation : Un témoin dit avoir vu Maëlle près du pont. Il ne l’a reconnue que de dos et hésite sur son identité.\n\nVérification : Le registre ne mentionne aucun passage. La liste est incomplète après 18 h.\n",
+    "required_before": [
+      "Vérification :"
+    ],
+    "optional_before": [
+      "Observation :"
+    ],
+    "keep_together": [
+      "Un témoin dit avoir vu Maëlle près du pont. Il ne l’a reconnue que de dos et hésite sur son identité.",
+      "Le registre ne mentionne aucun passage. La liste est incomplète après 18 h."
+    ]
+  },
+  {
+    "id": "rectification",
+    "split": "calibration",
+    "text": "La déclaration initiale donne le 8 mai comme date de disparition. Après appel, la famille précise que le 8 mai est la date du dernier contact. La date de disparition reste inconnue.\n\nRendez-vous : entretien prévu le 20 mai.",
+    "required_before": [
+      "Rendez-vous :"
+    ],
+    "optional_before": [],
+    "keep_together": [
+      "La déclaration initiale donne le 8 mai comme date de disparition. Après appel, la famille précise que le 8 mai est la date du dernier contact. La date de disparition reste inconnue."
+    ]
+  },
+  {
+    "id": "homonyme",
+    "split": "calibration",
+    "text": "Une attestation indique un décès à Port-Lys sous le nom de Lina Darel. Le numéro de dossier correspond à une homonyme. Cette attestation ne permet pas d’établir le décès de Lina Darel.\nTransmission : une copie a été déposée sous scellés.",
+    "required_before": [
+      "Transmission :"
+    ],
+    "optional_before": [],
+    "keep_together": [
+      "Une attestation indique un décès à Port-Lys sous le nom de Lina Darel. Le numéro de dossier correspond à une homonyme. Cette attestation ne permet pas d’établir le décès de Lina Darel."
+    ]
+  },
+  {
+    "id": "deux-personnes",
+    "split": "calibration",
+    "text": "Ana Derval figure sur la liste des personnes arrivées à Belrive.\n\nUn garde pense avoir aperçu Elias au quai ouest. La pluie masquait les traits du visage.",
+    "required_before": [
+      "Un garde"
+    ],
+    "optional_before": [],
+    "keep_together": [
+      "Un garde pense avoir aperçu Elias au quai ouest. La pluie masquait les traits du visage."
+    ]
+  },
+  {
+    "id": "reapparition",
+    "split": "calibration",
+    "text": "Une voisine signale Nils au marché. Information non confirmée.\n\nLe bureau rouvre lundi.\n\nNils est cité de nouveau dans une liste de passagers. Information non confirmée.",
+    "required_before": [
+      "Le bureau",
+      "Nils est cité"
+    ],
+    "optional_before": [],
+    "keep_together": [
+      "Une voisine signale Nils au marché. Information non confirmée.",
+      "Nils est cité de nouveau dans une liste de passagers. Information non confirmée."
+    ]
+  },
+  {
+    "id": "temoignage-long",
+    "split": "calibration",
+    "text": "Un témoin a attendu devant la porte nord de l’école de 18 h 15 à 18 h 45. Il dit avoir aperçu une personne portant un manteau similaire à celui de Tom. Il était à distance et les lampes étaient éteintes. Son récit change lorsqu’on lui montre le plan : la porte qu’il voyait était celle du gymnase. Il maintient l’heure approximative, mais ne peut confirmer qu’il s’agissait de Tom.\n\nAnnexe administrative : la salle d’entretien est réservée mardi.",
+    "required_before": [
+      "Annexe administrative"
+    ],
+    "optional_before": [],
+    "keep_together": [
+      "Un témoin a attendu devant la porte nord de l’école de 18 h 15 à 18 h 45. Il dit avoir aperçu une personne portant un manteau similaire à celui de Tom. Il était à distance et les lampes étaient éteintes. Son récit change lorsqu’on lui montre le plan : la porte qu’il voyait était celle du gymnase. Il maintient l’heure approximative, mais ne peut confirmer qu’il s’agissait de Tom."
+    ]
+  },
+  {
+    "id": "champs-courts",
+    "split": "calibration",
+    "text": "Lieu déclaré : Vireval.\nTéléphone du service : inconnu.\nDocument reçu : 6 août.",
+    "required_before": [
+      "Téléphone du service",
+      "Document reçu"
+    ],
+    "optional_before": [],
+    "keep_together": []
+  },
+  {
+    "id": "ponctuation",
+    "split": "calibration",
+    "text": "\tRéférence : « T‑17 » ; vérification à faire.\r\n\r\nNote d’équipe : relire le registre.  \r\n",
+    "required_before": [
+      "Note d’équipe"
+    ],
+    "optional_before": [],
+    "keep_together": []
+  },
+  {
+    "id": "desaccord",
+    "split": "calibration",
+    "text": "Le premier témoin situe Jo à la gare. Le second le situe au même moment au centre d’accueil. Leurs déclarations divergent et restent à vérifier.\n\nLe dossier a été transmis à l’équipe de suivi.",
+    "required_before": [
+      "Le dossier a été transmis"
+    ],
+    "optional_before": [],
+    "keep_together": [
+      "Le premier témoin situe Jo à la gare. Le second le situe au même moment au centre d’accueil. Leurs déclarations divergent et restent à vérifier."
+    ]
+  },
+  {
+    "id": "libelle-et-negation",
+    "split": "calibration",
+    "text": "Rapport de contrôle du formulaire.\nLa mention « transfert confirmé » apparaît sur le formulaire. Le responsable précise qu’il s’agit d’un exemple imprimé et qu’aucun transfert n’a été confirmé.\n\nQualité du scan reproduit : bonne.",
+    "required_before": [
+      "Qualité du scan"
+    ],
+    "optional_before": [
+      "La mention"
+    ],
+    "keep_together": [
+      "La mention « transfert confirmé » apparaît sur le formulaire. Le responsable précise qu’il s’agit d’un exemple imprimé et qu’aucun transfert n’a été confirmé."
+    ]
+  },
+  {
+    "id": "reserve-voix",
+    "split": "reserve",
+    "text": "Dernier contact rapporté.\nUn voisin rapporte avoir entendu Leïla appeler. La communication était hachée et il ne reconnaît pas la voix avec certitude.\n\nLogistique : l’enregistreur est au bureau.",
+    "required_before": [
+      "Logistique :"
+    ],
+    "optional_before": [],
+    "keep_together": [
+      "Un voisin rapporte avoir entendu Leïla appeler. La communication était hachée et il ne reconnaît pas la voix avec certitude."
+    ]
+  },
+  {
+    "id": "reserve-date",
+    "split": "reserve",
+    "text": "La fiche indique une arrivée au camp le 14 août. L’agent corrige le lendemain : le 14 août est la date d’ouverture de la fiche, l’arrivée est sans date.\n\nPrêt de véhicule : aucun.",
+    "required_before": [
+      "Prêt de véhicule"
+    ],
+    "optional_before": [],
+    "keep_together": [
+      "La fiche indique une arrivée au camp le 14 août. L’agent corrige le lendemain : le 14 août est la date d’ouverture de la fiche, l’arrivée est sans date."
+    ]
+  },
+  {
+    "id": "reserve-homonyme",
+    "split": "reserve",
+    "text": "Le registre indique le départ de Salim B. pour Rochemont. La copie comporte un autre identifiant : il s’agit d’un homonyme, et le départ de Salim Benar n’est pas établi.\n\nInventaire : deux chemises ont été remises.",
+    "required_before": [
+      "Inventaire :"
+    ],
+    "optional_before": [],
+    "keep_together": [
+      "Le registre indique le départ de Salim B. pour Rochemont. La copie comporte un autre identifiant : il s’agit d’un homonyme, et le départ de Salim Benar n’est pas établi."
+    ]
+  },
+  {
+    "id": "reserve-recurrence",
+    "split": "reserve",
+    "text": "Mila est citée dans le compte rendu de la mairie.\n\nBoîte d’archives : « 04 ».\n\nDans l’annexe, Mila est citée comme contact du service.",
+    "required_before": [
+      "Boîte d’archives",
+      "Dans l’annexe"
+    ],
+    "optional_before": [],
+    "keep_together": []
+  },
+  {
+    "id": "reserve-long",
+    "split": "reserve",
+    "text": "N. décrit trois points lumineux sur le chemin vers la gare. Il ne sait pas si c’était un véhicule. Il se tenait près d’une vitre qui reflétait les lampes du couloir. La même observation est répétée dans son entretien du lendemain. N. ajoute qu’il était de retour chez lui quand l’appel mentionnant la gare est arrivé. Cette précision concerne l’appel et ne change pas ses conditions d’observation précédentes.\n\nTransmission : le compte rendu reste à relire.",
+    "required_before": [
+      "Transmission :"
+    ],
+    "optional_before": [],
+    "keep_together": [
+      "N. décrit trois points lumineux sur le chemin vers la gare. Il ne sait pas si c’était un véhicule. Il se tenait près d’une vitre qui reflétait les lampes du couloir. La même observation est répétée dans son entretien du lendemain. N. ajoute qu’il était de retour chez lui quand l’appel mentionnant la gare est arrivé. Cette précision concerne l’appel et ne change pas ses conditions d’observation précédentes."
+    ]
+  },
+  {
+    "id": "reserve-repetitions",
+    "split": "reserve",
+    "text": "  Statut : inconnu.\nIdentité : inconnue.\n\nLogistique\nStatut : inconnu.\n  ",
+    "required_before": [
+      "Logistique"
+    ],
+    "optional_before": [
+      "Identité :"
+    ],
+    "keep_together": []
+  }
+]

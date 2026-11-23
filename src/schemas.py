@@ -40,6 +40,12 @@ class EvaluationCase(BaseModel):
     relevant_ids: Annotated[list[RecordId], Field(min_length=1)]
 
 
+class ScopedEvaluationCase(EvaluationCase):
+    """Question annotée dans un dossier explicite, sans déduction depuis le nom."""
+
+    dossier_id: NonBlankText
+
+
 def _unique_person_ids(values: list[str]) -> list[str]:
     if len(values) != len(set(values)):
         raise ValueError('les identifiants de personnes ne doivent pas être dupliqués')

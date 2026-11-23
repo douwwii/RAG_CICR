@@ -1,52 +1,36 @@
-"""Indexation unique des documents fictifs vers Qdrant local."""
-from qdrant_client import models
-from common import COLLECTION, TEXT_BUILDER_VERSION, client, load_documents, make_text
+"""Indexation des champs fictifs via les interfaces d’embedding et de stockage."""
+import sqlite3
+
+from catalog import Catalog, CatalogError
+from catalog_index import prepare_index_records
+from common import CATALOG_FILE, DATA_FILE, TEXT_BUILDER_VERSION
+from config import VECTOR_STORE_CONFIG
+from data_loader import DataValidationError, load_field_records
 from embeddings import EmbeddingError, SentenceTransformerEmbedder
-from index_metadata import ensure_collection_compatible, make_index_metadata
+from scope import ScopeError
+from vector_store import VectorStoreError, open_vector_store
 
 
 def main():
-    docs = load_documents()
+    docs = load_field_records(DATA_FILE)
+    with Catalog(CATALOG_FILE, read_only=True) as catalog:
+        records = prepare_index_records(docs, catalog, DATA_FILE)
     embedder = SentenceTransformerEmbedder()
-    texts = [make_text(d) for d in docs]
-    vectors = embedder.embed_documents(texts)
-    points = [
-        models.PointStruct(
-            id=d['id'], vector=v.tolist(),
-            payload={**d, 'embedding_text': text},
-        )
-        for d, v, text in zip(docs, vectors, texts)
-    ]
-    db = client()
+    vectors = embedder.embed_documents([record.embedding_text for record in records])
+    store = open_vector_store()
     try:
-        # Recrée l'index à chaque exécution : rend le test reproductible.
-        if db.collection_exists(COLLECTION):
-            # Ne jamais remplacer silencieusement un index d’un autre profil.
-            ensure_collection_compatible(db, COLLECTION, embedder.profile, TEXT_BUILDER_VERSION)
-            db.delete_collection(COLLECTION)
-        db.create_collection(
-            collection_name=COLLECTION,
-            vectors_config=models.VectorParams(
-                size=embedder.dimension,
-                distance=models.Distance.COSINE,
-            ),
+        store.rebuild(
+            records, vectors, profile=embedder.profile, text_builder_version=TEXT_BUILDER_VERSION,
         )
-        db.upsert(collection_name=COLLECTION, points=points, wait=True)
-        # Publier le profil uniquement après une insertion réussie. Sans profil,
-        # un index incomplet sera refusé par la recherche.
-        db.update_collection(
-            collection_name=COLLECTION,
-            metadata=make_index_metadata(embedder.profile, TEXT_BUILDER_VERSION),
-        )
-        print(f"Indexation terminée : {len(points)} champs dans {COLLECTION}")
+        print(f"Indexation terminée : {len(records)} champs dans {VECTOR_STORE_CONFIG.collection_name}")
         print(f"Dimension des vecteurs : {vectors.shape[1]}")
         print(f"Profil d’embedding : {embedder.profile.fingerprint[:12]}")
     finally:
-        db.close()
+        store.close()
 
 
 if __name__ == '__main__':
     try:
         main()
-    except EmbeddingError as exc:
+    except (EmbeddingError, VectorStoreError, ScopeError, CatalogError, DataValidationError, OSError, sqlite3.Error) as exc:
         raise SystemExit(f'Erreur : {exc}') from exc

@@ -76,11 +76,19 @@ class ImportSummary:
 
 
 class Catalog:
-    def __init__(self, path: Path | str):
-        self._connection = sqlite3.connect(str(path), isolation_level=None)
+    def __init__(self, path: Path | str, *, read_only: bool = False):
+        # mode=ro refuse une base absente au lieu de créer un catalogue vide.
+        target = Path(path).resolve().as_uri() + '?mode=ro' if read_only else str(path)
+        self._connection = sqlite3.connect(target, uri=read_only, isolation_level=None)
         self._connection.row_factory = sqlite3.Row
         # Activer les contraintes avant toute transaction, sur chaque connexion.
-        self._connection.execute('PRAGMA foreign_keys = ON')
+        try:
+            self._connection.execute('PRAGMA foreign_keys = ON')
+            if read_only:
+                self._require_schema()
+        except Exception:
+            self._connection.close()
+            raise
 
     def __enter__(self) -> 'Catalog':
         return self
@@ -266,5 +274,13 @@ class Catalog:
         row = self._connection.execute(
             'SELECT * FROM documents WHERE dossier_id = ? AND document_id = ?',
             (dossier_id, document_id),
+        ).fetchone()
+        return self._document_metadata(row) if row else None
+
+    def lookup_document(self, document_id: str) -> DocumentMetadata | None:
+        """Retrouve une référence unique pour l’indexation, avant de connaître son dossier."""
+        self._require_schema()
+        row = self._connection.execute(
+            'SELECT * FROM documents WHERE document_id = ?', (document_id,),
         ).fetchone()
         return self._document_metadata(row) if row else None
