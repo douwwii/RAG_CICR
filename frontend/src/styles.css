@@ -1348,3 +1348,68 @@ h1 span {
     bottom: auto;
   }
 }
+.assessment {
+  background: #eef5f9;
+  border: 1px solid #d3e2ed;
+  border-radius: 8px;
+  padding: 19px 21px;
+  margin: 0 0 22px;
+}
+.assessment h3 {
+  font-size: 14px;
+  font-weight: 600;
+  color: #2c506a;
+  margin: 10px 0;
+}
+.assessment p {
+  font-size: 12px;
+  line-height: 1.85;
+  color: #4b687e;
+  margin: 8px 0;
+  overflow-wrap: anywhere;
+}
+.assessment small {
+  display: block;
+  font-size: 9px;
+  line-height: 1.7;
+  color: #8096a7;
+  border-top: 1px solid #dce7ef;
+  margin-top: 13px;
+  padding-top: 10px;
+}
+.assessment .citation {
+  display: inline;
+  padding: 0 3px;
+  min-height: 0;
+  font-size: 11px;
+  vertical-align: baseline;
+}
+.relevance {
+  display: inline-block;
+  font-size: 9px;
+  padding: 4px 7px;
+  border-radius: 4px;
+  background: #eef3f7;
+  color: #627e94;
+  margin-bottom: 12px;
+}
+.relevance-direct {
+  background: #edf5f0;
+  color: #4c7860;
+}
+.relevance-partial {
+  background: #fbf4e7;
+  color: #8e7546;
+}
+.relevance-unrelated {
+  background: #f2f2f3;
+  color: #8b9096;
+}
+.relevance-reason {
+  font-size: 10px;
+  line-height: 1.8;
+  color: #8398a8;
+  margin-top: 12px;
+  border-left: 2px solid #dce7ef;
+  padding-left: 10px;
+}

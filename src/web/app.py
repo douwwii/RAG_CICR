@@ -83,7 +83,8 @@ def create_app(factory=WebService):
         config = request.app.state.service.index_config
         return {'status': 'ok', 'prototype': True,
                 'retrieval': {'model': config.embedding.model_name,
-                              'preparation': 'contexte_coherent' if config.coherent else 'historique'}}
+                              'preparation': 'contexte_coherent' if config.coherent else 'historique'},
+                'reranking': {'enabled': True, 'candidate_limit': request.app.state.service.rerank_candidates}}
 
     @app.get('/api/dossiers')
     def dossiers(request: Request):
@@ -95,7 +96,7 @@ def create_app(factory=WebService):
 
     @app.post('/api/dossiers/{dossier_id}/search')
     def search(dossier_id: str, body: SearchRequest, request: Request):
-        return {'results': request.app.state.service.search(dossier_id, body.question, body.top_k)}
+        return request.app.state.service.search_analysis(dossier_id, body.question, body.top_k)
 
     @app.post('/api/dossiers/{dossier_id}/imports', status_code=202)
     async def upload(dossier_id: str, request: Request, response: Response, file: UploadFile = File(...)):

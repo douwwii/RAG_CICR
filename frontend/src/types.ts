@@ -32,6 +32,9 @@ export interface Hit {
   title: string;
   text: string;
   score: number;
+  relevance?: "direct" | "partial" | "context" | "unrelated";
+  relevance_reason?: string;
+  evidence_quote?: string;
   page_start: number | null;
   page_end: number | null;
   name: string;
@@ -47,4 +50,19 @@ export interface Source {
   kind: "pdf" | "text";
   name: string;
   text?: string;
+}
+
+export interface SearchResponse {
+  results: Hit[];
+  assessment: {
+    coverage: "direct" | "partial" | "context" | "none" | "contradictory";
+    summary: { text: string; passage_ids: string[] }[];
+  } | null;
+  reranking: {
+    status: "applied" | "fallback" | "empty";
+    candidate_count: number;
+    calls: number;
+    duration_seconds: number;
+    warning: string | null;
+  };
 }

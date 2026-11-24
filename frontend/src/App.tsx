@@ -1,3 +1,5 @@
+import { SearchAssessment } from "./components/SearchAssessment";
+import type { SearchResponse } from "./types";
 import { useEffect, useRef, useState } from "react";
 import {
   AlertCircle,
@@ -43,6 +45,7 @@ export default function App() {
   const [catalogError, setCatalogError] = useState("");
   const [question, setQuestion] = useState("");
   const [submitted, setSubmitted] = useState("");
+  const [analysis, setAnalysis] = useState<SearchResponse | null>(null);
   const [hits, setHits] = useState<Hit[]>([]);
   const [searching, setSearching] = useState(false);
   const [searched, setSearched] = useState(false);
@@ -84,6 +87,7 @@ export default function App() {
     setQuestion("");
     setSubmitted("");
     setHits([]);
+    setAnalysis(null);
     setSelection(null);
     setError("");
     setSearched(false);
@@ -101,11 +105,13 @@ export default function App() {
     setError("");
     setSelection(null);
     setHits([]);
+    setAnalysis(null);
     setSubmitted(question);
     try {
       const data = await api.search(dossier, question.trim(), request.signal);
       if (!request.signal.aborted) {
         setHits(data.results);
+        setAnalysis(data);
         setSearched(true);
       }
     } catch (e) {
@@ -389,7 +395,7 @@ export default function App() {
               <div className="results-loading" role="status">
                 <LoaderCircle size={25} className="spin" />
                 <h2>Recherche dans votre dossier…</h2>
-                <p>Comparaison de votre question avec les extraits indexés.</p>
+                <p>Recherche et analyse des passages par Qwen…</p>
               </div>
             ) : searched ? (
               <section className="results" aria-label="Résultats de recherche">
@@ -398,9 +404,26 @@ export default function App() {
                     {hits.length} passage{hits.length > 1 ? "s" : ""} retrouvé
                     {hits.length > 1 ? "s" : ""}
                   </h2>
-                  <span>PAR SIMILARITÉ</span>
+                  <span>
+                    {analysis?.reranking.status === "applied"
+                      ? "CLASSÉS PAR QWEN"
+                      : "PAR SIMILARITÉ"}
+                  </span>
                 </div>
                 <p className="query-label">Pour « {submitted} »</p>
+                {analysis && (
+                  <SearchAssessment
+                    analysis={analysis}
+                    onOpen={(hit) =>
+                      setSelection({
+                        document_id: hit.document_id,
+                        name: hit.name,
+                        page: hit.page_start || 1,
+                        text: hit.text,
+                      })
+                    }
+                  />
+                )}
                 {hits.length ? (
                   hits.map((hit, index) => (
                     <article
@@ -425,7 +448,26 @@ export default function App() {
                         )}
                       </div>
                       <h3>{hit.title}</h3>
+                      {hit.relevance && (
+                        <span
+                          className={`relevance relevance-${hit.relevance}`}
+                        >
+                          {
+                            {
+                              direct: "Répond directement",
+                              partial: "Répond partiellement",
+                              context: "Apporte du contexte",
+                              unrelated: "Proximité thématique",
+                            }[hit.relevance]
+                          }
+                        </span>
+                      )}
                       <p className="passage-text">{hit.text}</p>
+                      {hit.relevance_reason && (
+                        <p className="relevance-reason">
+                          Analyse Qwen : {hit.relevance_reason}
+                        </p>
+                      )}
                       <div className="result-footer">
                         <span title="Similarité cosinus ; ce score n’est pas une probabilité de vérité.">
                           Similarité {hit.score.toFixed(3)}

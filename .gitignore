@@ -13,3 +13,6 @@ frontend/dist/
 frontend/*.tsbuildinfo
 experiments/query_rewriting/results/
 experiments/embedding_benchmark/results/
+experiments/reranking/results/
+experiments/reranking/results-v1-calibration/
+experiments/reranking/results-v2-pilot/

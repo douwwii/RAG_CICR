@@ -92,13 +92,13 @@ cd frontend
 pnpm build
 ```
 
-Les tests HTTP automatisés utilisent de vrais catalogues SQLite et Qdrant temporaires, mais des modèles simulés pour isoler les contrats de l'accès distant. Ils couvrent import, doublons, validation, séparation des dossiers, exactitude source, pages, découpage et redémarrage. Ils ne mesurent pas la qualité sémantique de Qwen ou MiniLM.
+Les tests HTTP automatisés utilisent de vrais catalogues SQLite et Qdrant temporaires, mais des modèles simulés pour isoler les contrats de l'accès distant. Ils couvrent import, doublons, validation, séparation des dossiers, exactitude source, pages, découpage, reranking et redémarrage. Ils ne mesurent pas la qualité sémantique des modèles ; les benchmarks séparés servent à cette comparaison.
 
 Pour régénérer les PDF de démonstration : `.venv/bin/python scripts/create_demo_pdfs.py` (ReportLab dans les dépendances de développement).
 
 ## Préparation des questions
 
-Chaque recherche envoie d’abord la question à Qwen pour obtenir une phrase de recherche concise, sans réponse ni ajout de faits. MiniLM encode ensuite cette formulation et Qdrant classe les passages par similarité cosinus dans le dossier sélectionné. Cinq résultats maximum sont retournés. Une panne Qwen ou une formulation invalide/trop longue fait utiliser la question originale. Cette reformulation ne constitue pas un reranking et ne garantit pas une amélioration de pertinence.
+Chaque recherche envoie d’abord la question à Qwen pour obtenir une phrase de recherche concise, sans réponse ni ajout de faits. Le modèle d’embedding actif (BGE-M3 dans la version web migrée) encode ensuite cette formulation et Qdrant classe les candidats par similarité cosinus dans le dossier sélectionné. Le reranking décrit plus bas sélectionne les cinq résultats affichés. Une panne Qwen ou une formulation invalide/trop longue fait utiliser la question originale. Cette étape de reformulation ne garantit pas à elle seule une amélioration de pertinence.
 
 La reformulation utilise désormais le prompt versionné `prompts/query_rewriting/v4.txt`, avec contrôles conservateurs des noms, nombres, mois et négations. L’évaluation comparative et ses limites sont décrites dans `experiments/query_rewriting/README.md`. Elle ne remplace pas un classement plus fin des passages ni une amélioration du découpage documentaire.
 
@@ -135,3 +135,21 @@ PYTHON
 ```
 
 Le retour arrière change uniquement l’index consulté : les PDF importés depuis la migration restent visibles au catalogue et sont indiqués non indexés si leur artefact est absent de cette génération ; un réimport permet de les y indexer. Les compteurs de passages reflètent la dernière migration effectuée. Le profil actif est consultable via `GET /api/health`, sans exposer de chemins système.
+
+## Reranking Qwen et bilan de pertinence
+
+La recherche prépare la question avec Qwen, récupère **30 candidats** cosinus au total dans le dossier, vérifie leurs sources, puis demande à Qwen d’en classer cinq. Le nombre de candidats est configurable entre 20 et 30 via `SPOC_RERANK_CANDIDATES` avant le démarrage. Il ne s’agit pas de 30 candidats par collection après fusion : les champs et passages PDF sont réunis puis limités au nombre demandé.
+
+Le reranker juge la question originale, pas uniquement sa reformulation. Il ne reçoit pas les scores cosinus et renvoie des identifiants existants, une catégorie (`direct`, `partial`, `context`, `unrelated`), une justification courte et un diagnostic global. Le backend reprend les textes originaux, sans copier une version générée par le modèle. Le score affiché reste la similarité cosinus ; il ne détermine plus l’ordre final et n’est pas une probabilité de vérité.
+
+Le bilan affiché décrit la pertinence et les limites des extraits à partir des catégories de Qwen, avec des liens vers les passages. Il n’est pas une synthèse factuelle libre : les premiers essais ont montré une perte possible de conditionnel dans une telle synthèse. Les faits et leurs réserves restent lisibles dans les passages exacts. Les catégories et justifications demeurent des jugements du modèle, à vérifier.
+
+En cas de réponse invalide, délai, modèle occupé ou budget dépassé, les cinq premiers résultats cosinus sont retournés avec un avertissement et sans bilan prétendument réussi. Les identifiants inconnus, doublons et sorties hors schéma sont refusés. Une seule nouvelle tentative est permise avec les identifiants contraints par le schéma ; si elle échoue, le repli est explicite. Un lot contient au plus 60 000 octets JSON UTF-8 ; les extraits restent entiers. Un traitement par petits lots est prévu jusqu’à quatre lots avec sélection finale ; si les finalistes dépassent encore le budget, le système revient explicitement au cosinus. Aucune troncature silencieuse.
+
+Une seule analyse de reranking est exécutée à la fois dans ce backend local. La première analyse peut prendre plusieurs dizaines de secondes sur la machine distante, davantage en cas d’attente sur la machine partagée. Les 32 dernières analyses réussies sont conservées en mémoire, uniquement pour une question et une liste de candidats identiques. Les sources sont relues/vérifiées avant consultation de ce cache. Les erreurs ne sont pas mises en cache ; redémarrer le backend vide ce cache, notamment après un changement du modèle distant.
+
+Le protocole et les sources des nouveaux tests sont dans `experiments/reranking/README.md` et `data/reranking_demo/`. Ce corpus est séparé du catalogue de démonstration pour ne pas le polluer avec des copies et références fictives adversariales.
+
+Le réglage initial de 25 candidats a été comparé à 20 et 30 sur les cas de calibration. La version retient 30 candidats pour sa validation ; la qualité similaire des trois tailles sur ce petit échantillon ne prouve pas un optimum universel.
+
+Le [rapport mesuré](experiments/reranking/RESULTATS.md) compare cosinus seul, dédoublonnage et reranking sur 24 questions fictives, avec calibration et validation séparées. Le classement retrouve mieux les preuves attendues sur ce corpus ; le diagnostic global de contradiction reste insuffisant même lorsque les deux témoignages sont sélectionnés.

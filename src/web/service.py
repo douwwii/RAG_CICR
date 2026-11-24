@@ -1,5 +1,7 @@
 """Ressources locales partagées : un encodeur, un client Qdrant, une file d’import."""
 from concurrent.futures import ThreadPoolExecutor
+from collections import OrderedDict
+from copy import deepcopy
 from hashlib import sha256
 import json
 import logging
@@ -20,6 +22,7 @@ from qdrant_store import QdrantVectorStore
 from schemas import DocumentMetadata
 from search import retrieve
 from query_rewriting import rewrite_question
+from reranking import rerank, cache_key as reranking_key
 from web.jobs import JobRepository
 from web.index_config import WebIndexConfig, create_embedder
 
@@ -37,6 +40,10 @@ class WebService:
         self.artifact_path.mkdir(parents=True, exist_ok=True)
         self.jobs = JobRepository(self.data_path / 'jobs.sqlite')
         self.lock = RLock()
+        self.reranking_cache = OrderedDict()
+        self.rerank_candidates = int(os.environ.get('SPOC_RERANK_CANDIDATES', '30'))
+        if not 20 <= self.rerank_candidates <= 30:
+            raise ValueError('SPOC_RERANK_CANDIDATES doit être compris entre 20 et 30.')
         self.embedder = embedder
         self.llm = llm or OllamaClient(OllamaConfig(
             base_url=os.environ.get('SPOC_OLLAMA_URL', 'http://127.0.0.1:11435'),
@@ -164,9 +171,11 @@ class WebService:
             raise ValueError('Document pas encore indexé.')
         return json.loads((self.artifact_path / (document_id + '.json')).read_text(encoding='utf-8'))
 
-    def search(self, dossier_id, question, top_k):
+    def retrieve_candidates(self, dossier_id, question, candidate_k=30):
         self.require_dossier(dossier_id)
-        top_k = min(top_k, 5)
+        if not 1 <= candidate_k <= 30:
+            raise ValueError('Entre 1 et 30 candidats sont requis.')
+        top_k = candidate_k
         # L’appel distant ne bloque pas le catalogue ni les autres recherches.
         with self.lock:
             embedder = self.encoder()
@@ -205,6 +214,37 @@ class WebService:
                                     text=p.text, score=score, page_start=p.page_start, page_end=p.page_end,
                                     name=ready[p.document_id]['filename'], kind='pdf'))
             return sorted(results, key=lambda r: r['score'], reverse=True)[:top_k]
+
+    def search_analysis(self, dossier_id, question, top_k=5, *, candidate_k=None):
+        if not 1 <= top_k <= 5:
+            raise ValueError('Entre 1 et 5 résultats sont requis.')
+        candidates = self.retrieve_candidates(dossier_id, question, candidate_k or self.rerank_candidates)
+        model = self.llm.config.model_name if isinstance(self.llm, OllamaClient) else type(self.llm).__name__
+        cache_key = reranking_key(question, candidates, top_k, model)
+        with self.lock:
+            cached = self.reranking_cache.get(cache_key)
+            if cached is not None:
+                self.reranking_cache.move_to_end(cache_key)
+                response = deepcopy(cached)
+                current = {p['passage_id']: p for p in candidates}
+                response['results'] = [dict(current[p['passage_id']], relevance=p['relevance'],
+                                            relevance_reason=p['relevance_reason']) for p in response['results']]
+                response['reranking'].update(cached=True, calls=0, duration_seconds=0.0)
+                return response
+        client = self.llm
+        if isinstance(client, OllamaClient):
+            client = OllamaClient(client.config.model_copy(update={'num_predict': 2048, 'timeout_seconds': 90.0}))
+        response = rerank(client, question, candidates, limit=top_k)
+        response['reranking']['cached'] = False
+        if response['reranking']['status'] == 'applied':
+            with self.lock:
+                self.reranking_cache[cache_key] = deepcopy(response)
+                if len(self.reranking_cache) > 32:
+                    self.reranking_cache.popitem(last=False)
+        return response
+
+    def search(self, dossier_id, question, top_k):
+        return self.search_analysis(dossier_id, question, top_k)['results']
 
     def source(self, dossier_id, document_id):
         with Catalog(self.catalog_path, read_only=True) as catalog:

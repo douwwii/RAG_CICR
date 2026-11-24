@@ -1,4 +1,10 @@
-import type { Dossier, Hit, Job, Source, SourceDocument } from "../types";
+import type {
+  SearchResponse,
+  Dossier,
+  Job,
+  Source,
+  SourceDocument,
+} from "../types";
 async function request<T>(path: string, init?: RequestInit): Promise<T> {
   let response: Response;
   try {
@@ -22,7 +28,7 @@ export const api = {
   documents: (id: string) =>
     request<SourceDocument[]>(scope(id) + "/documents"),
   search: (id: string, question: string, signal: AbortSignal) =>
-    request<{ results: Hit[] }>(scope(id) + "/search", {
+    request<SearchResponse>(scope(id) + "/search", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ question, top_k: 5 }),

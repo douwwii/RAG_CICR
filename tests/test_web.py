@@ -105,6 +105,40 @@ class WebTests(unittest.TestCase):
         self.assertNotEqual(other['document_id'], document_id)
         self.assertNotIn(str(self.root), json.dumps(self.client.get('/api/dossiers/A/documents').json()))
 
+    def test_http_returns_qwen_ranking_and_assessment(self):
+        from test_reranking import candidates, proposal
+        from reranking import PROMPT
+        source=candidates()
+        for item in source:item['dossier_id']='A'
+        chosen=list(reversed(source[-5:]))
+        self.service.llm.generate=lambda system,text,schema: Generation(content=json.dumps(proposal(chosen)))
+        with patch.object(self.service,'retrieve_candidates',return_value=source) as retrieve:
+            response=self.client.post('/api/dossiers/A/search',json={'question':'Question originale ?'})
+        self.assertEqual(response.status_code,200,response.text)
+        body=response.json()
+        self.assertEqual(body['reranking']['status'],'applied')
+        self.assertEqual(body['reranking']['candidate_count'],25)
+        self.assertEqual(len(body['results']),5)
+        self.assertEqual(body['results'][0]['passage_id'],'24')
+        self.assertIsNotNone(body['assessment'])
+        retrieve.assert_called_once_with('A','Question originale ?',self.service.rerank_candidates)
+
+    def test_reranking_cache_requires_identical_verified_candidates(self):
+        from test_reranking import candidates, proposal
+        source=candidates()
+        for item in source:item['dossier_id']='A'
+        with patch.object(self.service,'retrieve_candidates',return_value=source), patch.object(self.service.llm,'generate',return_value=Generation(content=json.dumps(proposal(source[:5])))) as generate:
+            first=self.service.search_analysis('A','Question ?')
+            source[0]['score']-=.01
+            second=self.service.search_analysis('A','Question ?')
+            self.assertFalse(first['reranking']['cached'])
+            self.assertTrue(second['reranking']['cached'])
+            self.assertEqual(second['results'][0]['score'],source[0]['score'])
+            self.assertEqual(generate.call_count,1)
+            source[0]['text']+=' Source modifiée.'
+            self.service.search_analysis('A','Question ?')
+            self.assertEqual(generate.call_count,2)
+
     def test_upload_validation_and_no_text_pdf(self):
         bad = self.client.post('/api/dossiers/A/imports', files={'file': ('bad.pdf', b'not a pdf')})
         self.assertEqual(bad.status_code, 415)
