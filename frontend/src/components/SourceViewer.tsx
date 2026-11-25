@@ -1,3 +1,4 @@
+import { useLanguage } from "../i18n";
 import { useEffect, useRef, useState } from "react";
 import { Document, Page, pdfjs } from "react-pdf";
 import {
@@ -30,6 +31,8 @@ export function SourceViewer({
   selection: Selection | null;
   onClose: () => void;
 }) {
+  const { t } = useLanguage();
+  const [expanded, setExpanded] = useState(false);
   const [source, setSource] = useState<Source | null>(null);
   const [error, setError] = useState("");
   const [page, setPage] = useState(1);
@@ -38,6 +41,7 @@ export function SourceViewer({
   const [zoom, setZoom] = useState(1);
   const container = useRef<HTMLDivElement>(null);
   useEffect(() => {
+    setExpanded(false);
     setSource(null);
     setError("");
     setPages(0);
@@ -63,20 +67,31 @@ export function SourceViewer({
   }, [selection?.document_id]);
   return (
     <aside
-      className={`source-panel ${selection ? "source-open" : ""}`}
-      aria-label="Document source"
+      className={`source-panel ${selection ? "source-open" : ""} ${expanded ? "source-expanded" : ""}`}
+      aria-label={t("Document source")}
+      onKeyDown={(e) => {
+        if (e.key === "Escape") {
+          if (expanded) setExpanded(false);
+          else onClose();
+        }
+      }}
     >
       <div className="panel-heading">
-        <div className="eyebrow">DOCUMENT SOURCE</div>
+        <div className="eyebrow">{t("DOCUMENT SOURCE")}</div>
         {selection && (
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={onClose}
-            aria-label="Fermer la source"
-          >
-            <X size={17} />
-          </Button>
+          <>
+            <Button variant="ghost" onClick={() => setExpanded((v) => !v)}>
+              {t(expanded ? "Réduire le lecteur" : "Agrandir le lecteur")}
+            </Button>
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={onClose}
+              aria-label={t("Fermer la source")}
+            >
+              <X size={17} />
+            </Button>
+          </>
         )}
       </div>
       {selection ? (
@@ -89,8 +104,8 @@ export function SourceViewer({
               <h2>{selection.name}</h2>
               <p>
                 {source?.kind === "pdf"
-                  ? "Document original · PDF"
-                  : "Consultation de la source"}
+                  ? t("Document original · PDF")
+                  : t("Consultation de la source")}
               </p>
             </div>
           </div>
@@ -101,19 +116,19 @@ export function SourceViewer({
                 size="icon"
                 onClick={() => setPage((p) => Math.max(1, p - 1))}
                 disabled={page <= 1}
-                aria-label="Page précédente"
+                aria-label={t("Page précédente")}
               >
                 <ChevronLeft size={17} />
               </Button>
               <span>
-                Page <strong>{page}</strong> / {pages || "…"}
+                {t("Page")} <strong>{page}</strong> / {pages || "…"}
               </span>
               <Button
                 variant="ghost"
                 size="icon"
                 onClick={() => setPage((p) => Math.min(pages, p + 1))}
                 disabled={!pages || page >= pages}
-                aria-label="Page suivante"
+                aria-label={t("Page suivante")}
               >
                 <ChevronRight size={17} />
               </Button>
@@ -122,7 +137,7 @@ export function SourceViewer({
                 size="icon"
                 onClick={() => setZoom((z) => Math.max(1, z - 0.25))}
                 disabled={zoom <= 1}
-                aria-label="Réduire le zoom"
+                aria-label={t("Réduire le zoom")}
               >
                 <Minus size={14} />
               </Button>
@@ -131,7 +146,7 @@ export function SourceViewer({
                 size="icon"
                 onClick={() => setZoom((z) => Math.min(2.5, z + 0.25))}
                 disabled={zoom >= 2.5}
-                aria-label="Agrandir la page"
+                aria-label={t("Agrandir la page")}
               >
                 <Plus size={14} />
               </Button>
@@ -142,7 +157,7 @@ export function SourceViewer({
                   }
                   target="_blank"
                   rel="noreferrer"
-                  aria-label="Ouvrir le PDF dans un nouvel onglet"
+                  aria-label={t("Ouvrir le PDF dans un nouvel onglet")}
                 >
                   <ArrowUpRight size={17} />
                 </a>
@@ -152,13 +167,13 @@ export function SourceViewer({
           <div className="source-content" ref={container}>
             {error && (
               <div className="error-message" role="alert">
-                {error}
+                {t(error)}
               </div>
             )}
             {!source && !error && (
               <div className="loading">
-                <LoaderCircle className="spin" size={20} /> Ouverture de la
-                source…
+                <LoaderCircle className="spin" size={20} />
+                {t("Ouverture de la source…")}
               </div>
             )}
             {source?.kind === "pdf" && (
@@ -170,13 +185,15 @@ export function SourceViewer({
                 }}
                 onLoadError={() =>
                   setError(
-                    "Impossible de lire ce PDF. Vous pouvez essayer de l’ouvrir dans un nouvel onglet.",
+                    t(
+                      "Impossible de lire ce PDF. Vous pouvez essayer de l’ouvrir dans un nouvel onglet.",
+                    ),
                   )
                 }
                 loading={
                   <div className="loading">
-                    <LoaderCircle className="spin" size={20} /> Chargement du
-                    PDF…
+                    <LoaderCircle className="spin" size={20} />
+                    {t("Chargement du PDF…")}
                   </div>
                 }
               >
@@ -184,44 +201,31 @@ export function SourceViewer({
                   pageNumber={page}
                   width={width * zoom}
                   loading={
-                    <div className="loading">Chargement de la page…</div>
+                    <div className="loading">{t("Chargement de la page…")}</div>
                   }
                 />
               </Document>
             )}
             {source?.kind === "text" && (
               <div className="text-source">
-                <span className="eyebrow">TEXTE ORIGINAL</span>
-                <pre>{source.text}</pre>
+                <span className="eyebrow">{t("TEXTE ORIGINAL")}</span>
+                <pre dir="auto">{source.text}</pre>
                 <p className="muted">
-                  Cette source ne possède pas de PDF associé.
+                  {t("Cette source ne possède pas de PDF associé.")}
                 </p>
               </div>
             )}
           </div>
           {selection.text && (
             <div className="source-excerpt">
-              <span className="eyebrow">PASSAGE SÉLECTIONNÉ</span>
-              <p>{selection.text}</p>
+              <span className="eyebrow">{t("PASSAGE SÉLECTIONNÉ")}</span>
+              <p dir="auto">{selection.text}</p>
             </div>
           )}
         </>
       ) : (
         <div className="source-placeholder">
-          <div className="document-illustration">
-            <FileSearch size={36} strokeWidth={1.2} />
-            <span />
-            <span />
-            <span />
-          </div>
-          <h2>Remontez à la source.</h2>
-          <p>
-            Sélectionnez un passage pour consulter son document original et
-            vérifier son contexte.
-          </p>
-          <div className="source-note">
-            Chaque résultat reste relié à sa source.
-          </div>
+          <p>{t("Sélectionnez un document ou un passage pour le lire.")}</p>
         </div>
       )}
     </aside>

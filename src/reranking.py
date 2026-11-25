@@ -10,7 +10,7 @@ from typing import Literal
 from pydantic import BaseModel, ConfigDict, Field
 from segmentation_schemas import GenerationError
 
-PROMPT = (Path(__file__).resolve().parents[1] / 'prompts/reranking/v2.txt').read_text(encoding='utf-8')
+PROMPT = (Path(__file__).resolve().parents[1] / 'prompts/reranking/v3-multilingual.txt').read_text(encoding='utf-8')
 MAX_INPUT_BYTES = 60000
 _GATE = BoundedSemaphore(1)
 Label = Literal['direct', 'partial', 'context', 'unrelated']

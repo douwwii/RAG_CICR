@@ -29,7 +29,10 @@ from web.index_config import WebIndexConfig, create_embedder
 log = logging.getLogger(__name__)
 
 
-class WebService:
+from web.management import Management
+
+
+class WebService(Management):
     def __init__(self, *, catalog_path=CATALOG_FILE, data_path=None, vector_path=None,
                  embedder=None, llm=None, qdrant=None, index_config=None):
         self.catalog_path = Path(catalog_path)
@@ -53,6 +56,8 @@ class WebService:
         self.client = qdrant or QdrantClient(path=str(vector_path or self.index_config.fields.path))
         self.legacy = QdrantVectorStore(config=self.index_config.fields, client=self.client)
         self.passages = PassageIndex(self.client, collection=self.index_config.passage_collection)
+        self.recover_move()
+        self.recover_delete()
         self.executor = ThreadPoolExecutor(max_workers=1, thread_name_prefix='pdf-ingestion')
 
     def close(self):
@@ -66,9 +71,11 @@ class WebService:
 
     def dossiers(self):
         with Catalog(self.catalog_path, read_only=True) as catalog:
-            return [d.model_dump() for d in catalog.list_dossiers()]
+            return [dict(d.model_dump(), archived=d.dossier_id in self.jobs.archived()) for d in catalog.list_dossiers()]
 
     def require_dossier(self, dossier_id):
+        if dossier_id in self.jobs.archived():
+            raise ValueError('Ce dossier est archivé. Restaurez-le pour continuer.')
         with Catalog(self.catalog_path, read_only=True) as catalog:
             catalog.list_documents(dossier_id)
 

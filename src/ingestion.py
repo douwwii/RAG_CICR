@@ -14,12 +14,20 @@ def ingest_pdf(path, source, client, embedder, index, artifact_path: Path, progr
     extracted = extract_pdf(path)
     progress('Découpage thématique par Qwen')
     root = Path(__file__).resolve().parents[1]
-    prompt_version = 'v3-coherent' if coherent else 'v2-exemples'
+    prompt_version = 'v4-multilingual' if coherent else 'v2-exemples'
     prompt = (root / f'prompts/segmentation/{prompt_version}.txt').read_text(encoding='utf-8')
-    run = segment_document(
-        extracted.text, source, client, prompt=prompt, prompt_version=prompt_version,
-        restore_separators=True, coherent=coherent,
-    )
+    if len(extracted.text) > 8000:
+        from long_segmentation import segment_long_document
+        run = segment_long_document(
+            extracted.text, source, client, prompt=prompt, prompt_version=prompt_version,
+            checkpoint_dir=artifact_path.parent / 'checkpoints' / source.document_id,
+            progress=progress, coherent=coherent,
+        )
+    else:
+        run = segment_document(
+            extracted.text, source, client, prompt=prompt, prompt_version=prompt_version,
+            restore_separators=True, coherent=coherent,
+        )
     if any(a.error in {'connection', 'timeout', 'http', 'protocol', 'truncated'} for a in run.attempts):
         raise ValueError('Qwen est indisponible ou sa réponse est incomplète. Vérifiez le tunnel SSH puis réessayez.')
     progress('Préparation des extraits indexables')
@@ -40,7 +48,7 @@ def ingest_pdf(path, source, client, embedder, index, artifact_path: Path, progr
     if not passages:
         raise ValueError('Aucun extrait indexable dans ce document.')
     # Source extraite et journal complet conservés avant publication dans l’index.
-    artifact = dict(pipeline='context_coherent_v1' if coherent else 'strict_v1',
+    artifact = dict(pipeline=('context_coherent_v1' if coherent else 'strict_v1') + ('+windows-v1' if len(extracted.text) > 8000 else ''),
                     text=extracted.text, pages=[asdict(p) for p in extracted.pages],
                     segmentation=run.model_dump(), passages=[p.model_dump() for p in passages])
     temporary = artifact_path.with_suffix('.tmp')

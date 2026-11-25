@@ -27,6 +27,26 @@ class SearchRequest(BaseModel):
         return value
 
 
+class DossierName(BaseModel):
+    title: str = Field(min_length=1, max_length=160)
+
+    @field_validator('title')
+    @classmethod
+    def clean_title(cls, value):
+        if not value.strip():
+            raise ValueError('Nom vide.')
+        return value.strip()
+
+
+class DossierUpdate(BaseModel):
+    title: str | None = Field(default=None, min_length=1, max_length=160)
+    archived: bool | None = None
+
+
+class DocumentMove(BaseModel):
+    destination: str = Field(min_length=1, max_length=100)
+
+
 def create_app(factory=WebService):
     @asynccontextmanager
     async def lifespan(app):
@@ -90,6 +110,34 @@ def create_app(factory=WebService):
     def dossiers(request: Request):
         return request.app.state.service.dossiers()
 
+    @app.delete('/api/dossiers/{dossier_id}')
+    def delete_dossier(dossier_id: str, request: Request, confirmed: bool = False):
+        if not confirmed:
+            raise HTTPException(400, 'Confirmez explicitement la suppression.')
+        request.app.state.service.delete(dossier_id)
+        return {'ok': True}
+
+    @app.delete('/api/dossiers/{dossier_id}/documents/{document_id}')
+    def delete_document(dossier_id: str, document_id: str, request: Request, confirmed: bool = False):
+        if not confirmed:
+            raise HTTPException(400, 'Confirmez explicitement la suppression.')
+        request.app.state.service.delete(dossier_id, document_id)
+        return {'ok': True}
+
+    @app.post('/api/dossiers', status_code=201)
+    def create_dossier(body: DossierName, request: Request):
+        return request.app.state.service.create_dossier(body.title)
+
+    @app.patch('/api/dossiers/{dossier_id}')
+    def update_dossier(dossier_id: str, body: DossierUpdate, request: Request):
+        request.app.state.service.update_dossier(dossier_id, body.title, body.archived)
+        return {'ok': True}
+
+    @app.post('/api/dossiers/{dossier_id}/documents/{document_id}/move')
+    def move_document(dossier_id: str, document_id: str, body: DocumentMove, request: Request):
+        request.app.state.service.move_document(dossier_id, document_id, body.destination)
+        return {'ok': True}
+
     @app.get('/api/dossiers/{dossier_id}/documents')
     def documents(dossier_id: str, request: Request):
         return request.app.state.service.documents(dossier_id)
@@ -116,6 +164,15 @@ def create_app(factory=WebService):
             return result
         finally:
             await file.close()
+
+    @app.post('/api/dossiers/{dossier_id}/documents/{document_id}/retry', status_code=202)
+    def retry_import(dossier_id: str, document_id: str, request: Request):
+        service = request.app.state.service
+        service.require_dossier(dossier_id)
+        source = service.source(dossier_id, document_id)
+        if source['kind'] != 'pdf':
+            raise HTTPException(415, 'Seuls les PDF importés peuvent être retraités.')
+        return service.submit(dossier_id, source['name'], source['path'].read_bytes())
 
     @app.get('/api/jobs/{job_id}')
     def job(job_id: str, request: Request):

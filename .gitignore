@@ -16,3 +16,5 @@ experiments/embedding_benchmark/results/
 experiments/reranking/results/
 experiments/reranking/results-v1-calibration/
 experiments/reranking/results-v2-pilot/
+
+experiments/multilingual/raw.json

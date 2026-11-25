@@ -24,6 +24,35 @@ async function request<T>(path: string, init?: RequestInit): Promise<T> {
 }
 const scope = (id: string) => `/dossiers/${encodeURIComponent(id)}`;
 export const api = {
+  deleteItem: (id: string, document?: string) =>
+    request(
+      scope(id) +
+        (document ? `/documents/${encodeURIComponent(document)}` : "") +
+        "?confirmed=true",
+      { method: "DELETE" },
+    ),
+  retryDocument: (id: string, document: string) =>
+    request(scope(id) + `/documents/${encodeURIComponent(document)}/retry`, {
+      method: "POST",
+    }),
+  createDossier: (title: string) =>
+    request<Dossier>("/dossiers", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ title }),
+    }),
+  updateDossier: (id: string, data: { title?: string; archived?: boolean }) =>
+    request(scope(id), {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    }),
+  moveDocument: (id: string, document: string, destination: string) =>
+    request(scope(id) + `/documents/${encodeURIComponent(document)}/move`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ destination }),
+    }),
   dossiers: () => request<Dossier[]>("/dossiers"),
   documents: (id: string) =>
     request<SourceDocument[]>(scope(id) + "/documents"),

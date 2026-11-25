@@ -1,0 +1,298 @@
+{
+  "segmentation": {
+    "fr": {
+      "status": "validated",
+      "exact": true,
+      "count": 3
+    },
+    "en": {
+      "status": "validated",
+      "exact": true,
+      "count": 3
+    },
+    "es": {
+      "status": "validated",
+      "exact": true,
+      "count": 3
+    },
+    "ar": {
+      "status": "validated",
+      "exact": true,
+      "count": 3
+    }
+  },
+  "cases": [
+    {
+      "question": "À qui le sac personnel de Sami a-t-il été remis ?",
+      "question_language": "fr",
+      "source_language": "fr",
+      "reformulation": "À qui le sac personnel de Sami a-t-il été remis ?",
+      "expected": "fr-0",
+      "cosine_first": "fr-0",
+      "reranked_first": "fr-0",
+      "found5": true,
+      "status": "applied",
+      "assessment": {
+        "coverage": "direct",
+        "summary": [
+          {
+            "text": "Selon Qwen, les passages sélectionnés permettent de répondre directement à la question.",
+            "passage_ids": [
+              "fr-0"
+            ]
+          },
+          {
+            "text": "Les extraits suivants apportent seulement du contexte ou une proximité thématique.",
+            "passage_ids": [
+              "fr-1",
+              "fr-2",
+              "ar-0",
+              "es-0"
+            ]
+          }
+        ],
+        "summary_mode": "relevance_only"
+      },
+      "first_reason": "Réponse explicite au destinataire du sac de Sami.",
+      "source_exact": true
+    },
+    {
+      "question": "Is the death of Lina confirmed?",
+      "question_language": "en",
+      "source_language": "en",
+      "reformulation": "Is the death of Lina confirmed?",
+      "expected": "en-1",
+      "cosine_first": "en-1",
+      "reranked_first": "en-1",
+      "found5": true,
+      "status": "applied",
+      "assessment": {
+        "coverage": "direct",
+        "summary": [
+          {
+            "text": "Selon Qwen, les passages sélectionnés permettent de répondre directement à la question.",
+            "passage_ids": [
+              "en-1"
+            ]
+          },
+          {
+            "text": "Les extraits suivants apportent seulement du contexte ou une proximité thématique.",
+            "passage_ids": [
+              "fr-1",
+              "es-1",
+              "ar-1",
+              "en-0"
+            ]
+          }
+        ],
+        "summary_mode": "relevance_only"
+      },
+      "first_reason": "Explicitly negates confirmation of Lina's death.",
+      "source_exact": true
+    },
+    {
+      "question": "¿A quién se entregó el bolso personal de Karim?",
+      "question_language": "es",
+      "source_language": "es",
+      "reformulation": "¿A quién se entregó el bolso personal de Karim?",
+      "expected": "es-0",
+      "cosine_first": "es-0",
+      "reranked_first": "es-0",
+      "found5": true,
+      "status": "applied",
+      "assessment": {
+        "coverage": "direct",
+        "summary": [
+          {
+            "text": "Selon Qwen, les passages sélectionnés permettent de répondre directement à la question.",
+            "passage_ids": [
+              "es-0"
+            ]
+          },
+          {
+            "text": "Les extraits suivants apportent seulement du contexte ou une proximité thématique.",
+            "passage_ids": [
+              "es-1",
+              "es-2",
+              "ar-0",
+              "fr-0"
+            ]
+          }
+        ],
+        "summary_mode": "relevance_only"
+      },
+      "first_reason": "Responde directamente a quién se entregó el bolso de Karim.",
+      "source_exact": true
+    },
+    {
+      "question": "هل تم تأكيد وفاة Adam؟",
+      "question_language": "ar",
+      "source_language": "ar",
+      "reformulation": "هل تم تأكيد وفاة Adam؟",
+      "expected": "ar-1",
+      "cosine_first": "ar-1",
+      "reranked_first": "ar-1",
+      "found5": true,
+      "status": "applied",
+      "assessment": {
+        "coverage": "direct",
+        "summary": [
+          {
+            "text": "Selon Qwen, les passages sélectionnés permettent de répondre directement à la question.",
+            "passage_ids": [
+              "ar-1"
+            ]
+          },
+          {
+            "text": "Les extraits suivants apportent seulement du contexte ou une proximité thématique.",
+            "passage_ids": [
+              "ar-0",
+              "fr-1",
+              "es-1",
+              "en-1"
+            ]
+          }
+        ],
+        "summary_mode": "relevance_only"
+      },
+      "first_reason": "ينفي صراحة تأكيد وفاة الشخص المبحوث عنه",
+      "source_exact": true
+    },
+    {
+      "question": "À qui a été remis le sac personnel de Karim, et non la copie de l’inventaire ?",
+      "question_language": "fr",
+      "source_language": "es",
+      "reformulation": "À qui a été remis le sac personnel de Karim, et non la copie de l’inventaire ?",
+      "expected": "es-0",
+      "cosine_first": "es-0",
+      "reranked_first": "es-0",
+      "found5": true,
+      "status": "applied",
+      "assessment": {
+        "coverage": "direct",
+        "summary": [
+          {
+            "text": "Selon Qwen, les passages sélectionnés permettent de répondre directement à la question.",
+            "passage_ids": [
+              "es-0"
+            ]
+          },
+          {
+            "text": "Les extraits suivants apportent seulement du contexte ou une proximité thématique.",
+            "passage_ids": [
+              "fr-0",
+              "en-0",
+              "ar-0",
+              "es-1"
+            ]
+          }
+        ],
+        "summary_mode": "relevance_only"
+      },
+      "first_reason": "Identifie le destinataire du sac de Karim et distingue la copie.",
+      "source_exact": true
+    },
+    {
+      "question": "Is the death of Adam confirmed?",
+      "question_language": "en",
+      "source_language": "ar",
+      "reformulation": "Is the death of Adam confirmed?",
+      "expected": "ar-1",
+      "cosine_first": "ar-1",
+      "reranked_first": "ar-1",
+      "found5": true,
+      "status": "applied",
+      "assessment": {
+        "coverage": "direct",
+        "summary": [
+          {
+            "text": "Selon Qwen, les passages sélectionnés permettent de répondre directement à la question.",
+            "passage_ids": [
+              "ar-1"
+            ]
+          },
+          {
+            "text": "Les extraits suivants apportent seulement du contexte ou une proximité thématique.",
+            "passage_ids": [
+              "ar-0",
+              "ar-2",
+              "fr-1",
+              "en-1"
+            ]
+          }
+        ],
+        "summary_mode": "relevance_only"
+      },
+      "first_reason": "Négation explicite de la confirmation de la mort d'Adam.",
+      "source_exact": true
+    },
+    {
+      "question": "¿Se ha confirmado la muerte de Lina?",
+      "question_language": "es",
+      "source_language": "en",
+      "reformulation": "¿Se ha confirmado la muerte de Lina?",
+      "expected": "en-1",
+      "cosine_first": "en-1",
+      "reranked_first": "en-1",
+      "found5": true,
+      "status": "applied",
+      "assessment": {
+        "coverage": "direct",
+        "summary": [
+          {
+            "text": "Selon Qwen, les passages sélectionnés permettent de répondre directement à la question.",
+            "passage_ids": [
+              "en-1"
+            ]
+          },
+          {
+            "text": "Les extraits suivants apportent seulement du contexte ou une proximité thématique.",
+            "passage_ids": [
+              "es-1",
+              "fr-1",
+              "ar-1",
+              "en-0"
+            ]
+          }
+        ],
+        "summary_mode": "relevance_only"
+      },
+      "first_reason": "Confirma que el certificado no valida la muerte de Lina.",
+      "source_exact": true
+    },
+    {
+      "question": "إلى من سُلّمت الحقيبة الشخصية الخاصة بـ Sami؟",
+      "question_language": "ar",
+      "source_language": "fr",
+      "reformulation": "إلى من سُلّمت الحقيبة الشخصية الخاصة بـ Sami؟",
+      "expected": "fr-0",
+      "cosine_first": "fr-0",
+      "reranked_first": "fr-0",
+      "found5": true,
+      "status": "applied",
+      "assessment": {
+        "coverage": "direct",
+        "summary": [
+          {
+            "text": "Selon Qwen, les passages sélectionnés permettent de répondre directement à la question.",
+            "passage_ids": [
+              "fr-0"
+            ]
+          },
+          {
+            "text": "Les extraits suivants apportent seulement du contexte ou une proximité thématique.",
+            "passage_ids": [
+              "fr-1",
+              "fr-2",
+              "ar-0",
+              "es-0"
+            ]
+          }
+        ],
+        "summary_mode": "relevance_only"
+      },
+      "first_reason": "Réponse directe à la question sur le destinataire de la sacoche de Sami.",
+      "source_exact": true
+    }
+  ]
+}

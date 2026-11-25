@@ -50,12 +50,14 @@ class PassageIndex:
 
     def add(self, passages, embedder):
         self.ensure(embedder)
-        vectors = embedder.embed_documents([p.text for p in passages])
-        points = [models.PointStruct(id=p.passage_id, vector=v.tolist(), payload=p.model_dump())
-                  for p, v in zip(passages, vectors, strict=True)]
-        result = self.client.upsert(self.collection, points=points, wait=True)
-        if result.status != models.UpdateStatus.COMPLETED:
-            raise ValueError('Indexation Qdrant inachevée.')
+        for offset in range(0, len(passages), 16):
+            batch = passages[offset:offset+16]
+            vectors = embedder.embed_documents([p.text for p in batch])
+            points = [models.PointStruct(id=p.passage_id, vector=v.tolist(), payload=p.model_dump())
+                      for p, v in zip(batch, vectors, strict=True)]
+            result = self.client.upsert(self.collection, points=points, wait=True)
+            if result.status != models.UpdateStatus.COMPLETED:
+                raise ValueError('Indexation Qdrant inachevée.')
 
     def search(self, vector, embedder, dossier_id, document_ids, limit):
         if not document_ids or not self.client.collection_exists(self.collection):

@@ -76,6 +76,131 @@ class WebTests(unittest.TestCase):
             time.sleep(.02)
         self.fail('Import non terminé dans le délai de test.')
 
+    def test_move_person_references_and_rollback_do_not_leak_associations(self):
+        from schemas import Person, DocumentMetadata
+        job=self.wait(self.upload().json()['job'])
+        text=self.service.data_path/'note.txt';text.write_text('Note sur une personne.')
+        with Catalog(self.catalog) as catalog:
+            catalog.register(persons=[Person(person_id='P-X',display_name='Personne test')])
+            catalog._connection.execute('INSERT INTO dossier_persons VALUES (?,?)',('A','P-X'))
+            catalog.register(documents=[DocumentMetadata(document_id='NOTE',dossier_id='A',source_kind='txt',source_path=str(text),person_ids=['P-X'])])
+        original=self.service.client.set_payload
+        calls=[]
+        def fail_once(*args,**kwargs):
+            calls.append(1)
+            if len(calls)==1:raise ValueError('Panne simulée')
+            return original(*args,**kwargs)
+        with patch.object(self.service.client,'set_payload',side_effect=fail_once):
+            self.assertEqual(self.client.post('/api/dossiers/A/documents/NOTE/move',json={'destination':'B'}).status_code,400)
+        with Catalog(self.catalog,read_only=True) as catalog:
+            self.assertEqual(catalog.list_persons('B'),[])
+            self.assertEqual(catalog.get_document('A','NOTE').person_ids,['P-X'])
+        self.assertEqual(self.client.post('/api/dossiers/A/documents/NOTE/move',json={'destination':'B'}).status_code,200)
+        with Catalog(self.catalog,read_only=True) as catalog:
+            self.assertEqual(catalog.get_document('B','NOTE').person_ids,['P-X'])
+            self.assertEqual(catalog.list_persons('B')[0].person_id,'P-X')
+
+    def test_delete_document_requires_confirmation_and_removes_search_and_files(self):
+        job=self.wait(self.upload().json()['job']);doc=job['document_id']
+        url=f'/api/dossiers/A/documents/{doc}'
+        self.assertEqual(self.client.delete(url).status_code,400)
+        self.assertEqual(self.client.get(url+'/file').status_code,200)
+        self.assertEqual(self.client.delete(f'/api/dossiers/B/documents/{doc}?confirmed=true').status_code,404)
+        self.assertEqual(self.client.delete(url+'?confirmed=true').status_code,200)
+        self.assertEqual(self.client.get(url+'/file').status_code,404)
+        self.assertFalse((self.service.data_path/(doc+'.pdf')).exists())
+        self.assertFalse((self.service.artifact_path/(doc+'.json')).exists())
+        self.assertEqual(self.client.post('/api/dossiers/A/search',json={'question':'Lina'}).json()['results'],[])
+        self.assertIsNone(self.service.jobs.get(job['job_id']))
+        self.assertEqual(self.client.get('/api/dossiers/A/documents').status_code,200)
+
+    def test_delete_dossier_includes_documents_and_rejects_busy_import(self):
+        job=self.wait(self.upload().json()['job']);doc=job['document_id']
+        self.assertEqual(self.client.delete('/api/dossiers/A').status_code,400)
+        self.service.jobs.update(job['job_id'],status='running')
+        self.assertEqual(self.client.delete('/api/dossiers/A?confirmed=true').status_code,400)
+        self.service.jobs.update(job['job_id'],status='done')
+        self.assertEqual(self.client.delete('/api/dossiers/A?confirmed=true').status_code,200)
+        self.assertEqual(self.client.get('/api/dossiers/A/documents').status_code,404)
+        self.assertEqual(self.client.get('/api/dossiers/B/documents').status_code,200)
+        self.assertFalse((self.service.data_path/(doc+'.pdf')).exists())
+
+    def test_delete_interruption_can_be_recovered(self):
+        job=self.wait(self.upload().json()['job']);doc=job['document_id']
+        with patch.object(self.service.client,'delete',side_effect=ValueError('Panne simulée')):
+            self.assertEqual(self.client.delete(f'/api/dossiers/A/documents/{doc}?confirmed=true').status_code,400)
+        self.assertTrue((self.service.data_path/'document-delete.json').exists())
+        self.service.recover_delete()
+        self.assertFalse((self.service.data_path/'document-delete.json').exists())
+        self.assertEqual(self.client.get(f'/api/dossiers/A/documents/{doc}/file').status_code,404)
+
+    def test_retry_import_uses_original_pdf_without_upload(self):
+        job=self.wait(self.upload().json()['job']);self.service.jobs.update(job['job_id'],status='error')
+        doc=job['document_id']
+        response=self.client.post(f'/api/dossiers/A/documents/{doc}/retry')
+        self.assertEqual(response.status_code,202)
+        self.assertEqual(response.json()['job']['document_id'],doc)
+        self.assertEqual(self.wait(response.json()['job'])['status'],'done')
+        self.assertEqual(self.client.post(f'/api/dossiers/B/documents/{doc}/retry').status_code,404)
+
+    def test_manage_dossiers_create_rename_archive_restore(self):
+        for title in ['', '  ', 'x'*161]:
+            self.assertEqual(self.client.post('/api/dossiers', json={'title':title}).status_code, 422)
+        response = self.client.post('/api/dossiers', json={'title':' Nouvelle enquête '})
+        self.assertEqual(response.status_code,201)
+        dossier = response.json()['dossier_id']
+        self.assertEqual(response.json()['title'],'Nouvelle enquête')
+        self.assertEqual(self.client.patch('/api/dossiers/'+dossier,json={'title':'Renommé'}).status_code,200)
+        self.assertEqual(self.client.patch('/api/dossiers/'+dossier,json={'archived':True}).status_code,200)
+        row=next(d for d in self.client.get('/api/dossiers').json() if d['dossier_id']==dossier)
+        self.assertEqual(row['title'],'Renommé');self.assertTrue(row['archived'])
+        self.assertEqual(self.client.post('/api/dossiers/'+dossier+'/search',json={'question':'Où ?'}).status_code,400)
+        self.assertEqual(self.client.patch('/api/dossiers/'+dossier,json={'archived':False}).status_code,200)
+        self.assertEqual(self.client.post('/api/dossiers/'+dossier+'/search',json={'question':'Où ?'}).status_code,200)
+
+    def test_move_pdf_updates_index_source_jobs_and_duplicate_detection(self):
+        content=pdf_bytes('Lina reste au centre. Son identite est incertaine.')
+        job=self.wait(self.upload(content=content).json()['job']);self.assertEqual(job['status'],'done')
+        doc=job['document_id'];path=f'/api/dossiers/A/documents/{doc}/move'
+        self.assertEqual(self.client.post(path,json={'destination':'B'}).status_code,200)
+        self.assertEqual(self.client.get(f'/api/dossiers/A/documents/{doc}/file').status_code,404)
+        self.assertEqual(self.client.get(f'/api/dossiers/B/documents/{doc}/file').content,content)
+        self.assertEqual(self.client.post('/api/dossiers/A/search',json={'question':'Lina'}).json()['results'],[])
+        hits=self.client.post('/api/dossiers/B/search',json={'question':'Lina'}).json()['results']
+        self.assertTrue(hits);self.assertTrue(all(h['dossier_id']=='B' for h in hits))
+        self.assertTrue(self.upload(dossier='B',content=content).json()['duplicate'])
+        self.assertEqual(self.service.artifact('B',doc)['segmentation']['document']['source']['dossier_id'],'B')
+        self.assertFalse((self.service.data_path/'document-move.json').exists())
+        self.assertEqual(self.client.post(path,json={'destination':'B'}).status_code,404)
+
+    def test_move_failure_restores_original_scope(self):
+        job=self.wait(self.upload().json()['job']);doc=job['document_id']
+        original=self.service.client.set_payload
+        calls=[]
+        def fail_once(*args,**kwargs):
+            calls.append(1)
+            if len(calls)==1:raise ValueError('Panne simulée')
+            return original(*args,**kwargs)
+        with patch.object(self.service.client,'set_payload',side_effect=fail_once):
+            self.assertEqual(self.client.post(f'/api/dossiers/A/documents/{doc}/move',json={'destination':'B'}).status_code,400)
+        self.assertEqual(self.client.get(f'/api/dossiers/A/documents/{doc}/file').status_code,200)
+        self.assertEqual(self.service.artifact('A',doc)['passages'][0]['dossier_id'],'A')
+        self.assertFalse((self.service.data_path/'document-move.json').exists())
+
+    def test_recover_interrupted_move_and_forbid_busy_move(self):
+        job=self.wait(self.upload().json()['job']);doc=job['document_id']
+        self.service.jobs.update(job['job_id'],status='running')
+        self.assertEqual(self.client.post(f'/api/dossiers/A/documents/{doc}/move',json={'destination':'B'}).status_code,400)
+        self.assertEqual(self.client.patch('/api/dossiers/A',json={'archived':True}).status_code,400)
+        self.service.jobs.update(job['job_id'],status='done')
+        artifact=self.service.artifact('A',doc)
+        journal=self.service.data_path/'document-move.json'
+        journal.write_text(json.dumps(dict(document_id=doc,origin='A',artifact=artifact)))
+        self.service._set_document_scope(doc,'B',artifact)
+        self.service.recover_move()
+        self.assertEqual(self.client.get(f'/api/dossiers/A/documents/{doc}/file').status_code,200)
+        self.assertEqual(self.service.artifact('A',doc)['passages'][0]['dossier_id'],'A')
+
     def test_import_search_source_duplicate_and_dossier_isolation(self):
         data = pdf_bytes('Lina a ete vue pres du hangar.', 'Son identite reste incertaine.')
         response = self.upload(content=data)

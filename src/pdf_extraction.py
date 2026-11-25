@@ -28,7 +28,7 @@ class ExtractedPDF:
         return pages[0], pages[-1]
 
 
-def extract_pdf(path: Path, *, max_pages: int = 100, max_characters: int = 24000) -> ExtractedPDF:
+def extract_pdf(path: Path, *, max_pages: int = 1000, max_characters: int = 2_000_000) -> ExtractedPDF:
     reader = PdfReader(path)
     if reader.is_encrypted:
         raise ValueError('Les PDF protégés par un mot de passe ne sont pas pris en charge.')
@@ -49,5 +49,5 @@ def extract_pdf(path: Path, *, max_pages: int = 100, max_characters: int = 24000
         spans.append(PageSpan(number, cursor, cursor + len(part)))
         cursor += len(part)
         if cursor > max_characters:
-            raise ValueError(f'Document trop long pour la V1 ({max_characters} caractères maximum).')
+            raise ValueError(f'Document trop long ({max_characters} caractères maximum).')
     return ExtractedPDF(''.join(parts), spans)

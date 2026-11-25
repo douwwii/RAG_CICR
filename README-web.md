@@ -73,7 +73,7 @@ Les anciennes sources JSON et TXT s'ouvrent comme texte ; aucune page PDF n'est 
 
 ## Fonctionnement et limites explicites
 
-- PDF de 20 Mo maximum, 100 pages et 24 000 caractères extraits : limites de démonstration pour contenir l'extraction et la requête Qwen. Les PDF protégés, illisibles et pages sans texte sont refusés. Pas d'OCR ; les documents mixtes contenant des pages sans texte sont également refusés.
+- PDF de 20 Mo maximum, 1 000 pages et 2 millions de caractères extraits. Les PDF protégés, illisibles et pages sans texte sont refusés. Pas d'OCR ; les documents mixtes contenant des pages sans texte sont également refusés.
 - Extraction `pypdf`, page par page. Le texte et ses positions sont persistés avant indexation. « Texte original » signifie texte numérique extrait du PDF ; la disposition visuelle, les ligatures et l'ordre de lecture de tableaux peuvent différer de l'affichage. Le PDF reste la référence visuelle.
 - Qwen reçoit le texte brut complet, sans blocs numérotés. Les extraits sont vérifiés contre la source ; seuls les séparateurs blancs omis entre extraits exacts peuvent être restaurés. La validation stricte historique conserve son comportement par défaut.
 - Si la segmentation est invalide, le document est indexé en extraits techniques exacts, avec avertissement explicite. Un échec réseau, délai ou sortie tronquée produit une erreur à réessayer, sans succès artificiel.
@@ -153,3 +153,45 @@ Le protocole et les sources des nouveaux tests sont dans `experiments/reranking/
 Le réglage initial de 25 candidats a été comparé à 20 et 30 sur les cas de calibration. La version retient 30 candidats pour sa validation ; la qualité similaire des trois tailles sur ce petit échantillon ne prouve pas un optimum universel.
 
 Le [rapport mesuré](experiments/reranking/RESULTATS.md) compare cosinus seul, dédoublonnage et reranking sur 24 questions fictives, avec calibration et validation séparées. Le classement retrouve mieux les preuves attendues sur ce corpus ; le diagnostic global de contradiction reste insuffisant même lorsque les deux témoignages sont sélectionnés.
+
+
+## Documents longs
+
+Au-delà de 8 000 caractères, l’ingestion utilise `src/long_segmentation.py` : fenêtres de 6 000 caractères utiles, avec jusqu’à 1 000 caractères de contexte de chaque côté. Les appels restent séquentiels. La frontière de sortie privilégie une frontière thématique proposée près de la cible ; sinon une fin de phrase ou un paragraphe. Un texte sans séparateur peut nécessiter une frontière technique. Un thème très long peut donc rester réparti entre plusieurs passages.
+
+Le chevauchement sert seulement au contexte : chaque caractère est attribué une seule fois, dans l’ordre. Les positions globales et les pages sont calculées depuis le texte extrait original. Une vérification de couverture refuse omissions, duplications ou désalignements. Le découpage supplémentaire par le tokenizer d’embedding reste actif : aucune entrée surdimensionnée n’est tronquée silencieusement. Les embeddings et écritures Qdrant sont traités par lots de 16 passages.
+
+Les fenêtres terminées sont sauvegardées atomiquement sous `checkpoints/<document>/`, dans le répertoire d’artefacts actif. Leur empreinte inclut texte, source, prompt, configuration LLM et version du traitement. Une panne de transport arrête l’import sans publier un succès. Après rétablissement du tunnel ou redémarrage du serveur, réimporter le même PDF dans le même dossier : les fenêtres compatibles sont relues, les autres recalculées. La reprise n’est pas automatique ; la préparation des embeddings et l’indexation sont réexécutées. Les checkpoints sont des données documentaires locales et restent conservés avec les artefacts.
+
+La progression indique les caractères traités. La limite de taille du fichier reste 20 Mo et les PDF sans texte numérique sont toujours refusés. Les documents anciens restent consultables sans migration ; ces changements s’appliquent aux nouveaux imports et réimports.
+
+Validation : tests synthétiques d’un PDF de 120 pages, texte multilingue, absence de séparateurs, couverture exacte, coupure réseau, cache et checkpoint corrompu. Ces tests utilisent un LLM simulé : la qualité du découpage Qwen de vrais documents longs reste à évaluer sur la machine distante.
+
+
+## Mode multilingue
+
+Le sélecteur en haut de l’interface propose français, anglais, espagnol et arabe. Le choix est mémorisé localement dans le navigateur et reste indépendant de la question et des documents. Le mode arabe définit `lang=ar` et `dir=rtl` ; les extraits utilisent leur propre direction de lecture. Les noms de dossiers, les noms de fichiers et les textes sources restent inchangés. Les libellés, les statuts, l’import, le lecteur de sources et les bilans de pertinence fixes sont traduits sans appel LLM. Des erreurs détaillées non répertoriées du serveur peuvent rester en français.
+
+Le prompt de reformulation V5 multilingue conserve la langue de la question ; les contrôles conservateurs protègent aussi les négations anglaises, espagnoles et arabes. Le prompt de segmentation V4 demande des titres dans la langue du passage et préserve le texte original. Le reranker V3 compare les sens entre langues et demande des justifications dans la langue de la question. Cette consigne reste imparfaitement suivie sur certains cas entre langues ; les justifications libres peuvent encore apparaître en français. Les anciennes versions de prompts restent disponibles. Aucun ancien document n’est traduit ou réindexé automatiquement.
+
+`node frontend/scripts/check-i18n.cjs` vérifie les traductions déclarées. Les essais réels sur données fictives et leurs limites sont dans `experiments/multilingual/`. Ils isolent segmentation et recherche textuelle ; ils ne prouvent pas la qualité d’extraction de PDF arabes réels ou de scans.
+
+
+## Bureau documentaire et gestion des dossiers
+
+L’interface se répartit entre gestion des dossiers et documents, recherche, et lecteur source. Les introductions et statistiques permanentes ont été retirées ; les scores et justifications détaillées sont accessibles dans « Détails de la recherche ». Les cinq passages restent sourcés, avec accès à la page originale. Le lecteur peut être agrandi ; sur écran étroit il s’ouvre au-dessus des résultats. Les quatre langues et le mode RTL sont conservés.
+
+Le bouton « Nouveau dossier » crée un dossier nommé. L’action « Gérer le dossier » permet de renommer, archiver après confirmation et restaurer. Le filtre « Archivés » donne accès aux dossiers retirés de la liste active. L’archivage conserve les documents et interdit les nouveaux imports et recherches jusqu’à restauration. La lecture des documents existants reste possible. La suppression définitive dispose d’une confirmation distincte.
+
+« Déplacer » transfère le document vers un autre dossier actif, avec ses associations de personnes, son journal d’import, ses passages sources et les périmètres Qdrant. Les imports en cours et doublons dans la destination sont refusés. Le cache du reranker est vidé. Un journal local `document-move.json` permet de restaurer le dossier d’origine après une erreur ou une interruption du serveur. Si cette restauration échoue, le journal est conservé et le démarrage refuse de poursuivre tant que la cohérence n’est pas rétablie. Ce mécanisme concerne l’index web actif ; une ancienne génération d’index ne doit pas être réactivée après réorganisation sans reconstruction.
+
+Pour les PDF importés en échec ou absents de l’index actif, « Réessayer » réutilise le fichier déjà reçu. Les fenêtres de découpage compatibles sont réutilisées. Les sources historiques non PDF restent consultables ; leur réindexation relève des scripts existants.
+
+API : `POST /api/dossiers`, `PATCH /api/dossiers/{id}` (`title`, `archived`), `POST /api/dossiers/{id}/documents/{document}/move` (`destination`), `POST /api/dossiers/{id}/documents/{document}/retry`. Les identifiants restent stables lors d’un renommage et d’un déplacement. Les écritures restent soumises au contrôle d’origine local existant.
+
+
+## Suppression avec confirmation
+
+Le bouton « Supprimer » de chaque document et « Supprimer le dossier » dans sa gestion ouvrent une confirmation nommant la cible. Pour un dossier, le dialogue précise que tous ses documents seront supprimés. La case « Je confirme cette suppression » est nécessaire avant activation du bouton final ; Annuler ne lance aucune requête de suppression.
+
+Les routes DELETE correspondantes exigent `confirmed=true`. La suppression retire les références du catalogue, les passages des collections Qdrant actives, les tâches d’import, les fichiers PDF reçus, les artefacts actifs et leurs checkpoints. Les sources historiques JSON/TXT peuvent être partagées : leur fichier original reste conservé, seule la référence documentaire est supprimée. Les sauvegardes et anciennes générations d’index ne sont pas purgées ; il ne s’agit pas d’un effacement sécurisé de toutes les copies. Les imports en cours empêchent la suppression. Le journal `document-delete.json` termine une suppression interrompue au redémarrage, de manière idempotente.

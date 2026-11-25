@@ -1,4 +1,5 @@
 export interface Dossier {
+  archived?: boolean;
   dossier_id: string;
   title: string;
   person_ids: string[];

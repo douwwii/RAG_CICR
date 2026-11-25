@@ -1,0 +1,937 @@
+{
+  "En attente": {
+    "en": "Queued",
+    "es": "En espera",
+    "ar": "قيد الانتظار"
+  },
+  "En cours": {
+    "en": "Processing",
+    "es": "En curso",
+    "ar": "قيد المعالجة"
+  },
+  "Indexé": {
+    "en": "Indexed",
+    "es": "Indexado",
+    "ar": "مفهرس"
+  },
+  "Erreur": {
+    "en": "Error",
+    "es": "Error",
+    "ar": "خطأ"
+  },
+  "Non indexé": {
+    "en": "Not indexed",
+    "es": "Sin indexar",
+    "ar": "غير مفهرس"
+  },
+  "RECHERCHE DOCUMENTAIRE": {
+    "en": "DOCUMENT SEARCH",
+    "es": "BÚSQUEDA DOCUMENTAL",
+    "ar": "البحث في الوثائق"
+  },
+  "Espace d’investigation": {
+    "en": "Investigation workspace",
+    "es": "Espacio de investigación",
+    "ar": "مساحة التحقيق"
+  },
+  "VOTRE ESPACE": {
+    "en": "YOUR WORKSPACE",
+    "es": "SU ESPACIO",
+    "ar": "مساحتك"
+  },
+  "Recherche documentaire": {
+    "en": "Document search",
+    "es": "Búsqueda documental",
+    "ar": "البحث في الوثائق"
+  },
+  "DOSSIER ACTIF": {
+    "en": "ACTIVE CASE",
+    "es": "EXPEDIENTE ACTIVO",
+    "ar": "الملف النشط"
+  },
+  "Dossier actif": {
+    "en": "Active case",
+    "es": "Expediente activo",
+    "ar": "الملف النشط"
+  },
+  "Documents": {
+    "en": "Documents",
+    "es": "Documentos",
+    "ar": "الوثائق"
+  },
+  "Chargement…": {
+    "en": "Loading…",
+    "es": "Cargando…",
+    "ar": "جارٍ التحميل…"
+  },
+  "Aucun dossier": {
+    "en": "No cases",
+    "es": "Sin expedientes",
+    "ar": "لا توجد ملفات"
+  },
+  "Catalogue local": {
+    "en": "Local catalogue",
+    "es": "Catálogo local",
+    "ar": "الفهرس المحلي"
+  },
+  "Sillage, accueil": {
+    "en": "Sillage, home",
+    "es": "Sillage, inicio",
+    "ar": "Sillage، الرئيسية"
+  },
+  "Importer un PDF": {
+    "en": "Import a PDF",
+    "es": "Importar un PDF",
+    "ar": "استيراد PDF"
+  },
+  "Filtrer les documents": {
+    "en": "Filter documents",
+    "es": "Filtrar documentos",
+    "ar": "تصفية الوثائق"
+  },
+  "Retrouver un document…": {
+    "en": "Find a document…",
+    "es": "Buscar un documento…",
+    "ar": "البحث عن وثيقة…"
+  },
+  "Chargement des documents…": {
+    "en": "Loading documents…",
+    "es": "Cargando documentos…",
+    "ar": "جارٍ تحميل الوثائق…"
+  },
+  "Aucun document correspondant.": {
+    "en": "No matching documents.",
+    "es": "Ningún documento coincide.",
+    "ar": "لا توجد وثائق مطابقة."
+  },
+  "Aucun document dans ce dossier.": {
+    "en": "No documents in this case.",
+    "es": "No hay documentos en este expediente.",
+    "ar": "لا توجد وثائق في هذا الملف."
+  },
+  "Texte": {
+    "en": "Text",
+    "es": "Texto",
+    "ar": "نص"
+  },
+  "Importer un document": {
+    "en": "Import a document",
+    "es": "Importar un documento",
+    "ar": "استيراد وثيقة"
+  },
+  "Prototype de recherche": {
+    "en": "Search prototype",
+    "es": "Prototipo de búsqueda",
+    "ar": "نموذج بحث تجريبي"
+  },
+  "Données fictives ou publiques": {
+    "en": "Fictional or public data",
+    "es": "Datos ficticios o públicos",
+    "ar": "بيانات خيالية أو عامة"
+  },
+  "Dossiers": {
+    "en": "Cases",
+    "es": "Expedientes",
+    "ar": "الملفات"
+  },
+  "Sélection": {
+    "en": "Selection",
+    "es": "Selección",
+    "ar": "الاختيار"
+  },
+  "Recherche": {
+    "en": "Search",
+    "es": "Búsqueda",
+    "ar": "البحث"
+  },
+  "Exécution locale": {
+    "en": "Local application",
+    "es": "Aplicación local",
+    "ar": "تطبيق محلي"
+  },
+  "EXPLORER LE DOSSIER": {
+    "en": "EXPLORE THE CASE",
+    "es": "EXPLORAR EL EXPEDIENTE",
+    "ar": "استكشاف الملف"
+  },
+  "Une question.": {
+    "en": "One question.",
+    "es": "Una pregunta.",
+    "ar": "سؤال واحد."
+  },
+  "Les sources pour y répondre.": {
+    "en": "The sources to answer it.",
+    "es": "Las fuentes para responderla.",
+    "ar": "المصادر للإجابة عنه."
+  },
+  "Retrouvez les passages utiles dans les pièces de votre dossier.": {
+    "en": "Find useful passages in your case documents.",
+    "es": "Encuentre pasajes útiles en los documentos de su expediente.",
+    "ar": "اعثر على المقاطع المفيدة في وثائق ملفك."
+  },
+  "Consultez le texte original et vérifiez sa provenance.": {
+    "en": "Read the original text and check its source.",
+    "es": "Consulte el texto original y compruebe su procedencia.",
+    "ar": "اقرأ النص الأصلي وتحقق من مصدره."
+  },
+  "Question de recherche": {
+    "en": "Search question",
+    "es": "Pregunta de búsqueda",
+    "ar": "سؤال البحث"
+  },
+  "Que cherchez-vous dans ce dossier ?": {
+    "en": "What are you looking for in this case?",
+    "es": "¿Qué busca en este expediente?",
+    "ar": "عمّ تبحث في هذا الملف؟"
+  },
+  "Rechercher dans ce dossier": {
+    "en": "Search this case",
+    "es": "Buscar en este expediente",
+    "ar": "البحث في هذا الملف"
+  },
+  "Recherche limitée au dossier sélectionné": {
+    "en": "Search limited to the selected case",
+    "es": "Búsqueda limitada al expediente seleccionado",
+    "ar": "البحث مقتصر على الملف المحدد"
+  },
+  "Texte original · Sources vérifiables": {
+    "en": "Original text · Verifiable sources",
+    "es": "Texto original · Fuentes verificables",
+    "ar": "النص الأصلي · مصادر قابلة للتحقق"
+  },
+  "Réessayer": {
+    "en": "Retry",
+    "es": "Reintentar",
+    "ar": "إعادة المحاولة"
+  },
+  "En attente de traitement": {
+    "en": "Waiting for processing",
+    "es": "En espera de procesamiento",
+    "ar": "بانتظار المعالجة"
+  },
+  "· Suivi dans la liste des documents": {
+    "en": "· Track progress in the document list",
+    "es": "· Seguimiento en la lista de documentos",
+    "ar": "· تابع التقدم في قائمة الوثائق"
+  },
+  "Recherche dans votre dossier…": {
+    "en": "Searching your case…",
+    "es": "Buscando en su expediente…",
+    "ar": "جارٍ البحث في ملفك…"
+  },
+  "Recherche et analyse des passages par Qwen…": {
+    "en": "Qwen is searching and assessing passages…",
+    "es": "Qwen busca y analiza los pasajes…",
+    "ar": "يبحث Qwen في المقاطع ويحللها…"
+  },
+  "Résultats de recherche": {
+    "en": "Search results",
+    "es": "Resultados de búsqueda",
+    "ar": "نتائج البحث"
+  },
+  "CLASSÉS PAR QWEN": {
+    "en": "RANKED BY QWEN",
+    "es": "CLASIFICADOS POR QWEN",
+    "ar": "مرتبة بواسطة QWEN"
+  },
+  "PAR SIMILARITÉ": {
+    "en": "BY SIMILARITY",
+    "es": "POR SIMILITUD",
+    "ar": "حسب التشابه"
+  },
+  "Répond directement": {
+    "en": "Direct answer",
+    "es": "Respuesta directa",
+    "ar": "إجابة مباشرة"
+  },
+  "Répond partiellement": {
+    "en": "Partial answer",
+    "es": "Respuesta parcial",
+    "ar": "إجابة جزئية"
+  },
+  "Apporte du contexte": {
+    "en": "Provides context",
+    "es": "Aporta contexto",
+    "ar": "يوفر سياقًا"
+  },
+  "Proximité thématique": {
+    "en": "Thematic similarity",
+    "es": "Similitud temática",
+    "ar": "تشابه موضوعي"
+  },
+  "Analyse Qwen :": {
+    "en": "Qwen assessment:",
+    "es": "Análisis de Qwen:",
+    "ar": "تحليل Qwen:"
+  },
+  "Similarité cosinus ; ce score n’est pas une probabilité de vérité.": {
+    "en": "Cosine similarity; this score is not a probability of truth.",
+    "es": "Similitud coseno; esta puntuación no es una probabilidad de veracidad.",
+    "ar": "تشابه جيب التمام؛ هذه الدرجة ليست احتمالًا لصحة المعلومات."
+  },
+  "Similarité": {
+    "en": "Similarity",
+    "es": "Similitud",
+    "ar": "التشابه"
+  },
+  "Consulter la source": {
+    "en": "View source",
+    "es": "Consultar la fuente",
+    "ar": "عرض المصدر"
+  },
+  "Aucun passage retrouvé": {
+    "en": "No passages found",
+    "es": "No se encontraron pasajes",
+    "ar": "لم يُعثر على مقاطع"
+  },
+  "Vérifiez que les documents sont indexés, ou essayez une autre formulation.": {
+    "en": "Check that documents are indexed, or try rephrasing.",
+    "es": "Compruebe que los documentos estén indexados o reformule la pregunta.",
+    "ar": "تحقق من فهرسة الوثائق أو أعد صياغة السؤال."
+  },
+  "La similarité indique une proximité de sens. Elle ne confirme pas les faits rapportés.": {
+    "en": "Similarity indicates related meaning. It does not confirm the reported facts.",
+    "es": "La similitud indica cercanía de significado. No confirma los hechos relatados.",
+    "ar": "يشير التشابه إلى تقارب المعنى، ولا يؤكد صحة الوقائع المذكورة."
+  },
+  "Votre dossier, avec son contexte.": {
+    "en": "Your case, with its context.",
+    "es": "Su expediente, con su contexto.",
+    "ar": "ملفك مع سياقه."
+  },
+  "Interrogez les documents en langage naturel. Les passages retrouvés conservent les témoignages, les réserves et les rectifications de leur source.": {
+    "en": "Ask questions in natural language. Retrieved passages preserve the statements, qualifications and corrections in their source.",
+    "es": "Consulte los documentos en lenguaje natural. Los pasajes conservan los testimonios, las reservas y las rectificaciones de su fuente.",
+    "ar": "اطرح أسئلة بلغة طبيعية. تحافظ المقاطع على الشهادات والتحفظات والتصحيحات الواردة في المصدر."
+  },
+  "documents au dossier": {
+    "en": "case documents",
+    "es": "documentos en el expediente",
+    "ar": "وثائق في الملف"
+  },
+  "documents indexés": {
+    "en": "indexed documents",
+    "es": "documentos indexados",
+    "ar": "وثائق مفهرسة"
+  },
+  "personnes associées": {
+    "en": "associated people",
+    "es": "personas asociadas",
+    "ar": "أشخاص مرتبطون"
+  },
+  "Choisissez votre dossier": {
+    "en": "Choose your case",
+    "es": "Elija su expediente",
+    "ar": "اختر ملفك"
+  },
+  "Un périmètre explicite pour chaque recherche.": {
+    "en": "An explicit scope for every search.",
+    "es": "Un ámbito explícito para cada búsqueda.",
+    "ar": "نطاق واضح لكل بحث."
+  },
+  "Posez votre question": {
+    "en": "Ask your question",
+    "es": "Haga su pregunta",
+    "ar": "اطرح سؤالك"
+  },
+  "Retrouvez les extraits proches de votre demande.": {
+    "en": "Find passages related to your question.",
+    "es": "Encuentre pasajes relacionados con su pregunta.",
+    "ar": "اعثر على المقاطع المرتبطة بسؤالك."
+  },
+  "Vérifiez la source": {
+    "en": "Check the source",
+    "es": "Verifique la fuente",
+    "ar": "تحقق من المصدر"
+  },
+  "Revenez au document et à la page d’origine.": {
+    "en": "Return to the original document and page.",
+    "es": "Vuelva al documento y a la página original.",
+    "ar": "ارجع إلى الوثيقة والصفحة الأصليتين."
+  },
+  "Recherche documentaire · Version de démonstration": {
+    "en": "Document search · Demonstration version",
+    "es": "Búsqueda documental · Versión de demostración",
+    "ar": "البحث في الوثائق · نسخة تجريبية"
+  },
+  "Fermer la source": {
+    "en": "Close source",
+    "es": "Cerrar la fuente",
+    "ar": "إغلاق المصدر"
+  },
+  "Choisissez un fichier PDF.": {
+    "en": "Choose a PDF file.",
+    "es": "Elija un archivo PDF.",
+    "ar": "اختر ملف PDF."
+  },
+  "Le fichier dépasse la limite de 20 Mo.": {
+    "en": "The file exceeds the 20 MB limit.",
+    "es": "El archivo supera el límite de 20 MB.",
+    "ar": "يتجاوز الملف الحد الأقصى البالغ 20 ميغابايت."
+  },
+  "Ce document existe déjà dans ce dossier. Son statut figure dans la liste des documents.": {
+    "en": "This document already exists in this case. Check its status in the document list.",
+    "es": "Este documento ya existe en el expediente. Consulte su estado en la lista.",
+    "ar": "هذه الوثيقة موجودة بالفعل في الملف. راجع حالتها في قائمة الوثائق."
+  },
+  "Document reçu. Vous pouvez suivre son traitement dans la liste des documents.": {
+    "en": "Document received. Track processing in the document list.",
+    "es": "Documento recibido. Siga su procesamiento en la lista.",
+    "ar": "تم استلام الوثيقة. تابع معالجتها في قائمة الوثائق."
+  },
+  "Fermer l’importation": {
+    "en": "Close import",
+    "es": "Cerrar la importación",
+    "ar": "إغلاق الاستيراد"
+  },
+  "Ajouter une pièce au dossier": {
+    "en": "Add a case document",
+    "es": "Añadir un documento al expediente",
+    "ar": "إضافة وثيقة إلى الملف"
+  },
+  "Le document sera extrait, découpé par Qwen puis indexé pour la recherche.": {
+    "en": "The document will be extracted, segmented by Qwen and indexed for search.",
+    "es": "El documento se extraerá, se dividirá con Qwen y se indexará para la búsqueda.",
+    "ar": "سيُستخرج النص ويُقسّم بواسطة Qwen ثم يُفهرس للبحث."
+  },
+  "DOSSIER DE DESTINATION": {
+    "en": "DESTINATION CASE",
+    "es": "EXPEDIENTE DE DESTINO",
+    "ar": "الملف المستهدف"
+  },
+  "Déposez votre PDF ici": {
+    "en": "Drop your PDF here",
+    "es": "Suelte su PDF aquí",
+    "ar": "أفلت ملف PDF هنا"
+  },
+  "ou cliquez pour choisir un fichier": {
+    "en": "or click to choose a file",
+    "es": "o haga clic para elegir un archivo",
+    "ar": "أو انقر لاختيار ملف"
+  },
+  "PDF avec texte numérique · 20 Mo maximum": {
+    "en": "PDF with digital text · Maximum 20 MB",
+    "es": "PDF con texto digital · Máximo 20 MB",
+    "ar": "PDF بنص رقمي · الحد الأقصى 20 ميغابايت"
+  },
+  "Jusqu’à 1 000 pages et 2 millions de caractères extraits. Les pages sans texte exploitable sont refusées.": {
+    "en": "Up to 1,000 pages and 2 million extracted characters. Pages without usable text are rejected.",
+    "es": "Hasta 1.000 páginas y 2 millones de caracteres extraídos. Se rechazan las páginas sin texto utilizable.",
+    "ar": "حتى 1000 صفحة ومليوني حرف مستخرج. تُرفض الصفحات التي لا تحتوي على نص قابل للاستخدام."
+  },
+  "Fermer": {
+    "en": "Close",
+    "es": "Cerrar",
+    "ar": "إغلاق"
+  },
+  "Annuler": {
+    "en": "Cancel",
+    "es": "Cancelar",
+    "ar": "إلغاء"
+  },
+  "Importer et indexer": {
+    "en": "Import and index",
+    "es": "Importar e indexar",
+    "ar": "استيراد وفهرسة"
+  },
+  "Envoi du document…": {
+    "en": "Uploading document…",
+    "es": "Enviando documento…",
+    "ar": "جارٍ إرسال الوثيقة…"
+  },
+  "Document source": {
+    "en": "Source document",
+    "es": "Documento fuente",
+    "ar": "الوثيقة المصدر"
+  },
+  "DOCUMENT SOURCE": {
+    "en": "SOURCE DOCUMENT",
+    "es": "DOCUMENTO FUENTE",
+    "ar": "الوثيقة المصدر"
+  },
+  "Document original · PDF": {
+    "en": "Original document · PDF",
+    "es": "Documento original · PDF",
+    "ar": "الوثيقة الأصلية · PDF"
+  },
+  "Consultation de la source": {
+    "en": "Source viewer",
+    "es": "Consulta de la fuente",
+    "ar": "عرض المصدر"
+  },
+  "Page précédente": {
+    "en": "Previous page",
+    "es": "Página anterior",
+    "ar": "الصفحة السابقة"
+  },
+  "Page suivante": {
+    "en": "Next page",
+    "es": "Página siguiente",
+    "ar": "الصفحة التالية"
+  },
+  "Page": {
+    "en": "Page",
+    "es": "Página",
+    "ar": "الصفحة"
+  },
+  "Réduire le zoom": {
+    "en": "Zoom out",
+    "es": "Reducir zoom",
+    "ar": "تصغير"
+  },
+  "Agrandir la page": {
+    "en": "Zoom in",
+    "es": "Ampliar página",
+    "ar": "تكبير"
+  },
+  "Ouvrir le PDF dans un nouvel onglet": {
+    "en": "Open PDF in a new tab",
+    "es": "Abrir PDF en una pestaña nueva",
+    "ar": "فتح PDF في علامة تبويب جديدة"
+  },
+  "Ouverture de la source…": {
+    "en": "Opening source…",
+    "es": "Abriendo la fuente…",
+    "ar": "جارٍ فتح المصدر…"
+  },
+  "Chargement du PDF…": {
+    "en": "Loading PDF…",
+    "es": "Cargando PDF…",
+    "ar": "جارٍ تحميل PDF…"
+  },
+  "Chargement de la page…": {
+    "en": "Loading page…",
+    "es": "Cargando página…",
+    "ar": "جارٍ تحميل الصفحة…"
+  },
+  "Impossible de lire ce PDF. Vous pouvez essayer de l’ouvrir dans un nouvel onglet.": {
+    "en": "Unable to read this PDF. Try opening it in a new tab.",
+    "es": "No se puede leer este PDF. Intente abrirlo en una pestaña nueva.",
+    "ar": "تعذرت قراءة ملف PDF. حاول فتحه في علامة تبويب جديدة."
+  },
+  "TEXTE ORIGINAL": {
+    "en": "ORIGINAL TEXT",
+    "es": "TEXTO ORIGINAL",
+    "ar": "النص الأصلي"
+  },
+  "Cette source ne possède pas de PDF associé.": {
+    "en": "This source has no associated PDF.",
+    "es": "Esta fuente no tiene un PDF asociado.",
+    "ar": "لا يوجد PDF مرتبط بهذا المصدر."
+  },
+  "PASSAGE SÉLECTIONNÉ": {
+    "en": "SELECTED PASSAGE",
+    "es": "PASAJE SELECCIONADO",
+    "ar": "المقطع المحدد"
+  },
+  "Remontez à la source.": {
+    "en": "Go back to the source.",
+    "es": "Vuelva a la fuente.",
+    "ar": "ارجع إلى المصدر."
+  },
+  "Sélectionnez un passage pour consulter son document original et vérifier son contexte.": {
+    "en": "Select a passage to read its original document and check its context.",
+    "es": "Seleccione un pasaje para consultar el documento original y verificar su contexto.",
+    "ar": "اختر مقطعًا لعرض الوثيقة الأصلية والتحقق من سياقه."
+  },
+  "Chaque résultat reste relié à sa source.": {
+    "en": "Every result remains linked to its source.",
+    "es": "Cada resultado permanece vinculado a su fuente.",
+    "ar": "تبقى كل نتيجة مرتبطة بمصدرها."
+  },
+  "Des éléments répondent directement": {
+    "en": "Direct evidence available",
+    "es": "Hay elementos que responden directamente",
+    "ar": "توجد مقاطع تجيب مباشرة"
+  },
+  "Réponse partielle": {
+    "en": "Partial answer",
+    "es": "Respuesta parcial",
+    "ar": "إجابة جزئية"
+  },
+  "Contexte disponible": {
+    "en": "Context available",
+    "es": "Contexto disponible",
+    "ar": "يتوفر سياق"
+  },
+  "Réponse non établie par ces extraits": {
+    "en": "Answer not established by these passages",
+    "es": "Respuesta no establecida por estos pasajes",
+    "ar": "لا تثبت هذه المقاطع إجابة"
+  },
+  "Sources contradictoires": {
+    "en": "Conflicting sources",
+    "es": "Fuentes contradictorias",
+    "ar": "مصادر متعارضة"
+  },
+  "Bilan de pertinence": {
+    "en": "Relevance assessment",
+    "es": "Evaluación de pertinencia",
+    "ar": "تقييم الصلة"
+  },
+  "LIEN AVEC VOTRE QUESTION": {
+    "en": "RELEVANCE TO YOUR QUESTION",
+    "es": "RELACIÓN CON SU PREGUNTA",
+    "ar": "الصلة بسؤالك"
+  },
+  "Analyse produite par Qwen sur": {
+    "en": "Qwen assessment of",
+    "es": "Análisis de Qwen sobre",
+    "ar": "تحليل Qwen لعدد"
+  },
+  "candidats du dossier. Vérifiez les sources ; ce bilan n’établit pas la vérité des faits.": {
+    "en": "case candidates. Check the sources; this assessment does not establish the truth of the facts.",
+    "es": "candidatos del expediente. Verifique las fuentes; este análisis no establece la veracidad de los hechos.",
+    "ar": "من مقاطع الملف المرشحة. تحقق من المصادر؛ لا يثبت هذا التقييم صحة الوقائع."
+  },
+  "Le serveur local est inaccessible. Vérifiez que le backend est démarré.": {
+    "en": "Local server unreachable. Check that the backend is running.",
+    "es": "Servidor local inaccesible. Compruebe que el backend esté activo.",
+    "ar": "الخادم المحلي غير متاح. تحقق من تشغيله."
+  },
+  "La requête a échoué.": {
+    "en": "The request failed.",
+    "es": "La solicitud falló.",
+    "ar": "فشل الطلب."
+  },
+  "documents en traitement :": {
+    "en": "Documents processing:",
+    "es": "Documentos en proceso:",
+    "ar": "وثائق قيد المعالجة:"
+  },
+  "Passages retrouvés :": {
+    "en": "Passages found:",
+    "es": "Pasajes encontrados:",
+    "ar": "المقاطع المسترجعة:"
+  },
+  "Pour": {
+    "en": "For",
+    "es": "Para",
+    "ar": "للسؤال"
+  },
+  "Consulter le passage": {
+    "en": "View passage",
+    "es": "Consultar el pasaje",
+    "ar": "عرض المقطع"
+  },
+  "Prêt à envoyer": {
+    "en": "Ready to upload",
+    "es": "Listo para enviar",
+    "ar": "جاهز للإرسال"
+  },
+  "Selon Qwen, les passages sélectionnés permettent de répondre directement à la question.": {
+    "en": "According to Qwen, the selected passages directly answer the question.",
+    "es": "Según Qwen, los pasajes seleccionados responden directamente a la pregunta.",
+    "ar": "وفقًا لـ Qwen، تجيب المقاطع المحددة مباشرة عن السؤال."
+  },
+  "Selon Qwen, ces passages ne répondent qu’à une partie de la question.": {
+    "en": "According to Qwen, these passages answer only part of the question.",
+    "es": "Según Qwen, estos pasajes solo responden a una parte de la pregunta.",
+    "ar": "وفقًا لـ Qwen، تجيب هذه المقاطع عن جزء من السؤال فقط."
+  },
+  "Selon Qwen, ces extraits apportent du contexte mais pas de réponse explicite.": {
+    "en": "According to Qwen, these passages provide context but no explicit answer.",
+    "es": "Según Qwen, estos pasajes aportan contexto pero no una respuesta explícita.",
+    "ar": "وفقًا لـ Qwen، توفر هذه المقاطع سياقًا دون إجابة صريحة."
+  },
+  "Selon Qwen, aucune réponse explicite n’est présente dans ces extraits ; cela ne prouve pas son absence du dossier.": {
+    "en": "According to Qwen, no explicit answer appears in these passages; this does not prove its absence from the case.",
+    "es": "Según Qwen, estos pasajes no contienen una respuesta explícita; esto no demuestra su ausencia del expediente.",
+    "ar": "وفقًا لـ Qwen، لا توجد إجابة صريحة في هذه المقاطع؛ وهذا لا يثبت غيابها عن الملف."
+  },
+  "Qwen relève des éléments contradictoires ; les extraits doivent être confrontés sans trancher automatiquement.": {
+    "en": "Qwen identifies conflicting accounts; compare the passages without automatically deciding which is true.",
+    "es": "Qwen identifica relatos contradictorios; compare los pasajes sin decidir automáticamente cuál es verdadero.",
+    "ar": "يرصد Qwen روايات متعارضة؛ ينبغي مقارنتها دون الحسم التلقائي في صحتها."
+  },
+  "Les extraits suivants apportent seulement du contexte ou une proximité thématique.": {
+    "en": "The following passages provide only context or thematic similarity.",
+    "es": "Los siguientes pasajes solo aportan contexto o similitud temática.",
+    "ar": "توفر المقاطع التالية سياقًا أو تشابهًا موضوعيًا فقط."
+  },
+  "Certains passages répondent explicitement, les autres ne couvrent qu’une partie de la demande.": {
+    "en": "Some passages answer explicitly; others cover only part of the question.",
+    "es": "Algunos pasajes responden explícitamente; otros solo cubren parte de la pregunta.",
+    "ar": "تجيب بعض المقاطع صراحة، بينما تغطي أخرى جزءًا من السؤال فقط."
+  },
+  "Chargement du modèle d’embedding": {
+    "en": "Loading embedding model",
+    "es": "Cargando modelo de embeddings",
+    "ar": "جارٍ تحميل نموذج التضمين"
+  },
+  "Extraction du texte": {
+    "en": "Extracting text",
+    "es": "Extrayendo texto",
+    "ar": "جارٍ استخراج النص"
+  },
+  "Découpage thématique par Qwen": {
+    "en": "Qwen thematic segmentation",
+    "es": "Segmentación temática con Qwen",
+    "ar": "التقسيم الموضوعي بواسطة Qwen"
+  },
+  "Préparation des extraits indexables": {
+    "en": "Preparing passages for indexing",
+    "es": "Preparando pasajes para indexar",
+    "ar": "جارٍ إعداد المقاطع للفهرسة"
+  },
+  "Embeddings et indexation": {
+    "en": "Embedding and indexing",
+    "es": "Embeddings e indexación",
+    "ar": "التضمين والفهرسة"
+  },
+  "Terminé": {
+    "en": "Completed",
+    "es": "Terminado",
+    "ar": "اكتمل"
+  },
+  "Interrompu": {
+    "en": "Interrupted",
+    "es": "Interrumpido",
+    "ar": "توقف"
+  },
+  "Découpage Qwen": {
+    "en": "Qwen segmentation",
+    "es": "Segmentación Qwen",
+    "ar": "تقسيم Qwen"
+  },
+  "caractères": {
+    "en": "characters",
+    "es": "caracteres",
+    "ar": "حرف"
+  },
+  "Analyse Qwen indisponible ou invalide : classement par similarité, sans bilan.": {
+    "en": "Qwen assessment unavailable or invalid: ranked by similarity, without an assessment.",
+    "es": "Análisis de Qwen no disponible o inválido: orden por similitud, sin análisis.",
+    "ar": "تحليل Qwen غير متاح أو غير صالح: ترتيب حسب التشابه دون تقييم."
+  },
+  "Découpage thématique indisponible : extraits techniques du texte original.": {
+    "en": "Thematic segmentation unavailable: technical passages from the original text.",
+    "es": "Segmentación temática no disponible: pasajes técnicos del texto original.",
+    "ar": "التقسيم الموضوعي غير متاح: مقاطع تقنية من النص الأصلي."
+  },
+  "Le traitement a échoué. Consultez le journal du serveur.": {
+    "en": "Processing failed. Check the server log.",
+    "es": "El procesamiento falló. Consulte el registro del servidor.",
+    "ar": "فشلت المعالجة. راجع سجل الخادم."
+  },
+  "Qwen est indisponible ou sa réponse est incomplète. Vérifiez le tunnel SSH puis réessayez.": {
+    "en": "Qwen unavailable or response incomplete. Check the SSH tunnel and retry.",
+    "es": "Qwen no disponible o respuesta incompleta. Compruebe el túnel SSH y reintente.",
+    "ar": "Qwen غير متاح أو إجابته غير مكتملة. تحقق من نفق SSH وأعد المحاولة."
+  },
+  "Qwen interrompu : vérifiez le tunnel puis réimportez le même PDF pour reprendre.": {
+    "en": "Qwen interrupted: check the tunnel, then import the same PDF to resume.",
+    "es": "Qwen interrumpido: compruebe el túnel e importe el mismo PDF para continuar.",
+    "ar": "توقف Qwen: تحقق من النفق ثم أعد استيراد ملف PDF نفسه لاستئناف المعالجة."
+  },
+  "Nouveau dossier": {
+    "en": "New case",
+    "es": "Nuevo expediente",
+    "ar": "ملف جديد"
+  },
+  "Gérer le dossier": {
+    "en": "Manage case",
+    "es": "Gestionar expediente",
+    "ar": "إدارة الملف"
+  },
+  "Dossiers et documents": {
+    "en": "Cases and documents",
+    "es": "Expedientes y documentos",
+    "ar": "الملفات والوثائق"
+  },
+  "Archivés": {
+    "en": "Archived",
+    "es": "Archivados",
+    "ar": "المؤرشفة"
+  },
+  "Archivé": {
+    "en": "Archived",
+    "es": "Archivado",
+    "ar": "مؤرشف"
+  },
+  "Ajouter des documents": {
+    "en": "Add documents",
+    "es": "Añadir documentos",
+    "ar": "إضافة وثائق"
+  },
+  "Disponible": {
+    "en": "Available",
+    "es": "Disponible",
+    "ar": "متاح"
+  },
+  "En traitement": {
+    "en": "Processing",
+    "es": "En proceso",
+    "ar": "قيد المعالجة"
+  },
+  "Échec — Réessayer": {
+    "en": "Failed — Retry",
+    "es": "Error — Reintentar",
+    "ar": "فشل — أعد المحاولة"
+  },
+  "Déplacer": {
+    "en": "Move",
+    "es": "Mover",
+    "ar": "نقل"
+  },
+  "Détails": {
+    "en": "Details",
+    "es": "Detalles",
+    "ar": "تفاصيل"
+  },
+  "Choisissez un dossier": {
+    "en": "Choose a case",
+    "es": "Elija un expediente",
+    "ar": "اختر ملفًا"
+  },
+  "Votre question sur ce dossier": {
+    "en": "Your question about this case",
+    "es": "Su pregunta sobre este expediente",
+    "ar": "سؤالك حول هذا الملف"
+  },
+  "Écrivez votre question…": {
+    "en": "Write your question…",
+    "es": "Escriba su pregunta…",
+    "ar": "اكتب سؤالك…"
+  },
+  "Rechercher": {
+    "en": "Search",
+    "es": "Buscar",
+    "ar": "بحث"
+  },
+  "Recherche en cours…": {
+    "en": "Searching…",
+    "es": "Buscando…",
+    "ar": "جارٍ البحث…"
+  },
+  "Restaurez ce dossier pour ajouter des documents ou lancer une recherche.": {
+    "en": "Restore this case to add documents or search.",
+    "es": "Restaure este expediente para añadir documentos o buscar.",
+    "ar": "استعد هذا الملف لإضافة وثائق أو إجراء بحث."
+  },
+  "Choisissez un dossier ou créez-en un pour commencer.": {
+    "en": "Choose or create a case to begin.",
+    "es": "Elija o cree un expediente para empezar.",
+    "ar": "اختر ملفًا أو أنشئ ملفًا للبدء."
+  },
+  "Ajoutez des documents pour commencer.": {
+    "en": "Add documents to begin.",
+    "es": "Añada documentos para empezar.",
+    "ar": "أضف وثائق للبدء."
+  },
+  "documents en traitement": {
+    "en": "documents processing",
+    "es": "documentos en proceso",
+    "ar": "وثائق قيد المعالجة"
+  },
+  "Voir dans le document": {
+    "en": "View in document",
+    "es": "Ver en el documento",
+    "ar": "عرض في الوثيقة"
+  },
+  "Détails de la recherche": {
+    "en": "Search details",
+    "es": "Detalles de la búsqueda",
+    "ar": "تفاصيل البحث"
+  },
+  "Déplacer le document": {
+    "en": "Move document",
+    "es": "Mover el documento",
+    "ar": "نقل الوثيقة"
+  },
+  "Dossier de destination": {
+    "en": "Destination case",
+    "es": "Expediente de destino",
+    "ar": "الملف المستهدف"
+  },
+  "Choisir un dossier": {
+    "en": "Choose a case",
+    "es": "Elegir un expediente",
+    "ar": "اختيار ملف"
+  },
+  "Le document et ses résultats de recherche seront transférés dans ce dossier.": {
+    "en": "The document and its search results will move to this case.",
+    "es": "El documento y sus resultados se trasladarán a este expediente.",
+    "ar": "ستُنقل الوثيقة ونتائج البحث المرتبطة بها إلى هذا الملف."
+  },
+  "Nom du dossier": {
+    "en": "Case name",
+    "es": "Nombre del expediente",
+    "ar": "اسم الملف"
+  },
+  "Archiver ce dossier ? Ses documents seront conservés. Vous pourrez le restaurer.": {
+    "en": "Archive this case? Its documents will be kept. You can restore it.",
+    "es": "¿Archivar este expediente? Sus documentos se conservarán y podrá restaurarlo.",
+    "ar": "هل تريد أرشفة هذا الملف؟ ستُحفظ وثائقه ويمكنك استعادته."
+  },
+  "Enregistrer": {
+    "en": "Save",
+    "es": "Guardar",
+    "ar": "حفظ"
+  },
+  "Restaurer le dossier": {
+    "en": "Restore case",
+    "es": "Restaurar expediente",
+    "ar": "استعادة الملف"
+  },
+  "Confirmer l’archivage": {
+    "en": "Confirm archive",
+    "es": "Confirmar archivo",
+    "ar": "تأكيد الأرشفة"
+  },
+  "Archiver le dossier": {
+    "en": "Archive case",
+    "es": "Archivar expediente",
+    "ar": "أرشفة الملف"
+  },
+  "Réduire le lecteur": {
+    "en": "Restore reader size",
+    "es": "Reducir lector",
+    "ar": "تصغير القارئ"
+  },
+  "Agrandir le lecteur": {
+    "en": "Expand reader",
+    "es": "Ampliar lector",
+    "ar": "تكبير القارئ"
+  },
+  "Sélectionnez un document ou un passage pour le lire.": {
+    "en": "Select a document or passage to read it.",
+    "es": "Seleccione un documento o pasaje para leerlo.",
+    "ar": "اختر وثيقة أو مقطعًا لقراءته."
+  },
+  "Supprimer": {
+    "en": "Delete",
+    "es": "Eliminar",
+    "ar": "حذف"
+  },
+  "Supprimer le dossier": {
+    "en": "Delete case",
+    "es": "Eliminar expediente",
+    "ar": "حذف الملف"
+  },
+  "Supprimer le document": {
+    "en": "Delete document",
+    "es": "Eliminar documento",
+    "ar": "حذف الوثيقة"
+  },
+  "Supprimer définitivement": {
+    "en": "Permanently delete",
+    "es": "Eliminar definitivamente",
+    "ar": "حذف نهائي"
+  },
+  "Je confirme cette suppression.": {
+    "en": "I confirm this deletion.",
+    "es": "Confirmo esta eliminación.",
+    "ar": "أؤكد هذا الحذف."
+  },
+  "Ce document et ses passages seront supprimés de l’application. Cette action est irréversible.": {
+    "en": "This document and its passages will be deleted from the application. This cannot be undone.",
+    "es": "Este documento y sus pasajes se eliminarán de la aplicación. Esta acción es irreversible.",
+    "ar": "ستُحذف هذه الوثيقة ومقاطعها من التطبيق. لا يمكن التراجع عن هذا الإجراء."
+  },
+  "Ce dossier et tous ses documents seront supprimés de l’application. Cette action est irréversible.": {
+    "en": "This case and all its documents will be deleted from the application. This cannot be undone.",
+    "es": "Este expediente y todos sus documentos se eliminarán de la aplicación. Esta acción es irreversible.",
+    "ar": "سيُحذف هذا الملف وجميع وثائقه من التطبيق. لا يمكن التراجع عن هذا الإجراء."
+  }
+}

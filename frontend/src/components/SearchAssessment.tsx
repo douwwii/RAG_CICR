@@ -1,3 +1,4 @@
+import { useLanguage } from "../i18n";
 import type { Hit, SearchResponse } from "../types";
 import { Button } from "./ui/button";
 export function SearchAssessment({
@@ -7,29 +8,28 @@ export function SearchAssessment({
   analysis: SearchResponse;
   onOpen: (hit: Hit) => void;
 }) {
+  const { t } = useLanguage();
   const labels = {
-    direct: "Des éléments répondent directement",
-    partial: "Réponse partielle",
-    context: "Contexte disponible",
-    none: "Réponse non établie par ces extraits",
-    contradictory: "Sources contradictoires",
+    direct: t("Des éléments répondent directement"),
+    partial: t("Réponse partielle"),
+    context: t("Contexte disponible"),
+    none: t("Réponse non établie par ces extraits"),
+    contradictory: t("Sources contradictoires"),
   };
   return (
     <>
       {analysis.reranking.warning && (
         <div role="status" className="error-message">
-          {analysis.reranking.warning}
+          {t(analysis.reranking.warning)}
         </div>
       )}
       {analysis.assessment && (
-        <div className="assessment" aria-label="Bilan de pertinence">
-          <span className="eyebrow">
-            LIEN AVEC VOTRE QUESTION
-          </span>
+        <div className="assessment" aria-label={t("Bilan de pertinence")}>
+          <span className="eyebrow">{t("LIEN AVEC VOTRE QUESTION")}</span>
           <h3>{labels[analysis.assessment.coverage]}</h3>
-          {analysis.assessment.summary.map((sentence, index) => (
+          {analysis.assessment.summary.slice(0,1).map((sentence, index) => (
             <p key={index}>
-              {sentence.text}{" "}
+              {t(sentence.text)}{" "}
               {sentence.passage_ids.map((id) => {
                 const rank = analysis.results.findIndex(
                   (hit) => hit.passage_id === id,
@@ -40,7 +40,7 @@ export function SearchAssessment({
                     variant="ghost"
                     className="citation"
                     onClick={() => onOpen(analysis.results[rank])}
-                    aria-label={`Consulter le passage ${rank + 1}`}
+                    aria-label={`${t("Consulter le passage")} ${rank + 1}`}
                   >
                     [{rank + 1}]
                   </Button>
@@ -49,9 +49,11 @@ export function SearchAssessment({
             </p>
           ))}
           <small>
-            Analyse produite par Qwen sur {analysis.reranking.candidate_count}{" "}
-            candidats du dossier. Vérifiez les sources ; ce bilan n’établit pas
-            la vérité des faits.
+            {t("Analyse produite par Qwen sur")}{" "}
+            {analysis.reranking.candidate_count}{" "}
+            {t(
+              "candidats du dossier. Vérifiez les sources ; ce bilan n’établit pas la vérité des faits.",
+            )}
           </small>
         </div>
       )}

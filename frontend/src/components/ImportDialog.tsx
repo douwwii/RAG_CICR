@@ -1,3 +1,4 @@
+import { useLanguage } from "../i18n";
 import { useEffect, useRef, useState } from "react";
 import {
   AlertCircle,
@@ -20,6 +21,7 @@ export function ImportDialog({
   onClose: () => void;
   onImported: () => Promise<void>;
 }) {
+  const { t } = useLanguage();
   const dialog = useRef<HTMLDialogElement>(null);
   const input = useRef<HTMLInputElement>(null);
   const [file, setFile] = useState<File | null>(null);
@@ -36,11 +38,11 @@ export function ImportDialog({
     setFile(null);
     if (!candidate) return;
     if (!candidate.name.toLowerCase().endsWith(".pdf")) {
-      setError("Choisissez un fichier PDF.");
+      setError(t("Choisissez un fichier PDF."));
       return;
     }
     if (candidate.size > 20 * 1024 * 1024) {
-      setError("Le fichier dépasse la limite de 20 Mo.");
+      setError(t("Le fichier dépasse la limite de 20 Mo."));
       return;
     }
     setFile(candidate);
@@ -53,8 +55,12 @@ export function ImportDialog({
       const result = await api.upload(dossier, file);
       setMessage(
         result.duplicate
-          ? "Ce document existe déjà dans ce dossier. Son statut figure dans la liste des documents."
-          : "Document reçu. Vous pouvez suivre son traitement dans la liste des documents.",
+          ? t(
+              "Ce document existe déjà dans ce dossier. Son statut figure dans la liste des documents.",
+            )
+          : t(
+              "Document reçu. Vous pouvez suivre son traitement dans la liste des documents.",
+            ),
       );
       setFile(null);
       await onImported();
@@ -83,18 +89,19 @@ export function ImportDialog({
           size="icon"
           disabled={busy}
           onClick={onClose}
-          aria-label="Fermer l’importation"
+          aria-label={t("Fermer l’importation")}
         >
           <X size={18} />
         </Button>
       </div>
-      <h2 id="import-title">Ajouter une pièce au dossier</h2>
+      <h2 id="import-title">{t("Ajouter une pièce au dossier")}</h2>
       <p className="muted">
-        Le document sera extrait, découpé par Qwen puis indexé pour la
-        recherche.
+        {t(
+          "Le document sera extrait, découpé par Qwen puis indexé pour la recherche.",
+        )}
       </p>
       <div className="destination">
-        <span className="eyebrow">DOSSIER DE DESTINATION</span>
+        <span className="eyebrow">{t("DOSSIER DE DESTINATION")}</span>
         <strong>{title}</strong>
         <span>{dossier}</span>
       </div>
@@ -114,13 +121,13 @@ export function ImportDialog({
         }}
       >
         <Upload size={25} />
-        <strong>{file ? file.name : "Déposez votre PDF ici"}</strong>
+        <strong>{file ? file.name : t("Déposez votre PDF ici")}</strong>
         <span>
           {file
-            ? `${(file.size / 1024).toFixed(0)} Ko · Prêt à envoyer`
-            : "ou cliquez pour choisir un fichier"}
+            ? `${(file.size / 1024).toFixed(0)} KB · ${t("Prêt à envoyer")}`
+            : t("ou cliquez pour choisir un fichier")}
         </span>
-        <small>PDF avec texte numérique · 20 Mo maximum</small>
+        <small>{t("PDF avec texte numérique · 20 Mo maximum")}</small>
       </button>
       <input
         ref={input}
@@ -130,24 +137,25 @@ export function ImportDialog({
         onChange={(e) => select(e.target.files?.[0])}
       />
       <p className="import-limit">
-        V1 : jusqu’à 100 pages et 24 000 caractères extraits. Les pages sans
-        texte exploitable sont refusées.
+        {t(
+          "Jusqu’à 1 000 pages et 2 millions de caractères extraits. Les pages sans texte exploitable sont refusées.",
+        )}
       </p>
       {error && (
         <div className="error-message" role="alert">
           <AlertCircle size={17} />
-          {error}
+          {t(error)}
         </div>
       )}
       {message && (
         <div className="success-message" role="status">
           <CheckCircle2 size={18} />
-          {message}
+          {t(message)}
         </div>
       )}
       <div className="dialog-actions">
         <Button variant="outline" onClick={onClose} disabled={busy}>
-          {message ? "Fermer" : "Annuler"}
+          {message ? t("Fermer") : t("Annuler")}
         </Button>
         <Button
           onClick={() => {
@@ -160,7 +168,7 @@ export function ImportDialog({
           ) : (
             <Upload size={16} />
           )}{" "}
-          {busy ? "Envoi du document…" : "Importer et indexer"}
+          {busy ? t("Envoi du document…") : t("Importer et indexer")}
         </Button>
       </div>
     </dialog>

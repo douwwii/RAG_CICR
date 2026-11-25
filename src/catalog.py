@@ -284,3 +284,40 @@ class Catalog:
             'SELECT * FROM documents WHERE document_id = ?', (document_id,),
         ).fetchone()
         return self._document_metadata(row) if row else None
+
+    def rename_dossier(self, dossier_id, title):
+        self._require_dossier(dossier_id)
+        if not title.strip() or len(title) > 160:
+            raise ValueError('Nom de dossier invalide.')
+        with self._transaction():
+            self._connection.execute('UPDATE dossiers SET title=? WHERE dossier_id=?', (title.strip(), dossier_id))
+
+    def move_document(self, document_id, destination):
+        self._require_dossier(destination)
+        document = self.lookup_document(document_id)
+        if document is None:
+            raise ValueError('Document introuvable.')
+        with self._transaction():
+            self._connection.executemany('INSERT OR IGNORE INTO dossier_persons VALUES (?,?)',
+                                        [(destination, p) for p in document.person_ids])
+            self._connection.execute('DELETE FROM document_persons WHERE document_id=?', (document_id,))
+            self._connection.execute('UPDATE documents SET dossier_id=? WHERE document_id=?', (destination, document_id))
+            self._connection.executemany('INSERT INTO document_persons VALUES (?,?,?)',
+                                        [(document_id, destination, p) for p in document.person_ids])
+
+    def remove_unused_person_links(self, dossier_id, person_ids):
+        with self._transaction():
+            self._connection.executemany(
+                'DELETE FROM dossier_persons WHERE dossier_id=? AND person_id=? '
+                'AND NOT EXISTS (SELECT 1 FROM document_persons WHERE dossier_id=? AND person_id=?)',
+                [(dossier_id, p, dossier_id, p) for p in person_ids],
+            )
+
+    def delete_documents(self, document_ids, dossier_id=None):
+        with self._transaction():
+            for document_id in document_ids:
+                self._connection.execute('DELETE FROM document_persons WHERE document_id=?', (document_id,))
+                self._connection.execute('DELETE FROM documents WHERE document_id=?', (document_id,))
+            if dossier_id is not None:
+                self._connection.execute('DELETE FROM dossier_persons WHERE dossier_id=?', (dossier_id,))
+                self._connection.execute('DELETE FROM dossiers WHERE dossier_id=?', (dossier_id,))
