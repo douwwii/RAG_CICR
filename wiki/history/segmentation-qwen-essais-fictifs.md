@@ -1,3 +1,5 @@
+> Archive documentaire conservée le 25 novembre 2026. Décrit une étape passée ; utiliser le [guide actuel](../../README.md) pour exploiter BGE-M3. Les commandes et chemins en code se lisent depuis la racine du projet.
+
 # Découpage thématique avec Qwen : trois textes fictifs
 
 Modèle : `qwen3.8:27b-mlx` déjà chargé sur `wired`. Ollama : `0.40.13`.

@@ -1,0 +1,642 @@
+{
+  "96644d59c4965bac0009199688a9e40338315e8268f1ad07c3e2f6150b6f6d64": {
+    "content": "{\n  \"query\": \"Fecha y municipio de la última vez que fue visto Axel Mauricio Martínez Mancha según el boletín de búsqueda.\"\n}",
+    "done_reason": "stop",
+    "server_seconds": 1.356929792,
+    "generation_seconds": 1.196168167,
+    "input_tokens": 509,
+    "output_tokens": 31
+  },
+  "911ff10484f53ef80681887061a9c6f19e54beb02a95086be53a21638d3e08f8": {
+    "content": "{\n  \"selected\": [\n    {\n      \"passage_id\": \"p35-01300\",\n      \"label\": \"direct\",\n      \"reason\": \"Resumen de hechos del boletín con fecha y municipio exactos.\"\n    },\n    {\n      \"passage_id\": \"p31-01300\",\n      \"label\": \"direct\",\n      \"reason\": \"Resumen de hechos del boletín con fecha y municipio exactos.\"\n    },\n    {\n      \"passage_id\": \"p19-01289\",\n      \"label\": \"direct\",\n      \"reason\": \"Resumen de hechos del boletín con fecha y municipio exactos.\"\n    },\n    {\n      \"passage_id\": \"p31-00000\",\n      \"label\": \"partial\",\n      \"reason\": \"Datos del boletín: lugar de extravío y fecha de ausencia.\"\n    },\n    {\n      \"passage_id\": \"p19-00000\",\n      \"label\": \"partial\",\n      \"reason\": \"Datos del boletín: lugar de extravío y fecha de ausencia.\"\n    }\n  ],\n  \"coverage\": \"direct\"\n}",
+    "done_reason": "stop",
+    "server_seconds": 9.894830125,
+    "generation_seconds": 9.215747,
+    "input_tokens": 15110,
+    "output_tokens": 285
+  },
+  "f7e1de6dff747171e7db5e3a1c2d192c4f6c64479e4c97e1284edece39000399": {
+    "content": "{\n  \"query\": \"¿Qué estatura y peso indica el boletín de búsqueda de Axel?\"\n}",
+    "done_reason": "stop",
+    "server_seconds": 0.944386458,
+    "generation_seconds": 0.785080083,
+    "input_tokens": 500,
+    "output_tokens": 25
+  },
+  "ac8ab26a650cfef1bfe746a90a8b4cc5932a82f9d7e1778b111e3c1faabf32d7": {
+    "content": "{\n  \"selected\": [\n    {\n      \"passage_id\": \"p35-00000\",\n      \"label\": \"direct\",\n      \"reason\": \"Boletín de búsqueda con estatura y peso exactos.\"\n    },\n    {\n      \"passage_id\": \"p31-00000\",\n      \"label\": \"direct\",\n      \"reason\": \"Boletín de búsqueda con estatura y peso exactos.\"\n    },\n    {\n      \"passage_id\": \"p19-00000\",\n      \"label\": \"direct\",\n      \"reason\": \"Boletín de búsqueda con estatura y peso exactos.\"\n    },\n    {\n      \"passage_id\": \"p29-00000\",\n      \"label\": \"partial\",\n      \"reason\": \"Describe estatura aproximada en oficio de investigación.\"\n    },\n    {\n      \"passage_id\": \"p33-00000\",\n      \"label\": \"partial\",\n      \"reason\": \"Describe estatura aproximada en oficio de investigación.\"\n    }\n  ],\n  \"coverage\": \"direct\"\n}",
+    "done_reason": "stop",
+    "server_seconds": 13.197328334,
+    "generation_seconds": 12.695633584,
+    "input_tokens": 12298,
+    "output_tokens": 271
+  },
+  "07093e1cb54f52ae4303dae9d0dcf28c30a4401bab8cae136a4d15b3a7d192bb": {
+    "content": "{\n  \"query\": \"Fecha de nacimiento de Axel Mauricio Martínez Mancha.\"\n}",
+    "done_reason": "stop",
+    "server_seconds": 0.781785209,
+    "generation_seconds": 0.555936375,
+    "input_tokens": 497,
+    "output_tokens": 18
+  },
+  "dd9200423bb6b45acba23f4142579b8b12bb9712ca957f5eff342eb17af76bba": {
+    "content": "{\n  \"selected\": [\n    {\n      \"passage_id\": \"p31-00000\",\n      \"label\": \"direct\",\n      \"reason\": \"Boletín oficial con fecha de nacimiento explícita.\"\n    },\n    {\n      \"passage_id\": \"p19-00000\",\n      \"label\": \"direct\",\n      \"reason\": \"Boletín oficial con fecha de nacimiento explícita.\"\n    },\n    {\n      \"passage_id\": \"p35-00000\",\n      \"label\": \"direct\",\n      \"reason\": \"Boletín oficial con fecha de nacimiento explícita.\"\n    },\n    {\n      \"passage_id\": \"p25-00000\",\n      \"label\": \"direct\",\n      \"reason\": \"Oficio que cita la fecha de nacimiento.\"\n    },\n    {\n      \"passage_id\": \"p67-00000\",\n      \"label\": \"direct\",\n      \"reason\": \"Oficio que cita la fecha de nacimiento.\"\n    }\n  ],\n  \"coverage\": \"direct\"\n}",
+    "done_reason": "stop",
+    "server_seconds": 9.625426125,
+    "generation_seconds": 8.680460833,
+    "input_tokens": 15272,
+    "output_tokens": 264
+  },
+  "2fe698947c5126a77af0529c49cad7a0bb7c367de1d2b407ad359f5860f70586": {
+    "content": "{\n  \"query\": \"Fecha y hora del acta de entrevista de Margarita Ruiz Ahumada.\"\n}",
+    "done_reason": "stop",
+    "server_seconds": 0.947636833,
+    "generation_seconds": 0.782087833,
+    "input_tokens": 505,
+    "output_tokens": 25
+  },
+  "87bcc196f2031f0d24e3b659f9e56df484ff763702435e2702d9b335c7bcfb08": {
+    "content": "{\n  \"selected\": [\n    {\n      \"passage_id\": \"p03-00000\",\n      \"label\": \"direct\",\n      \"reason\": \"Contiene la fecha y hora exactas del acta de entrevista.\"\n    },\n    {\n      \"passage_id\": \"p05-00000\",\n      \"label\": \"context\",\n      \"reason\": \"Identifica a la entrevistada Margarita Ruiz Ahumada en el acta.\"\n    },\n    {\n      \"passage_id\": \"p13-00000\",\n      \"label\": \"context\",\n      \"reason\": \"Confirma la firma de la entrevistada en el acta.\"\n    },\n    {\n      \"passage_id\": \"p07-00000\",\n      \"label\": \"context\",\n      \"reason\": \"Muestra el relato de la entrevista de la abuela.\"\n    },\n    {\n      \"passage_id\": \"p11-00000\",\n      \"label\": \"context\",\n      \"reason\": \"Indica el cierre del acta de entrevista de la abuela.\"\n    }\n  ],\n  \"coverage\": \"direct\"\n}",
+    "done_reason": "stop",
+    "server_seconds": 260.993024917,
+    "generation_seconds": 260.360094791,
+    "input_tokens": 15723,
+    "output_tokens": 280
+  },
+  "4525b76c16599a7d36a7f9fc998d265eb823f1ad00109009501e9cdf2554c826": {
+    "content": "{\n  \"query\": \"¿Qué parentesco tiene Margarita Ruiz Ahumada con Axel?\"\n}",
+    "done_reason": "stop",
+    "server_seconds": 1.024075542,
+    "generation_seconds": 0.81942775,
+    "input_tokens": 498,
+    "output_tokens": 23
+  },
+  "847a6559b7fbc1709cec67a2caeb905e6a13f83ade2403fe9517b2d65f185907": {
+    "content": "{\n  \"selected\": [\n    {\n      \"passage_id\": \"p05-00000\",\n      \"label\": \"direct\",\n      \"reason\": \"Indica explícitamente el parentesco de abuela en la ficha de datos.\"\n    },\n    {\n      \"passage_id\": \"p07-00000\",\n      \"label\": \"direct\",\n      \"reason\": \"La entrevistada se identifica verbalmente como abuela de Axel.\"\n    },\n    {\n      \"passage_id\": \"p09-00000\",\n      \"label\": \"context\",\n      \"reason\": \"Confirma la relación de abuela mediante el uso del término nieto.\"\n    },\n    {\n      \"passage_id\": \"p11-00000\",\n      \"label\": \"context\",\n      \"reason\": \"Reafirma el vínculo familiar usando la expresión mi nieto Axel.\"\n    },\n    {\n      \"passage_id\": \"p09-01300\",\n      \"label\": \"context\",\n      \"reason\": \"Menciona la relación de abuela al referirse a su nieto.\"\n    }\n  ],\n  \"coverage\": \"direct\"\n}",
+    "done_reason": "stop",
+    "server_seconds": 20.681539583,
+    "generation_seconds": 20.126987375,
+    "input_tokens": 14753,
+    "output_tokens": 285
+  },
+  "2a4ce41d329d7a10b60657dfd7b2c2066b8e3dc4b9a71a52164beb9fc1b20103": {
+    "content": "{\n  \"query\": \"¿Qué palabras aparecen tatuadas en los nudillos de la mano derecha y de la izquierda de Axel?\"\n}",
+    "done_reason": "stop",
+    "server_seconds": 1.844184958,
+    "generation_seconds": 1.525699083,
+    "input_tokens": 505,
+    "output_tokens": 30
+  },
+  "3a4f77d1c521e57428c69be3e0f4ce4c56834b4ea247fe567c7a7518563ee76e": {
+    "content": "{\n  \"selected\": [\n    {\n      \"passage_id\": \"p19-00000\",\n      \"label\": \"direct\",\n      \"reason\": \"Describe los tatuajes en nudillos de ambas manos de Axel.\"\n    },\n    {\n      \"passage_id\": \"p35-00000\",\n      \"label\": \"direct\",\n      \"reason\": \"Confirma la información de los tatuajes en nudillos de Axel.\"\n    },\n    {\n      \"passage_id\": \"p31-00000\",\n      \"label\": \"direct\",\n      \"reason\": \"Repite los detalles de los tatuajes en nudillos de Axel.\"\n    },\n    {\n      \"passage_id\": \"p33-01299\",\n      \"label\": \"direct\",\n      \"reason\": \"Menciona las leyendas 'rock' y 'surf' en los nudillos.\"\n    },\n    {\n      \"passage_id\": \"p29-01297\",\n      \"label\": \"direct\",\n      \"reason\": \"Detalla los tatuajes en nudillos de la mano derecha e izquierda.\"\n    }\n  ],\n  \"coverage\": \"direct\"\n}",
+    "done_reason": "stop",
+    "server_seconds": 18.789855666,
+    "generation_seconds": 18.500911625,
+    "input_tokens": 8846,
+    "output_tokens": 284
+  },
+  "58d6d6f6be0d8c129119d6f0a111b0508aaeb05a68885d0202e4d994fe520ddf": {
+    "content": "{\n  \"query\": \"¿Dónde vive y de dónde es Paola Leyva según la captura de su perfil?\"\n}",
+    "done_reason": "stop",
+    "server_seconds": 2.653611041,
+    "generation_seconds": 2.341212875,
+    "input_tokens": 504,
+    "output_tokens": 27
+  },
+  "cffcd2f24f9317d42cfc8e73b264a8894bc1b0fed09bda0468b3cd200e65762f": {
+    "content": "{\n  \"selected\": [\n    {\n      \"passage_id\": \"p23-00000\",\n      \"label\": \"direct\",\n      \"reason\": \"Captura del perfil con residencia y origen exactos.\"\n    },\n    {\n      \"passage_id\": \"p09-01300\",\n      \"label\": \"context\",\n      \"reason\": \"Menciona la copia del perfil de Paola Leyva.\"\n    },\n    {\n      \"passage_id\": \"p09-00000\",\n      \"label\": \"context\",\n      \"reason\": \"Contexto de la entrevista sobre el perfil visto.\"\n    },\n    {\n      \"passage_id\": \"p21-00000\",\n      \"label\": \"context\",\n      \"reason\": \"Solicitud de información sobre el perfil de Facebook.\"\n    },\n    {\n      \"passage_id\": \"p27-00000\",\n      \"label\": \"context\",\n      \"reason\": \"Solicitud de domicilio de Paola Magdalena Leyva Pérez.\"\n    }\n  ],\n  \"coverage\": \"direct\"\n}",
+    "done_reason": "stop",
+    "server_seconds": 7.2887415,
+    "generation_seconds": 6.800382416,
+    "input_tokens": 14339,
+    "output_tokens": 264
+  },
+  "f43bdffab42b111a046905f4b7116b87f440b83a3542757dad590c0546241943": {
+    "content": "{\n  \"query\": \"¿Quién acompañó a Cristina Elizabeth Mancha Ruiz como perito en psicología en la comparecencia del 6 de julio de 2023?\"\n}",
+    "done_reason": "stop",
+    "server_seconds": 1.024189458,
+    "generation_seconds": 0.911386167,
+    "input_tokens": 516,
+    "output_tokens": 41
+  },
+  "060807185539359a75215f5cd212bd91d3d1c493bcd28a37eea18bdf708701a4": {
+    "content": "{\n  \"selected\": [\n    {\n      \"passage_id\": \"p71-00000\",\n      \"label\": \"direct\",\n      \"reason\": \"Identifica al perito presente en la comparecencia del 6 de julio.\"\n    },\n    {\n      \"passage_id\": \"p71-01300\",\n      \"label\": \"direct\",\n      \"reason\": \"Confirma el rol de perito en psicología en el acta.\"\n    },\n    {\n      \"passage_id\": \"p51-00000\",\n      \"label\": \"context\",\n      \"reason\": \"Contextualiza la participación de la víctima en diligencias de julio.\"\n    },\n    {\n      \"passage_id\": \"p53-00000\",\n      \"label\": \"context\",\n      \"reason\": \"Detalla el apoyo logístico para la comparecencia de la víctima.\"\n    },\n    {\n      \"passage_id\": \"p55-00000\",\n      \"label\": \"context\",\n      \"reason\": \"Oficializa la solicitud de viáticos para la asistencia de la víctima.\"\n    }\n  ],\n  \"coverage\": \"direct\"\n}",
+    "done_reason": "stop",
+    "server_seconds": 8.18631325,
+    "generation_seconds": 7.426330541,
+    "input_tokens": 15905,
+    "output_tokens": 286
+  },
+  "fd32de2e93325c1692aa87cb70470ad8efdd5f64adcdc51a1cae14b516344544": {
+    "content": "{\n  \"query\": \"¿Cuándo y durante cuánto tiempo estuvo Axel en casa de su abuela la última vez que ella lo vio?\"\n}",
+    "done_reason": "stop",
+    "server_seconds": 0.805944958,
+    "generation_seconds": 0.6885335,
+    "input_tokens": 507,
+    "output_tokens": 32
+  },
+  "c0134ae37797ab05c053cf9d6db50c65f213f75c840ee545a4ec45206a958b5d": {
+    "content": "{\n  \"selected\": [\n    {\n      \"passage_id\": \"p07-00000\",\n      \"label\": \"direct\",\n      \"reason\": \"Describe la última visita y duración en casa de la abuela.\"\n    },\n    {\n      \"passage_id\": \"p07-01291\",\n      \"label\": \"context\",\n      \"reason\": \"Continúa el relato de la abuela tras la última visita.\"\n    },\n    {\n      \"passage_id\": \"p09-00000\",\n      \"label\": \"context\",\n      \"reason\": \"Detalles posteriores a la última vista en casa de la abuela.\"\n    },\n    {\n      \"passage_id\": \"p11-00000\",\n      \"label\": \"context\",\n      \"reason\": \"Cierre del testimonio de la abuela sobre el caso.\"\n    },\n    {\n      \"passage_id\": \"p03-01300\",\n      \"label\": \"context\",\n      \"reason\": \"Identifica el contexto legal de la entrevista a la abuela.\"\n    }\n  ],\n  \"coverage\": \"direct\"\n}",
+    "done_reason": "stop",
+    "server_seconds": 7.801026208,
+    "generation_seconds": 7.390043167,
+    "input_tokens": 12414,
+    "output_tokens": 276
+  },
+  "4bfb7e9d30e392f7eca99103ca9b47e6504c04c3b41b519a9648670182caca86": {
+    "content": "{\n  \"query\": \"¿Qué día y a qué hora recibió la abuela el mensaje de WhatsApp de Axel?\"\n}",
+    "done_reason": "stop",
+    "server_seconds": 0.8069015,
+    "generation_seconds": 0.68535825,
+    "input_tokens": 502,
+    "output_tokens": 27
+  },
+  "d3460f9381535fd305639fe656f2e9e59081aab9ba8b245f798553d76d89b221": {
+    "content": "{\n  \"selected\": [\n    {\n      \"passage_id\": \"p07-00000\",\n      \"label\": \"direct\",\n      \"reason\": \"Indica fecha y hora exactas del mensaje de WhatsApp.\"\n    },\n    {\n      \"passage_id\": \"p07-01291\",\n      \"label\": \"context\",\n      \"reason\": \"Fragmento continuo del relato sobre el contacto posterior al mensaje.\"\n    },\n    {\n      \"passage_id\": \"p09-00000\",\n      \"label\": \"context\",\n      \"reason\": \"Continúa el relato de la abuela tras el mensaje recibido.\"\n    },\n    {\n      \"passage_id\": \"p09-01300\",\n      \"label\": \"context\",\n      \"reason\": \"Fragmento adicional del testimonio de la abuela sobre el caso.\"\n    },\n    {\n      \"passage_id\": \"p11-00000\",\n      \"label\": \"context\",\n      \"reason\": \"Cierre del testimonio de la abuela sobre la desaparición.\"\n    }\n  ],\n  \"coverage\": \"direct\"\n}",
+    "done_reason": "stop",
+    "server_seconds": 7.666058,
+    "generation_seconds": 7.398933584,
+    "input_tokens": 10872,
+    "output_tokens": 275
+  },
+  "d2db0adbf38f6885499af81c343fd12b63e6de543347e7ad5d08fb88209809d7": {
+    "content": "{\n  \"query\": \"Contenido de la fotografía recibida por WhatsApp y motivo de la asociación de la abuela con el hotel Montecarlo.\"\n}",
+    "done_reason": "stop",
+    "server_seconds": 1.162339334,
+    "generation_seconds": 1.038092792,
+    "input_tokens": 510,
+    "output_tokens": 34
+  },
+  "2e770038585b02ca3a3955750416a2e85aae5a94a873ec8fb352edbfceea6d8c": {
+    "content": "{\n  \"selected\": [\n    {\n      \"passage_id\": \"p07-00000\",\n      \"label\": \"direct\",\n      \"reason\": \"Describe contenido de la foto y motivo de la asociación con el hotel.\"\n    },\n    {\n      \"passage_id\": \"p09-00000\",\n      \"label\": \"partial\",\n      \"reason\": \"Detalla la comparación visual con los pasillos del hotel Montecarlo.\"\n    },\n    {\n      \"passage_id\": \"p07-01291\",\n      \"label\": \"partial\",\n      \"reason\": \"Explica el reconocimiento del lugar basado en experiencia laboral previa.\"\n    },\n    {\n      \"passage_id\": \"p09-01300\",\n      \"label\": \"context\",\n      \"reason\": \"Contextualiza la investigación posterior y la discrepancia con la descripción de la mujer.\"\n    },\n    {\n      \"passage_id\": \"p11-00000\",\n      \"label\": \"context\",\n      \"reason\": \"Concluye el relato de la abuela sobre la información obtenida en el hotel.\"\n    }\n  ],\n  \"coverage\": \"direct\"\n}",
+    "done_reason": "stop",
+    "server_seconds": 13.933570542,
+    "generation_seconds": 9.808011375,
+    "input_tokens": 9140,
+    "output_tokens": 286
+  },
+  "bbf7da49d160e03d9ba0f33b3bd664e5ab1b3c1b5fe9fc5a6df7329e2e1ad49b": {
+    "content": "{\n  \"query\": \"¿Con qué nombre se habría registrado en el Montecarlo una persona que coincidía con la descripción de Axel, y quién transmitió esa información?\"\n}",
+    "done_reason": "stop",
+    "server_seconds": 1.425351667,
+    "generation_seconds": 1.27927875,
+    "input_tokens": 514,
+    "output_tokens": 39
+  },
+  "83b7a5815ae084ae4d19bc741d50542d1edfc4df83d1d828eb5f215bde629974": {
+    "content": "{\n  \"selected\": [\n    {\n      \"passage_id\": \"p09-00000\",\n      \"label\": \"direct\",\n      \"reason\": \"Identifica el nombre de registro y la fuente de la información.\"\n    },\n    {\n      \"passage_id\": \"p07-00000\",\n      \"label\": \"context\",\n      \"reason\": \"Establece la identidad de la abuela que transmitió la información.\"\n    },\n    {\n      \"passage_id\": \"p07-01291\",\n      \"label\": \"context\",\n      \"reason\": \"Conecta la visita al hotel con el reconocimiento de la abuela.\"\n    },\n    {\n      \"passage_id\": \"p09-01300\",\n      \"label\": \"context\",\n      \"reason\": \"Detalla la descripción de la acompañante mencionada por la recepcionista.\"\n    },\n    {\n      \"passage_id\": \"p11-00000\",\n      \"label\": \"context\",\n      \"reason\": \"Confirma el cierre del relato sobre la información del hotel.\"\n    }\n  ],\n  \"coverage\": \"direct\"\n}",
+    "done_reason": "stop",
+    "server_seconds": 7.487584625,
+    "generation_seconds": 6.975615458,
+    "input_tokens": 12579,
+    "output_tokens": 280
+  },
+  "431b67e69b95fc4f3be347a2957606377eb595340d2c7b75dceb5e20f6e5a0ef": {
+    "content": "{\n  \"query\": \"¿Cuánto tiempo se conservaban las grabaciones del hotel según lo que la empleada dijo a Margarita?\"\n}",
+    "done_reason": "stop",
+    "server_seconds": 0.635019125,
+    "generation_seconds": 0.530090625,
+    "input_tokens": 510,
+    "output_tokens": 33
+  },
+  "10d47539c36219d5880533353b142bbf154a6500af67d0321c8a4befb3debb6f": {
+    "content": "{\n  \"selected\": [\n    {\n      \"passage_id\": \"p09-00000\",\n      \"label\": \"direct\",\n      \"reason\": \"Contiene la declaración de Margarita sobre la duración de las grabaciones.\"\n    },\n    {\n      \"passage_id\": \"p07-00000\",\n      \"label\": \"context\",\n      \"reason\": \"Contextualiza la entrevista de Margarita y su vínculo con el hotel.\"\n    },\n    {\n      \"passage_id\": \"p07-01291\",\n      \"label\": \"context\",\n      \"reason\": \"Fragmento de la entrevista que conecta con la visita al hotel.\"\n    },\n    {\n      \"passage_id\": \"p09-01300\",\n      \"label\": \"context\",\n      \"reason\": \"Continúa el relato de Margarita sobre la información recibida en el hotel.\"\n    },\n    {\n      \"passage_id\": \"p11-00000\",\n      \"label\": \"context\",\n      \"reason\": \"Cierre del relato de Margarita sobre la información del hotel.\"\n    }\n  ],\n  \"coverage\": \"direct\"\n}",
+    "done_reason": "stop",
+    "server_seconds": 5.265362042,
+    "generation_seconds": 5.010042666,
+    "input_tokens": 12598,
+    "output_tokens": 282
+  },
+  "7d0dc48bdda658fca2164e02b5c3bad15138c9dd02cc5b0708d35fc7a849004e": {
+    "content": "{\n  \"query\": \"¿Identificó Margarita a Paola Leyva como la mujer que acompañaba a Axel en el hotel?\"\n}",
+    "done_reason": "stop",
+    "server_seconds": 0.552555334,
+    "generation_seconds": 0.450845875,
+    "input_tokens": 506,
+    "output_tokens": 31
+  },
+  "ca398ce0a2ea629137d0ecee185a7b07263a676524cfe5cf1f9865b86cc8ef10": {
+    "content": "{\n  \"selected\": [\n    {\n      \"passage_id\": \"p09-01300\",\n      \"label\": \"direct\",\n      \"reason\": \"Negación explícita de identificación por Margarita.\"\n    },\n    {\n      \"passage_id\": \"p09-00000\",\n      \"label\": \"partial\",\n      \"reason\": \"Describe la descripción física de la acompañante.\"\n    },\n    {\n      \"passage_id\": \"p11-00000\",\n      \"label\": \"partial\",\n      \"reason\": \"Reitera la descripción física de la mujer.\"\n    },\n    {\n      \"passage_id\": \"p23-00000\",\n      \"label\": \"context\",\n      \"reason\": \"Muestra el perfil de Facebook de Paola Leyva.\"\n    },\n    {\n      \"passage_id\": \"p21-00000\",\n      \"label\": \"context\",\n      \"reason\": \"Oficio solicitando datos del perfil de Paola Leyva.\"\n    }\n  ],\n  \"coverage\": \"direct\"\n}",
+    "done_reason": "stop",
+    "server_seconds": 4.914925667,
+    "generation_seconds": 4.681970375,
+    "input_tokens": 12807,
+    "output_tokens": 262
+  },
+  "4f0247ce8938588cc635bb6bbb3e30f94d6ae3361e28ad01bf80b2c8d0c7fac8": {
+    "content": "{\n  \"query\": \"¿Cuándo acudió Margarita al hotel Montecarlo para preguntar por Axel?\"\n}",
+    "done_reason": "stop",
+    "server_seconds": 0.476783375,
+    "generation_seconds": 0.373720375,
+    "input_tokens": 502,
+    "output_tokens": 27
+  },
+  "63f7f3c77bdbd138a124979a56b0806e964da3df3635422fa6244048690de3ca": {
+    "content": "{\n  \"selected\": [\n    {\n      \"passage_id\": \"p09-00000\",\n      \"label\": \"direct\",\n      \"reason\": \"Indica la fecha exacta de la visita al hotel Montecarlo.\"\n    },\n    {\n      \"passage_id\": \"p07-00000\",\n      \"label\": \"partial\",\n      \"reason\": \"Identifica a Margarita y explica el motivo de la búsqueda.\"\n    },\n    {\n      \"passage_id\": \"p07-01291\",\n      \"label\": \"context\",\n      \"reason\": \"Conecta la identificación de Margarita con la mención del hotel.\"\n    },\n    {\n      \"passage_id\": \"p11-00000\",\n      \"label\": \"context\",\n      \"reason\": \"Detalla el resultado de la consulta realizada en el hotel.\"\n    },\n    {\n      \"passage_id\": \"p09-01300\",\n      \"label\": \"context\",\n      \"reason\": \"Aporta detalles adicionales sobre la información obtenida en el hotel.\"\n    }\n  ],\n  \"coverage\": \"direct\"\n}",
+    "done_reason": "stop",
+    "server_seconds": 5.56461675,
+    "generation_seconds": 5.278627084,
+    "input_tokens": 14686,
+    "output_tokens": 277
+  },
+  "bcfa02b95e1553eea3a6331434fb72d16cb3830d66eefb4f013471040c6e5b0d": {
+    "content": "{\n  \"query\": \"¿Conservaba Margarita la fotografía de WhatsApp cuando declaró?\"\n}",
+    "done_reason": "stop",
+    "server_seconds": 0.396519542,
+    "generation_seconds": 0.295929875,
+    "input_tokens": 497,
+    "output_tokens": 22
+  },
+  "f0eae6e473d77ad8dc84ddd328f2dfe9927b5935baa1db5e4e31fe56517994d0": {
+    "content": "{\n  \"selected\": [\n    {\n      \"passage_id\": \"p07-00000\",\n      \"label\": \"direct\",\n      \"reason\": \"Confirma la pérdida de la foto de WhatsApp durante la declaración.\"\n    },\n    {\n      \"passage_id\": \"p05-00000\",\n      \"label\": \"context\",\n      \"reason\": \"Identifica a Margarita como la declarante en el acta.\"\n    },\n    {\n      \"passage_id\": \"p13-00000\",\n      \"label\": \"context\",\n      \"reason\": \"Valida la autenticidad de la declaración mediante firma.\"\n    },\n    {\n      \"passage_id\": \"p15-00000\",\n      \"label\": \"context\",\n      \"reason\": \"Verifica la identidad de la abuela declarante.\"\n    },\n    {\n      \"passage_id\": \"p11-00000\",\n      \"label\": \"context\",\n      \"reason\": \"Cierra el relato de la declaración de Margarita.\"\n    }\n  ],\n  \"coverage\": \"direct\"\n}",
+    "done_reason": "stop",
+    "server_seconds": 4.572889666,
+    "generation_seconds": 4.407339667,
+    "input_tokens": 11579,
+    "output_tokens": 271
+  },
+  "b7091a43d183a0b8022eefbaf817658301fbe115fa9332063fceecd5dacd256f": {
+    "content": "{\n  \"query\": \"¿Qué fechas de videograbaciones solicitó la Fiscalía al hotel Montecarlo en el oficio del 27 de junio de 2023?\"\n}",
+    "done_reason": "stop",
+    "server_seconds": 0.793091833,
+    "generation_seconds": 0.693432416,
+    "input_tokens": 517,
+    "output_tokens": 42
+  },
+  "ebce5701cfa3506b93e1581f516cc5882275bb4ff6d55da948609b85da367065": {
+    "content": "{\n  \"selected\": [\n    {\n      \"passage_id\": \"p17-01296\",\n      \"label\": \"direct\",\n      \"reason\": \"Contiene las fechas exactas de las videograbaciones solicitadas al hotel.\"\n    },\n    {\n      \"passage_id\": \"p17-00000\",\n      \"label\": \"direct\",\n      \"reason\": \"Identifica el oficio del 27 de junio dirigido al hotel Montecarlo.\"\n    },\n    {\n      \"passage_id\": \"p33-00000\",\n      \"label\": \"context\",\n      \"reason\": \"Menciona las mismas fechas pero para cámaras de C5i, no del hotel.\"\n    },\n    {\n      \"passage_id\": \"p09-00000\",\n      \"label\": \"context\",\n      \"reason\": \"Describe la visita al hotel y la mención de grabaciones, sin fechas oficiales.\"\n    },\n    {\n      \"passage_id\": \"p07-00000\",\n      \"label\": \"context\",\n      \"reason\": \"Contextualiza la relación de la abuela con el hotel Montecarlo.\"\n    }\n  ],\n  \"coverage\": \"direct\"\n}",
+    "done_reason": "stop",
+    "server_seconds": 5.63577275,
+    "generation_seconds": 5.383707958,
+    "input_tokens": 14722,
+    "output_tokens": 295
+  },
+  "62a54eb5fd4a28ad798f52dce0fb9eb6d8a4e54e974ce706166cd7a4d116ef36": {
+    "content": "{\n  \"query\": \"¿Qué domicilio y qué fecha de grabaciones se mencionan en la solicitud al C5i sobre la colonia Adolfo López Mateos?\"\n}",
+    "done_reason": "stop",
+    "server_seconds": 0.629010334,
+    "generation_seconds": 0.529423291,
+    "input_tokens": 513,
+    "output_tokens": 37
+  },
+  "ef8a572c65b04bb3274793191e1eedd17d6fbcc00a55296a065f780e1db80924": {
+    "content": "{\n  \"selected\": [\n    {\n      \"passage_id\": \"p29-00000\",\n      \"label\": \"direct\",\n      \"reason\": \"Responde domicilio y fecha de grabaciones en colonia Adolfo López Mateos.\"\n    },\n    {\n      \"passage_id\": \"p15-00000\",\n      \"label\": \"context\",\n      \"reason\": \"Confirma domicilio en colonia Adolfo López Mateos, Altamira.\"\n    },\n    {\n      \"passage_id\": \"p33-00000\",\n      \"label\": \"context\",\n      \"reason\": \"Solicitud C5i distinta, no en colonia Adolfo López Mateos.\"\n    },\n    {\n      \"passage_id\": \"p17-01296\",\n      \"label\": \"context\",\n      \"reason\": \"Menciona fechas de grabaciones, pero no colonia Adolfo López Mateos.\"\n    },\n    {\n      \"passage_id\": \"p07-00000\",\n      \"label\": \"context\",\n      \"reason\": \"Contexto de desaparición en Altamira, no solicitud C5i específica.\"\n    }\n  ],\n  \"coverage\": \"direct\"\n}",
+    "done_reason": "stop",
+    "server_seconds": 5.411917917,
+    "generation_seconds": 5.100609209,
+    "input_tokens": 15006,
+    "output_tokens": 291
+  },
+  "ce8da73fe66e395162b974a8ccb912e41f53a955930bd29cce7ab244827d1c19": {
+    "content": "{\n  \"query\": \"Diferencias entre las fechas y lugares cubiertos por las dos solicitudes de cámaras al C5i.\"\n}",
+    "done_reason": "stop",
+    "server_seconds": 0.555978875,
+    "generation_seconds": 0.452570083,
+    "input_tokens": 506,
+    "output_tokens": 30
+  },
+  "8961882a4f10d14bad3c1e7430bc767ff8a363b558c4b63115991ab6cdd4039b": {
+    "content": "{\n  \"selected\": [\n    {\n      \"passage_id\": \"p29-00000\",\n      \"label\": \"partial\",\n      \"reason\": \"Primera solicitud: fecha y lugar específicos para cámaras C5i.\"\n    },\n    {\n      \"passage_id\": \"p33-00000\",\n      \"label\": \"partial\",\n      \"reason\": \"Segunda solicitud: fechas y lugar distintos para cámaras C5i.\"\n    },\n    {\n      \"passage_id\": \"p17-01296\",\n      \"label\": \"context\",\n      \"reason\": \"Solicitud de grabaciones a hotel, no al C5i.\"\n    },\n    {\n      \"passage_id\": \"p09-00000\",\n      \"label\": \"context\",\n      \"reason\": \"Testimonio sobre cámaras del hotel Montecarlo.\"\n    },\n    {\n      \"passage_id\": \"p33-02597\",\n      \"label\": \"context\",\n      \"reason\": \"Firma y recepción de la solicitud al C5i.\"\n    }\n  ],\n  \"coverage\": \"partial\"\n}",
+    "done_reason": "stop",
+    "server_seconds": 4.914624083,
+    "generation_seconds": 4.802881833,
+    "input_tokens": 7485,
+    "output_tokens": 274
+  },
+  "baa0535038f9d4a26c241084ffbc7a0c563a3fc89d5159e17bddd0878642bd2a": {
+    "content": "{\n  \"query\": \"¿El oficio dirigido al hotel Maeva demuestra que Paola Magdalena Leyva Pérez trabajaba allí?\"\n}",
+    "done_reason": "stop",
+    "server_seconds": 0.555792333,
+    "generation_seconds": 0.454283375,
+    "input_tokens": 504,
+    "output_tokens": 29
+  },
+  "3180e50966a8ee05223b2b51b6121d9cf58d730e224eecc2de434865175b9283": {
+    "content": "{\n  \"selected\": [\n    {\n      \"passage_id\": \"p27-00000\",\n      \"label\": \"partial\",\n      \"reason\": \"Oficio al hotel Maeva solicita datos laborales de Paola Leyva.\"\n    },\n    {\n      \"passage_id\": \"p27-01300\",\n      \"label\": \"partial\",\n      \"reason\": \"Continúa la solicitud de información laboral a la dirección del hotel.\"\n    },\n    {\n      \"passage_id\": \"p09-01300\",\n      \"label\": \"context\",\n      \"reason\": \"Entrevista que niega vínculo entre Paola Leyva y el hotel Montecarlo.\"\n    },\n    {\n      \"passage_id\": \"p09-00000\",\n      \"label\": \"context\",\n      \"reason\": \"Testimonio sobre el hotel Montecarlo y la pareja de Axel.\"\n    },\n    {\n      \"passage_id\": \"p17-00000\",\n      \"label\": \"context\",\n      \"reason\": \"Oficio al hotel Montecarlo, establecimiento distinto al Maeva.\"\n    }\n  ],\n  \"coverage\": \"partial\"\n}",
+    "done_reason": "stop",
+    "server_seconds": 5.544037833,
+    "generation_seconds": 5.344411583,
+    "input_tokens": 11230,
+    "output_tokens": 284
+  },
+  "c4df4f0df523eb3eededc812c2e4362450fe33e065d9671c7ed8a0bcc0f996e0": {
+    "content": "{\n  \"query\": \"¿Para quién se solicitó expresamente el Registro Nacional de Detenciones y para qué perfil se pidieron redes sociales?\"\n}",
+    "done_reason": "stop",
+    "server_seconds": 0.71294975,
+    "generation_seconds": 0.610104834,
+    "input_tokens": 508,
+    "output_tokens": 34
+  },
+  "dd4e19dc26022e58e7f60801313b3fa85cf8dcbdfa08b54364946411fd7c371b": {
+    "content": "{\n  \"selected\": [\n    {\n      \"passage_id\": \"p25-00000\",\n      \"label\": \"direct\",\n      \"reason\": \"Identifica al sujeto y el registro nacional de detenciones solicitado.\"\n    },\n    {\n      \"passage_id\": \"p21-00000\",\n      \"label\": \"direct\",\n      \"reason\": \"Especifica el perfil de Facebook y la solicitud de redes sociales.\"\n    },\n    {\n      \"passage_id\": \"p23-00000\",\n      \"label\": \"context\",\n      \"reason\": \"Muestra la captura del perfil social solicitado en la investigación.\"\n    },\n    {\n      \"passage_id\": \"p27-00000\",\n      \"label\": \"context\",\n      \"reason\": \"Detalla la búsqueda laboral de la persona vinculada al perfil.\"\n    },\n    {\n      \"passage_id\": \"p09-00000\",\n      \"label\": \"context\",\n      \"reason\": \"Contextualiza la aparición del perfil en el relato de la abuela.\"\n    }\n  ],\n  \"coverage\": \"direct\"\n}",
+    "done_reason": "stop",
+    "server_seconds": 5.07256025,
+    "generation_seconds": 4.886624042,
+    "input_tokens": 13070,
+    "output_tokens": 278
+  },
+  "2ccb6b4cbc9ff48e5a79cb72a1671efb2992e1dc485be338e98da81894d7526a": {
+    "content": "{\n  \"query\": \"¿A qué colectivo se vinculan las víctimas indirectas y para qué estaban previstas las visitas del 3 y 4 de julio de 2023?\"\n}",
+    "done_reason": "stop",
+    "server_seconds": 0.712459958,
+    "generation_seconds": 0.606684292,
+    "input_tokens": 518,
+    "output_tokens": 42
+  },
+  "0dc5651c601730936ea9bc5cefb3e475bc8bc5527c67e911fd601212012a28b3": {
+    "content": "{\n  \"selected\": [\n    {\n      \"passage_id\": \"p51-00000\",\n      \"label\": \"direct\",\n      \"reason\": \"Identifica el colectivo y el propósito de las visitas del 3 y 4 de julio.\"\n    },\n    {\n      \"passage_id\": \"p53-00000\",\n      \"label\": \"direct\",\n      \"reason\": \"Confirma el colectivo y la finalidad de la diligencia para las víctimas indirectas.\"\n    },\n    {\n      \"passage_id\": \"p55-00000\",\n      \"label\": \"partial\",\n      \"reason\": \"Detalla la solicitud de viáticos para garantizar la participación en la verificación de registros.\"\n    },\n    {\n      \"passage_id\": \"p51-01298\",\n      \"label\": \"context\",\n      \"reason\": \"Complementa la solicitud de apoyo integral para la participación en la diligencia anunciada.\"\n    },\n    {\n      \"passage_id\": \"p57-00000\",\n      \"label\": \"context\",\n      \"reason\": \"Muestra la gestión administrativa de los viáticos para la diligencia del 3 y 4 de julio.\"\n    }\n  ],\n  \"coverage\": \"direct\"\n}",
+    "done_reason": "stop",
+    "server_seconds": 5.548624042,
+    "generation_seconds": 5.381471167,
+    "input_tokens": 14661,
+    "output_tokens": 304
+  },
+  "84ebe0ddca4a6f50399cec970da443dac1c549da1edda503163b61dc29cf4a47": {
+    "content": "{\n  \"query\": \"¿Se mencionan los mismos conceptos de viáticos en el oficio inicial del 30 de junio y en el acuerdo del 1 de julio?\"\n}",
+    "done_reason": "stop",
+    "server_seconds": 1.166747417,
+    "generation_seconds": 1.063191584,
+    "input_tokens": 515,
+    "output_tokens": 40
+  },
+  "218d5088d660e331c020245b276ca97d8277b7dd5243346a20d06ed2d129bc3b": {
+    "content": "{\n  \"selected\": [\n    {\n      \"passage_id\": \"p51-00000\",\n      \"label\": \"partial\",\n      \"reason\": \"Oficio inicial del 30 de junio con conceptos de viáticos.\"\n    },\n    {\n      \"passage_id\": \"p53-00000\",\n      \"label\": \"partial\",\n      \"reason\": \"Acuerdo del 1 de julio con conceptos de viáticos.\"\n    },\n    {\n      \"passage_id\": \"p55-00000\",\n      \"label\": \"partial\",\n      \"reason\": \"Oficio del 1 de julio detallando conceptos de viáticos.\"\n    },\n    {\n      \"passage_id\": \"p51-01298\",\n      \"label\": \"context\",\n      \"reason\": \"Continuación del oficio inicial confirmando conceptos de viáticos.\"\n    },\n    {\n      \"passage_id\": \"p52-00000\",\n      \"label\": \"context\",\n      \"reason\": \"Cierre del oficio inicial del 30 de junio.\"\n    }\n  ],\n  \"coverage\": \"direct\"\n}",
+    "done_reason": "stop",
+    "server_seconds": 17.693102041,
+    "generation_seconds": 4.569909375,
+    "input_tokens": 14040,
+    "output_tokens": 279
+  },
+  "acc3155cf477fa66f970b97c7e34a642dab706ab59544c0ffe5b27fa8fe2159d": {
+    "content": "{\n  \"query\": \"¿Coinciden la fecha del oficio de difusión en pantallas Totem y la fecha del correo que lo remite?\"\n}",
+    "done_reason": "stop",
+    "server_seconds": 0.812174709,
+    "generation_seconds": 0.70851225,
+    "input_tokens": 510,
+    "output_tokens": 35
+  },
+  "8153f0d9d2cb321cd4a1a1a9f59368805e1341d6f040d56155b9b97197506cc1": {
+    "content": "{\n  \"selected\": [\n    {\n      \"passage_id\": \"p61-00000\",\n      \"label\": \"direct\",\n      \"reason\": \"Correo de remisión del oficio de difusión en pantallas Totem.\"\n    },\n    {\n      \"passage_id\": \"p59-00000\",\n      \"label\": \"direct\",\n      \"reason\": \"Oficio de solicitud de difusión en pantallas Totem con fecha.\"\n    },\n    {\n      \"passage_id\": \"p65-00000\",\n      \"label\": \"context\",\n      \"reason\": \"Correo de remisión de oficio de difusión en página web.\"\n    },\n    {\n      \"passage_id\": \"p63-00000\",\n      \"label\": \"context\",\n      \"reason\": \"Oficio de solicitud de difusión en página web con fecha.\"\n    },\n    {\n      \"passage_id\": \"p69-00000\",\n      \"label\": \"unrelated\",\n      \"reason\": \"Correo de solicitud de información a Unidad de Análisis.\"\n    }\n  ],\n  \"coverage\": \"direct\"\n}",
+    "done_reason": "stop",
+    "server_seconds": 20.082895625,
+    "generation_seconds": 4.777687583,
+    "input_tokens": 14592,
+    "output_tokens": 275
+  },
+  "4228ded95ed7bebba9af20db0a75224f8738e91de091b92b82ba4e565d8343b6": {
+    "content": "{\n  \"query\": \"¿Qué números de oficio corresponden a la difusión en pantallas Totem y a la publicación en la página oficial de la Fiscalía?\"\n}",
+    "done_reason": "stop",
+    "server_seconds": 0.890432625,
+    "generation_seconds": 0.538951709,
+    "input_tokens": 512,
+    "output_tokens": 37
+  },
+  "ac6d5c0eeb678490910f9a2b421a2b9c40de4b1b41402cdf2fca485052d8fc1b": {
+    "content": "{\n  \"selected\": [\n    {\n      \"passage_id\": \"p63-00000\",\n      \"label\": \"direct\",\n      \"reason\": \"Identifica el oficio para la publicación en la página oficial.\"\n    },\n    {\n      \"passage_id\": \"p59-00000\",\n      \"label\": \"direct\",\n      \"reason\": \"Identifica el oficio para la difusión en pantallas Totem.\"\n    },\n    {\n      \"passage_id\": \"p61-00000\",\n      \"label\": \"context\",\n      \"reason\": \"Correo de solicitud de difusión en pantallas Totem.\"\n    },\n    {\n      \"passage_id\": \"p65-00000\",\n      \"label\": \"context\",\n      \"reason\": \"Correo de solicitud de difusión en página oficial.\"\n    },\n    {\n      \"passage_id\": \"p63-01292\",\n      \"label\": \"context\",\n      \"reason\": \"Firma y datos de contacto del oficio de pantallas.\"\n    }\n  ],\n  \"coverage\": \"direct\"\n}",
+    "done_reason": "stop",
+    "server_seconds": 53.327748167,
+    "generation_seconds": 4.840652875,
+    "input_tokens": 13811,
+    "output_tokens": 270
+  },
+  "7072ca358d069398220e1c2ed70689239fe4322b837607c3cea10a3540d55f63": {
+    "content": "{\n  \"query\": \"¿La comparecencia del 6 de julio detalla cuáles fueron los avances de la investigación comunicados a Cristina?\"\n}",
+    "done_reason": "stop",
+    "server_seconds": 0.693330667,
+    "generation_seconds": 0.459916333,
+    "input_tokens": 508,
+    "output_tokens": 33
+  },
+  "29eb2ca4b7f0c09c0519c8c5ed98adab90d6bf76bfc9f70daa388fc435a4e864": {
+    "content": "{\n  \"selected\": [\n    {\n      \"passage_id\": \"p71-00000\",\n      \"label\": \"partial\",\n      \"reason\": \"Confirma la comparecencia y la solicitud de avances, sin detallarlos.\"\n    },\n    {\n      \"passage_id\": \"p71-01300\",\n      \"label\": \"partial\",\n      \"reason\": \"Registra la aceptación de los avances, pero omite su contenido específico.\"\n    },\n    {\n      \"passage_id\": \"p51-00000\",\n      \"label\": \"context\",\n      \"reason\": \"Contextualiza la actividad investigativa previa a la comparecencia del 6 de julio.\"\n    },\n    {\n      \"passage_id\": \"p53-00000\",\n      \"label\": \"context\",\n      \"reason\": \"Documenta la logística de la diligencia de verificación de registros.\"\n    },\n    {\n      \"passage_id\": \"p55-00000\",\n      \"label\": \"context\",\n      \"reason\": \"Detalla el oficio de viáticos para la comparecencia y verificación.\"\n    }\n  ],\n  \"coverage\": \"partial\"\n}",
+    "done_reason": "stop",
+    "server_seconds": 56.558026541,
+    "generation_seconds": 5.484438042,
+    "input_tokens": 14434,
+    "output_tokens": 291
+  },
+  "768be24cdcd93808afc18400dc5d865643329d67f0c1716fa975d151ab52a49e": {
+    "content": "{\n  \"query\": \"¿Coinciden el boletín y el oficio al C5i sobre el lado del rostro donde está el tatuaje del signo de pesos?\"\n}",
+    "done_reason": "stop",
+    "server_seconds": 1.114790417,
+    "generation_seconds": 0.758683292,
+    "input_tokens": 515,
+    "output_tokens": 40
+  },
+  "83a49298cd6a861dce75bf436190a806666d8a20e75199bf899379bbdc4d97f5": {
+    "content": "{\n  \"selected\": [\n    {\n      \"passage_id\": \"p19-00000\",\n      \"label\": \"partial\",\n      \"reason\": \"Boletín: signo de pesos en pómulo derecho.\"\n    },\n    {\n      \"passage_id\": \"p29-00000\",\n      \"label\": \"partial\",\n      \"reason\": \"Oficio C5i: signo de pesos en pómulo izquierdo.\"\n    },\n    {\n      \"passage_id\": \"p33-00000\",\n      \"label\": \"partial\",\n      \"reason\": \"Oficio C5i: confirma discrepancia lateral del tatuaje.\"\n    },\n    {\n      \"passage_id\": \"p35-00000\",\n      \"label\": \"context\",\n      \"reason\": \"Boletín: refuerza ubicación en pómulo derecho.\"\n    },\n    {\n      \"passage_id\": \"p31-00000\",\n      \"label\": \"context\",\n      \"reason\": \"Boletín: refuerza ubicación en pómulo derecho.\"\n    }\n  ],\n  \"coverage\": \"contradictory\"\n}",
+    "done_reason": "stop",
+    "server_seconds": 46.657510875,
+    "generation_seconds": 5.05014725,
+    "input_tokens": 12009,
+    "output_tokens": 282
+  },
+  "8bf087eba7e7c6ac21f1b420c0568098b1b892eb7b2662dcde905ea16479d0bb": {
+    "content": "{\n  \"query\": \"¿Qué discrepancia existe entre el boletín y el oficio al C5i respecto a la ubicación del tatuaje de mapache?\"\n}",
+    "done_reason": "stop",
+    "server_seconds": 1.109917042,
+    "generation_seconds": 0.705761042,
+    "input_tokens": 512,
+    "output_tokens": 38
+  },
+  "3a8f694050e157b7a9df2c415675c9e81ae65dc7411b79170f2ed62393e3d0f1": {
+    "content": "{\n  \"selected\": [\n    {\n      \"passage_id\": \"p19-00000\",\n      \"label\": \"partial\",\n      \"reason\": \"Boletín: ubicación del tatuaje de mapache en pierna izquierda.\"\n    },\n    {\n      \"passage_id\": \"p29-00000\",\n      \"label\": \"partial\",\n      \"reason\": \"Oficio C5i: ubicación del tatuaje de mapache en pantorrilla derecha.\"\n    },\n    {\n      \"passage_id\": \"p33-00000\",\n      \"label\": \"partial\",\n      \"reason\": \"Oficio C5i: confirma discrepancia de ubicación del tatuaje.\"\n    },\n    {\n      \"passage_id\": \"p31-00000\",\n      \"label\": \"context\",\n      \"reason\": \"Boletín: confirma ubicación en pierna izquierda.\"\n    },\n    {\n      \"passage_id\": \"p35-00000\",\n      \"label\": \"context\",\n      \"reason\": \"Boletín: confirma ubicación en pierna izquierda.\"\n    }\n  ],\n  \"coverage\": \"direct\"\n}",
+    "done_reason": "stop",
+    "server_seconds": 46.969848666,
+    "generation_seconds": 4.90004925,
+    "input_tokens": 12230,
+    "output_tokens": 282
+  },
+  "63b46d77c3088936a4858e889e8aaf1f81c3bfe704be457cdedcede5b8de90c8": {
+    "content": "{\n  \"query\": \"¿Es idéntica la calle indicada como lugar de entrevista de Margarita y la calle mencionada en la solicitud de cámaras de Altamira?\"\n}",
+    "done_reason": "stop",
+    "server_seconds": 0.907561792,
+    "generation_seconds": 0.547301333,
+    "input_tokens": 514,
+    "output_tokens": 39
+  },
+  "22267c47f3bf69258985e0d6385dc8cf64dfc8209adc2d65b9512277561b0847": {
+    "content": "{\n  \"selected\": [\n    {\n      \"passage_id\": \"p03-00000\",\n      \"label\": \"direct\",\n      \"reason\": \"Indica la calle exacta del lugar de la entrevista de Margarita.\"\n    },\n    {\n      \"passage_id\": \"p29-00000\",\n      \"label\": \"direct\",\n      \"reason\": \"Menciona la calle específica en la solicitud de cámaras de Altamira.\"\n    },\n    {\n      \"passage_id\": \"p05-00000\",\n      \"label\": \"partial\",\n      \"reason\": \"Confirma el domicilio de Margarita, coincidente con el lugar de la entrevista.\"\n    },\n    {\n      \"passage_id\": \"p15-00000\",\n      \"label\": \"partial\",\n      \"reason\": \"Muestra el domicilio en el INE, con un número diferente al de la entrevista.\"\n    },\n    {\n      \"passage_id\": \"p33-00000\",\n      \"label\": \"context\",\n      \"reason\": \"Solicitud de cámaras en Tampico, no en Altamira, para comparación.\"\n    }\n  ],\n  \"coverage\": \"direct\"\n}",
+    "done_reason": "stop",
+    "server_seconds": 50.783200625,
+    "generation_seconds": 5.060345041,
+    "input_tokens": 13102,
+    "output_tokens": 293
+  },
+  "9e7bebabf9fa7b144b7f1b015996aabe3bdf613184176d40b036db26bb513b17": {
+    "content": "{\n  \"query\": \"¿El nombre del agente aparece transcrito de la misma forma en el acta de entrevista y en el pie del oficio al hotel Montecarlo?\"\n}",
+    "done_reason": "stop",
+    "server_seconds": 0.986607833,
+    "generation_seconds": 0.616708125,
+    "input_tokens": 515,
+    "output_tokens": 40
+  },
+  "91c96f2ead62a8a82a2164b15b251eb051b29525add63de1a41101dd1095f4ce": {
+    "content": "{\n  \"selected\": [\n    {\n      \"passage_id\": \"p03-00000\",\n      \"label\": \"partial\",\n      \"reason\": \"Nombre del agente en el acta de entrevista.\"\n    },\n    {\n      \"passage_id\": \"p13-00000\",\n      \"label\": \"partial\",\n      \"reason\": \"Firma del agente en el acta de entrevista.\"\n    },\n    {\n      \"passage_id\": \"p17-02595\",\n      \"label\": \"partial\",\n      \"reason\": \"Nombre del agente en el pie del oficio al hotel.\"\n    },\n    {\n      \"passage_id\": \"p17-00000\",\n      \"label\": \"context\",\n      \"reason\": \"Identificación del oficio dirigido al hotel Montecarlo.\"\n    },\n    {\n      \"passage_id\": \"p27-02600\",\n      \"label\": \"context\",\n      \"reason\": \"Confirmación de la transcripción del nombre del agente.\"\n    }\n  ],\n  \"coverage\": \"partial\"\n}",
+    "done_reason": "stop",
+    "server_seconds": 54.68891125,
+    "generation_seconds": 4.521986458,
+    "input_tokens": 14053,
+    "output_tokens": 266
+  },
+  "ff21b49175009463b96c1c277698d53f9ba447c1546a6e3e1211ddfff5a04d80": {
+    "content": "{\n  \"query\": \"¿Qué días de video le pidieron directamente al hotel Montecarlo?\"\n}",
+    "done_reason": "stop",
+    "server_seconds": 0.620347458,
+    "generation_seconds": 0.38179025,
+    "input_tokens": 498,
+    "output_tokens": 24
+  },
+  "e226d8d6a25808ccb14a368bcd0d486ed236a60847e7f50742633eb45fbc5bf2": {
+    "content": "{\n  \"selected\": [\n    {\n      \"passage_id\": \"p17-01296\",\n      \"label\": \"direct\",\n      \"reason\": \"Solicita grabaciones de video de los días 27, 28 y 29 de diciembre.\"\n    },\n    {\n      \"passage_id\": \"p17-00000\",\n      \"label\": \"direct\",\n      \"reason\": \"Oficio dirigido al Hotel Montecarlo solicitando información y videos.\"\n    },\n    {\n      \"passage_id\": \"p33-00000\",\n      \"label\": \"partial\",\n      \"reason\": \"Solicita videos de cámaras cercanas al Hotel Montecarlo para las mismas fechas.\"\n    },\n    {\n      \"passage_id\": \"p09-00000\",\n      \"label\": \"context\",\n      \"reason\": \"Testimonio de la abuela sobre su visita al hotel y cámaras.\"\n    },\n    {\n      \"passage_id\": \"p07-00000\",\n      \"label\": \"context\",\n      \"reason\": \"Contexto de la denuncia y reconocimiento del hotel por la abuela.\"\n    }\n  ],\n  \"coverage\": \"direct\"\n}",
+    "done_reason": "stop",
+    "server_seconds": 45.655087208,
+    "generation_seconds": 4.95603175,
+    "input_tokens": 11899,
+    "output_tokens": 294
+  },
+  "72f776500388fa95157d442e15c98df1505afa7ed2efdd87fb655f2b9d1c8a8e": {
+    "content": "{\n  \"query\": \"Fecha y hora del último wasap que menciona la abuela.\"\n}",
+    "done_reason": "stop",
+    "server_seconds": 0.61996375,
+    "generation_seconds": 0.379457709,
+    "input_tokens": 500,
+    "output_tokens": 23
+  },
+  "5e8d8c1371126a07e5db25cb17b2eafa24102a35b347377f30d3523b4ac39c95": {
+    "content": "{\n  \"selected\": [\n    {\n      \"passage_id\": \"p07-00000\",\n      \"label\": \"direct\",\n      \"reason\": \"Menciona fecha y hora exactas del último mensaje de WhatsApp.\"\n    },\n    {\n      \"passage_id\": \"p07-01291\",\n      \"label\": \"context\",\n      \"reason\": \"Continúa el relato sobre la falta de respuesta tras el mensaje.\"\n    },\n    {\n      \"passage_id\": \"p05-00000\",\n      \"label\": \"context\",\n      \"reason\": \"Identifica a la abuela entrevistada, Margarita Ruiz Ahumada.\"\n    },\n    {\n      \"passage_id\": \"p09-00000\",\n      \"label\": \"context\",\n      \"reason\": \"Describe el contenido de la foto enviada por WhatsApp.\"\n    },\n    {\n      \"passage_id\": \"p11-00000\",\n      \"label\": \"context\",\n      \"reason\": \"Concluye el testimonio de la abuela sobre el caso.\"\n    }\n  ],\n  \"coverage\": \"direct\"\n}",
+    "done_reason": "stop",
+    "server_seconds": 54.191595791,
+    "generation_seconds": 5.316498708,
+    "input_tokens": 13972,
+    "output_tokens": 277
+  },
+  "6dea0124eb123899455b83bb01fe0bc1d6f06233b4079d75a487617e575d4388": {
+    "content": "{\n  \"query\": \"Descripción de la ropa y el calzado que llevaba Axel al momento de su desaparición, según el boletín.\"\n}",
+    "done_reason": "stop",
+    "server_seconds": 0.855893625,
+    "generation_seconds": 0.617784334,
+    "input_tokens": 502,
+    "output_tokens": 34
+  },
+  "4726d6845aeb103129ddd58a8fd1b97b758c040b727929a8bbfc177958e69c44": {
+    "content": "{\n  \"selected\": [\n    {\n      \"passage_id\": \"p31-00000\",\n      \"label\": \"direct\",\n      \"reason\": \"Boletín oficial indicando 'SIN DATO' para vestimenta y calzado.\"\n    },\n    {\n      \"passage_id\": \"p35-00000\",\n      \"label\": \"direct\",\n      \"reason\": \"Boletín oficial indicando 'SIN DATO' para vestimenta y calzado.\"\n    },\n    {\n      \"passage_id\": \"p19-00000\",\n      \"label\": \"direct\",\n      \"reason\": \"Boletín oficial indicando 'SIN DATO' para vestimenta y calzado.\"\n    },\n    {\n      \"passage_id\": \"p31-01300\",\n      \"label\": \"direct\",\n      \"reason\": \"Boletín oficial indicando 'SIN DATO' para vestimenta y calzado.\"\n    },\n    {\n      \"passage_id\": \"p35-01300\",\n      \"label\": \"direct\",\n      \"reason\": \"Boletín oficial indicando 'SIN DATO' para vestimenta y calzado.\"\n    }\n  ],\n  \"coverage\": \"direct\"\n}",
+    "done_reason": "stop",
+    "server_seconds": 45.417445667,
+    "generation_seconds": 4.778913792,
+    "input_tokens": 11886,
+    "output_tokens": 300
+  },
+  "111d81390dcb60316c19ead9fe475f9b874effd5987ebe51124f2bca63cedcdd": {
+    "content": "{\n  \"query\": \"¿Qué número de habitación ocupó Axel en el hotel Montecarlo?\"\n}",
+    "done_reason": "stop",
+    "server_seconds": 0.620830792,
+    "generation_seconds": 0.3823095,
+    "input_tokens": 499,
+    "output_tokens": 24
+  },
+  "bde69d701baa3e2593cfa945cbac4b4b2c2d643a4b07f9818939e30bed8f1fca": {
+    "content": "{\n  \"selected\": [\n    {\n      \"passage_id\": \"p17-00000\",\n      \"label\": \"context\",\n      \"reason\": \"Solicitud formal de número de habitación a hotel Montecarlo.\"\n    },\n    {\n      \"passage_id\": \"p17-01296\",\n      \"label\": \"context\",\n      \"reason\": \"Fragmento de la solicitud de datos de habitación.\"\n    },\n    {\n      \"passage_id\": \"p09-00000\",\n      \"label\": \"context\",\n      \"reason\": \"Testimonio de búsqueda de registro en el hotel.\"\n    },\n    {\n      \"passage_id\": \"p07-00000\",\n      \"label\": \"context\",\n      \"reason\": \"Contexto de la visita al hotel por la abuela.\"\n    },\n    {\n      \"passage_id\": \"p11-00000\",\n      \"label\": \"context\",\n      \"reason\": \"Cierre del testimonio sobre la información del hotel.\"\n    }\n  ],\n  \"coverage\": \"none\"\n}",
+    "done_reason": "stop",
+    "server_seconds": 44.357743667,
+    "generation_seconds": 4.68986925,
+    "input_tokens": 11552,
+    "output_tokens": 266
+  },
+  "e410c9db64538f177538246b1e930d2de0f9532f63dc88733ceb11ddcf18fac6": {
+    "content": "{\n  \"query\": \"¿Quién fue condenado por la desaparición de Axel y qué pena recibió?\"\n}",
+    "done_reason": "stop",
+    "server_seconds": 0.622278583,
+    "generation_seconds": 0.379186166,
+    "input_tokens": 499,
+    "output_tokens": 24
+  },
+  "5e1ac08ae9e74f912ae1178f834cedd927f193f083dfe5d106308e1133607d95": {
+    "content": "{\n  \"selected\": [\n    {\n      \"passage_id\": \"p31-01300\",\n      \"label\": \"context\",\n      \"reason\": \"Confirma la desaparición de Axel, pero no menciona condena ni pena.\"\n    },\n    {\n      \"passage_id\": \"p35-01300\",\n      \"label\": \"context\",\n      \"reason\": \"Repite datos de la desaparición sin información sobre sentencia judicial.\"\n    },\n    {\n      \"passage_id\": \"p19-01289\",\n      \"label\": \"context\",\n      \"reason\": \"Documento de búsqueda que no contiene datos de condena.\"\n    },\n    {\n      \"passage_id\": \"p07-00000\",\n      \"label\": \"context\",\n      \"reason\": \"Testimonio sobre la última vez que se vio a Axel.\"\n    },\n    {\n      \"passage_id\": \"p71-01300\",\n      \"label\": \"context\",\n      \"reason\": \"Acta de investigación que no detalla condenas ni penas.\"\n    }\n  ],\n  \"coverage\": \"none\"\n}",
+    "done_reason": "stop",
+    "server_seconds": 55.798905875,
+    "generation_seconds": 5.547844625,
+    "input_tokens": 14460,
+    "output_tokens": 274
+  },
+  "c19d2db3277b6d92887bb4ae537e4c6dc11d2b80be51da01b7655395d88b9b63": {
+    "content": "{\n  \"query\": \"¿Qué cantidad exacta de dinero recibió Cristina por los viáticos solicitados?\"\n}",
+    "done_reason": "stop",
+    "server_seconds": 0.623158583,
+    "generation_seconds": 0.382956417,
+    "input_tokens": 500,
+    "output_tokens": 25
+  },
+  "955a1f6f8a56bdc7709e98137ef381eeb9f8c02c315983e393c49c0d0c5b7c90": {
+    "content": "{\n  \"selected\": [\n    {\n      \"passage_id\": \"p53-00000\",\n      \"label\": \"context\",\n      \"reason\": \"Acuerda viáticos sin especificar la cantidad exacta solicitada.\"\n    },\n    {\n      \"passage_id\": \"p55-00000\",\n      \"label\": \"context\",\n      \"reason\": \"Solicita apoyo integral sin detallar el monto económico.\"\n    },\n    {\n      \"passage_id\": \"p57-00000\",\n      \"label\": \"context\",\n      \"reason\": \"Correo de solicitud de viáticos sin monto visible.\"\n    },\n    {\n      \"passage_id\": \"p51-01298\",\n      \"label\": \"context\",\n      \"reason\": \"Pide otorgar viáticos sin indicar la cantidad.\"\n    },\n    {\n      \"passage_id\": \"p67-01300\",\n      \"label\": \"context\",\n      \"reason\": \"Firma de oficio relacionado con la gestión de viáticos.\"\n    }\n  ],\n  \"coverage\": \"none\"\n}",
+    "done_reason": "stop",
+    "server_seconds": 39.960990959,
+    "generation_seconds": 5.375872333,
+    "input_tokens": 10141,
+    "output_tokens": 272
+  },
+  "785b24f60ff270de165c9550c0a13ded7ebb2aeab760283a791608472fe4e75d": {
+    "content": "{\n  \"query\": \"¿Qué día se publicó efectivamente el boletín de Axel en la página web de la Fiscalía?\"\n}",
+    "done_reason": "stop",
+    "server_seconds": 0.69982,
+    "generation_seconds": 0.4582985,
+    "input_tokens": 505,
+    "output_tokens": 30
+  },
+  "be42c2f815e83a762a0e68ffcf829cd2d13a70851a42b9f36ee8a46b4532970a": {
+    "content": "{\n  \"selected\": [\n    {\n      \"passage_id\": \"p65-00000\",\n      \"label\": \"partial\",\n      \"reason\": \"Solicitud de difusión en web con fecha de envío\"\n    },\n    {\n      \"passage_id\": \"p63-00000\",\n      \"label\": \"partial\",\n      \"reason\": \"Oficio formal solicitando publicación en página web\"\n    },\n    {\n      \"passage_id\": \"p61-00000\",\n      \"label\": \"context\",\n      \"reason\": \"Solicitud de difusión en pantallas Totem\"\n    },\n    {\n      \"passage_id\": \"p59-00000\",\n      \"label\": \"context\",\n      \"reason\": \"Solicitud de inclusión en programa de difusión\"\n    },\n    {\n      \"passage_id\": \"p31-00000\",\n      \"label\": \"context\",\n      \"reason\": \"Contenido del boletín de búsqueda\"\n    }\n  ],\n  \"coverage\": \"partial\"\n}",
+    "done_reason": "stop",
+    "server_seconds": 52.249041917,
+    "generation_seconds": 4.60232425,
+    "input_tokens": 13766,
+    "output_tokens": 259
+  },
+  "3d43ef967764bbdbfbfb19ab90651812bae4ebc26353170f06d9e293032a4569": {
+    "content": "{\n  \"query\": \"¿Cuál es el nombre completo de la empleada del Montecarlo que habló con Margarita?\"\n}",
+    "done_reason": "stop",
+    "server_seconds": 0.70153525,
+    "generation_seconds": 0.452727625,
+    "input_tokens": 504,
+    "output_tokens": 29
+  },
+  "31b899d90723e18e057827fe72039e4002b92e815ebd59b638fa7325961c9537": {
+    "content": "{\n  \"selected\": [\n    {\n      \"passage_id\": \"p09-00000\",\n      \"label\": \"partial\",\n      \"reason\": \"Confirma que la empleada no proporcionó su nombre a Margarita.\"\n    },\n    {\n      \"passage_id\": \"p09-01300\",\n      \"label\": \"partial\",\n      \"reason\": \"Reitera la negativa de la empleada a dar nombres.\"\n    },\n    {\n      \"passage_id\": \"p11-00000\",\n      \"label\": \"context\",\n      \"reason\": \"Describe la interacción final con la empleada del hotel.\"\n    },\n    {\n      \"passage_id\": \"p07-00000\",\n      \"label\": \"context\",\n      \"reason\": \"Contextualiza la visita de Margarita al hotel Montecarlo.\"\n    },\n    {\n      \"passage_id\": \"p17-00000\",\n      \"label\": \"context\",\n      \"reason\": \"Oficializa la solicitud de datos al hotel Montecarlo.\"\n    }\n  ],\n  \"coverage\": \"partial\"\n}",
+    "done_reason": "stop",
+    "server_seconds": 48.215132125,
+    "generation_seconds": 4.9872925,
+    "input_tokens": 12603,
+    "output_tokens": 276
+  },
+  "8b2332b7dfeb2ff01c0e08ee2fb4d1441868cf5d0bfb8d2b3a98fd9ad9abf6b8": {
+    "content": "{\n  \"query\": \"¿Cuál es la CURP completa de Margarita Ruiz Ahumada en la copia de su identificación?\"\n}",
+    "done_reason": "stop",
+    "server_seconds": 0.704417333,
+    "generation_seconds": 0.459984541,
+    "input_tokens": 505,
+    "output_tokens": 30
+  },
+  "ec7c7f9075a13df73d665c351f03c5d6252119559e05dd8601d6d07a76cbdd11": {
+    "content": "{\n  \"selected\": [\n    {\n      \"passage_id\": \"p15-00000\",\n      \"label\": \"partial\",\n      \"reason\": \"Muestra la CURP parcial en la copia del INE.\"\n    },\n    {\n      \"passage_id\": \"p05-00000\",\n      \"label\": \"context\",\n      \"reason\": \"Identifica a Margarita Ruiz Ahumada en el acta de entrevista.\"\n    },\n    {\n      \"passage_id\": \"p13-00000\",\n      \"label\": \"context\",\n      \"reason\": \"Confirma la anexión de la copia del INE de la persona.\"\n    },\n    {\n      \"passage_id\": \"p07-00000\",\n      \"label\": \"context\",\n      \"reason\": \"Contextualiza la declaración de Margarita Ruiz Ahumada en el caso.\"\n    },\n    {\n      \"passage_id\": \"p71-00000\",\n      \"label\": \"unrelated\",\n      \"reason\": \"Menciona a otra persona, no aporta datos de la CURP.\"\n    }\n  ],\n  \"coverage\": \"partial\"\n}",
+    "done_reason": "stop",
+    "server_seconds": 58.757693958,
+    "generation_seconds": 5.418369958,
+    "input_tokens": 15230,
+    "output_tokens": 286
+  },
+  "e2e9d44554ea4ec94b0b73fd043afc41e88d53b240b2e9b4111f4a474b6a88e4": {
+    "content": "{\n  \"query\": \"¿Qué resultado tuvo la revisión de álbumes de cadáveres prevista para el 3 y 4 de julio? ¿Se confirmó el fallecimiento de Axel?\"\n}",
+    "done_reason": "stop",
+    "server_seconds": 0.981959,
+    "generation_seconds": 0.620110167,
+    "input_tokens": 517,
+    "output_tokens": 42
+  },
+  "31395ce7067569cb925915ce318504b7a945250141e3fecc63964fddac4a828e": {
+    "content": "{\n  \"selected\": [\n    {\n      \"passage_id\": \"p51-00000\",\n      \"label\": \"partial\",\n      \"reason\": \"Confirma la agenda de la revisión de álbumes para las fechas indicadas.\"\n    },\n    {\n      \"passage_id\": \"p53-00000\",\n      \"label\": \"partial\",\n      \"reason\": \"Detalla el acuerdo administrativo para facilitar la verificación física de registros de cadáveres.\"\n    },\n    {\n      \"passage_id\": \"p55-00000\",\n      \"label\": \"partial\",\n      \"reason\": \"Identifica a la víctima indirecta designada para realizar la verificación presencial.\"\n    },\n    {\n      \"passage_id\": \"p31-00000\",\n      \"label\": \"context\",\n      \"reason\": \"Establece el estatus de no localizado, sin confirmar fallecimiento ni resultado de la revisión.\"\n    },\n    {\n      \"passage_id\": \"p71-01300\",\n      \"label\": \"context\",\n      \"reason\": \"Muestra la notificación de avances a la madre, sin especificar el hallazgo de la revisión.\"\n    }\n  ],\n  \"coverage\": \"partial\"\n}",
+    "done_reason": "stop",
+    "server_seconds": 47.926993083,
+    "generation_seconds": 5.818279833,
+    "input_tokens": 12136,
+    "output_tokens": 301
+  }
+}

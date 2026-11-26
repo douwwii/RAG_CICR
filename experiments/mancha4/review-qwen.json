@@ -1,0 +1,36 @@
+{
+  "scope": "Relecture qualitative des justifications pour les cas sensibles et sans réponse. Ce contrôle porte sur les extraits et les motifs de pertinence, pas sur une réponse finale générée ni sur le parcours dans le navigateur. Les notes ci-dessous sont une analyse de l’assistant, indépendante des libellés automatiques de Qwen.",
+  "findings": [
+    {
+      "cases": "ES14, ES20, ES26",
+      "verdict": "Réserves documentaires retrouvées",
+      "detail": "ES14 : les motifs indiquent explicitement la négation d’identification de Paola. ES20 : Qwen parle d’une demande de données professionnelles, sans conclure à un emploi confirmé. ES26 : il indique que les progrès ne sont pas détaillés."
+    },
+    {
+      "cases": "ES27 à ES30",
+      "verdict": "Deux versions restituées",
+      "detail": "Les variantes des tatouages, des adresses et du nom de l’agent sont présentes. ES27 est classé contradictory, ES28 et ES29 direct, ES30 partial : les catégories seules ne suffisent donc pas à juger le traitement d’une contradiction. Les motifs d’ES28 mentionnent bien une différence de localisation."
+    },
+    {
+      "cases": "ES34, ES35, ES36",
+      "verdict": "Absence de réponse reconnue",
+      "detail": "Les trois bilans sont none. Qwen ne fournit ni numéro de chambre, ni personne condamnée, ni peine, ni montant de paiement. Il décrit les extraits comme du contexte ou des demandes sans résultat."
+    },
+    {
+      "cases": "ES37, ES40",
+      "verdict": "Bilan trop généreux : partial",
+      "detail": "Les sources ne donnent ni date de publication effective, ni résultat de consultation des albums. Qwen classe pourtant ces cas partial. Pour ES40, une justification précise bien que le décès et le résultat ne sont pas confirmés. Aucune publication effective ni aucun décès ne sont affirmés dans les justifications examinées, mais le bilan pourrait laisser croire qu’une partie de la réponse demandée est connue."
+    },
+    {
+      "cases": "ES38, ES39",
+      "verdict": "Information manquante préservée",
+      "detail": "Le nom complet de l’employée et la CURP complète ne sont pas inventés. Qwen indique que le nom n’a pas été fourni et que la CURP est partielle. Le mot negativa dans un motif d’ES38 suggère toutefois un refus, alors que le témoignage établit seulement que le nom n’a pas été communiqué."
+    },
+    {
+      "cases": "ES11, ES16",
+      "verdict": "Formulations à rendre plus prudentes",
+      "detail": "ES11 parle de reconnaissance du lieu à partir de l’expérience de la témoin ; il faudrait expliciter que l’association au Montecarlo reste son interprétation. ES16 parle de perte de la photo, alors que la source dit seulement ne plus la posséder. Ces glissements montrent qu’une couverture parfaite des ancres ne garantit pas une justification parfaitement fidèle."
+    }
+  ],
+  "conclusion": "Résultat encourageant pour la recherche et le reclassement : 35/35 couvertures complètes, 40/40 reclassements appliqués. Restitution à améliorer sur la prudence des formulations et le bilan des questions sans réponse. Validation du pipeline complet dans l’interface et de la segmentation Qwen encore nécessaire. Aucun taux global d’hallucination n’est établi."
+}

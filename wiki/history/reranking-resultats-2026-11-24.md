@@ -1,3 +1,5 @@
+> Archive documentaire conservée le 25 novembre 2026. Décrit une étape passée ; utiliser le [guide actuel](../../README.md) pour exploiter BGE-M3. Les commandes et chemins en code se lisent depuis la racine du projet.
+
 # Reranking Qwen — résultats du 24 novembre 2026
 
 Réglage retenu sur les six cas de calibration : **30 candidats**. Il est ensuite figé pour les dix-huit autres questions, dont douze cas de réserve. Quatre dossiers fictifs, 128 passages, 24 questions, identifiants opaques.

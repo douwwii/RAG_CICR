@@ -1,3 +1,5 @@
+> Archive documentaire conservée le 25 novembre 2026. Décrit une étape passée ; utiliser le [guide actuel](../../README.md) pour exploiter BGE-M3. Les commandes et chemins en code se lisent depuis la racine du projet.
+
 # Résultats du benchmark croisé — 23 novembre 2026
 
 60 questions fictives, cinq résultats maximum, 24 configurations. Les résultats décrivent ce corpus, sans garantie de généralisation. Aucun changement n’a été appliqué à l’index de l’interface.

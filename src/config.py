@@ -40,7 +40,7 @@ class OllamaConfig(BaseModel):
 
     base_url: str = Field(default='http://127.0.0.1:11435', pattern=r'^https?://[^\s]+$')
     model_name: NonBlankText = 'qwen3.8:27b-mlx'
-    timeout_seconds: float = Field(default=90.0, gt=0, allow_inf_nan=False)
+    timeout_seconds: float | None = Field(default=90.0, gt=0, allow_inf_nan=False)
     temperature: float = Field(default=0.0, ge=0, allow_inf_nan=False)
     num_predict: int = Field(default=4096, ge=1)
     think: bool | None = False

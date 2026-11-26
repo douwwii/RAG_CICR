@@ -68,6 +68,12 @@ class ServiceTests(unittest.TestCase):
 
 
 class OllamaClientTests(unittest.TestCase):
+    def test_unlimited_timeout_is_forwarded_to_http(self):
+        self.assertEqual(OllamaConfig().timeout_seconds, 90.0)
+        with patch('ollama_client.urlopen', return_value=io.BytesIO(b'{}')) as request:
+            OllamaClient(OllamaConfig(timeout_seconds=None))._request('/api/tags')
+        self.assertIsNone(request.call_args.kwargs['timeout'])
+
     def test_http_request_preserves_raw_text_and_config(self):
         config = OllamaConfig(model_name='autre-modele', think=None, timeout_seconds=5.0)
         schema = {'type': 'object'}

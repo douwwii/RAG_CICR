@@ -1,12 +1,23 @@
-# Sillage — interface documentaire V1
+# Sillage — guide BGE-M3
 
-Application locale du prototype SPOC : dossiers du catalogue existant, recherche réelle dans Qdrant, ingestion de PDF numériques par Qwen et consultation des sources. Aucun appel de génération de réponse : les cartes affichent uniquement des extraits du texte source.
+Application locale du prototype SPOC : dossiers du catalogue, recherche BGE-M3 dans Qdrant, ingestion de PDF numériques par Qwen et consultation des sources. Les cartes affichent uniquement des extraits du texte source ; Qwen intervient pour préparer la recherche et juger la pertinence, sans génération de réponse factuelle.
+
+[Présentation](README.md) · [Architecture](wiki/Architecture.md) · [Sources et évaluations](wiki/Sources.md) · [Historique](wiki/history/README.md)
+
+## Parcours de lecture
+
+- [Installation](#installation) et [démarrage](#démarrage) pour un nouveau poste ou une session existante.
+- [Qwen distant](#qwen-distant) et [démonstration](#démonstration) pour importer et chercher.
+- [Prompts actifs](#prompts-actifs) et [profil BGE-M3](#profil-bge-m3) pour comprendre la configuration courante.
+- [Reconstruction de l'index](#reconstruction-de-lindex-bge-m3) pour une nouvelle génération ; ce n'est pas une étape du démarrage habituel.
+- [Vérifications](#vérifications), [documents longs](#documents-longs), [gestion](#bureau-documentaire-et-gestion-des-dossiers) et [suppression](#suppression-avec-confirmation) selon la tâche.
 
 ## Installation
 
-Depuis la racine du projet, avec Python compatible avec les dépendances du projet et Node.js 22.12+ (Node 24 convient) :
+Depuis la racine du projet, avec Python 3.10+ compatible avec les dépendances et Node.js 22.12+ (Node 24 convient). Pour une installation neuve, créer l’environnement virtuel ; sur un poste installé, conserver l’environnement existant :
 
 ```bash
+python3 -m venv .venv
 .venv/bin/python -m pip install -r requirements-web.txt
 cd frontend
 pnpm install --frozen-lockfile
@@ -15,7 +26,28 @@ cd ..
 
 Si `pnpm` n'est pas installé, installer pnpm depuis son registre habituel (`npm install -g pnpm@11`). Le fichier `pnpm-lock.yaml` fixe les dépendances réellement testées. Aucun chargement de polices, lecteur PDF ou script depuis un CDN.
 
-Le catalogue `catalogue.sqlite` est conservé. Le profil web actif est enregistré dans `web_data/active_index.json` ; après migration, il utilise BGE-M3 avec la préparation contexte + cohérent. Sans manifeste, le socle historique MiniLM reste disponible. Pour initialiser un checkout dépourvu de catalogue/index, suivre d'abord la procédure du README principal (`src/import_catalog.py`, puis `src/index.py`). Ne pas réindexer un corpus existant pour simplement démarrer l'interface.
+Le catalogue `catalogue.sqlite` et le profil `web_data/active_index.json` sont conservés pour une session existante. Si le manifeste pointe déjà vers BGE-M3, passer au démarrage sans réindexer. Sans manifeste, le code charge encore un profil de compatibilité ancien : ne pas le prendre pour la version BGE-M3.
+
+Sur un nouveau poste, télécharger explicitement **uniquement BGE-M3** à la révision applicative. Ce chargement initial nécessite Internet ; les chargements habituels utilisent ensuite le cache local :
+
+```bash
+PYTHONPATH=src .venv/bin/python - <<'PYTHON'
+from web.index_config import BGE_CONFIG, create_embedder
+embedder = create_embedder(BGE_CONFIG.model_copy(update={'local_files_only': False}))
+print(embedder.profile.model_name, embedder.profile.revision)
+PYTHON
+```
+
+Pour un checkout neuf, serveurs arrêtés, initialiser le catalogue fictif puis construire et activer la génération BGE-M3 :
+
+```bash
+.venv/bin/python src/import_catalog.py
+PYTHONPATH=src .venv/bin/python -m web.migrate_index
+```
+
+Cette construction lit les champs JSON directement ; elle ne nécessite pas d'index préalable de première génération. Un tunnel Qwen opérationnel est nécessaire si des PDF déjà importés doivent être redécoupés. Les sources TXT du catalogue ne sont pas automatiquement ingérées par cette commande.
+
+Pour reconstruire une session existante, suivre plutôt les précautions de [reconstruction](#reconstruction-de-lindex-bge-m3). Les scripts CLI archivés ne reconstruisent pas l'index web courant.
 
 ## Démarrage
 
@@ -40,7 +72,7 @@ L'application écoute sur la boucle locale. Elle ne fournit pas d'authentificati
 
 ## Qwen distant
 
-La recherche sur les documents déjà indexés fonctionne sans Qwen. Un import nécessite le tunnel SSH déjà configuré :
+Qwen sert à la segmentation des imports, à la reformulation et au reranking. Sur les documents déjà indexés, une panne Qwen entraîne les replis décrits ci-dessous ; la recherche cosinus reste possible. Un import nécessite le tunnel SSH déjà configuré sur ce poste :
 
 ```bash
 ssh -N -o ExitOnForwardFailure=yes \
@@ -54,6 +86,7 @@ Variables facultatives à définir **avant** de démarrer :
 - `SPOC_OLLAMA_URL` : URL locale du tunnel.
 - `SPOC_OLLAMA_MODEL` : modèle installé sur la machine, par défaut `qwen3.8:27b-mlx`.
 - `SPOC_WEB_DATA` : répertoire des PDF, textes extraits et journal des traitements, par défaut `web_data/`.
+- `SPOC_RERANK_CANDIDATES` : nombre total de candidats, entre 20 et 30, par défaut 30.
 
 Ne pas changer `SPOC_WEB_DATA` pour une session déjà alimentée sans déplacer les fichiers et leur catalogue de façon cohérente.
 
@@ -67,7 +100,7 @@ Deux PDF intégralement fictifs sont fournis dans `data/demo/` ; ils ne sont pas
 4. Sélectionner `DOS002` et importer `dossier-b-homonyme.pdf`. Demander « Où Lina a-t-elle été vue et son identité est-elle confirmée ? ».
 5. Vérifier que la recherche ne mélange jamais les dossiers. Changer de dossier efface résultats et source sélectionnée.
 
-Les réponses attendues servent à vérifier les extraits, sans garantie que chaque question classe le bon passage en tête. Le classement est celui du modèle MiniLM actuel. Les champs historiques et les nouveaux extraits emploient le même encodeur, mais leur préparation diffère ; leur classement combiné devra être évalué sur un corpus plus large.
+Les questions proposées servent à vérifier les extraits et leurs sources, sans garantir un classement parfait. BGE-M3 encode les champs préparés avec leur contexte et les passages PDF cohérents ; le reranker Qwen choisit l’ordre final lorsque son analyse réussit. La qualité sur un corpus plus large reste à évaluer.
 
 Les anciennes sources JSON et TXT s'ouvrent comme texte ; aucune page PDF n'est inventée. Le statut « Non indexé » est affiché pour une source de catalogue absente de l'index, notamment les rapports TXT historiques.
 
@@ -75,11 +108,11 @@ Les anciennes sources JSON et TXT s'ouvrent comme texte ; aucune page PDF n'est 
 
 - PDF de 20 Mo maximum, 1 000 pages et 2 millions de caractères extraits. Les PDF protégés, illisibles et pages sans texte sont refusés. Pas d'OCR ; les documents mixtes contenant des pages sans texte sont également refusés.
 - Extraction `pypdf`, page par page. Le texte et ses positions sont persistés avant indexation. « Texte original » signifie texte numérique extrait du PDF ; la disposition visuelle, les ligatures et l'ordre de lecture de tableaux peuvent différer de l'affichage. Le PDF reste la référence visuelle.
-- Qwen reçoit le texte brut complet, sans blocs numérotés. Les extraits sont vérifiés contre la source ; seuls les séparateurs blancs omis entre extraits exacts peuvent être restaurés. La validation stricte historique conserve son comportement par défaut.
+- Qwen reçoit le texte brut, par fenêtres pour les documents longs. L’ancrage cohérent projette les frontières proposées sur la source et conserve le contenu omis par le modèle ; les textes affichés restent ceux de la source.
 - Si la segmentation est invalide, le document est indexé en extraits techniques exacts, avec avertissement explicite. Un échec réseau, délai ou sortie tronquée produit une erreur à réessayer, sans succès artificiel.
-- Les passages trop longs sont divisés avec le tokenizer réel de MiniLM, sans troncature ; chaque extrait conserve son titre parent, ses positions et ses pages. Ce découpage technique peut séparer une réserve du début de son passage parent : lire le contexte dans la source reste nécessaire. Aucun surlignage approximatif n'est présenté.
+- Les passages trop longs sont divisés avec le tokenizer réel de BGE-M3, sans troncature ; chaque extrait conserve son titre parent, ses positions et ses pages. Ce découpage technique peut séparer une réserve du début de son passage parent : lire le contexte dans la source reste nécessaire. Aucun surlignage approximatif n'est présenté.
 - Une file d'ingestion séquentielle, journalisée dans `web_data/jobs.sqlite`. Les imports interrompus deviennent des erreurs au redémarrage. Réimporter le même fichier après erreur relance la même tâche et conserve le même document ; un doublon déjà en attente/indexé renvoie vers l'existant. Un même fichier dans deux dossiers obtient deux références distinctes.
-- Nouvelle collection `spoc_pdf_passages_v1`, profil d'embedding vérifié. La collection historique n'est pas reconstruite. Les points ne deviennent recherchables qu'après publication du statut terminé ; un échec partiel reste exclu des recherches.
+- Collections de la génération BGE-M3 : `cicr_fields_bge_context_v1` et `spoc_pdf_bge_coherent_v1`, avec profil d'embedding vérifié. Les points PDF ne deviennent recherchables qu'après publication du statut terminé ; un échec partiel reste exclu des recherches.
 - Le backend vérifie dossier, document et texte source ; les routes fichiers n'acceptent aucun chemin système. Le lecteur et le moteur PDF.js sont servis localement.
 - Sans coordonnées fiables, affichage de la page et du passage exact côte à côte. Les scores sont des similarités cosinus, jamais des probabilités de vérité.
 
@@ -98,19 +131,31 @@ Pour régénérer les PDF de démonstration : `.venv/bin/python scripts/create_d
 
 ## Préparation des questions
 
-Chaque recherche envoie d’abord la question à Qwen pour obtenir une phrase de recherche concise, sans réponse ni ajout de faits. Le modèle d’embedding actif (BGE-M3 dans la version web migrée) encode ensuite cette formulation et Qdrant classe les candidats par similarité cosinus dans le dossier sélectionné. Le reranking décrit plus bas sélectionne les cinq résultats affichés. Une panne Qwen ou une formulation invalide/trop longue fait utiliser la question originale. Cette étape de reformulation ne garantit pas à elle seule une amélioration de pertinence.
+Chaque recherche envoie d’abord la question à Qwen pour obtenir une phrase de recherche concise, sans réponse ni ajout de faits. BGE-M3 encode ensuite cette formulation et Qdrant classe les candidats par similarité cosinus dans le dossier sélectionné. Le reranking décrit plus bas sélectionne les cinq résultats affichés. Une panne Qwen ou une formulation invalide/trop longue fait utiliser la question originale. Cette étape de reformulation ne garantit pas à elle seule une amélioration de pertinence.
 
-La reformulation utilise désormais le prompt versionné `prompts/query_rewriting/v4.txt`, avec contrôles conservateurs des noms, nombres, mois et négations. L’évaluation comparative et ses limites sont décrites dans `experiments/query_rewriting/README.md`. Elle ne remplace pas un classement plus fin des passages ni une amélioration du découpage documentaire.
+La reformulation utilise le prompt multilingue V5, avec contrôles conservateurs des noms, nombres, mois et négations. Le [banc de reformulation](experiments/query_rewriting/README.md) précise pourquoi ses anciennes mesures ne constituent pas une évaluation de la configuration BGE-M3 actuelle.
 
 
-## Version BGE-M3 — contexte + cohérent
+## Prompts actifs
 
-La version migrée utilise `BAAI/bge-m3` à la révision `5617a9f61b028005a4858fdac845db406aefb181`, CPU, batch de quatre et quatre threads. Elle encode la question préparée et les documents avec le même modèle. La recherche reste limitée au dossier et à cinq passages maximum.
+| Étape | Prompt courant | Sélection dans le code |
+|---|---|---|
+| Reformulation | [V5 multilingue](prompts/query_rewriting/v5-multilingual.txt) | `src/query_rewriting.py` |
+| Segmentation cohérente | [V4 multilingue](prompts/segmentation/v4-multilingual.txt) | `src/ingestion.py`, si `coherent=True` dans le profil actif |
+| Reranking | [V3 multilingue](prompts/reranking/v3-multilingual.txt) | `src/reranking.py` |
+
+Les anciennes consignes restent dans le dépôt pour les expériences et la compatibilité. Leur présence ne signifie pas qu’elles sont actives. Une modification de prompt ne redécoupe pas les documents déjà indexés ; un nouvel import ou une reconstruction est nécessaire pour appliquer une nouvelle segmentation.
+
+## Profil BGE-M3
+
+La version de référence utilise `BAAI/bge-m3` à la révision `5617a9f61b028005a4858fdac845db406aefb181`, CPU, batch de quatre et quatre threads. Elle encode la question préparée et les documents avec le même modèle. La recherche reste limitée au dossier et à cinq passages maximum.
 
 - Champs historiques : le nom de la personne explicitement associée est inclus dans l’embedding. Les valeurs et identifiants source sont conservés.
-- PDF : prompt `prompts/segmentation/v3-coherent.txt`, ancrage des frontières dans le texte original, regroupement des intertitres courts, conservation des réserves et des phrases complètes lorsque Qwen les propose correctement. Toute la source est conservée, y compris les zones omises dans la proposition du modèle. Un échec d’ancrage entraîne la nouvelle tentative/repli explicite habituels.
+- PDF : prompt `prompts/segmentation/v4-multilingual.txt`, ancrage des frontières dans le texte original, regroupement des intertitres courts, conservation des réserves et des phrases complètes lorsque Qwen les propose correctement. Toute la source est conservée, y compris les zones omises dans la proposition du modèle. Un échec d’ancrage entraîne la nouvelle tentative/repli explicite habituels.
 - Nouveaux imports : utilisent le profil actif et enregistrent leurs textes extraits dans le répertoire d’artefacts de cette génération.
-- Les collections MiniLM historiques et les anciens artefacts restent disponibles. Les scripts CLI historiques continuent à utiliser MiniLM ; ils ne reconstruisent pas l’index BGE web.
+- Les anciennes générations et commandes sont décrites dans l’[historique](wiki/history/README.md) ; elles ne pilotent pas le profil actif.
+
+## Reconstruction de l'index BGE-M3
 
 Pour construire une nouvelle génération et l’activer, arrêter les deux serveurs puis lancer :
 
@@ -119,9 +164,9 @@ PYTHONPATH=src .venv/bin/python -m web.migrate_index
 ./scripts/start-web.sh
 ```
 
-Les poids BGE doivent être présents dans le cache Hugging Face ; le téléchargement local épinglé est disponible avec `experiments/embedding_benchmark/download_models.py`. Un tunnel Qwen fonctionnel est nécessaire pour redécouper les PDF. Ne pas lancer de nouveaux imports pendant cette opération.
+Les poids BGE-M3 doivent être présents dans le cache Hugging Face ; le téléchargement ciblé est décrit dans l’[installation](#installation). Un tunnel Qwen fonctionnel est nécessaire pour redécouper les PDF. Ne pas lancer de nouveaux imports pendant cette opération.
 
-La migration écrit dans `web_data/indexes/` un stockage distinct et des artefacts distincts. Elle vérifie les empreintes des PDF, les références du catalogue, les profils, les décomptes et la recherche des champs après réouverture. Un PDF en repli interrompt la migration avant activation. Le fichier `active_index.json` n’est remplacé qu’après ces contrôles. `previous_index.json` permet un retour à la génération précédente, serveurs arrêtés :
+La migration écrit dans `web_data/indexes/` un stockage distinct et des artefacts distincts. Elle vérifie les empreintes des PDF, les références du catalogue, les profils, les décomptes et la recherche des champs après réouverture. Un PDF en repli interrompt la migration avant activation. Le fichier `active_index.json` n’est remplacé qu’après ces contrôles. `previous_index.json` permet un retour à la génération précédente seulement si elle reste cohérente avec le catalogue courant, serveurs arrêtés. **Après déplacement ou suppression documentaire, ne pas réactiver une ancienne génération sans reconstruction.** Le manifeste seul ne restaure ni le catalogue, ni les fichiers supprimés, ni les journaux. Si les seules différences sont de nouveaux imports, le retour peut être effectué ainsi :
 
 ```bash
 .venv/bin/python - <<'PYTHON'
@@ -148,11 +193,9 @@ En cas de réponse invalide, délai, modèle occupé ou budget dépassé, les ci
 
 Une seule analyse de reranking est exécutée à la fois dans ce backend local. La première analyse peut prendre plusieurs dizaines de secondes sur la machine distante, davantage en cas d’attente sur la machine partagée. Les 32 dernières analyses réussies sont conservées en mémoire, uniquement pour une question et une liste de candidats identiques. Les sources sont relues/vérifiées avant consultation de ce cache. Les erreurs ne sont pas mises en cache ; redémarrer le backend vide ce cache, notamment après un changement du modèle distant.
 
-Le protocole et les sources des nouveaux tests sont dans `experiments/reranking/README.md` et `data/reranking_demo/`. Ce corpus est séparé du catalogue de démonstration pour ne pas le polluer avec des copies et références fictives adversariales.
+Le [banc de classement](experiments/reranking/README.md) utilise les sources fictives de `data/reranking_demo/`. Ce corpus est séparé du catalogue de démonstration pour ne pas le polluer avec des copies et références fictives adversariales.
 
-Le réglage initial de 25 candidats a été comparé à 20 et 30 sur les cas de calibration. La version retient 30 candidats pour sa validation ; la qualité similaire des trois tailles sur ce petit échantillon ne prouve pas un optimum universel.
-
-Le [rapport mesuré](experiments/reranking/RESULTATS.md) compare cosinus seul, dédoublonnage et reranking sur 24 questions fictives, avec calibration et validation séparées. Le classement retrouve mieux les preuves attendues sur ce corpus ; le diagnostic global de contradiction reste insuffisant même lorsque les deux témoignages sont sélectionnés.
+Le [rapport historique du 24 novembre](wiki/history/reranking-resultats-2026-11-24.md) compare cosinus seul, dédoublonnage et reranking sur 24 questions fictives, avec calibration et validation séparées. Le classement y retrouve mieux les preuves attendues ; le diagnostic global de contradiction reste insuffisant même lorsque les deux témoignages sont sélectionnés. Ces mesures portent sur les prompts de cette série, pas sur une nouvelle évaluation des versions multilingues actuelles.
 
 
 ## Documents longs
@@ -185,7 +228,7 @@ Le bouton « Nouveau dossier » crée un dossier nommé. L’action « Gérer le
 
 « Déplacer » transfère le document vers un autre dossier actif, avec ses associations de personnes, son journal d’import, ses passages sources et les périmètres Qdrant. Les imports en cours et doublons dans la destination sont refusés. Le cache du reranker est vidé. Un journal local `document-move.json` permet de restaurer le dossier d’origine après une erreur ou une interruption du serveur. Si cette restauration échoue, le journal est conservé et le démarrage refuse de poursuivre tant que la cohérence n’est pas rétablie. Ce mécanisme concerne l’index web actif ; une ancienne génération d’index ne doit pas être réactivée après réorganisation sans reconstruction.
 
-Pour les PDF importés en échec ou absents de l’index actif, « Réessayer » réutilise le fichier déjà reçu. Les fenêtres de découpage compatibles sont réutilisées. Les sources historiques non PDF restent consultables ; leur réindexation relève des scripts existants.
+Pour les PDF importés en échec ou absents de l’index actif, « Réessayer » réutilise le fichier déjà reçu. Les fenêtres de découpage compatibles sont réutilisées. Les sources JSON/TXT du catalogue restent consultables. La reconstruction BGE-M3 reprend les champs JSON ; les rapports TXT ne sont pas automatiquement ingérés.
 
 API : `POST /api/dossiers`, `PATCH /api/dossiers/{id}` (`title`, `archived`), `POST /api/dossiers/{id}/documents/{document}/move` (`destination`), `POST /api/dossiers/{id}/documents/{document}/retry`. Les identifiants restent stables lors d’un renommage et d’un déplacement. Les écritures restent soumises au contrôle d’origine local existant.
 

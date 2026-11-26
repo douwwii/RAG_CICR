@@ -1,3 +1,5 @@
+> Archive documentaire conservée le 25 novembre 2026. Décrit une étape passée ; utiliser le [guide actuel](../../README.md) pour exploiter BGE-M3. Les commandes et chemins en code se lisent depuis la racine du projet.
+
 # Qwen : comparaison de deux consignes de découpage
 
 Même modèle déjà chargé (`qwen3.8:27b-mlx`, même empreinte) et même version d’Ollama. Chaque nouvel appel reprend les blocs, le regroupement des documents, le mode de sortie et les paramètres de son appel de référence. Seul le message système change dans la requête. Les deux profils d’appel restent distincts : schéma JSON pour la fiche, mode JSON pour les mini-cas.

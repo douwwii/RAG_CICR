@@ -1,0 +1,1176 @@
+{
+  "schema_version": 1,
+  "annotation_revision": 2,
+  "language": "es",
+  "corpus": "transcription.md",
+  "annotation_audit": "Après un premier essai (25/35 couvertures complètes), ajout des formulations équivalentes omises pour ES01 et ES06 et de la signature de l’acta p. 13 pour ES30. Aucun changement des questions, du corpus, du découpage, des seuils ou du classement. Jeu diagnostique, non aveugle.",
+  "scope": "Questions documentaires, sans recherche extérieure ni conclusion judiciaire.",
+  "annotation_note": "Les citations sont des ancres de localisation minimales, pas une preuve automatique de réponse complète. Les groupes sont tous requis; les alternatives au sein de chaque groupe sont équivalentes.",
+  "cases": [
+    {
+      "id": "ES01",
+      "category": "Faits explicites",
+      "difficulty": "facile",
+      "question_es": "Según el boletín de búsqueda, ¿en qué fecha y municipio fue visto por última vez Axel Mauricio Martínez Mancha?",
+      "expected_answer_es": "El 27 de diciembre de 2022, en Altamira, Tamaulipas.",
+      "pitfalls_fr": "Ne pas donner la date de rédaction des courriers ni celle du message WhatsApp.",
+      "critical": false,
+      "answerability": "supported",
+      "evidence_groups": [
+        [
+          {
+            "pages": [
+              19,
+              31,
+              35
+            ],
+            "quote": "FECHA DE AUSENCIA : `27/12/2022`"
+          },
+          {
+            "pages": [
+              19,
+              31,
+              35
+            ],
+            "quote": "EL DÍA 27/12/2022, AXEL MAURICIO MARTINEZ MANCHA FUE VISTO(A) POR ULTIMA VEZ"
+          }
+        ],
+        [
+          {
+            "pages": [
+              19,
+              31,
+              35
+            ],
+            "quote": "LUGAR DE EXTRAVÍO : `ALTAMIRA, TAMAULIPAS`"
+          },
+          {
+            "pages": [
+              19,
+              31,
+              35
+            ],
+            "quote": "VISTO(A) POR ULTIMA VEZ EN EL MUNICIPIO DE ALTAMIRA, TAMAULIPAS"
+          }
+        ]
+      ],
+      "variant_of": null
+    },
+    {
+      "id": "ES02",
+      "category": "Faits explicites",
+      "difficulty": "facile",
+      "question_es": "¿Qué estatura y peso indica el boletín de búsqueda de Axel?",
+      "expected_answer_es": "190 cm y 90 kg.",
+      "pitfalls_fr": "Les deux valeurs doivent être présentes.",
+      "critical": false,
+      "answerability": "supported",
+      "evidence_groups": [
+        [
+          {
+            "pages": [
+              19,
+              31,
+              35
+            ],
+            "quote": "ESTATURA : `190 CM.`"
+          }
+        ],
+        [
+          {
+            "pages": [
+              19,
+              31,
+              35
+            ],
+            "quote": "PESO : `90 KG.`"
+          }
+        ]
+      ],
+      "variant_of": null
+    },
+    {
+      "id": "ES03",
+      "category": "Faits explicites",
+      "difficulty": "facile",
+      "question_es": "¿Cuál es la fecha de nacimiento de Axel Mauricio Martínez Mancha?",
+      "expected_answer_es": "23 de diciembre de 1994.",
+      "pitfalls_fr": "Ne pas confondre avec la date de disparition.",
+      "critical": false,
+      "answerability": "supported",
+      "evidence_groups": [
+        [
+          {
+            "pages": [
+              19,
+              31,
+              35
+            ],
+            "quote": "FECHA DE NACIMIENTO : `23/12/1994`"
+          },
+          {
+            "pages": [
+              25
+            ],
+            "quote": "fecha de nacimiento 23 de diciembre del año 1994"
+          },
+          {
+            "pages": [
+              67
+            ],
+            "quote": "fecha de nacimiento: 23/12/1994"
+          }
+        ]
+      ],
+      "variant_of": null
+    },
+    {
+      "id": "ES04",
+      "category": "Faits explicites",
+      "difficulty": "facile",
+      "question_es": "¿Qué fecha y hora figuran en el acta de entrevista de Margarita Ruiz Ahumada?",
+      "expected_answer_es": "27 de junio de 2023, a las 14:10 horas.",
+      "pitfalls_fr": "La date de l’entretien diffère des événements racontés.",
+      "critical": false,
+      "answerability": "supported",
+      "evidence_groups": [
+        [
+          {
+            "pages": [
+              3
+            ],
+            "quote": "Fecha : Día `27` / Mes `06` / Año `2023`"
+          }
+        ],
+        [
+          {
+            "pages": [
+              3
+            ],
+            "quote": "Hora : `14:10 hrs.`"
+          }
+        ]
+      ],
+      "variant_of": null
+    },
+    {
+      "id": "ES05",
+      "category": "Faits explicites",
+      "difficulty": "facile",
+      "question_es": "¿Qué parentesco tiene Margarita Ruiz Ahumada con Axel?",
+      "expected_answer_es": "Es su abuela.",
+      "pitfalls_fr": "Ne pas la confondre avec Cristina, sa mère.",
+      "critical": false,
+      "answerability": "supported",
+      "evidence_groups": [
+        [
+          {
+            "pages": [
+              5
+            ],
+            "quote": "Parentesco : `Abuela`"
+          },
+          {
+            "pages": [
+              7
+            ],
+            "quote": "soy abuela del Ciudadano Axel Mauricio Martínez Mancha"
+          }
+        ]
+      ],
+      "variant_of": null
+    },
+    {
+      "id": "ES06",
+      "category": "Faits explicites",
+      "difficulty": "facile",
+      "question_es": "¿Qué palabras aparecen tatuadas en los nudillos de la mano derecha y de la izquierda de Axel?",
+      "expected_answer_es": "ROCK en la mano derecha y SURF en la izquierda.",
+      "pitfalls_fr": "Ne pas inverser les mains.",
+      "critical": false,
+      "answerability": "supported",
+      "evidence_groups": [
+        [
+          {
+            "pages": [
+              19,
+              31,
+              35
+            ],
+            "quote": "MANO DERECHA CON LA PALABRA'ROCK'"
+          },
+          {
+            "pages": [
+              29,
+              33
+            ],
+            "quote": "nudillos de la mano derecha tiene la leyenda \"rock\""
+          }
+        ],
+        [
+          {
+            "pages": [
+              19,
+              31,
+              35
+            ],
+            "quote": "MANO IZQUIERDA CON LA PALABRA'SURF'"
+          },
+          {
+            "pages": [
+              29,
+              33
+            ],
+            "quote": "mano izquierda en los nudillos la leyenda \"surf\""
+          }
+        ]
+      ],
+      "variant_of": null
+    },
+    {
+      "id": "ES07",
+      "category": "Faits explicites",
+      "difficulty": "facile",
+      "question_es": "Según la captura del perfil de Paola Leyva, ¿dónde vive y de dónde es?",
+      "expected_answer_es": "El perfil dice que vive en Tampico y que es de Saltillo.",
+      "pitfalls_fr": "Attribuer ces indications au profil, sans en déduire une identité vérifiée.",
+      "critical": false,
+      "answerability": "supported",
+      "evidence_groups": [
+        [
+          {
+            "pages": [
+              23
+            ],
+            "quote": "Vive en Tampico"
+          }
+        ],
+        [
+          {
+            "pages": [
+              23
+            ],
+            "quote": "De Saltillo"
+          }
+        ]
+      ],
+      "variant_of": null
+    },
+    {
+      "id": "ES08",
+      "category": "Faits explicites",
+      "difficulty": "facile",
+      "question_es": "¿Quién acompañó a Cristina Elizabeth Mancha Ruiz como perito en psicología en la comparecencia del 6 de julio de 2023?",
+      "expected_answer_es": "La licenciada Dalila del Carmen Guevara.",
+      "pitfalls_fr": "Ne pas confondre la psychologue avec la procureure.",
+      "critical": false,
+      "answerability": "supported",
+      "evidence_groups": [
+        [
+          {
+            "pages": [
+              71
+            ],
+            "quote": "LIC. DALILA DEL CARMEN GUEVARA."
+          }
+        ]
+      ],
+      "variant_of": null
+    },
+    {
+      "id": "ES09",
+      "category": "Témoignage et chronologie",
+      "difficulty": "moyenne",
+      "question_es": "¿Cuándo y durante cuánto tiempo estuvo Axel en casa de su abuela la última vez que ella lo vio?",
+      "expected_answer_es": "Según Margarita, el 27 de diciembre de 2022 llegó aproximadamente a las 10:00 y estuvo cerca de una hora y media.",
+      "pitfalls_fr": "Ne pas présenter 10:00 comme une heure exacte de disparition.",
+      "critical": false,
+      "answerability": "supported",
+      "evidence_groups": [
+        [
+          {
+            "pages": [
+              7
+            ],
+            "quote": "el día 27 de diciembre del año 2022, eso fue a las 10:00 horas aproximadamente"
+          }
+        ],
+        [
+          {
+            "pages": [
+              7
+            ],
+            "quote": "solo estuvo en mi casa como una hora y media aproximadamente"
+          }
+        ]
+      ],
+      "variant_of": null
+    },
+    {
+      "id": "ES10",
+      "category": "Témoignage et chronologie",
+      "difficulty": "moyenne",
+      "question_es": "¿Qué día y a qué hora recibió la abuela el mensaje de WhatsApp de Axel?",
+      "expected_answer_es": "Según su declaración, el 28 de diciembre de 2022, aproximadamente a las 10:53.",
+      "pitfalls_fr": "Ne pas substituer la date officielle de disparition à la date du message.",
+      "critical": false,
+      "answerability": "supported",
+      "evidence_groups": [
+        [
+          {
+            "pages": [
+              7
+            ],
+            "quote": "El dia 28 de diciembre del año 2022 a las 10:53 horas aproximadamente"
+          }
+        ]
+      ],
+      "variant_of": null
+    },
+    {
+      "id": "ES11",
+      "category": "Témoignage et chronologie",
+      "difficulty": "moyenne",
+      "question_es": "¿Qué mostraba la fotografía recibida por WhatsApp y por qué la abuela la relacionó con el hotel Montecarlo?",
+      "expected_answer_es": "Describió un pasillo, un elevador abierto y una luz reflejada. Lo relacionó con los pasillos del Montecarlo porque había trabajado allí; esto no verifica el lugar de la foto.",
+      "pitfalls_fr": "Le rapprochement est une interprétation de la témoin, pas une géolocalisation confirmée.",
+      "critical": true,
+      "answerability": "supported",
+      "evidence_groups": [
+        [
+          {
+            "pages": [
+              7
+            ],
+            "quote": "se podia ver un pasillo, un elevador que estaba abierto y una luz reflejada"
+          }
+        ],
+        [
+          {
+            "pages": [
+              7
+            ],
+            "quote": "yo trabaje hace muchas años en el hotel Montecarlo"
+          },
+          {
+            "pages": [
+              9
+            ],
+            "quote": "eran Similar a los pasillos del hotel Montecarlo"
+          }
+        ]
+      ],
+      "variant_of": null
+    },
+    {
+      "id": "ES12",
+      "category": "Témoignage et chronologie",
+      "difficulty": "moyenne",
+      "question_es": "¿Con qué nombre se habría registrado en el Montecarlo una persona que coincidía con la descripción de Axel, y quién transmitió esa información?",
+      "expected_answer_es": "Con el nombre de Carlos, según lo que una empleada sin nombre comunicó a Margarita. No es un registro hotelero verificado en la transcripción.",
+      "pitfalls_fr": "Conserver la chaîne employée → grand-mère → déclaration et le caractère non confirmé.",
+      "critical": true,
+      "answerability": "supported",
+      "evidence_groups": [
+        [
+          {
+            "pages": [
+              9
+            ],
+            "quote": "se habia registrado con el nombre de Carlos"
+          }
+        ],
+        [
+          {
+            "pages": [
+              9
+            ],
+            "quote": "me atendio una Señorita quien no me propicio su nombre"
+          }
+        ]
+      ],
+      "variant_of": null
+    },
+    {
+      "id": "ES13",
+      "category": "Témoignage et chronologie",
+      "difficulty": "moyenne",
+      "question_es": "Según lo que la empleada dijo a Margarita, ¿cuánto tiempo se conservaban las grabaciones del hotel?",
+      "expected_answer_es": "Según el relato de Margarita, la empleada dijo que se borraban a los tres días.",
+      "pitfalls_fr": "Ne pas transformer ce propos rapporté en audit technique du système vidéo.",
+      "critical": false,
+      "answerability": "supported",
+      "evidence_groups": [
+        [
+          {
+            "pages": [
+              9
+            ],
+            "quote": "las grabaciones se borian a las tres dias"
+          }
+        ]
+      ],
+      "variant_of": null
+    },
+    {
+      "id": "ES14",
+      "category": "Témoignage et chronologie",
+      "difficulty": "difficile",
+      "question_es": "¿Identificó Margarita a Paola Leyva como la mujer que acompañaba a Axel en el hotel?",
+      "expected_answer_es": "No. Dijo que no la conocía ni la había visto; la empleada no le dio ese nombre. Señaló además diferencias entre la mujer del perfil y la descripción de la acompañante.",
+      "pitfalls_fr": "Échec critique si le système confirme l’identification de Paola.",
+      "critical": true,
+      "answerability": "supported",
+      "evidence_groups": [
+        [
+          {
+            "pages": [
+              9
+            ],
+            "quote": "la cual no conozco y jamas he visto"
+          }
+        ],
+        [
+          {
+            "pages": [
+              9
+            ],
+            "quote": "en ningun momento la Señorita que me atendio en el hotel Montecarlo me dio el nombre de Paola Leyva"
+          }
+        ],
+        [
+          {
+            "pages": [
+              9
+            ],
+            "quote": "estatoria alta y con el pelo largo y en color negro"
+          }
+        ],
+        [
+          {
+            "pages": [
+              11
+            ],
+            "quote": "una mujer bajita de pelo pintado en color guero"
+          }
+        ]
+      ],
+      "variant_of": null
+    },
+    {
+      "id": "ES15",
+      "category": "Témoignage et chronologie",
+      "difficulty": "moyenne",
+      "question_es": "¿Cuándo acudió Margarita al hotel Montecarlo para preguntar por Axel?",
+      "expected_answer_es": "El 1 de enero de 2023, según su declaración.",
+      "pitfalls_fr": "Ne pas confondre visite personnelle et courrier officiel de juin.",
+      "critical": false,
+      "answerability": "supported",
+      "evidence_groups": [
+        [
+          {
+            "pages": [
+              9
+            ],
+            "quote": "el dia 1 de enero del año 2023"
+          }
+        ]
+      ],
+      "variant_of": null
+    },
+    {
+      "id": "ES16",
+      "category": "Témoignage et chronologie",
+      "difficulty": "moyenne",
+      "question_es": "¿Conservaba Margarita la fotografía de WhatsApp cuando declaró?",
+      "expected_answer_es": "No. Declaró que ya no contaba con esa fotografía.",
+      "pitfalls_fr": "La description dans le témoignage ne signifie pas que le fichier image est joint.",
+      "critical": true,
+      "answerability": "supported",
+      "evidence_groups": [
+        [
+          {
+            "pages": [
+              7
+            ],
+            "quote": "ya no cuento con esa foto"
+          }
+        ]
+      ],
+      "variant_of": null
+    },
+    {
+      "id": "ES17",
+      "category": "Demandes et résultats",
+      "difficulty": "moyenne",
+      "question_es": "¿Qué fechas de videograbaciones pidió la Fiscalía directamente al hotel Montecarlo en el oficio del 27 de junio de 2023?",
+      "expected_answer_es": "Los días 27, 28 y 29 de diciembre de 2022, durante las 24 horas de cada día.",
+      "pitfalls_fr": "Retrouver la demande adressée à l’hôtel, et non seulement celle adressée au C5i.",
+      "critical": false,
+      "answerability": "supported",
+      "evidence_groups": [
+        [
+          {
+            "pages": [
+              17
+            ],
+            "quote": "GRABACIONES DE LOS DÍAS 27, 28 Y 29 DE DICIEMBRE DEL AÑO 2022"
+          }
+        ],
+        [
+          {
+            "pages": [
+              17
+            ],
+            "quote": "EN UN HORARIO COMPRENDIDO DE 24 HORAS"
+          }
+        ]
+      ],
+      "variant_of": null
+    },
+    {
+      "id": "ES18",
+      "category": "Demandes et résultats",
+      "difficulty": "moyenne",
+      "question_es": "En la solicitud al C5i sobre la colonia Adolfo López Mateos, ¿qué domicilio y qué fecha de grabaciones se mencionan?",
+      "expected_answer_es": "Calle Guadalupe Victoria número 600, colonia Adolfo López Mateos, Altamira; 27 de diciembre de 2022, durante 24 horas.",
+      "pitfalls_fr": "Ne pas remplacer Guadalupe Victoria par Emiliano Zapata depuis un autre document.",
+      "critical": false,
+      "answerability": "supported",
+      "evidence_groups": [
+        [
+          {
+            "pages": [
+              29
+            ],
+            "quote": "Calle Guadalupe victoria número 600"
+          }
+        ],
+        [
+          {
+            "pages": [
+              29
+            ],
+            "quote": "videograbaciones de fecha 27 de diciembre del año 2022"
+          }
+        ]
+      ],
+      "variant_of": null
+    },
+    {
+      "id": "ES19",
+      "category": "Recoupements",
+      "difficulty": "difficile",
+      "question_es": "¿Qué diferencia hay entre las fechas y lugares cubiertos por las dos solicitudes de cámaras al C5i?",
+      "expected_answer_es": "Una pide el 27 de diciembre de 2022 cerca de Guadalupe Victoria 600 en Altamira; la otra pide el 27, 28 y 29 de diciembre cerca de General César López de Lara 107-C, referencia hotel Montecarlo, en Tampico.",
+      "pitfalls_fr": "Il faut les deux demandes; éviter de fusionner leurs adresses et périodes.",
+      "critical": false,
+      "answerability": "supported",
+      "evidence_groups": [
+        [
+          {
+            "pages": [
+              29
+            ],
+            "quote": "Calle Guadalupe victoria número 600"
+          }
+        ],
+        [
+          {
+            "pages": [
+              29
+            ],
+            "quote": "videograbaciones de fecha 27 de diciembre del año 2022"
+          }
+        ],
+        [
+          {
+            "pages": [
+              33
+            ],
+            "quote": "calle General Cesar López de Lara 107-C"
+          }
+        ],
+        [
+          {
+            "pages": [
+              33
+            ],
+            "quote": "videograbaciones de fecha 27, 28 y 29 de diciembre del año 2022"
+          }
+        ]
+      ],
+      "variant_of": null
+    },
+    {
+      "id": "ES20",
+      "category": "Demandes et résultats",
+      "difficulty": "difficile",
+      "question_es": "¿El oficio dirigido al hotel Maeva demuestra que Paola Magdalena Leyva Pérez trabajaba allí?",
+      "expected_answer_es": "No. Solicita verificar si trabaja o trabajó allí y, en caso positivo, remitir datos y expediente laboral. El oficio no contiene una respuesta del hotel.",
+      "pitfalls_fr": "Échec critique si une demande conditionnelle devient une preuve d’emploi.",
+      "critical": true,
+      "answerability": "supported",
+      "evidence_groups": [
+        [
+          {
+            "pages": [
+              27
+            ],
+            "quote": "SI SE ENCUENTRA TRABAJANDO O LABORO EN DICHO HOTEL LA PERSONA PAOLA MAGDALENA LEYVA PÉREZ, EN CASO POSITIVO"
+          }
+        ]
+      ],
+      "variant_of": null
+    },
+    {
+      "id": "ES21",
+      "category": "Recoupements",
+      "difficulty": "difficile",
+      "question_es": "¿Para quién se pidió expresamente el Registro Nacional de Detenciones y para qué perfil se solicitaron redes sociales?",
+      "expected_answer_es": "El Registro Nacional de Detenciones se pidió respecto de Axel Mauricio Martínez Mancha; las redes sociales se solicitaron respecto del perfil Paola Leyva.",
+      "pitfalls_fr": "Ne pas transférer une demande d’une personne à l’autre.",
+      "critical": false,
+      "answerability": "supported",
+      "evidence_groups": [
+        [
+          {
+            "pages": [
+              25
+            ],
+            "quote": "consulte en su base de datos al C. Axel Mauricio Martínez Mancha"
+          }
+        ],
+        [
+          {
+            "pages": [
+              25
+            ],
+            "quote": "Registro nacional de detenciones"
+          }
+        ],
+        [
+          {
+            "pages": [
+              21
+            ],
+            "quote": "perfil de facebook: \"Paola Leyva\""
+          }
+        ],
+        [
+          {
+            "pages": [
+              21
+            ],
+            "quote": "Redes sociales."
+          }
+        ]
+      ],
+      "variant_of": null
+    },
+    {
+      "id": "ES22",
+      "category": "Recoupements",
+      "difficulty": "moyenne",
+      "question_es": "¿A qué colectivo se vincula a las víctimas indirectas y para qué estaban previstas las visitas del 3 y 4 de julio de 2023?",
+      "expected_answer_es": "Al colectivo Por amor a ti hasta encontrarte. Las visitas a la Fiscalía en Ciudad Victoria tenían como finalidad revisar físicamente álbumes o registros de cadáveres y restos no identificados.",
+      "pitfalls_fr": "Une visite prévue ne prouve ni participation effective ni identification d’un corps.",
+      "critical": false,
+      "answerability": "supported",
+      "evidence_groups": [
+        [
+          {
+            "pages": [
+              51,
+              53
+            ],
+            "quote": "Por amor a ti hasta encontrarte"
+          }
+        ],
+        [
+          {
+            "pages": [
+              51
+            ],
+            "quote": "los días 03 y 04 de julio del año en curso"
+          }
+        ],
+        [
+          {
+            "pages": [
+              51
+            ],
+            "quote": "verificar físicamente los álbumes y/o registros"
+          }
+        ]
+      ],
+      "variant_of": null
+    },
+    {
+      "id": "ES23",
+      "category": "Recoupements",
+      "difficulty": "difficile",
+      "question_es": "¿Se mencionan los mismos conceptos de viáticos en el oficio inicial del 30 de junio y en el acuerdo del 1 de julio?",
+      "expected_answer_es": "No exactamente. El oficio inicial menciona alimentos, traslado y hospedaje; el acuerdo del 1 de julio menciona alimentos y traslado. Esto no demuestra que se pagara ningún apoyo.",
+      "pitfalls_fr": "Conserver la différence de portée sans inventer de décision sur le logement.",
+      "critical": true,
+      "answerability": "supported",
+      "evidence_groups": [
+        [
+          {
+            "pages": [
+              51
+            ],
+            "quote": "viáticos de alimentos, traslado y hospedaje"
+          }
+        ],
+        [
+          {
+            "pages": [
+              53
+            ],
+            "quote": "viáticos de alimentos y traslado"
+          }
+        ]
+      ],
+      "variant_of": null
+    },
+    {
+      "id": "ES24",
+      "category": "Recoupements",
+      "difficulty": "difficile",
+      "question_es": "¿Coinciden la fecha del oficio de difusión en pantallas Totem y la fecha del correo que lo remite?",
+      "expected_answer_es": "No. El oficio está fechado el 30 de junio de 2023; el correo de remisión aparece el 3 de julio de 2023 a las 15:49.",
+      "pitfalls_fr": "Ne pas confondre rédaction, envoi et réalisation de la diffusion.",
+      "critical": false,
+      "answerability": "supported",
+      "evidence_groups": [
+        [
+          {
+            "pages": [
+              59
+            ],
+            "quote": "a 30 de Junio del 2023"
+          }
+        ],
+        [
+          {
+            "pages": [
+              61
+            ],
+            "quote": "Lun 03/07/2023 15:49"
+          }
+        ]
+      ],
+      "variant_of": null
+    },
+    {
+      "id": "ES25",
+      "category": "Recoupements",
+      "difficulty": "difficile",
+      "question_es": "¿Qué números de oficio corresponden a la difusión en pantallas Totem y a la publicación en la página oficial de la Fiscalía?",
+      "expected_answer_es": "FGJET/FEIDDFP/7548/2023 para pantallas Totem y FGJET/FEIDDFP/7549/2023 para la página oficial.",
+      "pitfalls_fr": "Associer chaque numéro au bon canal; ce sont des demandes de diffusion.",
+      "critical": false,
+      "answerability": "supported",
+      "evidence_groups": [
+        [
+          {
+            "pages": [
+              59
+            ],
+            "quote": "FGJET/FEIDDFP/7548/2023."
+          }
+        ],
+        [
+          {
+            "pages": [
+              59
+            ],
+            "quote": "pantallas Totem"
+          }
+        ],
+        [
+          {
+            "pages": [
+              63
+            ],
+            "quote": "FGJET/FEIDDFP/7549/2023."
+          }
+        ],
+        [
+          {
+            "pages": [
+              63
+            ],
+            "quote": "página web oficial"
+          }
+        ]
+      ],
+      "variant_of": null
+    },
+    {
+      "id": "ES26",
+      "category": "Demandes et résultats",
+      "difficulty": "difficile",
+      "question_es": "¿La comparecencia del 6 de julio detalla cuáles fueron los avances de la investigación comunicados a Cristina?",
+      "expected_answer_es": "No. Registra que se le comunicaron avances y que se dio por enterada, pero no enumera esos avances.",
+      "pitfalls_fr": "Ne pas compléter le compte rendu avec les démarches présentes ailleurs dans le dossier.",
+      "critical": true,
+      "answerability": "supported",
+      "evidence_groups": [
+        [
+          {
+            "pages": [
+              71
+            ],
+            "quote": "hace del conocimiento de la compareciente los avances"
+          }
+        ],
+        [
+          {
+            "pages": [
+              71
+            ],
+            "quote": "me doy por enterada de conformidad"
+          }
+        ]
+      ],
+      "variant_of": null
+    },
+    {
+      "id": "ES27",
+      "category": "Contradictions de sources",
+      "difficulty": "difficile",
+      "question_es": "¿Coinciden el boletín y el oficio al C5i sobre el lado del rostro donde está el tatuaje del signo de pesos?",
+      "expected_answer_es": "No. El boletín indica pómulo derecho; los oficios al C5i indican pómulo izquierdo. Debe señalarse la discrepancia sin decidir qué versión es correcta.",
+      "pitfalls_fr": "Échec critique si le système choisit un côté sans signaler l’autre.",
+      "critical": true,
+      "answerability": "supported",
+      "evidence_groups": [
+        [
+          {
+            "pages": [
+              19,
+              31,
+              35
+            ],
+            "quote": "SIGNO DE PESOS EN PÓMULO DERECHO"
+          }
+        ],
+        [
+          {
+            "pages": [
+              29,
+              33
+            ],
+            "quote": "un signo de pesos cerca del pómulo izquierdo"
+          }
+        ]
+      ],
+      "variant_of": null
+    },
+    {
+      "id": "ES28",
+      "category": "Contradictions de sources",
+      "difficulty": "difficile",
+      "question_es": "¿Qué discrepancia hay entre el boletín y el oficio al C5i sobre la ubicación del tatuaje de mapache?",
+      "expected_answer_es": "El boletín dice pierna izquierda; el oficio al C5i describe un mapache con una pistola de Star Wars en la pantorrilla derecha. No se puede resolver la discrepancia con estas fuentes.",
+      "pitfalls_fr": "Ne pas réunir les deux descriptions en une seule localisation certaine.",
+      "critical": true,
+      "answerability": "supported",
+      "evidence_groups": [
+        [
+          {
+            "pages": [
+              19,
+              31,
+              35
+            ],
+            "quote": "MAPACHE EN LA PIERNA IZQUIERDA"
+          }
+        ],
+        [
+          {
+            "pages": [
+              29,
+              33
+            ],
+            "quote": "un mapache con una pistola de Star Wars en pantorrilla derecha"
+          }
+        ]
+      ],
+      "variant_of": null
+    },
+    {
+      "id": "ES29",
+      "category": "Contradictions de sources",
+      "difficulty": "difficile",
+      "question_es": "¿Es idéntica la calle indicada como lugar de entrevista de Margarita y la calle mencionada en la solicitud de cámaras de Altamira?",
+      "expected_answer_es": "No. El acta indica Emiliano Zapata número 600 y la solicitud al C5i, Guadalupe Victoria número 600, ambas en la colonia Adolfo López Mateos. La transcripción no permite resolver la diferencia.",
+      "pitfalls_fr": "Ne pas corriger automatiquement une adresse avec l’autre.",
+      "critical": true,
+      "answerability": "supported",
+      "evidence_groups": [
+        [
+          {
+            "pages": [
+              3
+            ],
+            "quote": "Lugar de la entrevista : `Calle Emiliano Zapata número 600"
+          }
+        ],
+        [
+          {
+            "pages": [
+              29
+            ],
+            "quote": "Calle Guadalupe victoria número 600"
+          }
+        ]
+      ],
+      "variant_of": null
+    },
+    {
+      "id": "ES30",
+      "category": "Contradictions de sources",
+      "difficulty": "difficile",
+      "question_es": "¿El nombre del agente aparece transcrito de la misma forma en el acta de entrevista y en el pie del oficio al hotel Montecarlo?",
+      "expected_answer_es": "No. El acta dice Ing. Emanuel Salgado Hernández; el pie del oficio dice Ing. Emanuel Salvador Hernández. Es una diferencia de transcripción que requiere cotejo del original, sin afirmar que sean dos personas.",
+      "pitfalls_fr": "Conserver les graphies transcrites et la réserve sur leur lecture.",
+      "critical": true,
+      "answerability": "supported",
+      "evidence_groups": [
+        [
+          {
+            "pages": [
+              3,
+              13
+            ],
+            "quote": "Ing. Emanuel Salgado Hernández"
+          }
+        ],
+        [
+          {
+            "pages": [
+              17
+            ],
+            "quote": "ING. EMANUEL SALVADOR HERNÁNDEZ."
+          }
+        ]
+      ],
+      "variant_of": null
+    },
+    {
+      "id": "ES31",
+      "category": "Robustesse linguistique",
+      "difficulty": "moyenne",
+      "question_es": "que dias de video le pidieron directamente al hotel montecarlo?",
+      "expected_answer_es": "Los días 27, 28 y 29 de diciembre de 2022.",
+      "pitfalls_fr": "Tester l’absence d’accents, de majuscules et de ponctuation espagnole.",
+      "critical": false,
+      "answerability": "supported",
+      "evidence_groups": [
+        [
+          {
+            "pages": [
+              17
+            ],
+            "quote": "GRABACIONES DE LOS DÍAS 27, 28 Y 29 DE DICIEMBRE DEL AÑO 2022"
+          }
+        ]
+      ],
+      "variant_of": "ES17"
+    },
+    {
+      "id": "ES32",
+      "category": "Robustesse linguistique",
+      "difficulty": "moyenne",
+      "question_es": "La abuela: ¿fecha y hora del último wasap que menciona?",
+      "expected_answer_es": "28 de diciembre de 2022, aproximadamente a las 10:53.",
+      "pitfalls_fr": "Tester une formulation courte et la graphie familière wasap.",
+      "critical": false,
+      "answerability": "supported",
+      "evidence_groups": [
+        [
+          {
+            "pages": [
+              7
+            ],
+            "quote": "El dia 28 de diciembre del año 2022 a las 10:53 horas aproximadamente"
+          }
+        ]
+      ],
+      "variant_of": "ES10"
+    },
+    {
+      "id": "ES33",
+      "category": "Absence explicite",
+      "difficulty": "moyenne",
+      "question_es": "¿Qué ropa y calzado llevaba Axel cuando desapareció, según el boletín?",
+      "expected_answer_es": "El boletín indica SIN DATO; no describe ropa ni calzado.",
+      "pitfalls_fr": "Échec critique si une tenue est inventée. SIN DATO est une preuve positive d’absence renseignée.",
+      "critical": true,
+      "answerability": "explicit_unknown",
+      "evidence_groups": [
+        [
+          {
+            "pages": [
+              19,
+              31,
+              35
+            ],
+            "quote": "VESTIMENTA Y CALZADO : `SIN DATO`"
+          }
+        ]
+      ],
+      "variant_of": null
+    },
+    {
+      "id": "ES34",
+      "category": "Sans réponse dans le corpus",
+      "difficulty": "difficile",
+      "question_es": "¿Qué número de habitación ocupó Axel en el hotel Montecarlo?",
+      "expected_answer_es": "No consta en la transcripción. El oficio pide ese dato, pero no contiene la respuesta del hotel.",
+      "pitfalls_fr": "Ne jamais produire de numéro à partir du numéro du courrier ou de l’adresse.",
+      "critical": true,
+      "answerability": "not_in_corpus",
+      "evidence_groups": [
+        [
+          {
+            "pages": [
+              17
+            ],
+            "quote": "NÚMERO DE HABITACION QUE OCUPO"
+          }
+        ]
+      ],
+      "variant_of": null
+    },
+    {
+      "id": "ES35",
+      "category": "Sans réponse dans le corpus",
+      "difficulty": "difficile",
+      "question_es": "¿Quién fue condenado por la desaparición de Axel y qué pena recibió?",
+      "expected_answer_es": "La transcripción no aporta una sentencia, una persona condenada ni una pena.",
+      "pitfalls_fr": "Ne pas accuser Paola ni présenter Axel comme suspect en reprenant une annotation française.",
+      "critical": true,
+      "answerability": "not_in_corpus",
+      "evidence_groups": [],
+      "variant_of": null
+    },
+    {
+      "id": "ES36",
+      "category": "Sans réponse dans le corpus",
+      "difficulty": "difficile",
+      "question_es": "¿Qué cantidad exacta de dinero recibió Cristina por los viáticos solicitados?",
+      "expected_answer_es": "No consta un importe ni un comprobante de pago. Hay solicitudes de apoyo.",
+      "pitfalls_fr": "Une demande de viatiques ne prouve ni approbation ni paiement.",
+      "critical": true,
+      "answerability": "not_in_corpus",
+      "evidence_groups": [
+        [
+          {
+            "pages": [
+              55
+            ],
+            "quote": "viáticos de alimentos y traslado"
+          }
+        ]
+      ],
+      "variant_of": null
+    },
+    {
+      "id": "ES37",
+      "category": "Sans réponse dans le corpus",
+      "difficulty": "difficile",
+      "question_es": "¿Qué día se publicó efectivamente el boletín de Axel en la página web de la Fiscalía?",
+      "expected_answer_es": "No consta la publicación efectiva. Hay un oficio del 30 de junio y un correo de solicitud del 3 de julio, que no acreditan una publicación.",
+      "pitfalls_fr": "Échec critique si une date de demande ou de courriel devient la date de publication.",
+      "critical": true,
+      "answerability": "not_in_corpus",
+      "evidence_groups": [
+        [
+          {
+            "pages": [
+              63
+            ],
+            "quote": "realizar la difusión del boletín de búsqueda"
+          }
+        ],
+        [
+          {
+            "pages": [
+              65
+            ],
+            "quote": "Lun 03/07/2023 15:52"
+          }
+        ]
+      ],
+      "variant_of": null
+    },
+    {
+      "id": "ES38",
+      "category": "Sans réponse dans le corpus",
+      "difficulty": "difficile",
+      "question_es": "¿Cuál es el nombre completo de la empleada del Montecarlo que habló con Margarita?",
+      "expected_answer_es": "No se proporciona; Margarita dijo que la empleada no le dio su nombre.",
+      "pitfalls_fr": "Ne pas attribuer le nom Paola à l’employée.",
+      "critical": true,
+      "answerability": "explicit_unknown",
+      "evidence_groups": [
+        [
+          {
+            "pages": [
+              9
+            ],
+            "quote": "una Señorita quien no me propicio su nombre"
+          }
+        ]
+      ],
+      "variant_of": null
+    },
+    {
+      "id": "ES39",
+      "category": "Sans réponse dans le corpus",
+      "difficulty": "difficile",
+      "question_es": "¿Cuál es la CURP completa de Margarita Ruiz Ahumada en la copia de su identificación?",
+      "expected_answer_es": "No se puede recuperar completa: la transcripción solo recoge RUAM541017MAZS... y marca el final como ilegible.",
+      "pitfalls_fr": "Ne pas reconstituer les caractères manquants à partir de la date de naissance.",
+      "critical": true,
+      "answerability": "explicit_unknown",
+      "evidence_groups": [
+        [
+          {
+            "pages": [
+              15
+            ],
+            "quote": "CURP : `RUAM541017MAZS...` (fin [illisible])"
+          }
+        ]
+      ],
+      "variant_of": null
+    },
+    {
+      "id": "ES40",
+      "category": "Sans réponse dans le corpus",
+      "difficulty": "difficile",
+      "question_es": "¿Qué resultado tuvo la revisión de álbumes de cadáveres prevista para el 3 y 4 de julio? ¿Se confirmó el fallecimiento de Axel?",
+      "expected_answer_es": "La transcripción menciona la visita prevista, pero no aporta su resultado ni confirma el fallecimiento de Axel.",
+      "pitfalls_fr": "Échec critique si la consultation prévue devient une identification ou un décès confirmé.",
+      "critical": true,
+      "answerability": "not_in_corpus",
+      "evidence_groups": [
+        [
+          {
+            "pages": [
+              51
+            ],
+            "quote": "verificar físicamente los álbumes y/o registros"
+          }
+        ]
+      ],
+      "variant_of": null
+    }
+  ]
+}
