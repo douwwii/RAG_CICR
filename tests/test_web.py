@@ -118,7 +118,9 @@ class WebTests(unittest.TestCase):
         job=self.wait(self.upload().json()['job']);doc=job['document_id']
         self.assertEqual(self.client.delete('/api/dossiers/A').status_code,400)
         self.service.jobs.update(job['job_id'],status='running')
-        self.assertEqual(self.client.delete('/api/dossiers/A?confirmed=true').status_code,400)
+        response=self.client.delete('/api/dossiers/A?confirmed=true')
+        self.assertEqual(response.status_code,409)
+        self.assertIn('traitement de document',response.json()['detail'])
         self.service.jobs.update(job['job_id'],status='done')
         self.assertEqual(self.client.delete('/api/dossiers/A?confirmed=true').status_code,200)
         self.assertEqual(self.client.get('/api/dossiers/A/documents').status_code,404)
@@ -229,6 +231,84 @@ class WebTests(unittest.TestCase):
         self.assertEqual(other['status'], 'done')
         self.assertNotEqual(other['document_id'], document_id)
         self.assertNotIn(str(self.root), json.dumps(self.client.get('/api/dossiers/A/documents').json()))
+
+    def test_exact_and_hybrid_use_original_terms_and_document_scope(self):
+        from test_reranking import proposal
+        first = self.wait(self.upload(content=pdf_bytes('Elodie Martin reference AB-2026/0012.')).json()['job'])
+        second = self.wait(self.upload(content=pdf_bytes('Un autre temoignage sur le hangar.')).json()['job'])
+        foreign = self.wait(self.upload('B', pdf_bytes('Elodie Martin reference AB-2026/0012.')).json()['job'])
+        selected = first['document_id']
+        with patch('web.service.rewrite_question') as rewrite, patch.object(self.service, 'encoder') as encoder:
+            hits = self.service.retrieve_candidates('A', 'AB-2026/0012', mode='exact')
+            self.assertEqual({c['document_id'] for c in hits}, {selected})
+            rewrite.assert_not_called()
+            encoder.assert_not_called()
+        with patch('web.service.rewrite_question', return_value='Le hangar') as rewrite:
+            hits = self.service.retrieve_candidates('A', 'AB-2026/0012', mode='hybrid', candidate_k=2)
+            self.assertIn(selected, {c['document_id'] for c in hits})
+            self.assertTrue(all(c['score_kind'] == 'rrf' for c in hits))
+        self.assertEqual(self.service.retrieve_candidates('A', 'AB-2026/0012', mode='exact',
+                                                         document_ids=[second['document_id']]), [])
+        self.assertEqual(self.service.retrieve_candidates('A', 'AB-2026/0012', mode='exact', document_ids=[]), [])
+        for mode in ('semantic', 'hybrid', 'exact'):
+            with self.subTest(mode=mode):
+                source = self.service.retrieve_candidates('A', 'hangar', mode=mode, document_ids=[second['document_id']])
+                self.assertEqual({c['document_id'] for c in source}, {second['document_id']})
+                bad = self.client.post('/api/dossiers/A/search', json=dict(question='AB-2026/0012',
+                                       mode=mode, document_ids=[foreign['document_id']]))
+                self.assertEqual(bad.status_code, 400)
+        # Qwen reçoit uniquement les candidats lexicaux vérifiés et la question originale.
+        def generate(system, text, schema):
+            payload = json.loads(text)
+            self.assertEqual(payload['question'], 'AB-2026/0012')
+            self.assertEqual(len(payload['candidates']), 1)
+            return Generation(content=json.dumps(proposal(payload['candidates'])))
+        with patch.object(self.service.llm, 'generate', side_effect=generate):
+            response = self.client.post('/api/dossiers/A/search', json=dict(question='AB-2026/0012', mode='exact'))
+        self.assertEqual(response.status_code, 200, response.text)
+        self.assertEqual(response.json()['retrieval']['mode'], 'exact')
+        self.assertEqual(response.json()['reranking']['status'], 'applied')
+        self.assertEqual(self.client.post('/api/dossiers/A/search', json=dict(question='a', mode='other')).status_code, 422)
+
+    def test_lexical_fields_preserve_person_context_and_scope(self):
+        from test_vector_store import make_record
+        from schemas import Person, DocumentMetadata
+        record = make_record().model_copy(update={'dossier_id': 'C', 'value': 'Reference ZX-0012', 'embedding_text': 'Reference ZX-0012'})
+        with Catalog(self.catalog) as catalog:
+            catalog.register(dossiers=[Dossier(dossier_id='C', title='Dossier C', person_ids=[record.person_id])],
+                             persons=[Person(person_id=record.person_id, display_name='Élodie Martin')],
+                             documents=[DocumentMetadata(document_id=record.document_id, dossier_id='C',
+                                        source_kind=record.source_kind, source_path=record.source_path,
+                                        source_locator=record.source_locator, person_ids=[record.person_id])])
+        self.service.legacy.rebuild([record], self.encoder.embed_documents([record.embedding_text]),
+                                   profile=self.encoder.profile,
+                                   text_builder_version=self.service.index_config.text_builder_version)
+        for question in ('ZX-0012', 'ELODIE MARTIN', record.document_id):
+            hits = self.service.retrieve_candidates('C', question, mode='exact')
+            self.assertEqual(len(hits), 1)
+            self.assertEqual(hits[0]['text'], record.value)
+            self.assertEqual(hits[0]['passage_id'], str(record.id))
+        self.assertEqual(self.service.retrieve_candidates('B', 'ZX-0012', mode='exact'), [])
+        # Le filtre s'applique également au stockage dense avant sa limite.
+        hits = self.service.retrieve_candidates('C', 'Reference', mode='hybrid', document_ids=[record.document_id])
+        self.assertEqual(len(hits), 1)
+        self.assertEqual(hits[0]['score_kind'], 'rrf')
+
+    def test_lexical_excludes_unpublished_and_checks_source_before_reranking(self):
+        job = self.wait(self.upload(content=pdf_bytes('Reference AB-0012.')).json()['job'])
+        path = self.service.artifact_path / (job['document_id'] + '.json')
+        artifact = json.loads(path.read_text())
+        artifact['text'] = 'Texte remplace.'
+        path.write_text(json.dumps(artifact))
+        with patch.object(self.service.llm, 'generate') as generate:
+            with self.assertRaisesRegex(ValueError, 'texte source'):
+                self.service.search_analysis('A', 'AB-0012', mode='exact')
+            generate.assert_not_called()
+        path.unlink()
+        self.assertEqual(self.service.retrieve_candidates('A', 'AB-0012', mode='exact'), [])
+        self.service.jobs.update(job['job_id'], status='review')
+        path.write_text(json.dumps(artifact))
+        self.assertEqual(self.service.retrieve_candidates('A', 'AB-0012', mode='exact'), [])
 
     def test_http_returns_qwen_ranking_and_assessment(self):
         from test_reranking import candidates, proposal

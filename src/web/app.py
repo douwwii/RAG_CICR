@@ -2,6 +2,7 @@
 from contextlib import asynccontextmanager
 import logging
 from pathlib import Path
+from typing import Literal
 
 from fastapi import FastAPI, File, HTTPException, Request, Response, UploadFile
 from fastapi.exceptions import RequestValidationError
@@ -11,13 +12,26 @@ from starlette.middleware.trustedhost import TrustedHostMiddleware
 
 from catalog import DossierNotFoundError
 from web.service import WebService
+from web.management import ImportInProgressError
 
 MAX_UPLOAD = 20 * 1024 * 1024
+import os
+MAX_OCR_UPLOAD = int(os.environ.get('SPOC_OCR_MAX_MIB', '100')) * 1024 * 1024
+
+
+class OCREdit(BaseModel):
+    destination: str | None = Field(default=None, min_length=1, max_length=100)
+    pages: list[str] | None = Field(default=None, max_length=1000)
+    publish: bool = False
+    retry: bool = False
+    retry_page: int | None = Field(default=None, ge=1, le=1000)
 
 
 class SearchRequest(BaseModel):
     question: str = Field(min_length=1, max_length=2000)
     top_k: int = Field(default=5, ge=1, le=5)
+    mode: Literal['semantic', 'hybrid', 'exact'] = 'semantic'
+    document_ids: list[str] | None = Field(default=None, max_length=200)
 
     @field_validator('question')
     @classmethod
@@ -66,10 +80,10 @@ def create_app(factory=WebService):
             'http://127.0.0.1:5173', 'http://localhost:5173', 'http://127.0.0.1:8000', 'http://localhost:8000',
         }:
             return JSONResponse(status_code=403, content={'detail': 'Origine non autorisée.'})
-        if request.url.path.endswith('/imports'):
+        if request.url.path.endswith(('/imports', '/ocr-imports')):
             size = request.headers.get('content-length', '')
-            if not size.isdigit() or int(size) > MAX_UPLOAD + 1024 * 1024:
-                return JSONResponse(status_code=413, content={'detail': 'PDF limité à 20 Mo ; taille de requête requise.'})
+            if not size.isdigit() or int(size) > (MAX_OCR_UPLOAD if request.url.path.endswith('/ocr-imports') else MAX_UPLOAD) + 1024 * 1024:
+                return JSONResponse(status_code=413, content={'detail': 'Fichier trop volumineux ou taille de requête absente.'})
         response = await call_next(request)
         response.headers['X-Content-Type-Options'] = 'nosniff'
         response.headers['Cache-Control'] = 'no-store'
@@ -87,6 +101,10 @@ def create_app(factory=WebService):
     @app.exception_handler(RequestValidationError)
     async def invalid_input(request, exc):
         return JSONResponse(status_code=422, content={'detail': 'Données invalides : vérifiez la question, le fichier et les paramètres.'})
+
+    @app.exception_handler(ImportInProgressError)
+    async def busy_document(request, exc):
+        return JSONResponse(status_code=409, content={'detail': str(exc)})
 
     @app.exception_handler(ValueError)
     async def invalid_operation(request, exc):
@@ -144,7 +162,31 @@ def create_app(factory=WebService):
 
     @app.post('/api/dossiers/{dossier_id}/search')
     def search(dossier_id: str, body: SearchRequest, request: Request):
-        return request.app.state.service.search_analysis(dossier_id, body.question, body.top_k)
+        return request.app.state.service.search_analysis(dossier_id, body.question, body.top_k,
+                                                         mode=body.mode, document_ids=body.document_ids)
+
+    @app.post('/api/dossiers/{dossier_id}/ocr-imports', status_code=202)
+    async def ocr_upload(dossier_id: str, request: Request, file: UploadFile = File(...)):
+        try:
+            content = await file.read(MAX_OCR_UPLOAD + 1)
+            name = Path((file.filename or '').replace('\\', '/')).name[:160]
+            if not name.lower().endswith('.pdf') or not content.startswith(b'%PDF-'):
+                raise HTTPException(415, 'Sélectionnez un véritable fichier PDF.')
+            if len(content) > MAX_OCR_UPLOAD:
+                raise HTTPException(413, 'PDF trop volumineux pour OCR.')
+            from starlette.concurrency import run_in_threadpool
+            return await run_in_threadpool(request.app.state.service.submit,
+                                          dossier_id, name, content, ocr=True)
+        finally:
+            await file.close()
+
+    @app.get('/api/dossiers/{dossier_id}/documents/{document_id}/ocr')
+    def ocr_get(dossier_id: str, document_id: str, request: Request):
+        return request.app.state.service.ocr_state(dossier_id, document_id)
+
+    @app.put('/api/dossiers/{dossier_id}/documents/{document_id}/ocr')
+    def ocr_edit(dossier_id: str, document_id: str, body: OCREdit, request: Request):
+        return request.app.state.service.edit_ocr(dossier_id, document_id, **body.model_dump())
 
     @app.post('/api/dossiers/{dossier_id}/imports', status_code=202)
     async def upload(dossier_id: str, request: Request, response: Response, file: UploadFile = File(...)):

@@ -114,7 +114,7 @@ Les anciennes sources JSON et TXT s'ouvrent comme texte ; aucune page PDF n'est 
 - Une file d'ingestion séquentielle, journalisée dans `web_data/jobs.sqlite`. Les imports interrompus deviennent des erreurs au redémarrage. Réimporter le même fichier après erreur relance la même tâche et conserve le même document ; un doublon déjà en attente/indexé renvoie vers l'existant. Un même fichier dans deux dossiers obtient deux références distinctes.
 - Collections de la génération BGE-M3 : `cicr_fields_bge_context_v1` et `spoc_pdf_bge_coherent_v1`, avec profil d'embedding vérifié. Les points PDF ne deviennent recherchables qu'après publication du statut terminé ; un échec partiel reste exclu des recherches.
 - Le backend vérifie dossier, document et texte source ; les routes fichiers n'acceptent aucun chemin système. Le lecteur et le moteur PDF.js sont servis localement.
-- Sans coordonnées fiables, affichage de la page et du passage exact côte à côte. Les scores sont des similarités cosinus, jamais des probabilités de vérité.
+- Sans coordonnées fiables, affichage de la page et du passage exact côte à côte. Les scores indiquent le cosinus, le classement lexical ou la fusion selon le mode ; jamais une probabilité de vérité.
 
 ## Vérifications
 
@@ -131,9 +131,28 @@ Pour régénérer les PDF de démonstration : `.venv/bin/python scripts/create_d
 
 ## Préparation des questions
 
-Chaque recherche envoie d’abord la question à Qwen pour obtenir une phrase de recherche concise, sans réponse ni ajout de faits. BGE-M3 encode ensuite cette formulation et Qdrant classe les candidats par similarité cosinus dans le dossier sélectionné. Le reranking décrit plus bas sélectionne les cinq résultats affichés. Une panne Qwen ou une formulation invalide/trop longue fait utiliser la question originale. Cette étape de reformulation ne garantit pas à elle seule une amélioration de pertinence.
+En mode sémantique ou hybride, la recherche envoie d’abord la question à Qwen pour obtenir une phrase de recherche concise, sans réponse ni ajout de faits. BGE-M3 encode ensuite cette formulation et Qdrant classe les candidats par similarité cosinus dans le dossier sélectionné. Le reranking décrit plus bas sélectionne les cinq résultats affichés. Une panne Qwen ou une formulation invalide/trop longue fait utiliser la question originale. Cette étape de reformulation ne garantit pas à elle seule une amélioration de pertinence.
 
 La reformulation utilise le prompt multilingue V5, avec contrôles conservateurs des noms, nombres, mois et négations. Le [banc de reformulation](experiments/query_rewriting/README.md) précise pourquoi ses anciennes mesures ne constituent pas une évaluation de la configuration BGE-M3 actuelle.
+
+
+## Recherche exacte et hybride
+
+Le sélecteur **Mode de recherche** permet de comparer, sur la même question et le même dossier :
+
+- **Sémantique** (défaut conservé) : reformulation V5 et classement cosinus actuels.
+- **Hybride** : candidats sémantiques et candidats lexicaux BM25 sur la question originale, fusionnés par rangs réciproques (RRF, constante 60, poids égaux). La liste dédoublonnée reste limitée à 30 candidats avant Qwen.
+- **Exacte** : tous les mots saisis doivent apparaître dans le même ordre, contigus dans un même champ. Aucun embedding ni reformulation ; Qwen classe ensuite les correspondances vérifiées.
+
+Pour rechercher une personne, saisir son nom ; en mode exact, saisir directement `Élodie Martin` ou `AB-2026/0012`, plutôt qu’une question complète. La casse et les accents sont ignorés, les séparateurs sont normalisés et les mots restent entiers (`0012` ne correspond pas à `00123`). Ce n’est pas une égalité caractère par caractère. Les correspondances portent sur le texte, le titre, le nom affiché ou l’identifiant du document ; pour les champs structurés, le nom de la personne explicitement associée est inclus. Une correspondance de nom ne constitue jamais une résolution d’identité.
+
+**Limiter aux documents sélectionnés** restreint les trois modes avant leur limite de candidats. Sans sélection, le dossier entier est recherché. Le filtre n’infère pas de lien entre documents ou personnes. Les documents OCR en révision, en traitement ou sans artefact publié restent exclus.
+
+API : `POST /api/dossiers/{dossier_id}/search` accepte `mode` (`semantic`, `hybrid`, `exact`, défaut `semantic`) et `document_ids` (liste d’identifiants du dossier, maximum 200 ; `null` = tout le dossier, `[]` = aucun document). La réponse ajoute `retrieval` et, pour les résultats lexicaux ou hybrides, `score_kind` (`lexical` ou `rrf`). Ces scores ne sont pas des cosinus. En cas de panne du reranker, l’ordre du mode choisi est conservé sans bilan Qwen.
+
+La voie lexicale parcourt les métadonnées Qdrant du périmètre en mémoire, sans dépendance supplémentaire, migration ni reconstruction. Cette première version privilégie la cohérence immédiate avec les imports, déplacements et suppressions ; son coût augmente avec le nombre de passages et elle partage le verrou de recherche. Un index lexical persistant pourra être envisagé après mesure sur des dossiers plus volumineux.
+
+Les tests utilisent des modèles simulés : ils vérifient les contrats et l’apport de candidats lexicaux, pas un gain de pertinence réel. Comparer les trois modes sur les mêmes questions, documents et limites avant de changer le défaut ; aucun benchmark distant n’est lancé automatiquement.
 
 
 ## Prompts actifs
@@ -183,13 +202,13 @@ Le retour arrière change uniquement l’index consulté : les PDF importés dep
 
 ## Reranking Qwen et bilan de pertinence
 
-La recherche prépare la question avec Qwen, récupère **30 candidats** cosinus au total dans le dossier, vérifie leurs sources, puis demande à Qwen d’en classer cinq. Le nombre de candidats est configurable entre 20 et 30 via `SPOC_RERANK_CANDIDATES` avant le démarrage. Il ne s’agit pas de 30 candidats par collection après fusion : les champs et passages PDF sont réunis puis limités au nombre demandé.
+La recherche récupère **30 candidats** au total selon le mode choisi (cosinus, hybride ou exact), vérifie leurs sources, puis demande à Qwen d’en classer cinq. Les modes sémantique et hybride préparent la question avec Qwen pour la voie dense. Le nombre de candidats est configurable entre 20 et 30 via `SPOC_RERANK_CANDIDATES` avant le démarrage. Il ne s’agit pas de 30 candidats par collection après fusion : les champs et passages PDF sont réunis puis limités au nombre demandé.
 
-Le reranker juge la question originale, pas uniquement sa reformulation. Il ne reçoit pas les scores cosinus et renvoie des identifiants existants, une catégorie (`direct`, `partial`, `context`, `unrelated`), une justification courte et un diagnostic global. Le backend reprend les textes originaux, sans copier une version générée par le modèle. Le score affiché reste la similarité cosinus ; il ne détermine plus l’ordre final et n’est pas une probabilité de vérité.
+Le reranker juge la question originale, pas uniquement sa reformulation. Il ne reçoit pas les scores cosinus et renvoie des identifiants existants, une catégorie (`direct`, `partial`, `context`, `unrelated`), une justification courte et un diagnostic global. Le backend reprend les textes originaux, sans copier une version générée par le modèle. Le score affiché dépend du mode (cosinus, lexical ou RRF) ; il ne détermine plus l’ordre final et n’est pas une probabilité de vérité.
 
 Le bilan affiché décrit la pertinence et les limites des extraits à partir des catégories de Qwen, avec des liens vers les passages. Il n’est pas une synthèse factuelle libre : les premiers essais ont montré une perte possible de conditionnel dans une telle synthèse. Les faits et leurs réserves restent lisibles dans les passages exacts. Les catégories et justifications demeurent des jugements du modèle, à vérifier.
 
-En cas de réponse invalide, délai, modèle occupé ou budget dépassé, les cinq premiers résultats cosinus sont retournés avec un avertissement et sans bilan prétendument réussi. Les identifiants inconnus, doublons et sorties hors schéma sont refusés. Une seule nouvelle tentative est permise avec les identifiants contraints par le schéma ; si elle échoue, le repli est explicite. Un lot contient au plus 60 000 octets JSON UTF-8 ; les extraits restent entiers. Un traitement par petits lots est prévu jusqu’à quatre lots avec sélection finale ; si les finalistes dépassent encore le budget, le système revient explicitement au cosinus. Aucune troncature silencieuse.
+En cas de réponse invalide, délai, modèle occupé ou budget dépassé, les cinq premiers résultats du classement choisi sont retournés avec un avertissement et sans bilan prétendument réussi. Les identifiants inconnus, doublons et sorties hors schéma sont refusés. Une seule nouvelle tentative est permise avec les identifiants contraints par le schéma ; si elle échoue, le repli est explicite. Un lot contient au plus 60 000 octets JSON UTF-8 ; les extraits restent entiers. Un traitement par petits lots est prévu jusqu’à quatre lots avec sélection finale ; si les finalistes dépassent encore le budget, le système revient explicitement au classement du mode choisi. Aucune troncature silencieuse.
 
 Une seule analyse de reranking est exécutée à la fois dans ce backend local. La première analyse peut prendre plusieurs dizaines de secondes sur la machine distante, davantage en cas d’attente sur la machine partagée. Les 32 dernières analyses réussies sont conservées en mémoire, uniquement pour une question et une liste de candidats identiques. Les sources sont relues/vérifiées avant consultation de ce cache. Les erreurs ne sont pas mises en cache ; redémarrer le backend vide ce cache, notamment après un changement du modèle distant.
 
@@ -237,4 +256,69 @@ API : `POST /api/dossiers`, `PATCH /api/dossiers/{id}` (`title`, `archived`), `P
 
 Le bouton « Supprimer » de chaque document et « Supprimer le dossier » dans sa gestion ouvrent une confirmation nommant la cible. Pour un dossier, le dialogue précise que tous ses documents seront supprimés. La case « Je confirme cette suppression » est nécessaire avant activation du bouton final ; Annuler ne lance aucune requête de suppression.
 
+La confirmation vérifie les traitements du dossier et désactive la suppression tant qu’un import ou OCR est en attente/en cours. Elle réévalue cet état périodiquement. Le backend maintient ce contrôle indépendamment du navigateur et renvoie un conflit HTTP 409 explicite.
+
 Les routes DELETE correspondantes exigent `confirmed=true`. La suppression retire les références du catalogue, les passages des collections Qdrant actives, les tâches d’import, les fichiers PDF reçus, les artefacts actifs et leurs checkpoints. Les sources historiques JSON/TXT peuvent être partagées : leur fichier original reste conservé, seule la référence documentaire est supprimée. Les sauvegardes et anciennes générations d’index ne sont pas purgées ; il ne s’agit pas d’un effacement sécurisé de toutes les copies. Les imports en cours empêchent la suppression. Le journal `document-delete.json` termine une suppression interrompue au redémarrage, de manière idempotente.
+
+
+## OCR Inkling
+
+L’onglet **OCR** utilise un espace de préparation indépendant des dossiers d’enquête et conserve le lecteur PDF. Aucune destination n’est présélectionnée. Choisir un PDF puis cliquer « Lancer la transcription ». Le choix du fichier seul
+ne démarre aucun traitement. Le document en cours est sélectionné automatiquement ;
+la progression indique les pages terminées et la page en cours de lecture.
+Sélectionner un document, naviguer par page et utiliser
+« Voir dans le document » pour comparer au scan. Le traitement s’effectue sur le serveur
+Inkling accessible par le tunnel SSH, pas sur le poste utilisateur. Aucun fournisseur
+cloud ni repli distant supplémentaire n’est utilisé.
+
+Prérequis : `pdftoppm` (Poppler) sur le poste du backend, le tunnel de la section
+[Qwen distant](#qwen-distant), et un modèle vision Inkling installé sur le serveur.
+Le nom historique par défaut est `inkling-2-mini:26b-a5b-nvfp4`. Il est vérifié dans
+la liste des modèles avant chaque traitement ; aucun modèle n’est téléchargé automatiquement.
+
+Variables facultatives avant démarrage :
+
+- `SPOC_OCR_URL` : entrée du serveur Ollama, par défaut `http://127.0.0.1:11435`.
+- `SPOC_OCR_MODEL` : nom exact du modèle Inkling.
+- `SPOC_OCR_MAX_MIB` : limite des imports OCR, 100 Mio par défaut ; l’import numérique reste à 20 Mio.
+
+Le [prompt V1](prompts/ocr/v1.txt) distingue transcription et observations. Les images
+sont rendues une par une à 200 DPI, limitées à 2400 pixels sur le grand côté ; elles
+sont temporaires. Les inférences sont séquentielles, à température zéro, avec une
+limite de 16384 tokens et un délai de 600 secondes par appel. Ces valeurs constituent
+un réglage initial à évaluer, pas une garantie de précision.
+
+La progression et chaque page terminée sont sauvegardées. Après une erreur ou un
+redémarrage, sélectionner le document et « Reprendre la transcription ». Dans « Téléchargement et nouvelle lecture », « Relire cette page »
+remplace uniquement la page sélectionnée et conserve sa version antérieure. La reprise
+exige le même PDF, modèle (empreinte), prompt et paramètres ; un changement crée une
+nouvelle série, en conservant l’ancienne dans les données OCR.
+
+Un document transcrit reçoit l’état **OCR à vérifier** et reste exclu de la recherche.
+Les observations ne sont jamais indexées. Corriger le texte puis enregistrer, ou cliquer
+« Ajouter à la recherche » pour enregistrer et indexer cette version. Les marqueurs
+d’incertitude restent visibles : le modèle ne fournit pas de mesure de confiance fiable.
+Une correction d’un document déjà indexé le retire de la recherche jusqu’à une nouvelle
+publication. Une transcription vide ou incomplète ne peut pas être publiée.
+La segmentation, la reformulation et le reranking continuent d’utiliser Qwen sur le
+serveur configuré, comme pour les PDF numériques.
+
+Les exports Markdown et JSON sont disponibles dans l’onglet. Le fichier durable
+`web_data/<document_id>.ocr.json`, adjacent au PDF original, conserve réponses brutes,
+prompt, empreinte du modèle, corrections et version approuvée. Il est indépendant des
+générations d’index : une reconstruction réutilise la version approuvée sans relancer
+Inkling. Le déplacement conserve ce fichier ; la suppression confirmée du document
+le retire avec le PDF. Les anciennes générations et sauvegardes restent conservées.
+Les imports numériques préexistants ne sont pas automatiquement convertis en OCR.
+
+Les tests OCR utilisent des pages synthétiques et un serveur simulé. Une vérification
+réelle sur manuscrits reste nécessaire pour évaluer omissions et lectures incertaines.
+
+
+### Préparation OCR indépendante
+
+Les nouvelles transcriptions sont conservées dans un périmètre technique réservé (`__ocr_workspace__`), invisible dans la liste des dossiers et non indexé tant que l’utilisateur ne publie pas. Le catalogue impose un dossier à chaque document : ce périmètre réutilise les contrats existants sans rattacher l’OCR au dossier d’enquête actif. `submit(..., ocr=True)` refuse désormais tout autre périmètre. La préparation et le lecteur OCR restent accessibles sans dossier d’enquête sélectionné.
+
+Après vérification, « Ajouter à la recherche » exige une destination active explicitement choisie. Le backend valide cette destination, transfère les références par le mécanisme de déplacement existant, puis indexe le texte approuvé dans ce dossier. Les documents déjà rattachés par l’ancienne version ne sont ni déplacés ni supprimés automatiquement : ils restent accessibles sous « Anciennes transcriptions de ce dossier », sans possibilité d’y lancer de nouveaux imports OCR. La publication de ces transcriptions demande également une destination explicite.
+
+Cette évolution nécessite un redémarrage du backend. Ne pas interrompre un OCR en cours sans décision explicite de l’utilisateur ; attendre sa fin ou convenir d’une interruption conservant les pages déjà transcrites. Avant activation, l’interface signale l’indisponibilité de l’espace de préparation.

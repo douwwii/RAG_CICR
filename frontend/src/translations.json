@@ -437,7 +437,7 @@
   "Envoi du document…": {
     "en": "Uploading document…",
     "es": "Enviando documento…",
-    "ar": "جارٍ إرسال الوثيقة…"
+    "ar": "جارٍ إرسال المستند…"
   },
   "Document source": {
     "en": "Source document",
@@ -933,5 +933,359 @@
     "en": "This case and all its documents will be deleted from the application. This cannot be undone.",
     "es": "Este expediente y todos sus documentos se eliminarán de la aplicación. Esta acción es irreversible.",
     "ar": "سيُحذف هذا الملف وجميع وثائقه من التطبيق. لا يمكن التراجع عن هذا الإجراء."
-  }
+  },
+  "Outils": {
+    "en": "Tools",
+    "es": "Herramientas",
+    "ar": "الأدوات"
+  },
+  "OCR à vérifier": {
+    "en": "OCR to review",
+    "es": "OCR por revisar",
+    "ar": "التعرف الضوئي بحاجة للمراجعة"
+  },
+  "Choisissez un document": {
+    "en": "Choose a document",
+    "es": "Elija un documento",
+    "ar": "اختر مستندًا"
+  },
+  "Lancer l’OCR": {
+    "en": "Run OCR",
+    "es": "Iniciar OCR",
+    "ar": "بدء التعرف الضوئي"
+  },
+  "Transcription OCR": {
+    "en": "OCR transcription",
+    "es": "Transcripción OCR",
+    "ar": "النص المستخرج"
+  },
+  "Observations": {
+    "en": "Observations",
+    "es": "Observaciones",
+    "ar": "ملاحظات"
+  },
+  "Enregistrer les corrections": {
+    "en": "Save corrections",
+    "es": "Guardar correcciones",
+    "ar": "حفظ التصحيحات"
+  },
+  "Ajouter à la recherche": {
+    "en": "Add to search",
+    "es": "Añadir a la búsqueda",
+    "ar": "إضافة إلى البحث"
+  },
+  "Reprendre l’OCR": {
+    "en": "Resume OCR",
+    "es": "Reanudar OCR",
+    "ar": "استئناف التعرف الضوئي"
+  },
+  "Abandonner les corrections non enregistrées ?": {
+    "en": "Discard unsaved corrections?",
+    "es": "¿Descartar las correcciones sin guardar?",
+    "ar": "هل تريد تجاهل التصحيحات غير المحفوظة؟"
+  },
+  "Le document sera transmis à Inkling sur le serveur de Stéphane.": {
+    "en": "The document will be sent to Inkling on Stéphane’s server.",
+    "es": "El documento se enviará a Inkling en el servidor de Stéphane.",
+    "ar": "سيُرسل المستند إلى Inkling على خادم Stéphane."
+  },
+  "Réessayer cette page": {
+    "en": "Retry this page",
+    "es": "Reintentar esta página",
+    "ar": "إعادة محاولة هذه الصفحة"
+  },
+  "Transcription des documents": {
+    "en": "Document transcription",
+    "es": "Transcripción de documentos",
+    "ar": "نسخ المستندات"
+  },
+  "Du PDF au texte recherchable": {
+    "en": "From PDF to searchable text",
+    "es": "Del PDF al texto consultable",
+    "ar": "من ملف PDF إلى نص قابل للبحث"
+  },
+  "Transcrivez un document scanné, vérifiez le texte, puis retrouvez-le dans vos recherches.": {
+    "en": "Transcribe a scanned document, review the text, then find it in your searches.",
+    "es": "Transcriba un documento escaneado, revise el texto y búsquelo después.",
+    "ar": "استخرج نص المستند الممسوح، وراجعه، ثم ابحث فيه."
+  },
+  "Étapes du traitement": {
+    "en": "Processing steps",
+    "es": "Etapas del proceso",
+    "ar": "مراحل المعالجة"
+  },
+  "Choisir un PDF": {
+    "en": "Choose a PDF",
+    "es": "Elegir un PDF",
+    "ar": "اختيار ملف PDF"
+  },
+  "Transcrire": {
+    "en": "Transcribe",
+    "es": "Transcribir",
+    "ar": "استخراج النص"
+  },
+  "Vérifier et ajouter": {
+    "en": "Review and add",
+    "es": "Revisar y añadir",
+    "ar": "المراجعة والإضافة"
+  },
+  "Nouveau document": {
+    "en": "New document",
+    "es": "Nuevo documento",
+    "ar": "مستند جديد"
+  },
+  "Aucun fichier sélectionné": {
+    "en": "No file selected",
+    "es": "Ningún archivo seleccionado",
+    "ar": "لم يتم اختيار ملف"
+  },
+  "Lancer la transcription": {
+    "en": "Start transcription",
+    "es": "Iniciar transcripción",
+    "ar": "بدء استخراج النص"
+  },
+  "Suivre ou vérifier un document": {
+    "en": "Track or review a document",
+    "es": "Seguir o revisar un documento",
+    "ar": "متابعة مستند أو مراجعته"
+  },
+  "Impossible de charger la transcription. Sélectionnez à nouveau le document pour réessayer.": {
+    "en": "Unable to load the transcription. Select the document again to retry.",
+    "es": "No se pudo cargar la transcripción. Vuelva a seleccionar el documento.",
+    "ar": "تعذر تحميل النص. اختر المستند مجددًا للمحاولة."
+  },
+  "Document reçu. Le traitement peut continuer pendant que vous utilisez l’application.": {
+    "en": "Document received. Processing continues while you use the application.",
+    "es": "Documento recibido. El proceso continúa mientras utiliza la aplicación.",
+    "ar": "تم استلام المستند. تستمر المعالجة أثناء استخدام التطبيق."
+  },
+  "Corrections enregistrées. Ajoutez le document à la recherche lorsque vous avez terminé la vérification.": {
+    "en": "Corrections saved. Add the document to search once your review is complete.",
+    "es": "Correcciones guardadas. Añada el documento a la búsqueda al finalizar la revisión.",
+    "ar": "تم حفظ التصحيحات. أضف المستند إلى البحث عند انتهاء المراجعة."
+  },
+  "Ajout à la recherche demandé. Le document sera disponible à la fin du traitement.": {
+    "en": "Adding to search. The document will be available when processing finishes.",
+    "es": "Adición a la búsqueda solicitada. El documento estará disponible al finalizar el proceso.",
+    "ar": "طُلبت الإضافة إلى البحث. سيتاح المستند بعد انتهاء المعالجة."
+  },
+  "Nouvelle lecture demandée. Les pages déjà terminées sont conservées.": {
+    "en": "New reading requested. Completed pages are preserved.",
+    "es": "Nueva lectura solicitada. Se conservan las páginas completadas.",
+    "ar": "طُلبت قراءة جديدة. تُحفظ الصفحات المكتملة."
+  },
+  "Transcription en cours": {
+    "en": "Transcription in progress",
+    "es": "Transcripción en curso",
+    "ar": "جارٍ استخراج النص"
+  },
+  "Préparation pour la recherche": {
+    "en": "Preparing for search",
+    "es": "Preparación para la búsqueda",
+    "ar": "جارٍ التجهيز للبحث"
+  },
+  "Le traitement s’est interrompu": {
+    "en": "Processing was interrupted",
+    "es": "El proceso se ha interrumpido",
+    "ar": "توقفت المعالجة"
+  },
+  "Disponible dans la recherche": {
+    "en": "Available in search",
+    "es": "Disponible en la búsqueda",
+    "ar": "متاح في البحث"
+  },
+  "Transcription à vérifier": {
+    "en": "Transcription ready for review",
+    "es": "Transcripción por revisar",
+    "ar": "النص جاهز للمراجعة"
+  },
+  "Votre document est dans la file. Le traitement démarrera dès que le serveur sera disponible.": {
+    "en": "Your document is queued. Processing starts when the server is available.",
+    "es": "Su documento está en cola. El proceso comenzará cuando el servidor esté disponible.",
+    "ar": "المستند في قائمة الانتظار. تبدأ المعالجة عند توفر الخادم."
+  },
+  "Inkling lit les pages une à une. Vous pouvez déjà consulter les pages terminées.": {
+    "en": "Inkling is reading each page in turn. Completed pages are already available to view.",
+    "es": "Inkling lee las páginas una a una. Ya puede consultar las páginas terminadas.",
+    "ar": "يقرأ Inkling الصفحات بالتتابع. يمكنك الاطلاع على الصفحات المكتملة الآن."
+  },
+  "Le texte est en cours de préparation pour permettre la recherche dans ce dossier.": {
+    "en": "The text is being prepared for search in this folder.",
+    "es": "El texto se está preparando para la búsqueda en este expediente.",
+    "ar": "يُجهز النص لإتاحة البحث فيه ضمن هذا المجلد."
+  },
+  "Les pages terminées sont conservées. Vous pouvez reprendre le traitement sans renvoyer le PDF.": {
+    "en": "Completed pages are saved. Resume processing without uploading the PDF again.",
+    "es": "Se conservan las páginas terminadas. Reanude el proceso sin volver a enviar el PDF.",
+    "ar": "تُحفظ الصفحات المكتملة. استأنف المعالجة دون إرسال الملف مجددًا."
+  },
+  "Vous pouvez maintenant retrouver les passages de ce document dans l’onglet Rechercher.": {
+    "en": "You can now find passages from this document in the Search tab.",
+    "es": "Ya puede encontrar los pasajes de este documento en la pestaña Buscar.",
+    "ar": "يمكنك الآن العثور على مقاطع هذا المستند في تبويب البحث."
+  },
+  "Comparez le texte avec le PDF, corrigez si nécessaire, puis ajoutez le document à la recherche.": {
+    "en": "Compare the text with the PDF, correct it if needed, then add the document to search.",
+    "es": "Compare el texto con el PDF, corríjalo si es necesario y añádalo a la búsqueda.",
+    "ar": "قارن النص بملف PDF، وصححه عند الحاجة، ثم أضف المستند إلى البحث."
+  },
+  "pages transcrites": {
+    "en": "pages transcribed",
+    "es": "páginas transcritas",
+    "ar": "صفحات مكتملة"
+  },
+  "Pages transcrites": {
+    "en": "Pages transcribed",
+    "es": "Páginas transcritas",
+    "ar": "الصفحات المكتملة"
+  },
+  "Lecture de la page": {
+    "en": "Reading page",
+    "es": "Leyendo la página",
+    "ar": "جارٍ قراءة الصفحة"
+  },
+  "Vérifiez le tunnel vers le serveur puis réessayez.": {
+    "en": "Check the server tunnel and try again.",
+    "es": "Compruebe el túnel al servidor y vuelva a intentarlo.",
+    "ar": "تحقق من الاتصال بالخادم ثم حاول مجددًا."
+  },
+  "Reprendre la transcription": {
+    "en": "Resume transcription",
+    "es": "Reanudar transcripción",
+    "ar": "استئناف استخراج النص"
+  },
+  "Chargement de la transcription…": {
+    "en": "Loading transcription…",
+    "es": "Cargando transcripción…",
+    "ar": "جارٍ تحميل النص…"
+  },
+  "Vérifier la transcription": {
+    "en": "Review the transcription",
+    "es": "Revisar la transcripción",
+    "ar": "مراجعة النص"
+  },
+  "Corrections non enregistrées": {
+    "en": "Unsaved corrections",
+    "es": "Correcciones sin guardar",
+    "ar": "تصحيحات غير محفوظة"
+  },
+  "Lecture seule pendant le traitement": {
+    "en": "Read-only while processing",
+    "es": "Solo lectura durante el proceso",
+    "ar": "للقراءة فقط أثناء المعالجة"
+  },
+  "Modifications enregistrées": {
+    "en": "Changes saved",
+    "es": "Cambios guardados",
+    "ar": "تم حفظ التغييرات"
+  },
+  "Voir le PDF original": {
+    "en": "View original PDF",
+    "es": "Ver PDF original",
+    "ar": "عرض ملف PDF الأصلي"
+  },
+  "Texte de la page": {
+    "en": "Page text",
+    "es": "Texto de la página",
+    "ar": "نص الصفحة"
+  },
+  "Conservez les mentions d’incertitude et vérifiez les noms, dates et nombres dans le PDF.": {
+    "en": "Keep uncertainty markers and check names, dates and numbers against the PDF.",
+    "es": "Conserve las marcas de incertidumbre y compruebe nombres, fechas y números en el PDF.",
+    "ar": "احتفظ بعلامات عدم اليقين وتحقق من الأسماء والتواريخ والأرقام في الملف الأصلي."
+  },
+  "Observations de cette page": {
+    "en": "Page observations",
+    "es": "Observaciones de esta página",
+    "ar": "ملاحظات هذه الصفحة"
+  },
+  "Ces observations ne sont pas ajoutées à la recherche.": {
+    "en": "These observations are not added to search.",
+    "es": "Estas observaciones no se añaden a la búsqueda.",
+    "ar": "لا تُضاف هذه الملاحظات إلى البحث."
+  },
+  "Enregistrement…": {
+    "en": "Saving…",
+    "es": "Guardando…",
+    "ar": "جارٍ الحفظ…"
+  },
+  "Téléchargement et nouvelle lecture": {
+    "en": "Download and reread",
+    "es": "Descarga y nueva lectura",
+    "ar": "التنزيل وإعادة القراءة"
+  },
+  "Télécharger la transcription": {
+    "en": "Download transcription",
+    "es": "Descargar transcripción",
+    "ar": "تنزيل النص"
+  },
+  "Texte Markdown": {
+    "en": "Markdown text",
+    "es": "Texto Markdown",
+    "ar": "نص Markdown"
+  },
+  "Données JSON": {
+    "en": "JSON data",
+    "es": "Datos JSON",
+    "ar": "بيانات JSON"
+  },
+  "En cas de mauvaise lecture, demandez à Inkling de relire cette page. Les corrections non enregistrées seront perdues.": {
+    "en": "If a page was read incorrectly, ask Inkling to reread it. Unsaved corrections will be lost.",
+    "es": "Si la lectura es incorrecta, pida a Inkling que relea esta página. Se perderán las correcciones sin guardar.",
+    "ar": "عند وجود خطأ في القراءة، اطلب إعادة قراءة الصفحة. ستُفقد التصحيحات غير المحفوظة."
+  },
+  "Relire cette page": {
+    "en": "Reread this page",
+    "es": "Releer esta página",
+    "ar": "إعادة قراءة هذه الصفحة"
+  },
+  "Choisissez un PDF ci-dessus pour commencer.": {
+    "en": "Choose a PDF above to get started.",
+    "es": "Elija un PDF arriba para comenzar.",
+    "ar": "اختر ملف PDF أعلاه للبدء."
+  },
+  "Votre document sera ajouté à la recherche uniquement après votre vérification.": {
+    "en": "Your document is added to search only after your review.",
+    "es": "El documento se añadirá a la búsqueda solo después de su revisión.",
+    "ar": "لا يُضاف المستند إلى البحث إلا بعد مراجعتك."
+  },
+  "Un traitement de document est en cours. Attendez sa fin avant de supprimer.": {
+    "en": "A document is still being processed. Wait for it to finish before deleting.",
+    "es": "Hay un documento en proceso. Espere a que termine antes de eliminar.",
+    "ar": "تجري معالجة وثيقة. انتظر انتهاء المعالجة قبل الحذف."
+  },
+  "Vérification des traitements en cours…": {
+    "en": "Checking for ongoing processing…",
+    "es": "Comprobando los procesos en curso…",
+    "ar": "جارٍ التحقق من المعالجة الجارية…"
+  },
+  "Espace OCR indépendant": {
+    "en": "Independent OCR workspace",
+    "es": "Espacio OCR independiente",
+    "ar": "مساحة OCR مستقلة"
+  },
+  "Aucun dossier n’est choisi automatiquement. Sélectionnez une destination après vérification.": {
+    "en": "No case is selected automatically. Choose a destination after review.",
+    "es": "No se selecciona ningún expediente automáticamente. Elija un destino tras la revisión.",
+    "ar": "لا يتم اختيار أي ملف تلقائيًا. اختر الوجهة بعد المراجعة."
+  },
+  "Anciennes transcriptions de ce dossier": {
+    "en": "Existing transcriptions in this case",
+    "es": "Transcripciones existentes en este expediente",
+    "ar": "النسخ الموجودة في هذا الملف"
+  },
+  "L’espace OCR n’est pas encore disponible sur le serveur. Rechargez l’interface après son redémarrage.": {
+    "en": "The OCR workspace is not yet available on the server. Reload the interface after restarting it.",
+    "es": "El espacio OCR aún no está disponible en el servidor. Recargue la interfaz tras reiniciarlo.",
+    "ar": "مساحة OCR غير متاحة بعد على الخادم. أعد تحميل الواجهة بعد إعادة تشغيله."
+  },
+  "Mode de recherche": {"en": "Search mode", "es": "Modo de búsqueda", "ar": "وضع البحث"},
+  "Sémantique": {"en": "Semantic", "es": "Semántica", "ar": "دلالي"},
+  "Hybride": {"en": "Hybrid", "es": "Híbrida", "ar": "هجين"},
+  "Exacte": {"en": "Exact", "es": "Exacta", "ar": "مطابق"},
+  "Hybride : sens et mots précis. Exacte : suite de mots, sans distinction de casse ni d’accents.": {"en": "Hybrid: meaning and precise words. Exact: a sequence of words, ignoring case and accents.", "es": "Híbrida: significado y palabras precisas. Exacta: secuencia de palabras, sin distinguir mayúsculas ni acentos.", "ar": "هجين: المعنى والكلمات الدقيقة. مطابق: تسلسل كلمات دون تمييز حالة الأحرف أو علامات التشكيل."},
+  "Limiter aux documents sélectionnés": {"en": "Limit to selected documents", "es": "Limitar a los documentos seleccionados", "ar": "حصر البحث في المستندات المحددة"},
+  "Sans sélection, tout le dossier est recherché.": {"en": "Without a selection, the whole case is searched.", "es": "Sin selección, se busca en todo el expediente.", "ar": "بدون تحديد، يتم البحث في الملف بأكمله."},
+  "Score hybride": {"en": "Hybrid score", "es": "Puntuación híbrida", "ar": "درجة هجينة"},
+  "Score lexical": {"en": "Lexical score", "es": "Puntuación léxica", "ar": "درجة لفظية"}
 }

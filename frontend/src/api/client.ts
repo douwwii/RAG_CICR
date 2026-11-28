@@ -1,5 +1,7 @@
 import type {
+  OCRState,
   SearchResponse,
+  SearchMode,
   Dossier,
   Job,
   Source,
@@ -24,6 +26,37 @@ async function request<T>(path: string, init?: RequestInit): Promise<T> {
 }
 const scope = (id: string) => `/dossiers/${encodeURIComponent(id)}`;
 export const api = {
+  ocr: (id: string, document: string) =>
+    request<OCRState>(
+      scope(id) + `/documents/${encodeURIComponent(document)}/ocr`,
+    ),
+  editOCR: (
+    id: string,
+    document: string,
+    data: {
+      pages?: string[];
+      publish?: boolean;
+      retry?: boolean;
+      retry_page?: number;
+      destination?: string;
+    },
+  ) =>
+    request<{ ok: boolean; dossier_id: string }>(
+      scope(id) + `/documents/${encodeURIComponent(document)}/ocr`,
+      {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      },
+    ),
+  uploadOCR: (id: string, file: File) => {
+    const body = new FormData();
+    body.append("file", file);
+    return request<{ job: Job }>(scope(id) + "/ocr-imports", {
+      method: "POST",
+      body,
+    });
+  },
   deleteItem: (id: string, document?: string) =>
     request(
       scope(id) +
@@ -56,11 +89,11 @@ export const api = {
   dossiers: () => request<Dossier[]>("/dossiers"),
   documents: (id: string) =>
     request<SourceDocument[]>(scope(id) + "/documents"),
-  search: (id: string, question: string, signal: AbortSignal) =>
+  search: (id: string, question: string, signal: AbortSignal, mode: SearchMode, document_ids: string[] | null) =>
     request<SearchResponse>(scope(id) + "/search", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ question, top_k: 5 }),
+      body: JSON.stringify({ question, top_k: 5, mode, document_ids }),
       signal,
     }),
   upload: (id: string, file: File) => {

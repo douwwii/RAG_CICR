@@ -163,7 +163,11 @@ class QdrantVectorStore:
         # search() reste protégé quand il est appelé sans passer par retrieve().
         self.check_compatibility(profile, text_builder_version)
         conditions = [models.FieldCondition(key=key, match=models.MatchValue(value=value))
-                      for key, value in filters.model_dump().items() if value is not None]
+                      for key, value in filters.model_dump(exclude={'document_ids'}).items() if value is not None]
+        if filters.document_ids is not None:
+            if not filters.document_ids:
+                return []
+            conditions.append(models.FieldCondition(key='document_id', match=models.MatchAny(any=filters.document_ids)))
         try:
             hits = self._client.query_points(
                 collection_name=self._config.collection_name, query=vector.tolist(),
@@ -173,8 +177,9 @@ class QdrantVectorStore:
             results = [VectorHit(id=hit.id, score=hit.score, payload=VectorRecord.model_validate(hit.payload))
                        for hit in hits]
             for hit in results:
-                if any(getattr(hit.payload, key) != value for key, value in filters.model_dump().items()
-                       if value is not None):
+                if (any(getattr(hit.payload, key) != value for key, value in filters.model_dump(exclude={'document_ids'}).items()
+                        if value is not None) or
+                        (filters.document_ids is not None and hit.payload.document_id not in filters.document_ids)):
                     raise VectorStoreError('Résultat hors du périmètre demandé.')
             return results
         except Exception as exc:

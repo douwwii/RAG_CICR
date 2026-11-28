@@ -10,7 +10,7 @@ from pathlib import Path
 from threading import RLock
 from uuid import uuid4
 
-from qdrant_client import QdrantClient
+from qdrant_client import QdrantClient, models
 
 from catalog import Catalog
 from common import CATALOG_FILE, DATA_FILE
@@ -21,10 +21,16 @@ from passage_index import PassageIndex
 from qdrant_store import QdrantVectorStore
 from schemas import DocumentMetadata
 from search import retrieve
+from lexical_search import rank_lexical, fuse_ranks
+from vector_store import VectorRecord
+from scope import validate_field_reference
+from passage_index import IndexedPassage
 from query_rewriting import rewrite_question
 from reranking import rerank, cache_key as reranking_key
 from web.jobs import JobRepository
 from web.index_config import WebIndexConfig, create_embedder
+
+OCR_WORKSPACE = '__ocr_workspace__'
 
 log = logging.getLogger(__name__)
 
@@ -56,6 +62,9 @@ class WebService(Management):
         self.client = qdrant or QdrantClient(path=str(vector_path or self.index_config.fields.path))
         self.legacy = QdrantVectorStore(config=self.index_config.fields, client=self.client)
         self.passages = PassageIndex(self.client, collection=self.index_config.passage_collection)
+        from schemas import Dossier
+        with Catalog(self.catalog_path) as catalog:
+            catalog.register(dossiers=[Dossier(dossier_id=OCR_WORKSPACE, title='OCR — préparation')])
         self.recover_move()
         self.recover_delete()
         self.executor = ThreadPoolExecutor(max_workers=1, thread_name_prefix='pdf-ingestion')
@@ -71,7 +80,7 @@ class WebService(Management):
 
     def dossiers(self):
         with Catalog(self.catalog_path, read_only=True) as catalog:
-            return [dict(d.model_dump(), archived=d.dossier_id in self.jobs.archived()) for d in catalog.list_dossiers()]
+            return [dict(d.model_dump(), archived=d.dossier_id in self.jobs.archived()) for d in catalog.list_dossiers() if d.dossier_id != OCR_WORKSPACE]
 
     def require_dossier(self, dossier_id):
         if dossier_id in self.jobs.archived():
@@ -115,10 +124,13 @@ class WebService(Management):
                          status=jobs[d.document_id]['status'] if d.document_id in jobs else
                          ('done' if d.document_id in indexed else 'not_indexed'),
                          job=self.jobs.public(jobs[d.document_id]) if d.document_id in jobs else None,
-                         has_pdf=d.source_kind == 'pdf' and d.document_id in jobs)
+                         has_pdf=d.source_kind == 'pdf' and d.document_id in jobs,
+                         ocr=d.source_kind == 'pdf' and Path(d.source_path).with_suffix('.ocr.json').exists())
                     for d in documents]
 
-    def submit(self, dossier_id, filename, content):
+    def submit(self, dossier_id, filename, content, *, ocr=False):
+        if ocr and dossier_id != OCR_WORKSPACE:
+            raise ValueError('Lancez la transcription depuis l’espace OCR indépendant.')
         self.require_dossier(dossier_id)
         digest = sha256(content).hexdigest()
         with self.lock:
@@ -142,8 +154,81 @@ class WebService(Management):
                 with Catalog(self.catalog_path) as catalog:
                     catalog.register(documents=[source])
                 self.jobs.create(job_id, document_id, dossier_id, digest, filename)
-            self.executor.submit(self.process, job_id, source)
+            from ocr import sidecar, save
+            ocr_path = sidecar(Path(source.source_path))
+            if ocr and not ocr_path.exists():
+                save(ocr_path, dict(pages=[], revisions=[], approved=None))
+            needs_ocr = ocr_path.exists() and (ocr or not json.loads(ocr_path.read_text()).get('approved'))
+            worker = self.process_ocr if needs_ocr else self.process
+            self.executor.submit(worker, job_id, source)
             return dict(job=self.jobs.public(self.jobs.get(job_id)), duplicate=False)
+
+    def process_ocr(self, job_id, source):
+        from ocr import transcribe
+        try:
+            state = transcribe(Path(source.source_path), lambda stage:
+                self.jobs.update(job_id, status='running', stage=stage))
+            self.jobs.update(job_id, status='review', stage='OCR à vérifier',
+                             page_count=state['page_count'], error=None)
+        except Exception:
+            log.warning('Échec OCR %s', job_id)
+            self.jobs.update(job_id, status='error', stage='Erreur OCR',
+                error='OCR interrompu. Vérifiez Inkling, le tunnel et Poppler puis réessayez.')
+
+    def ocr_state(self, dossier_id, document_id):
+        from ocr import sidecar
+        source = self.source(dossier_id, document_id)
+        return json.loads(sidecar(source['path']).read_text(encoding='utf-8'))
+
+    def edit_ocr(self, dossier_id, document_id, pages=None, *, publish=False, retry=False, retry_page=None, destination=None):
+        from ocr import sidecar, save
+        self.require_dossier(dossier_id)
+        if publish:
+            if not destination or destination == OCR_WORKSPACE:
+                raise ValueError('Choisissez explicitement un dossier de destination.')
+            self.require_dossier(destination)
+        if (publish and retry) or (retry_page is not None and not retry):
+            raise ValueError('Actions OCR incompatibles.')
+        if pages is not None and sum(map(len, pages)) > 2_000_000:
+            raise ValueError('Transcription trop longue.')
+        with self.lock:
+            job = self.jobs.documents(dossier_id).get(document_id)
+            if not job or job['status'] in {'queued', 'running'}:
+                raise ValueError('Document indisponible ou occupé.')
+            path = Path(self.source(dossier_id, document_id)['path'])
+            state = self.ocr_state(dossier_id, document_id)
+            if retry:
+                # Ne jamais remplacer une version déjà indexée par une reprise partielle.
+                if job['status'] == 'done':
+                    raise ValueError('Document déjà indexé.')
+                if retry_page is not None and not 1 <= retry_page <= len(state['pages']):
+                    raise ValueError('Page OCR inconnue.')
+                if retry_page is not None:
+                    state['retry_page'] = retry_page
+                state['approved'] = None
+            else:
+                if len(state['pages']) != state['page_count']:
+                    raise ValueError('OCR incomplet.')
+                if pages is not None:
+                    if len(pages) != len(state['pages']):
+                        raise ValueError('Nombre de pages incorrect.')
+                    state['revisions'].append([p['transcription'] for p in state['pages']])
+                    for page, text in zip(state['pages'], pages):
+                        page['transcription'] = text
+                state['approved'] = state['pages'] if publish else None
+                if publish and not any(p['transcription'].strip() for p in state['pages']):
+                    raise ValueError('Transcription vide.')
+            if publish and dossier_id != destination:
+                self.move_document(dossier_id, document_id, destination)
+                dossier_id = destination
+            save(sidecar(path), state)
+            self.jobs.update(job['job_id'], status='queued' if publish or retry else 'review',
+                             stage='En attente' if publish or retry else 'OCR à vérifier', error=None)
+            if publish or retry:
+                with Catalog(self.catalog_path, read_only=True) as catalog:
+                    source = catalog.get_document(dossier_id, document_id)
+                self.executor.submit(self.process_ocr if retry else self.process, job['job_id'], source)
+        return {'ok': True, 'dossier_id': dossier_id}
 
     def process(self, job_id, source):
         def progress(stage):
@@ -156,6 +241,11 @@ class WebService(Management):
             class LockedIndex:
                 def add(_, passages, encoder):
                     with self.lock:
+                        from qdrant_client import models
+                        if self.client.collection_exists(self.passages.collection):
+                            self.client.delete(self.passages.collection, points_selector=models.FilterSelector(
+                                filter=models.Filter(must=[models.FieldCondition(key='document_id',
+                                    match=models.MatchValue(value=source.document_id))])), wait=True)
                         self.passages.add(passages, encoder)
             pages, count, warning = ingest_pdf(
                 Path(source.source_path), source, self.llm, embedder, LockedIndex(),
@@ -178,54 +268,108 @@ class WebService(Management):
             raise ValueError('Document pas encore indexé.')
         return json.loads((self.artifact_path / (document_id + '.json')).read_text(encoding='utf-8'))
 
-    def retrieve_candidates(self, dossier_id, question, candidate_k=30):
+    def _scoped_points(self, collection, dossier_id, document_ids):
+        if not document_ids or not self.client.collection_exists(collection):
+            return
+        offset = None
+        scope = models.Filter(must=[
+            models.FieldCondition(key='dossier_id', match=models.MatchValue(value=dossier_id)),
+            models.FieldCondition(key='document_id', match=models.MatchAny(any=list(document_ids))),
+        ])
+        while True:
+            points, offset = self.client.scroll(collection, scroll_filter=scope, limit=256,
+                                                offset=offset, with_payload=True, with_vectors=False)
+            yield from points
+            if offset is None:
+                break
+
+    def _pdf_candidate(self, p, score, dossier_id, documents, ready):
+        if p.dossier_id != dossier_id or p.document_id not in documents or p.document_id not in ready:
+            raise ValueError('Source absente du dossier ou non publiée.')
+        artifact = self.artifact(dossier_id, p.document_id)
+        saved = next((item for item in artifact['passages'] if item['passage_id'] == p.passage_id), None)
+        if saved != p.model_dump() or artifact['text'][p.start:p.end] != p.text:
+            raise ValueError('Le passage ne correspond plus au texte source.')
+        return dict(passage_id=p.passage_id, parent_id=p.parent_id,
+                    document_id=p.document_id, dossier_id=dossier_id, title=p.title,
+                    text=p.text, score=score, page_start=p.page_start, page_end=p.page_end,
+                    name=ready[p.document_id]['filename'], kind='pdf')
+
+    @staticmethod
+    def _field_candidate(p, score, dossier_id, persons):
+        return dict(passage_id=str(p.id), document_id=p.document_id,
+                    dossier_id=dossier_id, title=p.field_label, text=p.value,
+                    score=score, page_start=None, page_end=None,
+                    name=f'{p.field_label} · {persons.get(p.person_id, p.person_id)}', kind=p.source_kind)
+
+    def retrieve_candidates(self, dossier_id, question, candidate_k=30, *, mode='semantic', document_ids=None):
         self.require_dossier(dossier_id)
+        if mode not in {'semantic', 'hybrid', 'exact'}:
+            raise ValueError('Mode de recherche inconnu.')
         if not 1 <= candidate_k <= 30:
             raise ValueError('Entre 1 et 30 candidats sont requis.')
-        top_k = candidate_k
-        # L’appel distant ne bloque pas le catalogue ni les autres recherches.
-        with self.lock:
-            embedder = self.encoder()
-        client = self.llm
-        if isinstance(client, OllamaClient):
-            client = OllamaClient(client.config.model_copy(update={'num_predict': 512, 'timeout_seconds': 45.0}))
-        question = rewrite_question(client, question, embedder, validation_lock=self.lock)
+        original = question
+        # La requête lexicale conserve toujours les termes originaux.
+        if mode != 'exact':
+            with self.lock:
+                embedder = self.encoder()
+            client = self.llm
+            if isinstance(client, OllamaClient):
+                client = OllamaClient(client.config.model_copy(update={'num_predict': 512, 'timeout_seconds': 45.0}))
+            question = rewrite_question(client, question, embedder, validation_lock=self.lock)
         with self.lock, Catalog(self.catalog_path, read_only=True) as catalog:
             documents = {d.document_id: d for d in catalog.list_documents(dossier_id)}
+            if document_ids is not None:
+                if not set(document_ids) <= documents.keys():
+                    raise ValueError('Document absent du dossier sélectionné.')
+                documents = {k: d for k, d in documents.items() if k in document_ids}
             if not documents:
                 return []
-            embedder = self.encoder()
-            results = []
             persons = {p.person_id: p.display_name for p in catalog.list_persons(dossier_id)}
-            if self.client.collection_exists(self.index_config.fields.collection_name):
-                for hit in retrieve(self.legacy, embedder, question, catalog=catalog,
-                                    dossier_id=dossier_id, top_k=top_k,
-                                    text_builder_version=self.index_config.text_builder_version):
-                    p = hit.payload
-                    results.append(dict(passage_id=str(hit.id), document_id=p.document_id,
-                                        dossier_id=dossier_id, title=p.field_label, text=p.value,
-                                        score=hit.score, page_start=None, page_end=None,
-                                        name=f'{p.field_label} · {persons.get(p.person_id, p.person_id)}', kind=p.source_kind))
-            ready = {k: j for k, j in self.jobs.documents(dossier_id).items() if j['status'] == 'done'}
-            ready = {k: j for k, j in ready.items() if (self.artifact_path / (k + '.json')).exists()}
-            vector = embedder.embed_query(question)
-            for p, score in self.passages.search(vector, embedder, dossier_id, list(ready), top_k):
-                if p.document_id not in documents:
-                    raise ValueError('Source absente du dossier.')
-                artifact = self.artifact(dossier_id, p.document_id)
-                saved = next((item for item in artifact['passages'] if item['passage_id'] == p.passage_id), None)
-                if saved != p.model_dump() or artifact['text'][p.start:p.end] != p.text:
-                    raise ValueError('Le passage ne correspond plus au texte source.')
-                results.append(dict(passage_id=p.passage_id, parent_id=p.parent_id,
-                                    document_id=p.document_id, dossier_id=dossier_id, title=p.title,
-                                    text=p.text, score=score, page_start=p.page_start, page_end=p.page_end,
-                                    name=ready[p.document_id]['filename'], kind='pdf'))
-            return sorted(results, key=lambda r: r['score'], reverse=True)[:top_k]
+            ready = {k: j for k, j in self.jobs.documents(dossier_id).items()
+                     if k in documents and j['status'] == 'done' and (self.artifact_path / (k + '.json')).exists()}
+            dense = []
+            if mode != 'exact':
+                if self.client.collection_exists(self.index_config.fields.collection_name):
+                    for hit in retrieve(self.legacy, embedder, question, catalog=catalog,
+                                        dossier_id=dossier_id, top_k=candidate_k, document_ids=list(documents),
+                                        text_builder_version=self.index_config.text_builder_version):
+                        dense.append(self._field_candidate(hit.payload, hit.score, dossier_id, persons))
+                vector = embedder.embed_query(question)
+                for p, score in self.passages.search(vector, embedder, dossier_id, list(ready), candidate_k):
+                    dense.append(self._pdf_candidate(p, score, dossier_id, documents, ready))
+                dense = sorted(dense, key=lambda r: r['score'], reverse=True)[:candidate_k]
+            if mode == 'semantic':
+                return dense
+            lexical, records = [], {}
+            for point in self._scoped_points(self.index_config.fields.collection_name, dossier_id, documents):
+                p = VectorRecord.model_validate(point.payload)
+                if str(point.id) != str(p.id) or p.dossier_id != dossier_id or p.document_id not in documents:
+                    raise ValueError('Champ hors périmètre ou identifiant incohérent.')
+                validate_field_reference(p, documents[p.document_id], source_path=p.source_path, source_locator=p.source_locator)
+                candidate = self._field_candidate(p, 0., dossier_id, persons)
+                lexical.append(candidate)
+            for point in self._scoped_points(self.passages.collection, dossier_id, ready):
+                p = IndexedPassage.model_validate(point.payload)
+                if str(point.id) != p.passage_id or p.dossier_id != dossier_id or p.document_id not in ready:
+                    raise ValueError('Passage hors périmètre ou identifiant incohérent.')
+                records[p.passage_id] = p
+                lexical.append(dict(passage_id=p.passage_id, document_id=p.document_id, title=p.title,
+                                    text=p.text, name=ready[p.document_id]['filename']))
+            lexical = rank_lexical(original, lexical, candidate_k, exact=mode == 'exact')
+            # Seuls les passages retenus nécessitent la relecture des artefacts.
+            for i, candidate in enumerate(lexical):
+                p = records.get(candidate['passage_id'])
+                if p is not None:
+                    lexical[i] = dict(self._pdf_candidate(p, candidate['score'], dossier_id, documents, ready),
+                                      score_kind='lexical', exact_match=candidate['exact_match'])
+            return lexical if mode == 'exact' else fuse_ranks(dense, lexical, candidate_k)
 
-    def search_analysis(self, dossier_id, question, top_k=5, *, candidate_k=None):
+    def search_analysis(self, dossier_id, question, top_k=5, *, candidate_k=None, mode='semantic', document_ids=None):
         if not 1 <= top_k <= 5:
             raise ValueError('Entre 1 et 5 résultats sont requis.')
-        candidates = self.retrieve_candidates(dossier_id, question, candidate_k or self.rerank_candidates)
+        options = {} if mode == 'semantic' and document_ids is None else dict(mode=mode, document_ids=document_ids)
+        candidates = self.retrieve_candidates(dossier_id, question, candidate_k or self.rerank_candidates, **options)
         model = self.llm.config.model_name if isinstance(self.llm, OllamaClient) else type(self.llm).__name__
         cache_key = reranking_key(question, candidates, top_k, model)
         with self.lock:
@@ -237,12 +381,14 @@ class WebService(Management):
                 response['results'] = [dict(current[p['passage_id']], relevance=p['relevance'],
                                             relevance_reason=p['relevance_reason']) for p in response['results']]
                 response['reranking'].update(cached=True, calls=0, duration_seconds=0.0)
+                response['retrieval'] = dict(mode=mode, document_ids=document_ids)
                 return response
         client = self.llm
         if isinstance(client, OllamaClient):
             client = OllamaClient(client.config.model_copy(update={'num_predict': 2048, 'timeout_seconds': 90.0}))
         response = rerank(client, question, candidates, limit=top_k)
         response['reranking']['cached'] = False
+        response['retrieval'] = dict(mode=mode, document_ids=document_ids)
         if response['reranking']['status'] == 'applied':
             with self.lock:
                 self.reranking_cache[cache_key] = deepcopy(response)

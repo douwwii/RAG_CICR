@@ -7,6 +7,10 @@ from schemas import Dossier
 from qdrant_client import models
 
 
+class ImportInProgressError(ValueError):
+    """Suppression refusée tant qu’un traitement écrit dans les documents."""
+
+
 class Management:
     def create_dossier(self, title):
         dossier = Dossier(dossier_id='DOS-'+str(uuid4()), title=title.strip())
@@ -128,7 +132,7 @@ class Management:
             ids = [d.document_id for d in documents]
             if any(j['status'] in {'running','queued'} and j['document_id'] in ids
                    for j in self.jobs.documents(dossier_id).values()):
-                raise ValueError('Un import est en cours. Attendez sa fin avant de supprimer.')
+                raise ImportInProgressError('Un traitement de document est en cours. Attendez sa fin avant de supprimer.')
             files = []
             for doc in documents:
                 # Les sources JSON/TXT historiques peuvent être partagées : ne pas les effacer.
@@ -136,6 +140,7 @@ class Management:
                          self.artifact_path / 'checkpoints' / doc.document_id]
                 if doc.source_kind == 'pdf' and Path(doc.source_path).resolve() == self.data_path / (doc.document_id+'.pdf'):
                     paths.append(Path(doc.source_path))
+                    paths.append(Path(doc.source_path).with_suffix('.ocr.json'))
                 for path in paths:
                     if path.exists() and path.resolve().is_relative_to(self.data_path):
                         files.append(str(path.resolve().relative_to(self.data_path)))

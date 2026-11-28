@@ -1513,3 +1513,72 @@ h1 span {
 .delete-warning { margin:16px 0; }
 .manage-dialog .delete-check { display:flex; align-items:center; gap:10px; line-height:1.6; }
 .manage-dialog .delete-check input { width:auto; margin:0; flex-shrink:0; }
+
+/* OCR : étapes, actions principales et état de traitement. */
+.ocr-panel { display:grid; gap:20px; padding-block:24px; max-width:920px; }
+.ocr-intro h2 { font-size:22px; letter-spacing:-.4px; font-weight:650; }
+.ocr-intro p { margin-top:8px; color:#526779; font-size:14px; line-height:1.6; }
+.ocr-steps { display:flex; list-style:none; padding:0; margin:0 0 2px; gap:8px; }
+.ocr-steps li { flex:1; display:flex; align-items:center; gap:8px; padding:10px 8px; border-bottom:2px solid #dfe6ec; color:#687b8a; font-size:12px; }
+.ocr-steps li > span { display:flex; align-items:center; justify-content:center; width:25px; height:25px; border:1px solid #ccd6df; border-radius:50%; flex-shrink:0; font-weight:650; }
+.ocr-steps li.current { color:#173e5d; border-color:#173e5d; font-weight:650; }
+.ocr-steps li.current > span { background:#173e5d; color:white; border-color:#173e5d; }
+.ocr-steps li.complete { color:#32705b; border-color:#77a896; }
+.ocr-card { background:#fff; border:1px solid #d7e0e8; border-radius:12px; padding:20px; box-shadow:0 2px 4px #173e5d04; }
+.ocr-card h3 { display:flex; align-items:center; gap:9px; font-size:15px; font-weight:650; margin:0; }
+.ocr-file-picker { display:flex; flex-wrap:wrap; gap:12px; align-items:center; margin:16px 0 12px; }
+.ocr-file-name { flex:1; min-width:140px; font-size:13px; color:#526779; overflow-wrap:anywhere; }
+.ocr-panel .button { border:1px solid #b4c4d1; min-height:42px; white-space:normal; line-height:1.4; padding:10px 14px; }
+.ocr-panel .button-primary { background:#173e5d; color:#fff; border-color:#173e5d; }
+.ocr-panel .button-primary:hover:not(:disabled) { background:#265a7f; }
+.ocr-panel .button-outline { background:white; color:#254b66; }
+.ocr-panel .button-outline:hover:not(:disabled) { background:#edf4f9; border-color:#6e92ac; }
+.ocr-panel .button:disabled { opacity:1; background:#edf0f3; border-color:#dce2e7; color:#768593; cursor:not-allowed; }
+.ocr-hint { font-size:12px; line-height:1.6; color:#5b6f80; }
+.ocr-document-picker { display:grid; gap:8px; }
+.ocr-document-picker > label, .ocr-text-label { font-size:13px; font-weight:600; }
+.ocr-panel select { border:1px solid #b4c4d1; border-radius:7px; padding:11px 12px; background:#fff; color:#223e53; min-height:42px; max-width:100%; font:inherit; font-size:14px; }
+.ocr-message { display:flex; gap:10px; align-items:flex-start; border:1px solid #bcdace; border-radius:9px; padding:13px 16px; background:#f0f8f4; color:#28614b; font-size:13px; line-height:1.6; }
+.ocr-message-error { border-color:#e8c1bb; background:#fff5f3; color:#993d32; }
+.ocr-status { background:#f3f7fb; border-color:#cbdde9; }
+.ocr-status-heading { display:flex; gap:13px; align-items:flex-start; color:#285575; }
+.ocr-status-heading p { font-size:13px; line-height:1.65; margin-top:7px; color:#526779; }
+.ocr-status.is-error { background:#fff7f3; border-color:#e9c7b6; }
+.ocr-status.is-done { background:#f2f8f4; border-color:#bad6c5; }
+.ocr-status > .button, .ocr-status > .ocr-hint { margin-top:14px; }
+.ocr-progress { margin-top:18px; }
+.ocr-progress > div { display:flex; flex-wrap:wrap; justify-content:space-between; gap:8px; font-size:12px; color:#446178; margin-bottom:9px; }
+.ocr-progress progress { display:block; width:100%; height:8px; appearance:none; border:0; border-radius:10px; overflow:hidden; background:#dfe8ef; }
+.ocr-progress progress::-webkit-progress-bar { background:#dfe8ef; }
+.ocr-progress progress::-webkit-progress-value { background:#327aa5; border-radius:10px; transition:width .3s; }
+.ocr-progress progress::-moz-progress-bar { background:#327aa5; }
+.ocr-editor-heading { display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px; align-items:center; }
+.ocr-save-state { font-size:11px; color:#537061; background:#eff6f1; border-radius:20px; padding:5px 9px; }
+.ocr-save-state.unsaved { color:#835c18; background:#fff4d8; }
+.ocr-page-toolbar { display:flex; flex-wrap:wrap; justify-content:space-between; gap:12px; align-items:center; margin:18px 0; padding-block:14px; border-block:1px solid #e5ebf0; }
+.ocr-page-navigation { display:flex; align-items:center; gap:9px; font-size:13px; }
+.ocr-page-navigation .button { padding:9px; }
+.ocr-page-navigation select { width:68px; }
+.ocr-panel textarea { display:block; resize:vertical; width:100%; min-height:260px; padding:16px; border:1px solid #b4c4d1; border-radius:8px; font:inherit; font-size:14px; line-height:1.8; margin:9px 0; color:#223447; background:#fff; }
+.ocr-panel textarea[readonly] { background:#f8fafc; }
+.ocr-panel textarea:focus-visible { outline:2px solid #3c81ac; outline-offset:3px; }
+.ocr-panel details { margin-top:16px; border-top:1px solid #e5ebf0; padding-top:14px; font-size:13px; }
+.ocr-panel summary { cursor:pointer; font-weight:550; color:#355b77; padding:5px 0; }
+.ocr-observations > p { white-space:pre-wrap; line-height:1.7; margin-top:10px; }
+.ocr-editor-footer { display:flex; flex-wrap:wrap; justify-content:space-between; gap:12px; padding-top:18px; }
+.ocr-secondary-group { display:grid; gap:10px; margin-top:14px; }
+.ocr-secondary-group > p { color:#5b6f80; font-size:12px; line-height:1.6; }
+.ocr-secondary-group > .button { justify-self:start; }
+.ocr-actions { display:flex; flex-wrap:wrap; gap:8px; align-items:center; }
+.ocr-empty { display:grid; justify-items:center; gap:12px; text-align:center; color:#688296; padding:28px 18px; border:1px dashed #c8d5df; border-radius:12px; background:#fafcfe; }
+.ocr-empty p { font-size:14px; color:#3c5a70; }
+.ocr-empty span { font-size:12px; line-height:1.6; }
+.ocr-loading { display:flex; gap:8px; align-items:center; font-size:13px; color:#526779; }
+@media(max-width:640px) { .ocr-panel { gap:16px; } .ocr-card { padding:16px; } .ocr-intro h2 { font-size:20px; } .ocr-steps { gap:4px; } .ocr-steps li { padding:8px 2px; font-size:11px; flex-direction:column; text-align:center; } .ocr-file-picker > .button:last-child { width:100%; } .ocr-editor-footer > .button { width:100%; } }
+
+.search-options { margin-bottom: 16px; }
+.search-options select { padding: 8px; font: inherit; max-width: 100%; }
+.search-options p { font-size: 13px; margin: 8px 0; }
+.search-options summary { cursor: pointer; }
+.search-document-options { max-height: 180px; overflow-y: auto; margin-top: 8px; }
+.search-document-options label { display: flex; gap: 8px; align-items: center; font-weight: normal; }

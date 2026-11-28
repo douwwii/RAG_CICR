@@ -101,6 +101,8 @@ class QdrantStoreTests(unittest.TestCase):
     def test_filters_intersect_and_unknown_values_return_no_results(self):
         cases = [
             (VectorFilters(dossier_id='DOS001'), {1, 2, 3, 4}),
+            (VectorFilters(dossier_id='DOS001', document_ids=['DOC3']), {3}),
+            (VectorFilters(dossier_id='DOS001', document_ids=[]), set()),
             (VectorFilters(dossier_id='DOS001', person_id='P001'), {1, 2}),
             (VectorFilters(dossier_id='DOS001', field_name='lieu_de_deces'), {1, 3}),
             (VectorFilters(dossier_id='DOS001', person_id='P002', field_name='temoignage'), {4}),

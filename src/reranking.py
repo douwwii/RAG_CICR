@@ -138,7 +138,7 @@ def rerank(client, question, candidates, *, limit=5, input_budget=MAX_INPUT_BYTE
     except (GenerationError, ValueError) as exc:
         reason = str(exc) if type(exc) is ValueError else type(exc).__name__
         logging.getLogger(__name__).warning('Reranking non appliqué : %s', reason)
-        metadata.update(status='fallback', warning='Analyse Qwen indisponible ou invalide : classement par similarité, sans bilan.')
+        metadata.update(status='fallback', warning='Analyse Qwen indisponible ou invalide : classement de recherche, sans bilan.')
         metadata['failure_reason'] = reason
         results, assessment = candidates[:limit], None
     metadata['duration_seconds'] = round(monotonic() - start, 3)

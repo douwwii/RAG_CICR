@@ -1,6 +1,6 @@
 # Sillage — recherche documentaire avec BGE-M3
 
-Prototype local du projet SPOC : recherche dans un dossier, import de PDF numériques et consultation des passages sources. Les jeux de démonstration fournis sont fictifs. L'application affiche des extraits exacts et des jugements de pertinence ; elle ne génère pas de réponse factuelle et ne réalise pas d'OCR.
+Prototype local du projet SPOC : recherche dans un dossier, import de PDF numériques et consultation des passages sources. Les jeux de démonstration fournis sont fictifs. L'application affiche des extraits exacts et des jugements de pertinence ; elle ne génère pas de réponse factuelle. L’onglet OCR transcrit les scans avec Inkling sur le serveur configuré, avant vérification et ajout explicite à la recherche.
 
 ## Trouver le bon contexte
 
@@ -19,7 +19,7 @@ Lire seulement le document correspondant à la tâche. Les anciens guides et ré
 - Embeddings locaux : **BAAI/bge-m3**, révision épinglée dans le profil web.
 - Préparation des champs : contexte de la personne explicitement associée.
 - PDF : segmentation cohérente avec le prompt multilingue V4, puis subdivisions adaptées au tokenizer si nécessaire.
-- Recherche : reformulation V5, filtrage par dossier, 30 candidats par défaut, reranking V3 et cinq extraits au maximum.
+- Recherche : modes sémantique, hybride et exact, filtrage par dossier et documents, 30 candidats par défaut, reranking V3 et cinq extraits au maximum.
 - Interface : français, anglais, espagnol et arabe ; lecture RTL pour l'arabe.
 - Stockages : catalogue SQLite, tâches SQLite, Qdrant local et fichiers sources/artefacts.
 
@@ -56,4 +56,4 @@ Les dépendances nécessaires à la suite complète sont dans `requirements-dev.
 
 Le dossier est sélectionné explicitement ; un nom n'est jamais une clé d'identité. Les passages doivent rester alignés avec leur texte source et leurs pages physiques. Un score cosinus ou un jugement Qwen n'est pas une probabilité de vérité.
 
-Les scans et les PDF comportant des pages sans texte extractible sont refusés. Le service local n'a pas d'authentification et n'est pas destiné à être publié tel quel. Les petits corpus d'évaluation ne démontrent pas une fiabilité générale.
+L’import numérique refuse les pages sans texte extractible ; les scans passent par l’[onglet OCR](README-web.md#ocr-inkling). Le service local n'a pas d'authentification et n'est pas destiné à être publié tel quel. Les petits corpus d'évaluation ne démontrent pas une fiabilité générale.

@@ -20,10 +20,12 @@ def retrieve(
     catalog: Catalog, dossier_id: str, person_id: str | None = None,
     field_name: str | None = None, top_k: int = DEFAULT_TOP_K,
     text_builder_version: str = TEXT_BUILDER_VERSION,
+    document_ids: list[str] | None = None,
 ) -> list[VectorHit]:
     validate_top_k(top_k)
     try:
-        filters = VectorFilters(dossier_id=dossier_id, person_id=person_id, field_name=field_name)
+        filters = VectorFilters(dossier_id=dossier_id, person_id=person_id, field_name=field_name,
+                                document_ids=document_ids)
     except ValidationError as exc:
         raise VectorStoreError(f'Filtres invalides : {exc}') from exc
     scope = resolve_scope(catalog, filters.dossier_id, filters.person_id)
@@ -42,6 +44,7 @@ def retrieve(
             record.dossier_id != scope.dossier_id or record.document_id not in documents
             or (person_id is not None and record.person_id != person_id)
             or (field_name is not None and record.field_name != field_name)
+            or (document_ids is not None and record.document_id not in document_ids)
         ):
             raise ScopeError('Le stockage a retourné un résultat hors du périmètre demandé.')
         document = documents[record.document_id]

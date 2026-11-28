@@ -11,7 +11,8 @@ from segmentation import segment_document
 
 def ingest_pdf(path, source, client, embedder, index, artifact_path: Path, progress, *, model_lock=None, coherent=False):
     progress('Extraction du texte')
-    extracted = extract_pdf(path)
+    from ocr import sidecar, extracted as extract_ocr
+    extracted = extract_ocr(path) if sidecar(path).exists() else extract_pdf(path)
     progress('Découpage thématique par Qwen')
     root = Path(__file__).resolve().parents[1]
     prompt_version = 'v4-multilingual' if coherent else 'v2-exemples'
@@ -49,8 +50,16 @@ def ingest_pdf(path, source, client, embedder, index, artifact_path: Path, progr
         raise ValueError('Aucun extrait indexable dans ce document.')
     # Source extraite et journal complet conservés avant publication dans l’index.
     artifact = dict(pipeline=('context_coherent_v1' if coherent else 'strict_v1') + ('+windows-v1' if len(extracted.text) > 8000 else ''),
+                    extraction_kind='ocr' if sidecar(path).exists() else 'digital',
                     text=extracted.text, pages=[asdict(p) for p in extracted.pages],
                     segmentation=run.model_dump(), passages=[p.model_dump() for p in passages])
+    if sidecar(path).exists():
+        from hashlib import sha256
+        ocr_state = json.loads(sidecar(path).read_text(encoding='utf-8'))
+        artifact['ocr_provenance'] = dict(
+            fingerprint=ocr_state['fingerprint'], model=ocr_state['model'],
+            model_digest=ocr_state['model_digest'],
+            transcription_sha256=sha256(extracted.text.encode('utf-8')).hexdigest())
     temporary = artifact_path.with_suffix('.tmp')
     temporary.write_text(json.dumps(artifact, ensure_ascii=False, indent=2), encoding='utf-8')
     temporary.replace(artifact_path)

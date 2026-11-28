@@ -4,7 +4,7 @@ export interface Dossier {
   title: string;
   person_ids: string[];
 }
-export type Status = "queued" | "running" | "done" | "error" | "not_indexed";
+export type Status = "queued" | "running" | "done" | "error" | "not_indexed" | "review";
 export interface Job {
   job_id: string;
   document_id: string;
@@ -25,7 +25,9 @@ export interface SourceDocument {
   status: Status;
   job: Job | null;
   has_pdf: boolean;
+  ocr?: boolean;
 }
+export type SearchMode = "semantic" | "hybrid" | "exact";
 export interface Hit {
   passage_id: string;
   document_id: string;
@@ -33,6 +35,7 @@ export interface Hit {
   title: string;
   text: string;
   score: number;
+  score_kind?: "lexical" | "rrf";
   relevance?: "direct" | "partial" | "context" | "unrelated";
   relevance_reason?: string;
   evidence_quote?: string;
@@ -42,6 +45,7 @@ export interface Hit {
   kind: string;
 }
 export interface Selection {
+  dossier_id?: string;
   document_id: string;
   name: string;
   page: number;
@@ -54,6 +58,7 @@ export interface Source {
 }
 
 export interface SearchResponse {
+  retrieval: {mode: SearchMode; document_ids: string[] | null};
   results: Hit[];
   assessment: {
     coverage: "direct" | "partial" | "context" | "none" | "contradictory";
@@ -66,4 +71,10 @@ export interface SearchResponse {
     duration_seconds: number;
     warning: string | null;
   };
+}
+
+export interface OCRState {
+  pages: {page: number; transcription: string; observations: string; raw: string}[];
+  page_count?: number;
+  model?: string;
 }

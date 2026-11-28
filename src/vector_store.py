@@ -32,6 +32,7 @@ class VectorFilters(BaseModel):
     dossier_id: NonBlankText
     person_id: NonBlankText | None = None
     field_name: NonBlankText | None = None
+    document_ids: list[NonBlankText] | None = None
 
 
 class VectorHit(BaseModel):

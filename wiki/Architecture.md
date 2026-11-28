@@ -1,6 +1,6 @@
 # Architecture actuelle
 
-Révisée le 25 novembre 2026 à partir du code et du manifeste web local. Référence : BGE-M3 avec préparation contexte + cohérent. Le manifeste de chaque installation reste l'autorité pour le profil chargé.
+Révisée le 26 novembre 2026 à partir du code et du manifeste web local. Référence : BGE-M3 avec préparation contexte + cohérent. Le manifeste de chaque installation reste l'autorité pour le profil chargé.
 
 ## Composants et points d'entrée
 
@@ -13,8 +13,10 @@ Révisée le 25 novembre 2026 à partir du code et du manifeste web local. Réf�
 | Catalogue et contrats métier | [catalog.py](../src/catalog.py), [schemas.py](../src/schemas.py), [scope.py](../src/scope.py) |
 | Validation des champs et préparation du contexte | [data_loader.py](../src/data_loader.py), [catalog_index.py](../src/catalog_index.py) |
 | Embeddings et compatibilité | [embeddings.py](../src/embeddings.py), [qdrant_store.py](../src/qdrant_store.py) |
+| OCR Inkling, reprise et prompt | [ocr.py](../src/ocr.py), [prompt V1](../prompts/ocr/v1.txt), [guide OCR](../README-web.md#ocr-inkling) |
 | Extraction et ingestion PDF | [pdf_extraction.py](../src/pdf_extraction.py), [ingestion.py](../src/ingestion.py), [passage_index.py](../src/passage_index.py) |
 | Segmentation et documents longs | [segmentation.py](../src/segmentation.py), [coherent_segmentation.py](../src/coherent_segmentation.py), [long_segmentation.py](../src/long_segmentation.py) |
+| Classement lexical et fusion hybride | [lexical_search.py](../src/lexical_search.py) |
 | Reformulation, reranking et transport LLM | [query_rewriting.py](../src/query_rewriting.py), [reranking.py](../src/reranking.py), [ollama_client.py](../src/ollama_client.py) |
 | Interface React | [App.tsx](../frontend/src/App.tsx), [client API](../frontend/src/api/client.ts), [composants](../frontend/src/components), [i18n.tsx](../frontend/src/i18n.tsx) |
 
@@ -28,12 +30,16 @@ Navigateur React → API locale FastAPI → dossier explicite dans le catalogue
     → passages exacts + artefact/checkpoints
     → embeddings BGE-M3 → Qdrant → statut terminé
 
-  Recherche → reformulation Qwen ou question originale en repli
-    → embedding BGE-M3 → candidats du dossier dans les champs et passages PDF
-    → fusion cosinus limitée à 30 candidats par défaut
-    → contrôle des sources → reranking Qwen ou repli cosinus
+  Recherche → dossier et éventuelle sélection explicite de documents
+    → sémantique : reformulation Qwen (ou question originale) → embedding BGE-M3
+    → hybride : voie sémantique + BM25 sur les termes originaux → fusion RRF
+    → exacte : suite de mots normalisée, sans reformulation ni embedding
+    → 30 candidats maximum par défaut dans les champs et passages PDF publiés
+    → contrôle des sources → reranking Qwen ou repli sur le classement choisi
     → cinq extraits maximum + pages + jugement de pertinence
 ```
+
+La voie lexicale parcourt les payloads Qdrant filtrés par dossier et documents, sans nouvel index persistant. Les imports, déplacements et suppressions restent ainsi reflétés immédiatement. Le classement lexical ne change ni les textes sources ni les contrats d’identité ; voir les [modes et limites](../README-web.md#recherche-exacte-et-hybride).
 
 Les nombres de candidats et les versions de prompts sont détaillés dans le [guide d'exploitation](../README-web.md). Le navigateur ne contacte pas le service LLM.
 
@@ -60,7 +66,7 @@ Les répertoires de données locaux, modèles, caches et sorties ne sont pas un 
 - **Catalogue** : cinq tables métier, contraintes de clés étrangères, schéma versionné. Une base étrangère ou de version inconnue est refusée ; l'initialisation conserve les données existantes.
 - **Champs JSON** : `FieldRecord` impose un identifiant entier unique entre 0 et `2**64 - 1` et six propriétés textuelles non vides : `document_id`, `person_id`, `field_name`, `field_label`, `value`, `source_kind`. Les types sont stricts, les propriétés inconnues refusées, les valeurs sources conservées. Le rattachement au catalogue est validé avant l'indexation.
 - **Contexte des champs** : la préparation web inclut la personne explicitement associée, sans inférer une identité depuis le texte. Les valeurs et identifiants d'origine restent conservés.
-- **Source PDF** : la référence visuelle est le PDF. Le texte indexé est celui extrait par pypdf ; positions Python avec fin exclue et pages physiques à partir de 1. Les titres Qwen sont des propositions ; les corps des passages restent tirés du texte source.
+- **Source PDF** : la référence visuelle est le PDF. Le texte indexé provient de pypdf pour les PDF numériques ou de la version OCR explicitement approuvée ; positions Python avec fin exclue et pages physiques à partir de 1. Les titres Qwen sont des propositions ; les corps des passages restent tirés du texte source.
 - **Segmentation** : l'ancrage cohérent restaure les frontières sur la source et conserve les zones omises. Une sortie invalide peut produire un repli technique signalé ; une panne de transport ou une sortie tronquée fait échouer l'import.
 - **Embeddings** : pas de troncature silencieuse. Les passages sont subdivisés selon le tokenizer actif. Le profil inclut modèle, révision, instructions, dimension, normalisation et versions pertinentes.
 - **Compatibilité** : une même dimension ne suffit pas. Profil, préparation des textes et version des métadonnées sont vérifiés ; une collection incompatible n'est pas convertie automatiquement.
@@ -75,3 +81,25 @@ Le [profil BGE-M3](../src/web/index_config.py) est distinct des valeurs par déf
 Une migration construit une génération distincte, vérifie les sources et profils, puis remplace atomiquement le manifeste. Les instructions et restrictions de retour arrière sont regroupées dans le [guide web](../README-web.md#reconstruction-de-lindex-bge-m3).
 
 Les [tests](../tests) vérifient les contrats, reprises et erreurs avec des modèles simulés et des stockages temporaires. Les [évaluations](Sources.md#évaluations-et-portée) ont des corpus et des limites propres ; leurs résultats ne valent pas validation générale de l'application.
+
+
+## OCR et publication
+
+`POST /api/dossiers/{dossier_id}/ocr-imports` enregistre le PDF et une source OCR durable,
+puis utilise la file de traitement existante. `GET` et `PUT` sur
+`/api/dossiers/{dossier_id}/documents/{document_id}/ocr` servent à consulter, corriger,
+reprendre ou approuver. Les états queued/running interdisent les mutations ; review
+signifie « OCR à vérifier » et ne participe jamais à la recherche. Une erreur conserve
+les pages terminées. La reprise est explicite après redémarrage.
+
+Le sidecar OCR reste adjacent au PDF, indépendant du manifeste d’index. Ses pages
+physiques incluent les pages sans texte. La transcription approuvée est assemblée de
+façon déterministe avant calcul des positions et segmentation ; observations et
+réponses brutes ne participent pas au texte indexable. L’artefact d’index conserve
+l’origine OCR, l’empreinte de la série et celle de la transcription. La reconstruction
+utilise ce même chemin d’ingestion. Une republication remplace les passages du document
+avant de rendre son état done ; un échec reste exclu de la recherche.
+
+### Périmètre de préparation OCR
+
+Les nouvelles transcriptions utilisent le dossier technique réservé `__ocr_workspace__`, créé au démarrage et filtré de la liste des dossiers d’enquête. Il assure le rattachement obligatoire du catalogue sans choisir un dossier utilisateur implicitement. Le choix de destination est obligatoire lors de `edit_ocr(publish=True, destination=...)` ; le déplacement précède l’indexation. Aucun déplacement automatique des transcriptions préexistantes n’est effectué. Voir le [guide OCR](../README-web.md#préparation-ocr-indépendante).

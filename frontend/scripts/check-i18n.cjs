@@ -18,5 +18,5 @@ function inspect(file) {
   }
   visit(src);
 }
-for (const file of ['App.tsx','components/DeleteDialog.tsx','components/ManageDialog.tsx','components/ImportDialog.tsx','components/SourceViewer.tsx','components/SearchAssessment.tsx']) inspect(path.join(root,file));
+for (const file of ['App.tsx','components/OCRPanel.tsx','components/DeleteDialog.tsx','components/ManageDialog.tsx','components/ImportDialog.tsx','components/SourceViewer.tsx','components/SearchAssessment.tsx']) inspect(path.join(root,file));
 console.log(`${Object.keys(messages).length} libellés vérifiés en anglais, espagnol et arabe.`);

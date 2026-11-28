@@ -1,3 +1,4 @@
+import { OCRPanel } from "./components/OCRPanel";
 import { DeleteDialog } from "./components/DeleteDialog";
 import type { DeleteTarget } from "./components/DeleteDialog";
 import { useEffect, useRef, useState } from "react";
@@ -20,15 +21,20 @@ import { SourceViewer } from "./components/SourceViewer";
 import { SearchAssessment } from "./components/SearchAssessment";
 import { ManageDialog } from "./components/ManageDialog";
 import type { ManagementAction } from "./components/ManageDialog";
-import type { Dossier, Hit, SearchResponse, Selection } from "./types";
+import type { Dossier, Hit, SearchResponse, SearchMode, Selection } from "./types";
 export default function App() {
   const { t } = useLanguage();
+  const ocrWorkspace = "__ocr_workspace__";
+  const ocrDocuments = useDocuments(ocrWorkspace);
+  const [tab, setTab] = useState<"search" | "ocr">("search");
   const [deleting, setDeleting] = useState<DeleteTarget | null>(null);
   const [dossiers, setDossiers] = useState<Dossier[]>([]);
   const [dossier, setDossier] = useState("");
   const [catalogLoading, setCatalogLoading] = useState(true);
   const [error, setError] = useState("");
   const [question, setQuestion] = useState("");
+  const [searchMode, setSearchMode] = useState<SearchMode>("semantic");
+  const [searchDocuments, setSearchDocuments] = useState<string[]>([]);
   const [submitted, setSubmitted] = useState("");
   const [analysis, setAnalysis] = useState<SearchResponse | null>(null);
   const [searching, setSearching] = useState(false);
@@ -51,6 +57,7 @@ export default function App() {
   function clearSearch() {
     controller.current?.abort();
     setQuestion("");
+    setSearchDocuments([]);
     setSubmitted("");
     setAnalysis(null);
     setSelection(null);
@@ -100,7 +107,7 @@ export default function App() {
     setError("");
     setSubmitted(question.trim());
     try {
-      const result = await api.search(dossier, question.trim(), request.signal);
+      const result = await api.search(dossier, question.trim(), request.signal, searchMode, searchDocuments.length ? searchDocuments : null);
       if (!request.signal.aborted) setAnalysis(result);
     } catch (e) {
       if (!request.signal.aborted) setError((e as Error).message);
@@ -237,11 +244,15 @@ export default function App() {
                     >
                       <FileText size={17} />
                       <span>
-                        <strong dir="auto">{doc.name}</strong>
+                        <strong dir="auto">
+                          {doc.name}
+                          {doc.ocr && <small> · OCR</small>}
+                        </strong>
                         <small>
                           {t(
                             {
                               done: "Disponible",
+                              review: "OCR à vérifier",
                               running: "En traitement",
                               queued: "En attente",
                               error: "Échec — Réessayer",
@@ -307,151 +318,238 @@ export default function App() {
       </aside>
       <main className="desk-search">
         <header className="desk-heading">
-          <h1 dir="auto">{active?.title || t("Choisissez un dossier")}</h1>
+          <h1 dir="auto">
+            {tab === "ocr"
+              ? t("Espace OCR indépendant")
+              : active?.title || t("Choisissez un dossier")}
+          </h1>
           {active?.archived && <span>{t("Archivé")}</span>}
         </header>
-        <form
-          onSubmit={(e) => {
-            void search(e);
-          }}
-          className="desk-search-form"
-        >
-          <label htmlFor="question">{t("Votre question sur ce dossier")}</label>
-          <textarea
-            id="question"
-            dir="auto"
-            rows={3}
-            maxLength={2000}
-            value={question}
-            onChange={(e) => setQuestion(e.target.value)}
-            placeholder={t("Écrivez votre question…")}
-            disabled={!active || active.archived}
-          />
+        <nav className="ocr-actions" aria-label={t("Outils")}>
           <Button
-            type="submit"
-            disabled={
-              !question.trim() || searching || !active || active.archived
-            }
+            variant={tab === "search" ? "default" : "outline"}
+            onClick={() => setTab("search")}
           >
-            {searching ? (
-              <LoaderCircle size={17} className="spin" />
-            ) : (
-              <Search size={17} />
-            )}{" "}
-            {t(searching ? "Recherche en cours…" : "Rechercher")}
+            {t("Rechercher")}
           </Button>
-        </form>
-        {error && (
-          <div className="error-message" role="alert">
-            {t(error)}
-            <Button
-              variant="ghost"
-              onClick={() => {
-                if (!active) void loadCatalog();
-                else setError("");
-              }}
-            >
-              {t("Fermer")}
-            </Button>
-          </div>
-        )}
-        {active?.archived ? (
-          <p className="desk-empty">
-            {t(
-              "Restaurez ce dossier pour ajouter des documents ou lancer une recherche.",
-            )}
-          </p>
-        ) : !active ? (
-          <p className="desk-empty">
-            {t("Choisissez un dossier ou créez-en un pour commencer.")}
-          </p>
-        ) : !documents.length && !documentsLoading ? (
-          <div className="desk-empty">
-            <p>{t("Ajoutez des documents pour commencer.")}</p>
-            <Button variant="outline" onClick={() => setImporting(true)}>
-              {t("Ajouter des documents")}
-            </Button>
-          </div>
-        ) : null}
-        {pending.length > 0 && (
-          <p className="processing-note" role="status">
-            <LoaderCircle className="spin" size={15} />
-            {pending.length} {t("documents en traitement")}
-          </p>
-        )}
-        {searching && (
-          <p role="status" className="desk-empty">
-            {t("Recherche et analyse des passages par Qwen…")}
-          </p>
-        )}
-        {analysis && (
-          <section
-            aria-label={t("Résultats de recherche")}
-            className="desk-results"
+          <Button
+            variant={tab === "ocr" ? "default" : "outline"}
+            onClick={() => setTab("ocr")}
           >
-            <p className="submitted" dir="auto">
-              {submitted}
+            OCR
+          </Button>
+        </nav>
+        <div hidden={tab !== "ocr"}>
+          {ocrDocuments.error ? (
+            <p role="alert">
+              {t(
+                "L’espace OCR n’est pas encore disponible sur le serveur. Rechargez l’interface après son redémarrage.",
+              )}
             </p>
-            <SearchAssessment analysis={analysis} onOpen={open} />
-            {analysis.results.map((hit, index) => (
-              <article
-                key={hit.passage_id}
-                className={`desk-result ${selection?.text === hit.text ? "selected" : ""}`}
-              >
-                <div className="result-source">
-                  <span>{index + 1}</span>
-                  <span dir="auto">{hit.name}</span>
-                  {hit.page_start && (
-                    <small>
-                      {t("Page")} {hit.page_start}
-                      {hit.page_end !== hit.page_start
-                        ? `–${hit.page_end}`
-                        : ""}
-                    </small>
-                  )}
+          ) : (
+            <OCRPanel
+              dossier={ocrWorkspace}
+              dossiers={dossiers}
+              documents={ocrDocuments.documents}
+              reload={ocrDocuments.reload}
+              onPublished={(id) => {
+                changeDossier(id);
+                setTab("search");
+              }}
+              onOpen={(s) => setSelection({ ...s, dossier_id: ocrWorkspace })}
+            />
+          )}
+          {active && documents.some((d) => d.ocr) && (
+            <details>
+              <summary>{t("Anciennes transcriptions de ce dossier")}</summary>
+              <OCRPanel
+                key={dossier}
+                uploadAllowed={false}
+                dossier={dossier}
+                dossiers={dossiers}
+                documents={documents}
+                reload={reload}
+                onPublished={(id) => {
+                  changeDossier(id);
+                  setTab("search");
+                }}
+                onOpen={setSelection}
+              />
+            </details>
+          )}
+        </div>
+        <div hidden={tab !== "search"}>
+          <form
+            onSubmit={(e) => {
+              void search(e);
+            }}
+            className="desk-search-form"
+          >
+            <label htmlFor="question">
+              {t("Votre question sur ce dossier")}
+            </label>
+            <textarea
+              id="question"
+              dir="auto"
+              rows={3}
+              maxLength={2000}
+              value={question}
+              onChange={(e) => setQuestion(e.target.value)}
+              placeholder={t("Écrivez votre question…")}
+              disabled={!active || active.archived}
+            />
+            <div className="search-options">
+              <label htmlFor="search-mode">{t("Mode de recherche")}</label>
+              <select id="search-mode" value={searchMode}
+                disabled={searching || !active || active.archived}
+                onChange={(e) => setSearchMode(e.target.value as SearchMode)}>
+                <option value="semantic">{t("Sémantique")}</option>
+                <option value="hybrid">{t("Hybride")}</option>
+                <option value="exact">{t("Exacte")}</option>
+              </select>
+              <p className="muted">{t("Hybride : sens et mots précis. Exacte : suite de mots, sans distinction de casse ni d’accents.")}</p>
+              <details>
+                <summary>{t("Limiter aux documents sélectionnés")} ({searchDocuments.length})</summary>
+                <p className="muted">{t("Sans sélection, tout le dossier est recherché.")}</p>
+                <div className="search-document-options">
+                  {documents.filter((d) => d.status === "done").map((d) => (
+                    <label key={d.document_id}>
+                      <input type="checkbox" checked={searchDocuments.includes(d.document_id)}
+                        disabled={searching || !active || active.archived}
+                        onChange={(e) => setSearchDocuments((old) => e.target.checked
+                          ? [...old, d.document_id] : old.filter((id) => id !== d.document_id))} />
+                      {d.name}
+                    </label>
+                  ))}
                 </div>
-                <h2 dir="auto">{hit.title}</h2>
-                {hit.relevance && (
-                  <span className={`relevance relevance-${hit.relevance}`}>
-                    {t(
-                      {
-                        direct: "Répond directement",
-                        partial: "Répond partiellement",
-                        context: "Apporte du contexte",
-                        unrelated: "Proximité thématique",
-                      }[hit.relevance],
-                    )}
-                  </span>
-                )}
-                <p className="passage-text" dir="auto">
-                  {hit.text}
-                </p>
-                <Button variant="outline" onClick={() => open(hit)}>
-                  {t("Voir dans le document")}
-                  <ArrowRight size={15} />
-                </Button>
-                <details>
-                  <summary>{t("Détails de la recherche")}</summary>
-                  <p>
-                    {t("Similarité")} : {hit.score.toFixed(3)}
-                  </p>
-                  <p dir="auto">{hit.relevance_reason}</p>
-                </details>
-              </article>
-            ))}
-            {!analysis.results.length && (
-              <p className="desk-empty">
-                {t("Aucun passage retrouvé")} —{" "}
-                {t(
-                  "Vérifiez que les documents sont indexés, ou essayez une autre formulation.",
-                )}
+              </details>
+            </div>
+            <Button
+              type="submit"
+              disabled={
+                !question.trim() || searching || !active || active.archived
+              }
+            >
+              {searching ? (
+                <LoaderCircle size={17} className="spin" />
+              ) : (
+                <Search size={17} />
+              )}{" "}
+              {t(searching ? "Recherche en cours…" : "Rechercher")}
+            </Button>
+          </form>
+          {error && (
+            <div className="error-message" role="alert">
+              {t(error)}
+              <Button
+                variant="ghost"
+                onClick={() => {
+                  if (!active) void loadCatalog();
+                  else setError("");
+                }}
+              >
+                {t("Fermer")}
+              </Button>
+            </div>
+          )}
+          {active?.archived ? (
+            <p className="desk-empty">
+              {t(
+                "Restaurez ce dossier pour ajouter des documents ou lancer une recherche.",
+              )}
+            </p>
+          ) : !active ? (
+            <p className="desk-empty">
+              {t("Choisissez un dossier ou créez-en un pour commencer.")}
+            </p>
+          ) : !documents.length && !documentsLoading ? (
+            <div className="desk-empty">
+              <p>{t("Ajoutez des documents pour commencer.")}</p>
+              <Button variant="outline" onClick={() => setImporting(true)}>
+                {t("Ajouter des documents")}
+              </Button>
+            </div>
+          ) : null}
+          {pending.length > 0 && (
+            <p className="processing-note" role="status">
+              <LoaderCircle className="spin" size={15} />
+              {pending.length} {t("documents en traitement")}
+            </p>
+          )}
+          {searching && (
+            <p role="status" className="desk-empty">
+              {t("Recherche et analyse des passages par Qwen…")}
+            </p>
+          )}
+          {analysis && (
+            <section
+              aria-label={t("Résultats de recherche")}
+              className="desk-results"
+            >
+              <p className="submitted" dir="auto">
+                {submitted}
               </p>
-            )}
-          </section>
-        )}
+              <SearchAssessment analysis={analysis} onOpen={open} />
+              {analysis.results.map((hit, index) => (
+                <article
+                  key={hit.passage_id}
+                  className={`desk-result ${selection?.text === hit.text ? "selected" : ""}`}
+                >
+                  <div className="result-source">
+                    <span>{index + 1}</span>
+                    <span dir="auto">{hit.name}</span>
+                    {hit.page_start && (
+                      <small>
+                        {t("Page")} {hit.page_start}
+                        {hit.page_end !== hit.page_start
+                          ? `–${hit.page_end}`
+                          : ""}
+                      </small>
+                    )}
+                  </div>
+                  <h2 dir="auto">{hit.title}</h2>
+                  {hit.relevance && (
+                    <span className={`relevance relevance-${hit.relevance}`}>
+                      {t(
+                        {
+                          direct: "Répond directement",
+                          partial: "Répond partiellement",
+                          context: "Apporte du contexte",
+                          unrelated: "Proximité thématique",
+                        }[hit.relevance],
+                      )}
+                    </span>
+                  )}
+                  <p className="passage-text" dir="auto">
+                    {hit.text}
+                  </p>
+                  <Button variant="outline" onClick={() => open(hit)}>
+                    {t("Voir dans le document")}
+                    <ArrowRight size={15} />
+                  </Button>
+                  <details>
+                    <summary>{t("Détails de la recherche")}</summary>
+                    <p>
+                      {hit.score_kind === "rrf" ? t("Score hybride") : hit.score_kind === "lexical" ? t("Score lexical") : t("Similarité")} : {hit.score.toFixed(3)}
+                    </p>
+                    <p dir="auto">{hit.relevance_reason}</p>
+                  </details>
+                </article>
+              ))}
+              {!analysis.results.length && (
+                <p className="desk-empty">
+                  {t("Aucun passage retrouvé")} —{" "}
+                  {t(
+                    "Vérifiez que les documents sont indexés, ou essayez une autre formulation.",
+                  )}
+                </p>
+              )}
+            </section>
+          )}
+        </div>
       </main>
       <SourceViewer
-        dossier={dossier}
+        dossier={selection?.dossier_id || dossier}
         selection={selection}
         onClose={() => setSelection(null)}
       />

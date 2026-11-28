@@ -18,14 +18,42 @@ export function DeleteDialog({
 }) {
   const { t } = useLanguage();
   const ref = useRef<HTMLDialogElement>(null);
+  const [processing, setProcessing] = useState<boolean | null>(null);
   const [confirmed, setConfirmed] = useState(false);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
   useEffect(() => {
     ref.current?.showModal();
-  }, []);
+    let live = true;
+    async function check() {
+      try {
+        const docs = await api.documents(target.dossier);
+        if (live)
+          setProcessing(
+            docs.some(
+              (d) =>
+                (!target.document || d.document_id === target.document) &&
+                ["queued", "running"].includes(d.status),
+            ),
+          );
+      } catch (e) {
+        if (live) {
+          setProcessing(null);
+          setError((e as Error).message);
+        }
+      }
+    }
+    void check();
+    const timer = setInterval(() => {
+      void check();
+    }, 2500);
+    return () => {
+      live = false;
+      clearInterval(timer);
+    };
+  }, [target.dossier, target.document]);
   async function remove() {
-    if (!confirmed || busy) return;
+    if (!confirmed || busy || processing !== false) return;
     setBusy(true);
     try {
       await api.deleteItem(target.dossier, target.document);
@@ -60,11 +88,20 @@ export function DeleteDialog({
             : "Ce dossier et tous ses documents seront supprimés de l’application. Cette action est irréversible.",
         )}
       </p>
+      {processing !== false && (
+        <p role="status" className="archive-confirm">
+          {t(
+            processing
+              ? "Un traitement de document est en cours. Attendez sa fin avant de supprimer."
+              : "Vérification des traitements en cours…",
+          )}
+        </p>
+      )}
       <label className="delete-check">
         <input
           type="checkbox"
           checked={confirmed}
-          disabled={busy}
+          disabled={busy || processing !== false}
           onChange={(e) => setConfirmed(e.target.checked)}
         />
         {t("Je confirme cette suppression.")}
@@ -80,7 +117,7 @@ export function DeleteDialog({
         </Button>
         <Button
           className="button-danger"
-          disabled={!confirmed || busy}
+          disabled={!confirmed || busy || processing !== false}
           onClick={() => {
             void remove();
           }}
